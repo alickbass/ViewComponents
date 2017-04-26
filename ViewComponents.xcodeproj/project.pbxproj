@@ -14,6 +14,7 @@
 		CEF534EA1EB0C1AD001E3CA8 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534E91EB0C1AD001E3CA8 /* Style.swift */; };
 		CEF534F11EB0C2DD001E3CA8 /* UIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F01EB0C2DD001E3CA8 /* UIViewStyle.swift */; };
 		CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */; };
+		CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		CEF534E91EB0C1AD001E3CA8 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		CEF534F01EB0C2DD001E3CA8 /* UIViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewStyle.swift; sourceTree = "<group>"; };
 		CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonStyle.swift; sourceTree = "<group>"; };
+		CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIViewStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				CEF534DB1EB0C182001E3CA8 /* ViewComponentsTests.swift */,
+				CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */,
 				CEF534DD1EB0C182001E3CA8 /* Info.plist */,
 			);
 			path = ViewComponentsTests;
@@ -230,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */,
 				CEF534DC1EB0C182001E3CA8 /* ViewComponentsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

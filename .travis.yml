@@ -1,0 +1,12 @@
+language: objective-c
+osx_image: xcode8.3
+
+script:
+  - open -a "simulator" --args -CurrentDeviceUDID 3684320E-8A74-42B8-82A7-099B0B40601C
+  - xcodebuild clean build test -project ViewComponents.xcodeproj -scheme ViewComponents -destination 'platform=iOS Simulator,OS=10.3,id=3684320E-8A74-42B8-82A7-099B0B40601C'
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: true
