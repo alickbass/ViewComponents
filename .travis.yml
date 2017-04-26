@@ -1,0 +1,17 @@
+language: objective-c
+osx_image: xcode8.3
+
+before_install:
+  - brew update
+  - brew outdated carthage || brew upgrade carthage
+  - carthage bootstrap --verbose --platform iOS --no-use-binaries --cache-builds
+
+script:
+  - open -a "simulator" --args -CurrentDeviceUDID 57E7D476-3A98-4107-A64D-98CA0EA13EC0
+  - xcodebuild clean build test -project ViewComponents.xcodeproj -scheme ViewComponents -destination 'platform=iOS Simulator,OS=10.2,id=57E7D476-3A98-4107-A64D-98CA0EA13EC0'
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: true
