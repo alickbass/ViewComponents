@@ -37,4 +37,52 @@ class TestUIViewStyle: XCTestCase {
         XCTAssertNotEqual(UIViewStyle.isExclusiveTouch(true), .isMultipleTouchEnabled(false))
     }
     
+    func testStyleSideEffects() {
+        let view = UIView()
+        
+        view.backgroundColor = .red
+        UIViewStyle.backgroundColor(.green).sideEffect(on: view)
+        XCTAssertEqual(view.backgroundColor, .green)
+        
+        view.isHidden = false
+        UIViewStyle.isHidden(true).sideEffect(on: view)
+        XCTAssertEqual(view.isHidden, true)
+        
+        view.alpha = 0.4
+        UIViewStyle.alpha(0.3).sideEffect(on: view)
+        XCTAssertEqualWithAccuracy(view.alpha, 0.3, accuracy: 0.001)
+        
+        view.isOpaque = false
+        UIViewStyle.isOpaque(true).sideEffect(on: view)
+        XCTAssertEqual(view.isOpaque, true)
+        
+        view.tintColor = .gray
+        UIViewStyle.tintColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.tintColor, .red)
+        
+        view.tintAdjustmentMode = .dimmed
+        UIViewStyle.tintAdjustmentMode(.normal).sideEffect(on: view)
+        XCTAssertEqual(view.tintAdjustmentMode, .normal)
+        
+        view.clipsToBounds = false
+        UIViewStyle.clipsToBounds(true).sideEffect(on: view)
+        XCTAssertEqual(view.clipsToBounds, true)
+        
+        view.clearsContextBeforeDrawing = false
+        UIViewStyle.clearsContextBeforeDrawing(true).sideEffect(on: view)
+        XCTAssertEqual(view.clearsContextBeforeDrawing, true)
+        
+        view.isUserInteractionEnabled = false
+        UIViewStyle.isUserInteractionEnabled(true).sideEffect(on: view)
+        XCTAssertEqual(view.isUserInteractionEnabled, true)
+        
+        view.isMultipleTouchEnabled = false
+        UIViewStyle.isMultipleTouchEnabled(true).sideEffect(on: view)
+        XCTAssertEqual(view.isMultipleTouchEnabled, true)
+        
+        view.isExclusiveTouch = false
+        UIViewStyle.isExclusiveTouch(true).sideEffect(on: view)
+        XCTAssertEqual(view.isExclusiveTouch, true)
+    }
+    
 }
