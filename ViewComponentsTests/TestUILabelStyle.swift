@@ -47,4 +47,71 @@ class TestUILabelStyle: XCTestCase {
         XCTAssertNotEqual(UILabelStyle.shadowOffset(.zero), .lineBreakMode(.byClipping))
     }
     
+    func testStyleSideEffects() {
+        let view = UILabel()
+        
+        view.text = "someOtherString"
+        UILabelStyle.text("test").sideEffect(on: view)
+        XCTAssertEqual(view.text, "test")
+        
+        view.attributedText = .init(string: "someOtherString")
+        UILabelStyle.attributedText(.init(string: "test")).sideEffect(on: view)
+        XCTAssertEqual(view.attributedText, NSAttributedString(string: "test"))
+        
+        view.font = .systemFont(ofSize: 13)
+        UILabelStyle.font(.systemFont(ofSize: 12)).sideEffect(on: view)
+        XCTAssertEqual(view.font, .systemFont(ofSize: 12))
+        
+        view.textColor = .green
+        UILabelStyle.textColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.textColor, .red)
+        
+        view.textAlignment = .center
+        UILabelStyle.textAlignment(.justified).sideEffect(on: view)
+        XCTAssertEqual(view.textAlignment, .justified)
+        
+        view.lineBreakMode = .byClipping
+        UILabelStyle.lineBreakMode(.byTruncatingHead).sideEffect(on: view)
+        XCTAssertEqual(view.lineBreakMode, .byTruncatingHead)
+        
+        view.isEnabled = true
+        UILabelStyle.isEnabled(false).sideEffect(on: view)
+        XCTAssertEqual(view.isEnabled, false)
+        
+        view.adjustsFontSizeToFitWidth = true
+        UILabelStyle.adjustsFontSizeToFitWidth(false).sideEffect(on: view)
+        XCTAssertEqual(view.adjustsFontSizeToFitWidth, false)
+        
+        view.allowsDefaultTighteningForTruncation = true
+        UILabelStyle.allowsDefaultTighteningForTruncation(false).sideEffect(on: view)
+        XCTAssertEqual(view.allowsDefaultTighteningForTruncation, false)
+        
+        view.baselineAdjustment = .alignBaselines
+        UILabelStyle.baselineAdjustment(.alignCenters).sideEffect(on: view)
+        XCTAssertEqual(view.baselineAdjustment, .alignCenters)
+        
+        view.minimumScaleFactor = 0.5
+        UILabelStyle.minimumScaleFactor(0.7).sideEffect(on: view)
+        XCTAssertEqualWithAccuracy(view.minimumScaleFactor, 0.7, accuracy: 0.001)
+        
+        view.numberOfLines = 12
+        UILabelStyle.numberOfLines(0).sideEffect(on: view)
+        XCTAssertEqual(view.numberOfLines, 0)
+        
+        view.highlightedTextColor = .green
+        UILabelStyle.highlightedTextColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.highlightedTextColor, .red)
+        
+        view.isHighlighted = true
+        UILabelStyle.isHighlighted(false).sideEffect(on: view)
+        XCTAssertEqual(view.isHighlighted, false)
+        
+        view.shadowColor = .green
+        UILabelStyle.shadowColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.shadowColor, .red)
+        
+        view.shadowOffset = CGSize(width: 20, height: 20)
+        UILabelStyle.shadowOffset(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.shadowOffset, .zero)
+    }
 }
