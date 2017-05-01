@@ -14,7 +14,7 @@ protocol ComponentType {
     func isEqual(to other: ComponentType) -> Bool
 }
 
-struct ChildComponent: ComponentType {
+struct ChildComponent {
     let component: ComponentType
     let access: (UIView) -> UIView
     
@@ -23,28 +23,20 @@ struct ChildComponent: ComponentType {
         self.access = { view in access(view as! T) }
     }
     
-    var styles: [StyleType] {
-        return component.styles
-    }
-    
     func configure(view: UIView) {
         component.configure(view: access(view))
-    }
-    
-    func isEqual(to other: ComponentType) -> Bool {
-        return component.isEqual(to: other)
     }
 }
 
 public struct Component<T: UIView>: ComponentType {
     public let styles: [StyleType]
-    let children: [ComponentType]
+    let children: [ChildComponent]
     
     public init() {
         self.init(styles: [], children: [])
     }
     
-    init(styles: [StyleType], children: [ComponentType]) {
+    init(styles: [StyleType], children: [ChildComponent]) {
         self.styles = styles
         self.children = children
     }
@@ -73,6 +65,6 @@ extension Component: Equatable {
         return lhs.styles.count == rhs.styles.count
             && lhs.children.count == rhs.children.count
             && zip(lhs.styles, rhs.styles).reduce(true, { $0 && $1.0.isEqual(to: $1.1) })
-            && zip(lhs.children, rhs.children).reduce(true, { $0 && $1.0.isEqual(to: $1.1) })
+            && zip(lhs.children, rhs.children).reduce(true, { $0 && $1.0.component.isEqual(to: $1.1.component) })
     }
 }
