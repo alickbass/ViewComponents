@@ -113,5 +113,9 @@ class TestUILabelStyle: XCTestCase {
         view.shadowOffset = CGSize(width: 20, height: 20)
         UILabelStyle.shadowOffset(.zero).sideEffect(on: view)
         XCTAssertEqual(view.shadowOffset, .zero)
+        
+        view.isHighlighted = false
+        Component<UILabel>().labelStyles(.isHighlighted(true)).configure(view: view)
+        XCTAssertEqual(view.isHighlighted, true)
     }
 }
