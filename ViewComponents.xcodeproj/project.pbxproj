@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		CE0CF5511EB75E2800B6BC36 /* TestStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */; };
+		CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5521EB7758400B6BC36 /* TestComponent.swift */; };
 		CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6735481EB677D400BBD2FE /* UILabelStyle.swift */; };
 		CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */; };
 		CEF534D71EB0C182001E3CA8 /* ViewComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF534CD1EB0C182001E3CA8 /* ViewComponents.framework */; };
-		CEF534DC1EB0C182001E3CA8 /* ViewComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534DB1EB0C182001E3CA8 /* ViewComponentsTests.swift */; };
 		CEF534DE1EB0C182001E3CA8 /* ViewComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF534D01EB0C182001E3CA8 /* ViewComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534E71EB0C18B001E3CA8 /* Component.swift */; };
 		CEF534EA1EB0C1AD001E3CA8 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534E91EB0C1AD001E3CA8 /* Style.swift */; };
@@ -32,13 +32,13 @@
 
 /* Begin PBXFileReference section */
 		CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStyle.swift; sourceTree = "<group>"; };
+		CE0CF5521EB7758400B6BC36 /* TestComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComponent.swift; sourceTree = "<group>"; };
 		CE6735481EB677D400BBD2FE /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUILabelStyle.swift; sourceTree = "<group>"; };
 		CEF534CD1EB0C182001E3CA8 /* ViewComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF534D01EB0C182001E3CA8 /* ViewComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewComponents.h; sourceTree = "<group>"; };
 		CEF534D11EB0C182001E3CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF534D61EB0C182001E3CA8 /* ViewComponentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewComponentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEF534DB1EB0C182001E3CA8 /* ViewComponentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewComponentsTests.swift; sourceTree = "<group>"; };
 		CEF534DD1EB0C182001E3CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEF534E71EB0C18B001E3CA8 /* Component.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
 		CEF534E91EB0C1AD001E3CA8 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		CEF534DA1EB0C182001E3CA8 /* ViewComponentsTests */ = {
 			isa = PBXGroup;
 			children = (
-				CEF534DB1EB0C182001E3CA8 /* ViewComponentsTests.swift */,
+				CE0CF5521EB7758400B6BC36 /* TestComponent.swift */,
 				CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */,
 				CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */,
 				CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */,
@@ -244,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */,
-				CEF534DC1EB0C182001E3CA8 /* ViewComponentsTests.swift in Sources */,
+				CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */,
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
 				CE0CF5511EB75E2800B6BC36 /* TestStyle.swift in Sources */,
 			);
