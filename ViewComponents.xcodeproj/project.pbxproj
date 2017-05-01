@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CE0CF5511EB75E2800B6BC36 /* TestStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */; };
 		CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5521EB7758400B6BC36 /* TestComponent.swift */; };
+		CE0CF5551EB786C600B6BC36 /* UIControlStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5541EB786C600B6BC36 /* UIControlStyle.swift */; };
+		CE0CF5571EB78A8900B6BC36 /* TestUIControlStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */; };
 		CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6735481EB677D400BBD2FE /* UILabelStyle.swift */; };
 		CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */; };
 		CEF534D71EB0C182001E3CA8 /* ViewComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF534CD1EB0C182001E3CA8 /* ViewComponents.framework */; };
@@ -33,6 +35,8 @@
 /* Begin PBXFileReference section */
 		CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStyle.swift; sourceTree = "<group>"; };
 		CE0CF5521EB7758400B6BC36 /* TestComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComponent.swift; sourceTree = "<group>"; };
+		CE0CF5541EB786C600B6BC36 /* UIControlStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlStyle.swift; sourceTree = "<group>"; };
+		CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIControlStyle.swift; sourceTree = "<group>"; };
 		CE6735481EB677D400BBD2FE /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUILabelStyle.swift; sourceTree = "<group>"; };
 		CEF534CD1EB0C182001E3CA8 /* ViewComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +107,7 @@
 				CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */,
 				CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */,
 				CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */,
+				CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */,
 				CEF534DD1EB0C182001E3CA8 /* Info.plist */,
 			);
 			path = ViewComponentsTests;
@@ -113,6 +118,7 @@
 			children = (
 				CEF534F01EB0C2DD001E3CA8 /* UIViewStyle.swift */,
 				CE6735481EB677D400BBD2FE /* UILabelStyle.swift */,
+				CE0CF5541EB786C600B6BC36 /* UIControlStyle.swift */,
 				CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */,
 			);
 			name = Styles;
@@ -234,6 +240,7 @@
 				CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */,
 				CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */,
 				CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */,
+				CE0CF5551EB786C600B6BC36 /* UIControlStyle.swift in Sources */,
 				CEF534F11EB0C2DD001E3CA8 /* UIViewStyle.swift in Sources */,
 				CEF534EA1EB0C1AD001E3CA8 /* Style.swift in Sources */,
 			);
@@ -245,6 +252,7 @@
 			files = (
 				CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */,
 				CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */,
+				CE0CF5571EB78A8900B6BC36 /* TestUIControlStyle.swift in Sources */,
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
 				CE0CF5511EB75E2800B6BC36 /* TestStyle.swift in Sources */,
 			);
