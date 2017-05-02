@@ -47,5 +47,9 @@ class TestUIControlStyle: XCTestCase {
         view.contentHorizontalAlignment = .left
         UIControlStyle.contentHorizontalAlignment(.center).sideEffect(on: view)
         XCTAssertEqual(view.contentHorizontalAlignment, .center)
+        
+        view.isSelected = true
+        Component<UIControl>().controlStyles(.isSelected(false)).configure(view: view)
+        XCTAssertEqual(view.isSelected, false)
     }
 }
