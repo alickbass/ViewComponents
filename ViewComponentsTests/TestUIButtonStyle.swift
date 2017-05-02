@@ -60,4 +60,63 @@ class TestUIButtonStyle: XCTestCase {
         XCTAssertNotEqual(UIButtonStyle.imageEdgeInsets(.zero), .titleEdgeInsets(.init(top: 0, left: 2, bottom: 2, right: 2)))
     }
     
+    func testStyleSideEffects() {
+        let view = UIButton()
+        
+        view.setTitle(nil, for: .normal)
+        UIButtonStyle.title("some", for: .normal).sideEffect(on: view)
+        XCTAssertEqual(view.title(for: .normal), "some")
+        
+        view.setAttributedTitle(nil, for: .normal)
+        UIButtonStyle.attributedTitle(.init(string: "some"), for: .normal).sideEffect(on: view)
+        XCTAssertEqual(view.attributedTitle(for: .normal), .init(string: "some"))
+        
+        view.setTitleColor(.green, for: .normal)
+        UIButtonStyle.titleColor(.red, for: .normal).sideEffect(on: view)
+        XCTAssertEqual(view.titleColor(for: .normal), .red)
+        
+        view.setTitleShadowColor(.green, for: .normal)
+        UIButtonStyle.titleShadowColor(.red, for: .normal).sideEffect(on: view)
+        XCTAssertEqual(view.titleShadowColor(for: .normal), .red)
+        
+        view.reversesTitleShadowWhenHighlighted = true
+        UIButtonStyle.reversesTitleShadowWhenHighlighted(false).sideEffect(on: view)
+        XCTAssertEqual(view.reversesTitleShadowWhenHighlighted, false)
+        
+        view.adjustsImageWhenHighlighted = true
+        UIButtonStyle.adjustsImageWhenHighlighted(false).sideEffect(on: view)
+        XCTAssertEqual(view.adjustsImageWhenHighlighted, false)
+        
+        view.adjustsImageWhenDisabled = true
+        UIButtonStyle.adjustsImageWhenDisabled(false).sideEffect(on: view)
+        XCTAssertEqual(view.adjustsImageWhenDisabled, false)
+        
+        view.showsTouchWhenHighlighted = true
+        UIButtonStyle.showsTouchWhenHighlighted(false).sideEffect(on: view)
+        XCTAssertEqual(view.showsTouchWhenHighlighted, false)
+        
+        view.setBackgroundImage(UIImage(), for: .normal)
+        UIButtonStyle.backgroundImage(.none, for: .normal).sideEffect(on: view)
+        XCTAssertEqual(view.backgroundImage(for: .normal), .none)
+        
+        view.setImage(UIImage(), for: .normal)
+        UIButtonStyle.image(.none, for: .normal).sideEffect(on: view)
+        XCTAssertEqual(view.image(for: .normal), .none)
+        
+        view.contentEdgeInsets = .init(top: 0, left: 2, bottom: 2, right: 2)
+        UIButtonStyle.contentEdgeInsets(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.contentEdgeInsets, .zero)
+        
+        view.titleEdgeInsets = .init(top: 0, left: 2, bottom: 2, right: 2)
+        UIButtonStyle.titleEdgeInsets(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.titleEdgeInsets, .zero)
+        
+        view.imageEdgeInsets = .init(top: 0, left: 2, bottom: 2, right: 2)
+        UIButtonStyle.imageEdgeInsets(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.imageEdgeInsets, .zero)
+        
+        view.showsTouchWhenHighlighted = false
+        Component<UIButton>().buttonStyles(.showsTouchWhenHighlighted(true)).configure(view: view)
+        XCTAssertEqual(view.showsTouchWhenHighlighted, true)
+    }
 }
