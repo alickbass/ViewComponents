@@ -33,32 +33,19 @@ public enum CAGravity: RawRepresentable {
     
     public init?(rawValue: String) {
         switch rawValue {
-        case kCAGravityCenter:
-            self = .center
-        case kCAGravityTop:
-            self = .top
-        case kCAGravityBottom:
-            self = .bottom
-        case kCAGravityLeft:
-            self = .left
-        case kCAGravityRight:
-            self = .right
-        case kCAGravityTopLeft:
-            self = .topLeft
-        case kCAGravityTopRight:
-            self = .topRight
-        case kCAGravityBottomLeft:
-            self = .bottomLeft
-        case kCAGravityBottomRight:
-            self = .bottomRight
-        case kCAGravityResize:
-            self = .resize
-        case kCAGravityResizeAspect:
-            self = .resizeAspect
-        case kCAGravityResizeAspectFill:
-            self = .resizeAspectFill
-        default:
-            return nil
+        case kCAGravityCenter: self = .center
+        case kCAGravityTop: self = .top
+        case kCAGravityBottom: self = .bottom
+        case kCAGravityLeft: self = .left
+        case kCAGravityRight: self = .right
+        case kCAGravityTopLeft: self = .topLeft
+        case kCAGravityTopRight: self = .topRight
+        case kCAGravityBottomLeft: self = .bottomLeft
+        case kCAGravityBottomRight: self = .bottomRight
+        case kCAGravityResize: self = .resize
+        case kCAGravityResizeAspect: self = .resizeAspect
+        case kCAGravityResizeAspectFill: self = .resizeAspectFill
+        default: return nil
         }
     }
 }
