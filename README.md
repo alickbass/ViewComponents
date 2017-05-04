@@ -34,9 +34,14 @@ let labelComponent = Component<UILabel>()
         .backgroundColor(.blue)
     )
 
+let iconComponent = Component<UIImageView>().imageViewStyles(
+	.image(myImage)
+)
+
 let viewComponent = Component<MyCustomView>()
     .child(buttonComponent, { $0.myButton })
     .child(labelComponent, { $0.myLabel })
+    .child(iconComponent, { $0.myIcon })
 ```
 
 and then when we need to apply our style we do the following:

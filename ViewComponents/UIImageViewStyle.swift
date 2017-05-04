@@ -62,3 +62,9 @@ public enum UIImageViewStyle: ConcreteStyleType {
         }
     }
 }
+
+public extension Component where T: UIImageView {
+    public func imageViewStyles(_ styles: UIImageViewStyle...) -> Component<T> {
+        return Component<T>(styles: self.styles + styles, children: children)
+    }
+}
