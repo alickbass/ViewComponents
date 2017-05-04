@@ -35,7 +35,7 @@ let labelComponent = Component<UILabel>()
     )
 
 let iconComponent = Component<UIImageView>().imageViewStyles(
-	.image(myImage)
+    .image(myImage)
 )
 
 let viewComponent = Component<MyCustomView>()
