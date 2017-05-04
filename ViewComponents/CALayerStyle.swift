@@ -49,3 +49,24 @@ public enum CAGravity: RawRepresentable {
         }
     }
 }
+
+public enum CAContentsFormat: RawRepresentable {
+    case RGBA8Uint, RGBA16Float, gray8Uint
+    
+    public var rawValue: String {
+        switch self {
+        case .RGBA8Uint: return kCAContentsFormatRGBA8Uint
+        case .RGBA16Float: return kCAContentsFormatRGBA16Float
+        case .gray8Uint: return kCAContentsFormatGray8Uint
+        }
+    }
+    
+    public init?(rawValue: String) {
+        switch rawValue {
+        case kCAContentsFormatRGBA8Uint: self = .RGBA8Uint
+        case kCAContentsFormatRGBA16Float: self = .RGBA16Float
+        case kCAContentsFormatGray8Uint: self = .gray8Uint
+        default: return nil
+        }
+    }
+}
