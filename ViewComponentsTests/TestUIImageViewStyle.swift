@@ -68,5 +68,9 @@ class TestUIImageViewStyle: XCTestCase {
         view.isHighlighted = false
         UIImageViewStyle.isHighlighted(true).sideEffect(on: view)
         XCTAssertTrue(view.isHighlighted)
+        
+        view.isHighlighted = false
+        Component<UIImageView>().imageViewStyles(.isHighlighted(true)).configure(view: view)
+        XCTAssertEqual(view.isHighlighted, true)
     }
 }
