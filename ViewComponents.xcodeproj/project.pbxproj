@@ -15,6 +15,7 @@
 		CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6735481EB677D400BBD2FE /* UILabelStyle.swift */; };
 		CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */; };
 		CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */; };
+		CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */; };
 		CEF534D71EB0C182001E3CA8 /* ViewComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEF534CD1EB0C182001E3CA8 /* ViewComponents.framework */; };
 		CEF534DE1EB0C182001E3CA8 /* ViewComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = CEF534D01EB0C182001E3CA8 /* ViewComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534E71EB0C18B001E3CA8 /* Component.swift */; };
@@ -43,6 +44,7 @@
 		CE6735481EB677D400BBD2FE /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUILabelStyle.swift; sourceTree = "<group>"; };
 		CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIButtonStyle.swift; sourceTree = "<group>"; };
+		CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIImageViewStyle.swift; sourceTree = "<group>"; };
 		CEF534CD1EB0C182001E3CA8 /* ViewComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ViewComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEF534D01EB0C182001E3CA8 /* ViewComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewComponents.h; sourceTree = "<group>"; };
 		CEF534D11EB0C182001E3CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */,
 				CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */,
 				CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */,
+				CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */,
 				CEF534DD1EB0C182001E3CA8 /* Info.plist */,
 			);
 			path = ViewComponentsTests;
@@ -263,6 +266,7 @@
 				CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */,
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
 				CE0CF5511EB75E2800B6BC36 /* TestStyle.swift in Sources */,
+				CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
