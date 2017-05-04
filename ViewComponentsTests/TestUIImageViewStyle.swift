@@ -10,10 +10,9 @@ import XCTest
 import ViewComponents
 
 class TestUIImageViewStyle: XCTestCase {
+    let image = UIImage()
     
     func testStyleEquatable() {
-        let image = UIImage()
-        
         XCTAssertEqual(UIImageViewStyle.image(image), .image(image))
         XCTAssertNotEqual(UIImageViewStyle.image(image), .image(nil))
         
@@ -23,6 +22,10 @@ class TestUIImageViewStyle: XCTestCase {
         XCTAssertEqual(UIImageViewStyle.animationImages([image]), .animationImages([image]))
         XCTAssertEqual(UIImageViewStyle.animationImages(nil), .animationImages(nil))
         XCTAssertNotEqual(UIImageViewStyle.animationImages([image]), .animationImages(nil))
+        
+        XCTAssertEqual(UIImageViewStyle.highlightedAnimationImages([image]), .highlightedAnimationImages([image]))
+        XCTAssertEqual(UIImageViewStyle.highlightedAnimationImages(nil), .highlightedAnimationImages(nil))
+        XCTAssertNotEqual(UIImageViewStyle.highlightedAnimationImages([image]), .highlightedAnimationImages(nil))
         
         XCTAssertEqual(UIImageViewStyle.animationDuration(12), .animationDuration(12))
         XCTAssertNotEqual(UIImageViewStyle.animationDuration(12), .animationDuration(20))
@@ -35,4 +38,35 @@ class TestUIImageViewStyle: XCTestCase {
         XCTAssertNotEqual(UIImageViewStyle.isHighlighted(true), .animationRepeatCount(20))
     }
     
+    func testStyleSideEffects() {
+        let view = UIImageView()
+        
+        view.image = image
+        UIImageViewStyle.image(nil).sideEffect(on: view)
+        XCTAssertNil(view.image)
+        
+        view.highlightedImage = image
+        UIImageViewStyle.highlightedImage(nil).sideEffect(on: view)
+        XCTAssertNil(view.highlightedImage)
+        
+        view.animationImages = [image]
+        UIImageViewStyle.animationImages(nil).sideEffect(on: view)
+        XCTAssertNil(view.animationImages)
+        
+        view.highlightedAnimationImages = [image]
+        UIImageViewStyle.highlightedAnimationImages(nil).sideEffect(on: view)
+        XCTAssertNil(view.highlightedAnimationImages)
+        
+        view.animationDuration = 50
+        UIImageViewStyle.animationDuration(12).sideEffect(on: view)
+        XCTAssertEqual(view.animationDuration, 12)
+        
+        view.animationRepeatCount = 50
+        UIImageViewStyle.animationRepeatCount(12).sideEffect(on: view)
+        XCTAssertEqual(view.animationRepeatCount, 12)
+        
+        view.isHighlighted = false
+        UIImageViewStyle.isHighlighted(true).sideEffect(on: view)
+        XCTAssertTrue(view.isHighlighted)
+    }
 }
