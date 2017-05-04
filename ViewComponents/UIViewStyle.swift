@@ -20,6 +20,7 @@ public enum UIViewStyle {
     case isUserInteractionEnabled(Bool)
     case isMultipleTouchEnabled(Bool)
     case isExclusiveTouch(Bool)
+    case contentMode(UIViewContentMode)
 }
 
 extension UIViewStyle: ConcreteStyleType {
@@ -49,6 +50,8 @@ extension UIViewStyle: ConcreteStyleType {
             view.isMultipleTouchEnabled = isEnabled
         case let .isExclusiveTouch(isExclusive):
             view.isExclusiveTouch = isExclusive
+        case let .contentMode(mode):
+            view.contentMode = mode
         }
     }
     
@@ -69,6 +72,8 @@ extension UIViewStyle: ConcreteStyleType {
         case let (.tintColor(leftColor), .tintColor(rightColor)):
             return leftColor == rightColor
         case let (.tintAdjustmentMode(leftMode), .tintAdjustmentMode(rightMode)):
+            return leftMode == rightMode
+        case let (.contentMode(leftMode), .contentMode(rightMode)):
             return leftMode == rightMode
         default:
             return false
