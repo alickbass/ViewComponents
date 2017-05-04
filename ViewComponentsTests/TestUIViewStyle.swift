@@ -35,6 +35,8 @@ class TestUIViewStyle: XCTestCase {
         XCTAssertEqual(UIViewStyle.isExclusiveTouch(true), .isExclusiveTouch(true))
         XCTAssertNotEqual(UIViewStyle.isExclusiveTouch(true), .isExclusiveTouch(false))
         XCTAssertNotEqual(UIViewStyle.isExclusiveTouch(true), .isMultipleTouchEnabled(false))
+        XCTAssertEqual(UIViewStyle.contentMode(.scaleToFill), .contentMode(.scaleToFill))
+        XCTAssertNotEqual(UIViewStyle.contentMode(.scaleToFill), .contentMode(.center))
     }
     
     func testStyleSideEffects() {
@@ -83,6 +85,10 @@ class TestUIViewStyle: XCTestCase {
         view.isExclusiveTouch = false
         UIViewStyle.isExclusiveTouch(true).sideEffect(on: view)
         XCTAssertEqual(view.isExclusiveTouch, true)
+        
+        view.contentMode = .scaleToFill
+        UIViewStyle.contentMode(.center).sideEffect(on: view)
+        XCTAssertEqual(view.contentMode, .center)
         
         view.isExclusiveTouch = false
         Component<UIView>().viewStyles(.isExclusiveTouch(true)).configure(view: view)
