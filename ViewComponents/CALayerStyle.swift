@@ -82,11 +82,6 @@ public enum CALayerStyle: ConcreteStyleType {
     case borderWidth(CGFloat)
     case borderColor(UIColor?)
     case backgroundColor(UIColor?)
-    case shadowOpacity(Float)
-    case shadowRadius(CGFloat)
-    case shadowOffset(CGSize)
-    case shadowColor(UIColor?)
-    case shadowPath(CGPath?)
     case style([AnyHashable : Any]?)
     case allowsEdgeAntialiasing(Bool)
     case allowsGroupOpacity(Bool)
@@ -130,16 +125,6 @@ public enum CALayerStyle: ConcreteStyleType {
             view.layer.borderColor = borderColor?.cgColor
         case let .backgroundColor(backgroundColor):
             view.layer.backgroundColor = backgroundColor?.cgColor
-        case let .shadowOpacity(shadowOpacity):
-            view.layer.shadowOpacity = shadowOpacity
-        case let .shadowRadius(shadowRadius):
-            view.layer.shadowRadius = shadowRadius
-        case let .shadowOffset(shadowOffset):
-            view.layer.shadowOffset = shadowOffset
-        case let .shadowColor(shadowColor):
-            view.layer.shadowColor = shadowColor?.cgColor
-        case let .shadowPath(shadowPath):
-            view.layer.shadowPath = shadowPath
         case let .style(style):
             view.layer.style = style
         case let .allowsEdgeAntialiasing(allowsEdgeAntialiasing):
@@ -180,6 +165,13 @@ public enum CALayerStyle: ConcreteStyleType {
             view.layer.sublayerTransform = sublayerTransform
         case let .name(name):
             view.layer.name = name
+        }
+    }
+    
+    public static func == (lhs: CALayerStyle, rhs: CALayerStyle) -> Bool {
+        switch (lhs, rhs) {
+        default:
+            return false
         }
     }
 }
