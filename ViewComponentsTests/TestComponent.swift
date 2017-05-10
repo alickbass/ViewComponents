@@ -30,4 +30,22 @@ class TestComponent: XCTestCase {
         XCTAssertEqual(label.isEnabled, false)
     }
     
+    func testComponentConvertibleProtocol() {
+        struct MyViewModel: ComponentConvertible {
+            var toComponent: Component<UIView> {
+                return Component<UIView>()
+                    .viewStyles(
+                        .alpha(0.2), .backgroundColor(.red)
+                )
+            }
+        }
+        
+        XCTAssertEqual(comp.toComponent, comp)
+        
+        let view = UIView()
+        MyViewModel().configure(view: view)
+        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.backgroundColor, .red)
+    }
+    
 }

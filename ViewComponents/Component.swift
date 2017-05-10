@@ -55,6 +55,12 @@ public struct Component<T: UIView>: ComponentType {
     }
 }
 
+extension Component: ComponentConvertible {
+    public var toComponent: Component<T> {
+        return self
+    }
+}
+
 extension Component: Equatable {
     func isEqual(to other: ComponentType) -> Bool {
         guard let other = other as? Component<T> else { return false }
@@ -66,5 +72,18 @@ extension Component: Equatable {
             && lhs.children.count == rhs.children.count
             && zip(lhs.styles, rhs.styles).reduce(true, { $0 && $1.0.isEqual(to: $1.1) })
             && zip(lhs.children, rhs.children).reduce(true, { $0 && $1.0.component.isEqual(to: $1.1.component) })
+    }
+}
+
+public protocol ComponentConvertible {
+    associatedtype ViewType: UIView
+    
+    var toComponent: Component<ViewType> { get }
+    func configure(view: ViewType)
+}
+
+public extension ComponentConvertible {
+    public func configure(view: ViewType) {
+        toComponent.configure(view: view)
     }
 }
