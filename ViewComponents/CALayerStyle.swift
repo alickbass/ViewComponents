@@ -79,7 +79,6 @@ public enum CALayerStyle: ConcreteStyleType {
     case mask(CALayer?)
     case isDoubleSided(Bool)
     case backgroundColor(UIColor?)
-    case style([AnyHashable : Any]?)
     case allowsEdgeAntialiasing(Bool)
     case allowsGroupOpacity(Bool)
     case isOpaque(Bool)
@@ -96,8 +95,6 @@ public enum CALayerStyle: ConcreteStyleType {
     case anchorPointZ(CGFloat)
     case anchorPoint(CGPoint)
     case contentsScale(CGFloat)
-    case transform(CATransform3D)
-    case sublayerTransform(CATransform3D)
     case name(String?)
     
     public func sideEffect(on view: UIView) {
@@ -116,8 +113,6 @@ public enum CALayerStyle: ConcreteStyleType {
             view.layer.isDoubleSided = isDoubleSided
         case let .backgroundColor(backgroundColor):
             view.layer.backgroundColor = backgroundColor?.cgColor
-        case let .style(style):
-            view.layer.style = style
         case let .allowsEdgeAntialiasing(allowsEdgeAntialiasing):
             view.layer.allowsEdgeAntialiasing = allowsEdgeAntialiasing
         case let .allowsGroupOpacity(allowsGroupOpacity):
@@ -150,10 +145,6 @@ public enum CALayerStyle: ConcreteStyleType {
             view.layer.anchorPoint = anchorPoint
         case let .contentsScale(contentsScale):
             view.layer.contentsScale = contentsScale
-        case let .transform(transform):
-            view.layer.transform = transform
-        case let .sublayerTransform(sublayerTransform):
-            view.layer.sublayerTransform = sublayerTransform
         case let .name(name):
             view.layer.name = name
         }
@@ -161,6 +152,41 @@ public enum CALayerStyle: ConcreteStyleType {
     
     public static func == (lhs: CALayerStyle, rhs: CALayerStyle) -> Bool {
         switch (lhs, rhs) {
+        case let (.contentsGravity(left), .contentsGravity(right)):
+            return left == right
+        case let (.opacity(left), .opacity(right)):
+            return left == right
+        case let (.isHidden(left), .isHidden(right)),
+             let (.masksToBounds(left), .masksToBounds(right)),
+             let (.isDoubleSided(left), .isDoubleSided(right)),
+             let (.allowsEdgeAntialiasing(left), .allowsEdgeAntialiasing(right)),
+             let (.allowsGroupOpacity(left), .allowsGroupOpacity(right)),
+             let (.isOpaque(left), .isOpaque(right)),
+             let (.isGeometryFlipped(left), .isGeometryFlipped(right)),
+             let (.drawsAsynchronously(left), .drawsAsynchronously(right)),
+             let (.shouldRasterize(left), .shouldRasterize(right)):
+            return left == right
+        case let (.mask(left), .mask(right)):
+            return left == right
+        case let (.backgroundColor(left), .backgroundColor(right)):
+            return left == right
+        case let (.edgeAntialiasingMask(left), .edgeAntialiasingMask(right)):
+            return left == right
+        case let (.rasterizationScale(left), .rasterizationScale(right)),
+             let (.zPosition(left), .zPosition(right)),
+             let (.anchorPointZ(left), .anchorPointZ(right)),
+             let (.contentsScale(left), .contentsScale(right)):
+            return left == right
+        case let (.contentsFormat(left), .contentsFormat(right)):
+            return left == right
+        case let (.frame(left), .frame(right)),
+             let (.bounds(left), .bounds(right)):
+            return left == right
+        case let (.position(left), .position(right)),
+             let (.anchorPoint(left), .anchorPoint(right)):
+            return left == right
+        case let (.name(left), .name(right)):
+            return left == right
         default:
             return false
         }
