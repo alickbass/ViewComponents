@@ -51,4 +51,31 @@ class TestCALayerStyle: XCTestCase {
         XCTAssertNil(CAContentsFormat(rawValue: "random"))
     }
     
+    func testStyleEquatable() {
+        XCTAssertEqual(CALayerStyle.contentsGravity(.bottom), .contentsGravity(.bottom))
+        XCTAssertEqual(CALayerStyle.opacity(0.2), .opacity(0.2))
+        XCTAssertEqual(CALayerStyle.isHidden(true), .isHidden(true))
+        XCTAssertEqual(CALayerStyle.masksToBounds(true), .masksToBounds(true))
+        let mask = CALayer()
+        XCTAssertEqual(CALayerStyle.mask(mask), .mask(mask))
+        XCTAssertEqual(CALayerStyle.isDoubleSided(true), .isDoubleSided(true))
+        XCTAssertEqual(CALayerStyle.backgroundColor(.red), .backgroundColor(.red))
+        XCTAssertEqual(CALayerStyle.allowsEdgeAntialiasing(true), .allowsEdgeAntialiasing(true))
+        XCTAssertEqual(CALayerStyle.allowsGroupOpacity(true), .allowsGroupOpacity(true))
+        XCTAssertEqual(CALayerStyle.isOpaque(true), .isOpaque(true))
+        XCTAssertEqual(CALayerStyle.edgeAntialiasingMask(.layerLeftEdge), .edgeAntialiasingMask(.layerLeftEdge))
+        XCTAssertEqual(CALayerStyle.isGeometryFlipped(true), .isGeometryFlipped(true))
+        XCTAssertEqual(CALayerStyle.drawsAsynchronously(true), .drawsAsynchronously(true))
+        XCTAssertEqual(CALayerStyle.shouldRasterize(true), .shouldRasterize(true))
+        XCTAssertEqual(CALayerStyle.rasterizationScale(0.2), .rasterizationScale(0.2))
+        XCTAssertEqual(CALayerStyle.contentsFormat(.RGBA16Float), .contentsFormat(.RGBA16Float))
+        XCTAssertEqual(CALayerStyle.frame(.zero), .frame(.zero))
+        XCTAssertEqual(CALayerStyle.bounds(.zero), .bounds(.zero))
+        XCTAssertEqual(CALayerStyle.position(.zero), .position(.zero))
+        XCTAssertEqual(CALayerStyle.zPosition(12), .zPosition(12))
+        XCTAssertEqual(CALayerStyle.anchorPoint(.zero), .anchorPoint(.zero))
+        XCTAssertEqual(CALayerStyle.contentsScale(0.2), .contentsScale(0.2))
+        XCTAssertEqual(CALayerStyle.name("test"), .name("test"))
+        XCTAssertNotEqual(CALayerStyle.name("test"), .contentsScale(0.2))
+    }
 }
