@@ -48,6 +48,7 @@ class TestCALayerStyle: XCTestCase {
         XCTAssertEqual(CAContentsFormat(rawValue: kCAContentsFormatRGBA8Uint), .RGBA8Uint)
         XCTAssertEqual(CAContentsFormat(rawValue: kCAContentsFormatRGBA16Float), .RGBA16Float)
         XCTAssertEqual(CAContentsFormat(rawValue: kCAContentsFormatGray8Uint), .gray8Uint)
+        XCTAssertNil(CAContentsFormat(rawValue: "random"))
     }
     
 }

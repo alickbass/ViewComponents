@@ -78,9 +78,6 @@ public enum CALayerStyle: ConcreteStyleType {
     case masksToBounds(Bool)
     case mask(CALayer?)
     case isDoubleSided(Bool)
-    case cornerRadius(CGFloat)
-    case borderWidth(CGFloat)
-    case borderColor(UIColor?)
     case backgroundColor(UIColor?)
     case style([AnyHashable : Any]?)
     case allowsEdgeAntialiasing(Bool)
@@ -117,12 +114,6 @@ public enum CALayerStyle: ConcreteStyleType {
             view.layer.mask = mask
         case let .isDoubleSided(isDoubleSided):
             view.layer.isDoubleSided = isDoubleSided
-        case let .cornerRadius(cornerRadius):
-            view.layer.cornerRadius = cornerRadius
-        case let .borderWidth(borderWidth):
-            view.layer.borderWidth = borderWidth
-        case let .borderColor(borderColor):
-            view.layer.borderColor = borderColor?.cgColor
         case let .backgroundColor(backgroundColor):
             view.layer.backgroundColor = backgroundColor?.cgColor
         case let .style(style):
