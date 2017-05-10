@@ -39,6 +39,9 @@ let iconComponent = Component<UIImageView>().imageViewStyles(
 )
 
 let viewComponent = Component<MyCustomView>()
+    .borderStyles(
+        .color(.red), .width(3), .cornerRadius(12)
+    )
     .child(buttonComponent, { $0.myButton })
     .child(labelComponent, { $0.myLabel })
     .child(iconComponent, { $0.myIcon })
