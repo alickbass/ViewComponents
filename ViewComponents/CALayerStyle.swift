@@ -192,3 +192,9 @@ public enum CALayerStyle: ConcreteStyleType {
         }
     }
 }
+
+public extension Component {
+    public func layerStyles(_ styles: CALayerStyle...) -> Component<T> {
+        return Component<T>(styles: self.styles + styles, children: children)
+    }
+}
