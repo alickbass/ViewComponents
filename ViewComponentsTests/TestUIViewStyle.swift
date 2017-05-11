@@ -11,6 +11,17 @@ import ViewComponents
 
 class TestUIViewStyle: XCTestCase {
     
+    static let allStyles: [UIViewStyle] = [
+        .backgroundColor(.red), .backgroundColor(nil), .isHidden(true), .alpha(0.2),
+        .isOpaque(true), .tintColor(.red), .tintAdjustmentMode(.automatic), .clipsToBounds(true),
+        .clearsContextBeforeDrawing(true), .isUserInteractionEnabled(true), .isMultipleTouchEnabled(true),
+        .isExclusiveTouch(true), .contentMode(.scaleToFill)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestCALayerBorderStyle.accumulatedHashes + TestUIViewStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(UIViewStyle.backgroundColor(.red), .backgroundColor(.red))
         XCTAssertNotEqual(UIViewStyle.backgroundColor(.red), .backgroundColor(.green))
@@ -95,4 +106,13 @@ class TestUIViewStyle: XCTestCase {
         XCTAssertEqual(view.isExclusiveTouch, true)
     }
     
+    func testHashValue() {
+        var hashes = Set(TestCALayerBorderStyle.accumulatedHashes)
+        
+        for item in TestUIViewStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
+    }
 }

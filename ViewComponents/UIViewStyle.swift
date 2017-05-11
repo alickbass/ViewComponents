@@ -23,7 +23,7 @@ public enum UIViewStyle {
     case contentMode(UIViewContentMode)
 }
 
-extension UIViewStyle: ConcreteStyleType {
+extension UIViewStyle: HashableConcreteStyle {
     public typealias View = UIView
     
     public func sideEffect(on view: UIView) {
@@ -77,6 +77,37 @@ extension UIViewStyle: ConcreteStyleType {
             return leftMode == rightMode
         default:
             return false
+        }
+    }
+    
+    var startIndex: Int { return 32 }
+    
+    var value: (index: Int, valueHash: Int) {
+        switch self {
+        case let .backgroundColor(color):
+            return (1, color?.hashValue ?? 0)
+        case let .isHidden(isHidden):
+            return (2, isHidden.hashValue)
+        case let .alpha(alpha):
+            return (3, alpha.hashValue)
+        case let .isOpaque(isOpaque):
+            return (4, isOpaque.hashValue)
+        case let .tintColor(tintColor):
+            return (5, tintColor.hashValue)
+        case let .tintAdjustmentMode(mode):
+            return (6, mode.hashValue)
+        case let .clipsToBounds(clips):
+            return (7, clips.hashValue)
+        case let .clearsContextBeforeDrawing(clears):
+            return (8, clears.hashValue)
+        case let .isUserInteractionEnabled(isEnabled):
+            return (9, isEnabled.hashValue)
+        case let .isMultipleTouchEnabled(isEnabled):
+            return (10, isEnabled.hashValue)
+        case let .isExclusiveTouch(isExclusive):
+            return (11, isExclusive.hashValue)
+        case let .contentMode(mode):
+            return (12, mode.hashValue)
         }
     }
 }

@@ -15,6 +15,10 @@ class TestCALayerShadowStyle: XCTestCase {
         .color(.red), .path(CGPath(rect: CGRect(x: 0, y: 0, width: 15, height: 15), transform: nil)), .path(nil), .color(nil)
     ]
     
+    static var accumulatedHashes: [Int] {
+        return TestCALayerStyle.accumulatedHashes + TestCALayerShadowStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(CALayer.ShadowStyle.opacity(0.2), .opacity(0.2))
         XCTAssertEqual(CALayer.ShadowStyle.radius(2), .radius(2))
@@ -53,7 +57,7 @@ class TestCALayerShadowStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestCALayerStyle.allStyles.map({ $0.hashValue }))
+        var hashes = Set(TestCALayerStyle.accumulatedHashes)
         
         for item in TestCALayerShadowStyle.allStyles {
             let hash = item.hashValue

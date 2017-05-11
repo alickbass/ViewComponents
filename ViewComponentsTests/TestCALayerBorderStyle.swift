@@ -15,6 +15,10 @@ class TestCALayerBorderStyle: XCTestCase {
         .cornerRadius(12), .width(12), .color(.red), .color(nil)
     ]
     
+    static var accumulatedHashes: [Int] {
+        return TestCALayerShadowStyle.accumulatedHashes + TestCALayerBorderStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(CALayer.BorderStyle.cornerRadius(12), .cornerRadius(12))
         XCTAssertEqual(CALayer.BorderStyle.width(12), .width(12))
@@ -43,9 +47,7 @@ class TestCALayerBorderStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(
-            TestCALayerStyle.allStyles.map({ $0.hashValue }) + TestCALayerShadowStyle.allStyles.map({ $0.hashValue })
-        )
+        var hashes = Set(TestCALayerShadowStyle.accumulatedHashes)
         
         for item in TestCALayerBorderStyle.allStyles {
             let hash = item.hashValue

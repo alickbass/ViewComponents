@@ -21,6 +21,10 @@ class TestCALayerStyle: XCTestCase {
         .mask(nil), .backgroundColor(nil), .name(nil)
     ]
     
+    static var accumulatedHashes: [Int] {
+        return TestCALayerStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testCAGravity() {
         XCTAssertEqual(CAGravity.center.rawValue, kCAGravityCenter)
         XCTAssertEqual(CAGravity.top.rawValue, kCAGravityTop)
