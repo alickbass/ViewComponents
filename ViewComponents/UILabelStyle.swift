@@ -101,6 +101,6 @@ public enum UILabelStyle: ConcreteStyleType {
 
 public extension Component where T: UILabel {
     public func labelStyles(_ styles: UILabelStyle...) -> Component<T> {
-        return Component<T>(styles: self.styles + styles, children: children)
+        return add(styles: styles)
     }
 }

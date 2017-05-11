@@ -8,6 +8,18 @@
 
 import UIKit
 
+public struct AnyStyle: Equatable {
+    public let style: StyleType
+    
+    public init(_ style: StyleType) {
+        self.style = style
+    }
+    
+    public static func == (lhs: AnyStyle, rhs: AnyStyle) -> Bool {
+        return lhs.style.isEqual(to: rhs.style)
+    }
+}
+
 public protocol StyleType {
     func sideEffect(view: UIView)
     func isEqual(to other: StyleType) -> Bool

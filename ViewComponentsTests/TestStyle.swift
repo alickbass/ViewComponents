@@ -25,4 +25,10 @@ class TestStyle: XCTestCase {
         XCTAssertEqual(view.backgroundColor, .green)
     }
     
+    func testAnyStyle() {
+        XCTAssertEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UIViewStyle.isHidden(true)))
+        XCTAssertNotEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UIViewStyle.isHidden(false)))
+        XCTAssertNotEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UILabelStyle.isEnabled(false)))
+    }
+    
 }
