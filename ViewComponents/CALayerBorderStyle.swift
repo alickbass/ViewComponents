@@ -9,7 +9,7 @@
 import UIKit
 
 public extension CALayer {
-    public enum BorderStyle: ConcreteStyleType {
+    public enum BorderStyle: HashableConcreteStyle {
         case cornerRadius(CGFloat)
         case width(CGFloat)
         case color(UIColor?)
@@ -36,6 +36,19 @@ public extension CALayer {
                 return leftColor == rightColor
             default:
                 return false
+            }
+        }
+        
+        var startIndex: Int { return 29 }
+        
+        var value: (index: Int, valueHash: Int) {
+            switch self {
+            case let .cornerRadius(cornerRadius):
+                return (1, cornerRadius.hashValue)
+            case let .width(borderWidth):
+                return (2, borderWidth.hashValue)
+            case let .color(borderColor):
+                return (3, borderColor?.hashValue ?? 0)
             }
         }
     }

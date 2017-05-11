@@ -17,7 +17,8 @@ class TestCALayerStyle: XCTestCase {
         .allowsGroupOpacity(true), .isOpaque(true), .edgeAntialiasingMask(.layerLeftEdge), .isGeometryFlipped(true),
         .drawsAsynchronously(true), .shouldRasterize(true), .rasterizationScale(0.2), .contentsFormat(.RGBA16Float),
         .frame(.zero), .bounds(.zero), .position(.zero), .zPosition(12),
-        .anchorPoint(.zero), .anchorPointZ(12), .contentsScale(0.2), .name("test")
+        .anchorPoint(.zero), .anchorPointZ(12), .contentsScale(0.2), .name("test"),
+        .mask(nil), .backgroundColor(nil), .name(nil)
     ]
     
     func testCAGravity() {
@@ -202,9 +203,5 @@ class TestCALayerStyle: XCTestCase {
             XCTAssertFalse(hashes.contains(hash))
             hashes.insert(hash)
         }
-        
-        XCTAssertEqual(CALayerStyle.mask(nil).hashValue, CALayerStyle.mask(nil).hashValue)
-        XCTAssertEqual(CALayerStyle.backgroundColor(nil).hashValue, CALayerStyle.backgroundColor(nil).hashValue)
-        XCTAssertEqual(CALayerStyle.name(nil).hashValue, CALayerStyle.name(nil).hashValue)
     }
 }

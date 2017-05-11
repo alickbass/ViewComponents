@@ -11,6 +11,10 @@ import ViewComponents
 
 class TestCALayerBorderStyle: XCTestCase {
     
+    static let allStyles: [CALayer.BorderStyle] = [
+        .cornerRadius(12), .width(12), .color(.red), .color(nil)
+    ]
+    
     func testStyleEquatable() {
         XCTAssertEqual(CALayer.BorderStyle.cornerRadius(12), .cornerRadius(12))
         XCTAssertEqual(CALayer.BorderStyle.width(12), .width(12))
@@ -36,5 +40,17 @@ class TestCALayerBorderStyle: XCTestCase {
         view.layer.borderColor = UIColor.green.cgColor
         Component<UIView>().borderStyles(.color(.red)).configure(view: view)
         XCTAssertEqual(view.layer.borderColor, UIColor.red.cgColor)
+    }
+    
+    func testHashValue() {
+        var hashes = Set(
+            TestCALayerStyle.allStyles.map({ $0.hashValue }) + TestCALayerShadowStyle.allStyles.map({ $0.hashValue })
+        )
+        
+        for item in TestCALayerBorderStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }
