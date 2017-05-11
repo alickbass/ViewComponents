@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UILabelStyle: ConcreteStyleType {
+public enum UILabelStyle: HashableConcreteStyle {
     case text(String?)
     case attributedText(NSAttributedString?)
     case font(UIFont)
@@ -95,6 +95,45 @@ public enum UILabelStyle: ConcreteStyleType {
             return leftOffset == rightOffset
         default:
             return false
+        }
+    }
+    
+    var startIndex: Int { return 44 }
+    
+    var value: (index: Int, valueHash: Int) {
+        switch self {
+        case let .text(text):
+            return (1, text?.hashValue ?? 0)
+        case let .attributedText(text):
+            return (2, text?.hashValue ?? 0)
+        case let .font(font):
+            return (3, font.hashValue)
+        case let .textColor(textColor):
+            return (4, textColor.hashValue)
+        case let .textAlignment(textAlignment):
+            return (5, textAlignment.hashValue)
+        case let .lineBreakMode(lineBreakMode):
+            return (6, lineBreakMode.hashValue)
+        case let .isEnabled(isEnabled):
+            return (7, isEnabled.hashValue)
+        case let .adjustsFontSizeToFitWidth(adjusts):
+            return (8, adjusts.hashValue)
+        case let .allowsDefaultTighteningForTruncation(allows):
+            return (9, allows.hashValue)
+        case let .baselineAdjustment(adjustment):
+            return (10, adjustment.hashValue)
+        case let .minimumScaleFactor(minimumScaleFactor):
+            return (11, minimumScaleFactor.hashValue)
+        case let .numberOfLines(numberOfLines):
+            return (12, numberOfLines.hashValue)
+        case let .highlightedTextColor(highlightedTextColor):
+            return (13, highlightedTextColor?.hashValue ?? 0)
+        case let .isHighlighted(isHighlighted):
+            return (14, isHighlighted.hashValue)
+        case let .shadowColor(shadowColor):
+            return (15, shadowColor?.hashValue ?? 0)
+        case let .shadowOffset(shadowOffset):
+            return (16, shadowOffset.hashValue)
         }
     }
 }

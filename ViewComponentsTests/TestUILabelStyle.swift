@@ -11,6 +11,20 @@ import ViewComponents
 
 class TestUILabelStyle: XCTestCase {
     
+    static let allStyles: [UILabelStyle] = [
+        UILabelStyle.text("test"), UILabelStyle.text(nil), UILabelStyle.attributedText(.init(string: "test")),
+        UILabelStyle.attributedText(nil), UILabelStyle.font(.systemFont(ofSize: 12)), UILabelStyle.textColor(.red),
+        UILabelStyle.textAlignment(.center), UILabelStyle.lineBreakMode(.byClipping), UILabelStyle.isEnabled(true),
+        UILabelStyle.adjustsFontSizeToFitWidth(true), UILabelStyle.allowsDefaultTighteningForTruncation(true),
+        UILabelStyle.baselineAdjustment(.alignBaselines), .minimumScaleFactor(12), UILabelStyle.numberOfLines(0),
+        .highlightedTextColor(.red), .highlightedTextColor(nil), .isHighlighted(true), .shadowColor(.red),
+        .shadowColor(nil), .shadowOffset(.zero)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestUIViewStyle.accumulatedHashes + TestUILabelStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(UILabelStyle.text("test"), .text("test"))
         XCTAssertNotEqual(UILabelStyle.text("test"), .text("notTest"))
@@ -117,5 +131,15 @@ class TestUILabelStyle: XCTestCase {
         view.isHighlighted = false
         Component<UILabel>().labelStyles(.isHighlighted(true)).configure(view: view)
         XCTAssertEqual(view.isHighlighted, true)
+    }
+    
+    func testHashValue() {
+        var hashes = Set(TestUIViewStyle.accumulatedHashes)
+        
+        for item in TestUILabelStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }
