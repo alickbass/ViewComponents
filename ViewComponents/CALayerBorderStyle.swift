@@ -15,13 +15,14 @@ public extension CALayer {
         case color(UIColor?)
         
         public func sideEffect(on view: UIView) {
+            let layer = view.layer
             switch self {
             case let .cornerRadius(cornerRadius):
-                view.layer.cornerRadius = cornerRadius
+                layer.cornerRadius = cornerRadius
             case let .width(borderWidth):
-                view.layer.borderWidth = borderWidth
+                layer.borderWidth = borderWidth
             case let .color(borderColor):
-                view.layer.borderColor = borderColor?.cgColor
+                layer.borderColor = borderColor?.cgColor
             }
         }
         

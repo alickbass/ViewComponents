@@ -98,55 +98,56 @@ public enum CALayerStyle: ConcreteStyleType {
     case name(String?)
     
     public func sideEffect(on view: UIView) {
+        let layer = view.layer
         switch self {
         case let .contentsGravity(gravity):
-            view.layer.contentsGravity = gravity.rawValue
+            layer.contentsGravity = gravity.rawValue
         case let .opacity(opacity):
-            view.layer.opacity = opacity
+            layer.opacity = opacity
         case let .isHidden(isHidden):
-            view.layer.isHidden = isHidden
+            layer.isHidden = isHidden
         case let .masksToBounds(masksToBounds):
-            view.layer.masksToBounds = masksToBounds
+            layer.masksToBounds = masksToBounds
         case let .mask(mask):
-            view.layer.mask = mask
+            layer.mask = mask
         case let .isDoubleSided(isDoubleSided):
-            view.layer.isDoubleSided = isDoubleSided
+            layer.isDoubleSided = isDoubleSided
         case let .backgroundColor(backgroundColor):
-            view.layer.backgroundColor = backgroundColor?.cgColor
+            layer.backgroundColor = backgroundColor?.cgColor
         case let .allowsEdgeAntialiasing(allowsEdgeAntialiasing):
-            view.layer.allowsEdgeAntialiasing = allowsEdgeAntialiasing
+            layer.allowsEdgeAntialiasing = allowsEdgeAntialiasing
         case let .allowsGroupOpacity(allowsGroupOpacity):
-            view.layer.allowsGroupOpacity = allowsGroupOpacity
+            layer.allowsGroupOpacity = allowsGroupOpacity
         case let .isOpaque(isOpaque):
-            view.layer.isOpaque = isOpaque
+            layer.isOpaque = isOpaque
         case let .edgeAntialiasingMask(edgeAntialiasingMask):
-            view.layer.edgeAntialiasingMask = edgeAntialiasingMask
+            layer.edgeAntialiasingMask = edgeAntialiasingMask
         case let .isGeometryFlipped(isGeometryFlipped):
-            view.layer.isGeometryFlipped = isGeometryFlipped
+            layer.isGeometryFlipped = isGeometryFlipped
         case let .drawsAsynchronously(drawsAsynchronously):
-            view.layer.drawsAsynchronously = drawsAsynchronously
+            layer.drawsAsynchronously = drawsAsynchronously
         case let .shouldRasterize(shouldRasterize):
-            view.layer.shouldRasterize = shouldRasterize
+            layer.shouldRasterize = shouldRasterize
         case let .rasterizationScale(rasterizationScale):
-            view.layer.rasterizationScale = rasterizationScale
+            layer.rasterizationScale = rasterizationScale
         case let .contentsFormat(contentsFormat):
-            view.layer.contentsFormat = contentsFormat.rawValue
+            layer.contentsFormat = contentsFormat.rawValue
         case let .frame(frame):
-            view.layer.frame = frame
+            layer.frame = frame
         case let .bounds(bounds):
-            view.layer.bounds = bounds
+            layer.bounds = bounds
         case let .position(position):
-            view.layer.position = position
+            layer.position = position
         case let .zPosition(zPosition):
-            view.layer.zPosition = zPosition
+            layer.zPosition = zPosition
         case let .anchorPointZ(anchorPointZ):
-            view.layer.anchorPointZ = anchorPointZ
+            layer.anchorPointZ = anchorPointZ
         case let .anchorPoint(anchorPoint):
-            view.layer.anchorPoint = anchorPoint
+            layer.anchorPoint = anchorPoint
         case let .contentsScale(contentsScale):
-            view.layer.contentsScale = contentsScale
+            layer.contentsScale = contentsScale
         case let .name(name):
-            view.layer.name = name
+            layer.name = name
         }
     }
     

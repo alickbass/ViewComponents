@@ -17,17 +17,18 @@ public extension CALayer {
         case path(CGPath?)
         
         public func sideEffect(on view: UIView) {
+            let layer = view.layer
             switch self {
             case let .opacity(shadowOpacity):
-                view.layer.shadowOpacity = shadowOpacity
+                layer.shadowOpacity = shadowOpacity
             case let .radius(shadowRadius):
-                view.layer.shadowRadius = shadowRadius
+                layer.shadowRadius = shadowRadius
             case let .offset(shadowOffset):
-                view.layer.shadowOffset = shadowOffset
+                layer.shadowOffset = shadowOffset
             case let .color(shadowColor):
-                view.layer.shadowColor = shadowColor?.cgColor
+                layer.shadowColor = shadowColor?.cgColor
             case let .path(shadowPath):
-                view.layer.shadowPath = shadowPath
+                layer.shadowPath = shadowPath
             }
         }
         
