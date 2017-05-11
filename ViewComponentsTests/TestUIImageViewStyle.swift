@@ -12,6 +12,18 @@ import ViewComponents
 class TestUIImageViewStyle: XCTestCase {
     let image = UIImage()
     
+    static let allStyles: [UIImageViewStyle] = [
+        UIImageViewStyle.image(UIImage()), UIImageViewStyle.image(nil),
+        UIImageViewStyle.highlightedImage(UIImage()), UIImageViewStyle.highlightedImage(nil),
+        UIImageViewStyle.highlightedAnimationImages([UIImage()]), UIImageViewStyle.highlightedAnimationImages(nil),
+        UIImageViewStyle.animationImages([UIImage()]), UIImageViewStyle.animationImages(nil),
+        UIImageViewStyle.animationDuration(12), .animationRepeatCount(12), .isHighlighted(true)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestUIButtonStyle.accumulatedHashes + TestUIImageViewStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(UIImageViewStyle.image(image), .image(image))
         XCTAssertNotEqual(UIImageViewStyle.image(image), .image(nil))
@@ -72,5 +84,15 @@ class TestUIImageViewStyle: XCTestCase {
         view.isHighlighted = false
         Component<UIImageView>().imageViewStyles(.isHighlighted(true)).configure(view: view)
         XCTAssertEqual(view.isHighlighted, true)
+    }
+    
+    func testHashValue() {
+        var hashes = Set(TestUIButtonStyle.accumulatedHashes)
+        
+        for item in TestUIImageViewStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }

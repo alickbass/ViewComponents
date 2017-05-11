@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIImageViewStyle: ConcreteStyleType {
+public enum UIImageViewStyle: HashableConcreteStyle {
     case image(UIImage?)
     case highlightedImage(UIImage?)
     case animationImages([UIImage]?)
@@ -59,6 +59,29 @@ public enum UIImageViewStyle: ConcreteStyleType {
             return leftBool == rightBool
         default:
             return false
+        }
+    }
+    
+    var startIndex: Int { return 62 }
+    
+    var value: (index: Int, valueHash: Int) {
+        switch self {
+        case let .image(image):
+            return (1, image?.hashValue ?? 0)
+        case let .highlightedImage(image):
+            return (2, image?.hashValue ?? 0)
+        case let .animationImages(images):
+            let hash = images.map({ $0.reduce(5381, { (($0.0 << 5) &+ $0.0) &+ $0.1.hashValue }) })
+            return (3, hash ?? 0)
+        case let .highlightedAnimationImages(images):
+            let hash = images.map({ $0.reduce(5381, { (($0.0 << 5) &+ $0.0) &+ $0.1.hashValue }) })
+            return (4, hash ?? 0)
+        case let .animationDuration(duration):
+            return (5, duration.hashValue)
+        case let .animationRepeatCount(animationRepeatCount):
+            return (6, animationRepeatCount.hashValue)
+        case let .isHighlighted(isHighlighted):
+            return (7, isHighlighted.hashValue)
         }
     }
 }
