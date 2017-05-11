@@ -11,6 +11,15 @@ import ViewComponents
 
 class TestUIControlStyle: XCTestCase {
     
+    static let allStyles: [UIControlStyle] = [
+        .isEnabled(true), .isSelected(true), .isHighlighted(true),
+        .contentVerticalAlignment(.bottom), .contentHorizontalAlignment(.center)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestUILabelStyle.accumulatedHashes + TestUIControlStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(UIControlStyle.isEnabled(true), .isEnabled(true))
         XCTAssertNotEqual(UIControlStyle.isEnabled(true), .isEnabled(false))
@@ -51,5 +60,15 @@ class TestUIControlStyle: XCTestCase {
         view.isSelected = true
         Component<UIControl>().controlStyles(.isSelected(false)).configure(view: view)
         XCTAssertEqual(view.isSelected, false)
+    }
+    
+    func testHashValue() {
+        var hashes = Set(TestUILabelStyle.accumulatedHashes)
+        
+        for item in TestUIControlStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }

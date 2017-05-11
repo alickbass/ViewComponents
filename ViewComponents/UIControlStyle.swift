@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIControlStyle: ConcreteStyleType {
+public enum UIControlStyle: HashableConcreteStyle {
     case isEnabled(Bool)
     case isSelected(Bool)
     case isHighlighted(Bool)
@@ -42,6 +42,23 @@ public enum UIControlStyle: ConcreteStyleType {
             return leftAlignment == rightAlignment
         default:
             return false
+        }
+    }
+    
+    var startIndex: Int { return 44 }
+    
+    var value: (index: Int, valueHash: Int) {
+        switch self {
+        case let .isEnabled(isEnabled):
+            return (1, isEnabled.hashValue)
+        case let .isSelected(isSelected):
+            return (2, isSelected.hashValue)
+        case let .isHighlighted(isHighlighted):
+            return (3, isHighlighted.hashValue)
+        case let .contentVerticalAlignment(alignment):
+            return (4, alignment.hashValue)
+        case let .contentHorizontalAlignment(alignment):
+            return (5, alignment.hashValue)
         }
     }
 }
