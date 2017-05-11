@@ -11,6 +11,15 @@ import ViewComponents
 
 class TestCALayerStyle: XCTestCase {
     
+    static let allStyles: [CALayerStyle] = [
+        .contentsGravity(.bottom), CALayerStyle.opacity(0.2), .isHidden(true), .masksToBounds(true),
+        .mask(CALayer()), .isDoubleSided(true), .backgroundColor(.red), .allowsEdgeAntialiasing(true),
+        .allowsGroupOpacity(true), .isOpaque(true), .edgeAntialiasingMask(.layerLeftEdge), .isGeometryFlipped(true),
+        .drawsAsynchronously(true), .shouldRasterize(true), .rasterizationScale(0.2), .contentsFormat(.RGBA16Float),
+        .frame(.zero), .bounds(.zero), .position(.zero), .zPosition(12),
+        .anchorPoint(.zero), .anchorPointZ(12), .contentsScale(0.2), .name("test")
+    ]
+    
     func testCAGravity() {
         XCTAssertEqual(CAGravity.center.rawValue, kCAGravityCenter)
         XCTAssertEqual(CAGravity.top.rawValue, kCAGravityTop)
@@ -183,5 +192,19 @@ class TestCALayerStyle: XCTestCase {
         view.layer.name = nil
         Component<UIView>().layerStyles(.name("test")).configure(view: view)
         XCTAssertEqual(view.layer.name, "test")
+    }
+    
+    func testHashValue() {
+        var hashes = Set<Int>()
+        
+        for item in TestCALayerStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
+        
+        XCTAssertEqual(CALayerStyle.mask(nil).hashValue, CALayerStyle.mask(nil).hashValue)
+        XCTAssertEqual(CALayerStyle.backgroundColor(nil).hashValue, CALayerStyle.backgroundColor(nil).hashValue)
+        XCTAssertEqual(CALayerStyle.name(nil).hashValue, CALayerStyle.name(nil).hashValue)
     }
 }
