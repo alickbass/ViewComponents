@@ -35,3 +35,15 @@ extension CGRect: Hashable {
     }
 }
 
+extension UIEdgeInsets: Hashable {
+    public var hashValue: Int {
+        var hash = 5381
+        
+        hash = ((hash << 5) &+ hash) &+ top.hashValue
+        hash = ((hash << 5) &+ hash) &+ bottom.hashValue
+        hash = ((hash << 5) &+ hash) &+ left.hashValue
+        hash = ((hash << 5) &+ hash) &+ right.hashValue
+        
+        return hash
+    }
+}

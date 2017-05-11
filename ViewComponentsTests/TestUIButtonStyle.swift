@@ -11,6 +11,22 @@ import ViewComponents
 
 class TestUIButtonStyle: XCTestCase {
     
+    static let allStyles: [UIButtonStyle] = [
+        .title("some", for: .normal), .title(nil, for: .normal),
+        .attributedTitle(.init(string: "some"), for: .normal), .attributedTitle(nil, for: .normal),
+        .titleColor(.red, for: .normal), .titleColor(nil, for: .normal),
+        .titleShadowColor(.red, for: .normal), .titleShadowColor(nil, for: .normal),
+        .reversesTitleShadowWhenHighlighted(true), .adjustsImageWhenHighlighted(true),
+        .adjustsImageWhenDisabled(true), .showsTouchWhenHighlighted(true),
+        .backgroundImage(UIImage(), for: .normal), .backgroundImage(nil, for: .normal),
+        .image(UIImage(), for: .normal), .image(nil, for: .normal),
+        .contentEdgeInsets(.zero), .titleEdgeInsets(.zero), .imageEdgeInsets(.zero)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestUIControlStyle.accumulatedHashes + TestUIButtonStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testStyleEquatable() {
         XCTAssertEqual(UIButtonStyle.title("some", for: .normal), .title("some", for: .normal))
         XCTAssertNotEqual(UIButtonStyle.title("some", for: .normal), .title(nil, for: .normal))
@@ -118,5 +134,15 @@ class TestUIButtonStyle: XCTestCase {
         view.showsTouchWhenHighlighted = false
         Component<UIButton>().buttonStyles(.showsTouchWhenHighlighted(true)).configure(view: view)
         XCTAssertEqual(view.showsTouchWhenHighlighted, true)
+    }
+    
+    func testHashValue() {
+        var hashes = Set(TestUIControlStyle.accumulatedHashes)
+        
+        for item in TestUIButtonStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }
