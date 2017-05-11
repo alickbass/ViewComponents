@@ -11,6 +11,20 @@ import ViewComponents
 
 class TestCALayerStyle: XCTestCase {
     
+    static let allStyles: [CALayerStyle] = [
+        .contentsGravity(.bottom), CALayerStyle.opacity(0.2), .isHidden(true), .masksToBounds(true),
+        .mask(CALayer()), .isDoubleSided(true), .backgroundColor(.red), .allowsEdgeAntialiasing(true),
+        .allowsGroupOpacity(true), .isOpaque(true), .edgeAntialiasingMask(.layerLeftEdge), .isGeometryFlipped(true),
+        .drawsAsynchronously(true), .shouldRasterize(true), .rasterizationScale(0.2), .contentsFormat(.RGBA16Float),
+        .frame(.zero), .bounds(.zero), .position(.zero), .zPosition(12),
+        .anchorPoint(.zero), .anchorPointZ(12), .contentsScale(0.2), .name("test"),
+        .mask(nil), .backgroundColor(nil), .name(nil)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestCALayerStyle.allStyles.map({ $0.hashValue })
+    }
+    
     func testCAGravity() {
         XCTAssertEqual(CAGravity.center.rawValue, kCAGravityCenter)
         XCTAssertEqual(CAGravity.top.rawValue, kCAGravityTop)
@@ -74,6 +88,7 @@ class TestCALayerStyle: XCTestCase {
         XCTAssertEqual(CALayerStyle.position(.zero), .position(.zero))
         XCTAssertEqual(CALayerStyle.zPosition(12), .zPosition(12))
         XCTAssertEqual(CALayerStyle.anchorPoint(.zero), .anchorPoint(.zero))
+        XCTAssertEqual(CALayerStyle.anchorPointZ(12), .anchorPointZ(12))
         XCTAssertEqual(CALayerStyle.contentsScale(0.2), .contentsScale(0.2))
         XCTAssertEqual(CALayerStyle.name("test"), .name("test"))
         XCTAssertNotEqual(CALayerStyle.name("test"), .contentsScale(0.2))
@@ -182,5 +197,15 @@ class TestCALayerStyle: XCTestCase {
         view.layer.name = nil
         Component<UIView>().layerStyles(.name("test")).configure(view: view)
         XCTAssertEqual(view.layer.name, "test")
+    }
+    
+    func testHashValue() {
+        var hashes = Set<Int>()
+        
+        for item in TestCALayerStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }

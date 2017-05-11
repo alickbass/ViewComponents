@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct AnyStyle: StyleType, Equatable {
+public struct AnyStyle: StyleType, Hashable {
     public let style: StyleType
     
     public init(_ style: StyleType) {
@@ -27,14 +27,19 @@ public struct AnyStyle: StyleType, Equatable {
     public static func == (lhs: AnyStyle, rhs: AnyStyle) -> Bool {
         return lhs.style.isEqual(to: rhs.style)
     }
+    
+    public var hashValue: Int {
+        return style.hashValue
+    }
 }
 
 public protocol StyleType {
     func sideEffect(view: UIView)
     func isEqual(to other: StyleType) -> Bool
+    var hashValue: Int { get }
 }
 
-public protocol ConcreteStyleType: StyleType, Equatable {
+public protocol ConcreteStyleType: StyleType, Hashable {
     associatedtype View: UIView
     func sideEffect(on view: View)
 }
@@ -47,5 +52,20 @@ public extension ConcreteStyleType {
     public func isEqual(to other: StyleType) -> Bool {
         guard let other = other as? Self else { return false }
         return self == other
+    }
+}
+
+protocol HashableConcreteStyle: ConcreteStyleType {
+    var startIndex: Int { get }
+    var value: (index: Int, valueHash: Int) { get }
+}
+
+extension HashableConcreteStyle {
+    public var hashValue: Int {
+        let value = self.value
+        var hash = 5381
+        hash = ((hash << 5) &+ hash) &+ (startIndex + value.index)
+        hash = ((hash << 5) &+ hash) &+ value.valueHash
+        return hash
     }
 }

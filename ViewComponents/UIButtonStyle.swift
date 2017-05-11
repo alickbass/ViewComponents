@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIButtonStyle: ConcreteStyleType {
+public enum UIButtonStyle: HashableConcreteStyle {
     case title(String?, for: UIControlState)
     case attributedTitle(NSAttributedString?, for: UIControlState)
     case titleColor(UIColor?, for: UIControlState)
@@ -77,6 +77,57 @@ public enum UIButtonStyle: ConcreteStyleType {
             return leftInsets == rightInsets
         default:
             return false
+        }
+    }
+    
+    var startIndex: Int { return 49 }
+    
+    var value: (index: Int, valueHash: Int) {
+        switch self {
+        case let .title(title, for: state):
+            var hash = 5381
+            hash = ((hash << 5) &+ hash) &+ (title?.hashValue ?? 0)
+            hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
+            return (1, hash)
+        case let .attributedTitle(title, for: state):
+            var hash = 5381
+            hash = ((hash << 5) &+ hash) &+ (title?.hashValue ?? 0)
+            hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
+            return (2, hash)
+        case let .titleColor(color, for: state):
+            var hash = 5381
+            hash = ((hash << 5) &+ hash) &+ (color?.hashValue ?? 0)
+            hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
+            return (3, hash)
+        case let .titleShadowColor(color, for: state):
+            var hash = 5381
+            hash = ((hash << 5) &+ hash) &+ (color?.hashValue ?? 0)
+            hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
+            return (4, hash)
+        case let .reversesTitleShadowWhenHighlighted(reverses):
+            return (5, reverses.hashValue)
+        case let .adjustsImageWhenHighlighted(adjusts):
+            return (6, adjusts.hashValue)
+        case let .adjustsImageWhenDisabled(adjusts):
+            return (7, adjusts.hashValue)
+        case let .showsTouchWhenHighlighted(shows):
+            return (8, shows.hashValue)
+        case let .backgroundImage(image, for: state):
+            var hash = 5381
+            hash = ((hash << 5) &+ hash) &+ (image?.hashValue ?? 0)
+            hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
+            return (9, hash)
+        case let .image(image, for: state):
+            var hash = 5381
+            hash = ((hash << 5) &+ hash) &+ (image?.hashValue ?? 0)
+            hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
+            return (10, hash)
+        case let .contentEdgeInsets(insets):
+            return (11, insets.hashValue)
+        case let .titleEdgeInsets(insets):
+            return (12, insets.hashValue)
+        case let .imageEdgeInsets(insets):
+            return (13, insets.hashValue)
         }
     }
 }
