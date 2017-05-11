@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct AnyStyle: StyleType, Equatable {
+public struct AnyStyle: StyleType, Hashable {
     public let style: StyleType
     
     public init(_ style: StyleType) {
@@ -27,11 +27,16 @@ public struct AnyStyle: StyleType, Equatable {
     public static func == (lhs: AnyStyle, rhs: AnyStyle) -> Bool {
         return lhs.style.isEqual(to: rhs.style)
     }
+    
+    public var hashValue: Int {
+        return style.hashValue
+    }
 }
 
 public protocol StyleType {
     func sideEffect(view: UIView)
     func isEqual(to other: StyleType) -> Bool
+    var hashValue: Int { get }
 }
 
 public protocol ConcreteStyleType: StyleType, Hashable {

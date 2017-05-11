@@ -31,6 +31,8 @@ class TestStyle: XCTestCase {
         XCTAssertNotEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UILabelStyle.isEnabled(false)))
         XCTAssertTrue(AnyStyle(UIViewStyle.isHidden(true)).isEqual(to: AnyStyle(UIViewStyle.isHidden(true))))
         XCTAssertFalse(AnyStyle(UIViewStyle.isHidden(true)).isEqual(to: UILabelStyle.isEnabled(false)))
+        
+        XCTAssertEqual(AnyStyle(UIViewStyle.isHidden(true)).hashValue, UIViewStyle.isHidden(true).hashValue)
     }
     
 }
