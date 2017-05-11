@@ -83,6 +83,6 @@ public enum UIButtonStyle: ConcreteStyleType {
 
 public extension Component where T: UIButton {
     public func buttonStyles(_ styles: UIButtonStyle...) -> Component<T> {
-        return Component<T>(styles: self.styles + styles, children: children)
+        return add(styles: styles)
     }
 }

@@ -48,6 +48,6 @@ public enum UIControlStyle: ConcreteStyleType {
 
 public extension Component where T: UIControl {
     public func controlStyles(_ styles: UIControlStyle...) -> Component<T> {
-        return Component<T>(styles: self.styles + styles, children: children)
+        return add(styles: styles)
     }
 }

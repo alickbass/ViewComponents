@@ -83,6 +83,6 @@ extension UIViewStyle: ConcreteStyleType {
 
 public extension Component {
     public func viewStyles(_ styles: UIViewStyle...) -> Component<T> {
-        return Component<T>(styles: self.styles + styles, children: children)
+        return add(styles: styles)
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ComponentType {
-    var styles: [StyleType] { get }
+    var styles: [AnyStyle] { get }
     func configure(view: UIView)
     func isEqual(to other: ComponentType) -> Bool
 }
@@ -29,14 +29,14 @@ struct ChildComponent {
 }
 
 public struct Component<T: UIView>: ComponentType {
-    public let styles: [StyleType]
+    public let styles: [AnyStyle]
     let children: [ChildComponent]
     
     public init() {
         self.init(styles: [], children: [])
     }
     
-    init(styles: [StyleType], children: [ChildComponent]) {
+    init(styles: [AnyStyle], children: [ChildComponent]) {
         self.styles = styles
         self.children = children
     }
@@ -45,8 +45,12 @@ public struct Component<T: UIView>: ComponentType {
         configure(view: view as! T)
     }
     
+    public func add<S: StyleType>(styles: [S]) -> Component<T> {
+        return Component<T>(styles: self.styles + styles.map(AnyStyle.init), children: children)
+    }
+    
     public func configure(view: T) {
-        styles.forEach { $0.sideEffect(view: view) }
+        styles.forEach { $0.style.sideEffect(view: view) }
         children.forEach({ $0.configure(view: view) })
     }
     
@@ -70,7 +74,7 @@ extension Component: Equatable {
     public static func == (lhs: Component<T>, rhs: Component<T>) -> Bool {
         return lhs.styles.count == rhs.styles.count
             && lhs.children.count == rhs.children.count
-            && zip(lhs.styles, rhs.styles).reduce(true, { $0 && $1.0.isEqual(to: $1.1) })
+            && lhs.styles == rhs.styles
             && zip(lhs.children, rhs.children).reduce(true, { $0 && $1.0.component.isEqual(to: $1.1.component) })
     }
 }

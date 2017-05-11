@@ -42,6 +42,6 @@ public extension CALayer {
 
 public extension Component {
     public func borderStyles(_ styles: CALayer.BorderStyle...) -> Component<T> {
-        return Component<T>(styles: self.styles + styles, children: children)
+        return add(styles: styles)
     }
 }
