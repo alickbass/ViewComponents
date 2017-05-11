@@ -74,6 +74,7 @@ class TestCALayerStyle: XCTestCase {
         XCTAssertEqual(CALayerStyle.position(.zero), .position(.zero))
         XCTAssertEqual(CALayerStyle.zPosition(12), .zPosition(12))
         XCTAssertEqual(CALayerStyle.anchorPoint(.zero), .anchorPoint(.zero))
+        XCTAssertEqual(CALayerStyle.anchorPointZ(12), .anchorPointZ(12))
         XCTAssertEqual(CALayerStyle.contentsScale(0.2), .contentsScale(0.2))
         XCTAssertEqual(CALayerStyle.name("test"), .name("test"))
         XCTAssertNotEqual(CALayerStyle.name("test"), .contentsScale(0.2))
