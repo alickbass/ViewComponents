@@ -8,11 +8,20 @@
 
 import UIKit
 
-public struct AnyStyle: Equatable {
+public struct AnyStyle: StyleType, Equatable {
     public let style: StyleType
     
     public init(_ style: StyleType) {
         self.style = style
+    }
+    
+    public func sideEffect(view: UIView) {
+        style.sideEffect(view: view)
+    }
+    
+    public func isEqual(to other: StyleType) -> Bool {
+        guard let other = other as? AnyStyle else { return false }
+        return self == other
     }
     
     public static func == (lhs: AnyStyle, rhs: AnyStyle) -> Bool {

@@ -54,7 +54,7 @@ public struct Component<T: UIView>: ComponentType {
     }
     
     public func configure(view: T) {
-        styles.forEach { $0.style.sideEffect(view: view) }
+        styles.forEach { $0.sideEffect(view: view) }
         children.forEach({ $0.configure(view: view) })
     }
     
