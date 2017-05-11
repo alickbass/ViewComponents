@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import ViewComponents
+@testable import ViewComponents
 
 class TestComponent: XCTestCase {
     let comp = Component<UIView>().viewStyles(.alpha(0.2), .backgroundColor(.red))
@@ -46,6 +46,13 @@ class TestComponent: XCTestCase {
         MyViewModel().configure(view: view)
         XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
+    }
+    
+    func testChildComponent() {
+        let child = ChildComponent(component: comp, { _ in UIView() })
+        XCTAssertEqual(child.styles, comp.styles)
+        XCTAssertTrue(child.isEqual(to: child))
+        XCTAssertFalse(child.isEqual(to: comp))
     }
     
 }
