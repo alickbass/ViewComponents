@@ -49,3 +49,18 @@ public extension ConcreteStyleType {
         return self == other
     }
 }
+
+protocol HashableStyle: Hashable {
+    var startIndex: Int { get }
+    var value: (index: Int, valueHash: Int) { get }
+}
+
+extension HashableStyle {
+    public var hashValue: Int {
+        let value = self.value
+        var hash = 5381
+        hash = ((hash << 5) &+ hash) &+ (startIndex + value.index)
+        hash = ((hash << 5) &+ hash) &+ value.valueHash
+        return hash
+    }
+}
