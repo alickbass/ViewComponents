@@ -71,7 +71,7 @@ public enum CAContentsFormat: RawRepresentable {
     }
 }
 
-public enum CALayerStyle: ConcreteStyleType, HashableStyle {
+public enum CALayerStyle: HashableConcreteStyle {
     case contentsGravity(CAGravity)
     case opacity(Float)
     case isHidden(Bool)

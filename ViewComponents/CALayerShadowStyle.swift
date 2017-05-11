@@ -9,7 +9,7 @@
 import UIKit
 
 public extension CALayer {
-    public enum ShadowStyle: ConcreteStyleType {
+    public enum ShadowStyle: HashableConcreteStyle {
         case opacity(Float)
         case radius(CGFloat)
         case offset(CGSize)
@@ -46,6 +46,23 @@ public extension CALayer {
                 return leftPath == rightPath
             default:
                 return false
+            }
+        }
+        
+        var startIndex: Int { return 24 }
+        
+        var value: (index: Int, valueHash: Int) {
+            switch self {
+            case let .opacity(shadowOpacity):
+                return (1, shadowOpacity.hashValue)
+            case let .radius(shadowRadius):
+                return (2, shadowRadius.hashValue)
+            case let .offset(shadowOffset):
+                return (3, shadowOffset.hashValue)
+            case let .color(shadowColor):
+                return (4, shadowColor?.hashValue ?? 0)
+            case let .path(shadowPath):
+                return (5, shadowPath.map({ UIBezierPath(cgPath: $0) })?.hashValue ?? 0)
             }
         }
     }

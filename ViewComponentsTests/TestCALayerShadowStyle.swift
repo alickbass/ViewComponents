@@ -10,6 +10,9 @@ import XCTest
 import ViewComponents
 
 class TestCALayerShadowStyle: XCTestCase {
+    static let allStyles: [CALayer.ShadowStyle] = [
+        .opacity(0.2), .radius(2), .offset(.zero), .color(.red), .path(nil)
+    ]
     
     func testStyleEquatable() {
         XCTAssertEqual(CALayer.ShadowStyle.opacity(0.2), .opacity(0.2))
@@ -46,5 +49,15 @@ class TestCALayerShadowStyle: XCTestCase {
         view.layer.shadowColor = UIColor.green.cgColor
         Component<UIView>().layerShadowStyles(.color(.red)).configure(view: view)
         XCTAssertEqual(view.layer.shadowColor, UIColor.red.cgColor)
+    }
+    
+    func testHashValue() {
+        var hashes = Set(TestCALayerStyle.allStyles.map({ $0.hashValue }))
+        
+        for item in TestCALayerShadowStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
     }
 }

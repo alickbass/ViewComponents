@@ -34,7 +34,7 @@ public protocol StyleType {
     func isEqual(to other: StyleType) -> Bool
 }
 
-public protocol ConcreteStyleType: StyleType, Equatable {
+public protocol ConcreteStyleType: StyleType, Hashable {
     associatedtype View: UIView
     func sideEffect(on view: View)
 }
@@ -50,12 +50,12 @@ public extension ConcreteStyleType {
     }
 }
 
-protocol HashableStyle: Hashable {
+protocol HashableConcreteStyle: ConcreteStyleType {
     var startIndex: Int { get }
     var value: (index: Int, valueHash: Int) { get }
 }
 
-extension HashableStyle {
+extension HashableConcreteStyle {
     public var hashValue: Int {
         let value = self.value
         var hash = 5381
