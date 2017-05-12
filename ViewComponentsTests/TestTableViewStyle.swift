@@ -133,6 +133,10 @@ class TestTableViewStyle: XCTestCase {
         view.remembersLastFocusedIndexPath = false
         TableViewStyle.remembersLastFocusedIndexPath(true).sideEffect(on: view)
         XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
+        
+        view.remembersLastFocusedIndexPath = false
+        Component<UITableView>().tableViewStyles(.remembersLastFocusedIndexPath(true)).configure(view: view)
+        XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
     }
     
     func testHashValue() {
