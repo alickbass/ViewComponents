@@ -15,6 +15,8 @@
 		CE37165E1EBA235600590480 /* UIImageViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37165D1EBA235600590480 /* UIImageViewStyle.swift */; };
 		CE5329AC1EC4A5AE0000E9AB /* HashableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329AB1EC4A5AE0000E9AB /* HashableExtensions.swift */; };
 		CE5329B01EC4A7D70000E9AB /* TestHashableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */; };
+		CE5329B21EC5AE320000E9AB /* UIIScrollViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329B11EC5AE320000E9AB /* UIIScrollViewStyle.swift */; };
+		CE5329B41EC5B2EB0000E9AB /* TestUIScrollViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329B31EC5B2EB0000E9AB /* TestUIScrollViewStyle.swift */; };
 		CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6735481EB677D400BBD2FE /* UILabelStyle.swift */; };
 		CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */; };
 		CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */; };
@@ -52,6 +54,8 @@
 		CE37165D1EBA235600590480 /* UIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewStyle.swift; sourceTree = "<group>"; };
 		CE5329AB1EC4A5AE0000E9AB /* HashableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableExtensions.swift; sourceTree = "<group>"; };
 		CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHashableExtensions.swift; sourceTree = "<group>"; };
+		CE5329B11EC5AE320000E9AB /* UIIScrollViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIIScrollViewStyle.swift; sourceTree = "<group>"; };
+		CE5329B31EC5B2EB0000E9AB /* TestUIScrollViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIScrollViewStyle.swift; sourceTree = "<group>"; };
 		CE6735481EB677D400BBD2FE /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUILabelStyle.swift; sourceTree = "<group>"; };
 		CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIButtonStyle.swift; sourceTree = "<group>"; };
@@ -136,14 +140,15 @@
 			children = (
 				CE0CF5521EB7758400B6BC36 /* TestComponent.swift */,
 				CE0CF5501EB75E2800B6BC36 /* TestStyle.swift */,
+				CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */,
+				CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */,
+				CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */,
 				CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */,
 				CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */,
 				CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */,
 				CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */,
 				CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */,
-				CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */,
-				CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */,
-				CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */,
+				CE5329B31EC5B2EB0000E9AB /* TestUIScrollViewStyle.swift */,
 				CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */,
 				CEF534DD1EB0C182001E3CA8 /* Info.plist */,
 			);
@@ -161,6 +166,7 @@
 				CE0CF5541EB786C600B6BC36 /* UIControlStyle.swift */,
 				CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */,
 				CE37165D1EBA235600590480 /* UIImageViewStyle.swift */,
+				CE5329B11EC5AE320000E9AB /* UIIScrollViewStyle.swift */,
 			);
 			name = Styles;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */,
+				CE5329B21EC5AE320000E9AB /* UIIScrollViewStyle.swift in Sources */,
 				CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */,
 				CE5329AC1EC4A5AE0000E9AB /* HashableExtensions.swift in Sources */,
 				CEE5DA7A1EC212E50022D6F1 /* CALayerShadowStyle.swift in Sources */,
@@ -299,6 +306,7 @@
 				CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */,
 				CE2D6A001EC33EE300CA62D0 /* TestCALayerBorderStyle.swift in Sources */,
 				CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */,
+				CE5329B41EC5B2EB0000E9AB /* TestUIScrollViewStyle.swift in Sources */,
 				CE0CF5571EB78A8900B6BC36 /* TestUIControlStyle.swift in Sources */,
 				CE5329B01EC4A7D70000E9AB /* TestHashableExtensions.swift in Sources */,
 				CEE5DA7C1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift in Sources */,
