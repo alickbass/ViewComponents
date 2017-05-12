@@ -14,6 +14,8 @@ class TestComponent: XCTestCase {
     
     func testComponentEquatable() {
         XCTAssertEqual(comp, comp)
+        XCTAssertEqual(comp.viewStyles(.alpha(0.2), .backgroundColor(.red)), comp)
+        XCTAssertEqual(Component<UIView>().viewStyles(.backgroundColor(.red), .alpha(0.2)), comp)
         XCTAssertEqual(comp.child(comp, { $0 }), comp.child(comp, { $0 }))
         XCTAssertNotEqual(comp.child(comp, { $0 }), comp.child(Component<UILabel>(), { _ in UILabel() }))
     }
