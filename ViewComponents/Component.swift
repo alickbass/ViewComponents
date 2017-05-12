@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ComponentType {
-    var styles: [AnyStyle] { get }
+    var styles: Set<AnyStyle> { get }
     func configure(view: UIView)
     func isEqual(to other: ComponentType) -> Bool
 }
@@ -23,7 +23,7 @@ struct ChildComponent: ComponentType, Equatable {
         self.access = { view in access(view as! T) }
     }
     
-    var styles: [AnyStyle] {
+    var styles: Set<AnyStyle> {
         return component.styles
     }
     
@@ -42,14 +42,14 @@ struct ChildComponent: ComponentType, Equatable {
 }
 
 public struct Component<T: UIView>: ComponentType {
-    public let styles: [AnyStyle]
+    public let styles: Set<AnyStyle>
     let children: [ChildComponent]
     
     public init() {
         self.init(styles: [], children: [])
     }
     
-    init(styles: [AnyStyle], children: [ChildComponent]) {
+    init(styles: Set<AnyStyle>, children: [ChildComponent]) {
         self.styles = styles
         self.children = children
     }
@@ -59,7 +59,7 @@ public struct Component<T: UIView>: ComponentType {
     }
     
     public func add<S: StyleType>(styles: [S]) -> Component<T> {
-        return Component<T>(styles: self.styles + styles.map(AnyStyle.init), children: children)
+        return Component<T>(styles: self.styles.union(styles.lazy.map(AnyStyle.init)), children: children)
     }
     
     public func configure(view: T) {
