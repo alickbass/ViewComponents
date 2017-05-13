@@ -40,6 +40,8 @@
 		CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */; };
 		CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */; };
 		CEFE1A251EC70BF600E077E0 /* ChildComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */; };
+		CEFE1A271EC7998A00E077E0 /* UITextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE1A261EC7998A00E077E0 /* UITextFieldStyle.swift */; };
+		CEFE1A291EC79E0400E077E0 /* TestUITextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE1A281EC79E0400E077E0 /* TestUITextFieldStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonStyle.swift; sourceTree = "<group>"; };
 		CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIViewStyle.swift; sourceTree = "<group>"; };
 		CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildComponent.swift; sourceTree = "<group>"; };
+		CEFE1A261EC7998A00E077E0 /* UITextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldStyle.swift; sourceTree = "<group>"; };
+		CEFE1A281EC79E0400E077E0 /* TestUITextFieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUITextFieldStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +171,7 @@
 				CE5329B71EC5CFCD0000E9AB /* TestTableViewStyle.swift */,
 				CE5779251EC5DF8700BE5F52 /* TestTableViewCellStyle.swift */,
 				CE5779291EC5F20E00BE5F52 /* TestUICollectionViewStyle.swift */,
+				CEFE1A281EC79E0400E077E0 /* TestUITextFieldStyle.swift */,
 				CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */,
 				CEF534DD1EB0C182001E3CA8 /* Info.plist */,
 			);
@@ -188,6 +193,7 @@
 				CE5329B51EC5C3B60000E9AB /* TableViewStyle.swift */,
 				CE5329B91EC5DA5F0000E9AB /* TableViewCellStyle.swift */,
 				CE5779271EC5F05D00BE5F52 /* UICollectionViewStyle.swift */,
+				CEFE1A261EC7998A00E077E0 /* UITextFieldStyle.swift */,
 			);
 			name = Styles;
 			sourceTree = "<group>";
@@ -309,6 +315,7 @@
 				CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */,
 				CE5329B21EC5AE320000E9AB /* UIIScrollViewStyle.swift in Sources */,
 				CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */,
+				CEFE1A271EC7998A00E077E0 /* UITextFieldStyle.swift in Sources */,
 				CE5329AC1EC4A5AE0000E9AB /* HashableExtensions.swift in Sources */,
 				CEE5DA7A1EC212E50022D6F1 /* CALayerShadowStyle.swift in Sources */,
 				CEFE1A251EC70BF600E077E0 /* ChildComponent.swift in Sources */,
@@ -341,6 +348,7 @@
 				CE57792A1EC5F20E00BE5F52 /* TestUICollectionViewStyle.swift in Sources */,
 				CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */,
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
+				CEFE1A291EC79E0400E077E0 /* TestUITextFieldStyle.swift in Sources */,
 				CE0CF5511EB75E2800B6BC36 /* TestStyle.swift in Sources */,
 				CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */,
 			);
