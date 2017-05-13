@@ -39,6 +39,7 @@
 		CEF534F11EB0C2DD001E3CA8 /* UIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F01EB0C2DD001E3CA8 /* UIViewStyle.swift */; };
 		CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */; };
 		CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */; };
+		CEFE1A251EC70BF600E077E0 /* ChildComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		CEF534F01EB0C2DD001E3CA8 /* UIViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewStyle.swift; sourceTree = "<group>"; };
 		CEF534F21EB0C382001E3CA8 /* UIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonStyle.swift; sourceTree = "<group>"; };
 		CEF534F61EB0ECAD001E3CA8 /* TestUIViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIViewStyle.swift; sourceTree = "<group>"; };
+		CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			children = (
 				CEF534D01EB0C182001E3CA8 /* ViewComponents.h */,
 				CEF534E71EB0C18B001E3CA8 /* Component.swift */,
+				CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */,
 				CEF534E91EB0C1AD001E3CA8 /* Style.swift */,
 				CEF534EF1EB0C2D1001E3CA8 /* Styles */,
 				CE5329AA1EC4A5920000E9AB /* Extensions */,
@@ -308,6 +311,7 @@
 				CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */,
 				CE5329AC1EC4A5AE0000E9AB /* HashableExtensions.swift in Sources */,
 				CEE5DA7A1EC212E50022D6F1 /* CALayerShadowStyle.swift in Sources */,
+				CEFE1A251EC70BF600E077E0 /* ChildComponent.swift in Sources */,
 				CE5329BA1EC5DA5F0000E9AB /* TableViewCellStyle.swift in Sources */,
 				CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */,
 				CE0CF5551EB786C600B6BC36 /* UIControlStyle.swift in Sources */,
