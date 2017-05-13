@@ -57,4 +57,51 @@ class TestComponent: XCTestCase {
         XCTAssertFalse(child.isEqual(to: comp))
     }
     
+    func testComponentDiffing() {
+        XCTAssertEqual(Component<UIView>().viewStyles(.alpha(0.2)).diffChanges(from: comp), Component<UIView>().viewStyles(.backgroundColor(.red)))
+        
+        let firstComponent = Component<UIView>()
+            .viewStyles(.clipsToBounds(true), .backgroundColor(.red))
+            .child(
+                Component<UIView>()
+                    .borderStyles(.color(.red), .width(12))
+                    .viewStyles(.isHidden(true)), { _ in UIView() }
+            )
+            .child(
+                Component<UIButton>()
+                    .buttonStyles(.title("test", for: .normal))
+                    .viewStyles(.isHidden(true)), { _ in UIButton() }
+            )
+        
+        let secondComponent = Component<UIView>()
+            .viewStyles(.backgroundColor(.red), .contentMode(.bottom))
+            .child(
+                Component<UIView>()
+                    .borderStyles(.color(.green), .width(12))
+                    .viewStyles(.isHidden(true)), { _ in UIView() }
+            )
+            .child(
+                Component<UIButton>()
+                    .buttonStyles(.title("test", for: .normal), .titleColor(.red, for: .normal))
+                    .viewStyles(.isHidden(true), .isMultipleTouchEnabled(true)), { _ in UIButton() }
+            )
+            .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), { _ in UIView() })
+        
+        let diff = Component<UIView>()
+            .viewStyles(.contentMode(.bottom))
+            .child(
+                Component<UIView>()
+                    .borderStyles(.color(.green))
+                    .viewStyles(), { _ in UIView() }
+            )
+            .child(
+                Component<UIButton>()
+                    .buttonStyles(.titleColor(.red, for: .normal))
+                    .viewStyles(.isMultipleTouchEnabled(true)), { _ in UIButton() }
+            )
+            .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), { _ in UIView() })
+        
+        XCTAssertEqual(firstComponent.diffChanges(from: secondComponent), diff)
+    }
+    
 }
