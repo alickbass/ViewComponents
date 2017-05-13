@@ -8,40 +8,20 @@
 
 import UIKit
 
-protocol ComponentType {
-    var styles: Set<AnyStyle> { get }
-    func configure(view: UIView)
-    func isEqual(to other: ComponentType) -> Bool
+public protocol ComponentConvertible {
+    associatedtype ViewType: UIView
+    
+    var toComponent: Component<ViewType> { get }
+    func configure(view: ViewType)
 }
 
-struct ChildComponent: ComponentType, Equatable {
-    let component: ComponentType
-    let access: (UIView) -> UIView
-    
-    init<V: UIView, T: UIView>(component: Component<V>, _ access: @escaping (T) -> V) {
-        self.component = component
-        self.access = { view in access(view as! T) }
-    }
-    
-    var styles: Set<AnyStyle> {
-        return component.styles
-    }
-    
-    func configure(view: UIView) {
-        component.configure(view: access(view))
-    }
-    
-    func isEqual(to other: ComponentType) -> Bool {
-        guard let other = other as? ChildComponent else { return false }
-        return component.isEqual(to: other.component)
-    }
-    
-    static func == (lhs: ChildComponent, rhs: ChildComponent) -> Bool {
-        return lhs.component.isEqual(to: rhs.component)
+public extension ComponentConvertible {
+    public func configure(view: ViewType) {
+        toComponent.configure(view: view)
     }
 }
 
-public struct Component<T: UIView>: ComponentType {
+public struct Component<T: UIView>: ConcreteComponentType {
     public let styles: Set<AnyStyle>
     let children: [ChildComponent]
     
@@ -72,13 +52,28 @@ public struct Component<T: UIView>: ComponentType {
     }
 }
 
+extension Component {
+    public func diffChanges(from other: Component<T>) -> Component<T> {
+        let newStyles = other.styles.subtracting(styles)
+        let newChildren = other.children.lazy.enumerated().flatMap({ current -> ChildComponent? in
+            if current.offset < children.count {
+                let diff = children[current.offset].diffChanges(from: current.element)
+                return diff.isEmpty ? nil : diff
+            } else {
+                return current.element
+            }
+        })
+        return Component<T>(styles: newStyles, children: newChildren)
+    }
+}
+
 extension Component: ComponentConvertible {
     public var toComponent: Component<T> {
         return self
     }
 }
 
-extension Component: Equatable {
+extension Component {
     func isEqual(to other: ComponentType) -> Bool {
         guard let other = other as? Component<T> else { return false }
         return self == other
@@ -86,18 +81,5 @@ extension Component: Equatable {
     
     public static func == (lhs: Component<T>, rhs: Component<T>) -> Bool {
         return lhs.styles == rhs.styles && lhs.children == rhs.children
-    }
-}
-
-public protocol ComponentConvertible {
-    associatedtype ViewType: UIView
-    
-    var toComponent: Component<ViewType> { get }
-    func configure(view: ViewType)
-}
-
-public extension ComponentConvertible {
-    public func configure(view: ViewType) {
-        toComponent.configure(view: view)
     }
 }
