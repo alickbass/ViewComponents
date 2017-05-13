@@ -13,13 +13,14 @@ class TestComponent: XCTestCase {
     let comp = Component<UIView>().viewStyles(.alpha(0.2), .backgroundColor(.red))
     let viewAccess: (UIView) -> UIView = { $0 }
     let buttonAccess: (UIView) -> UIButton = { _ in UIButton() }
+    let labelAcess: (UIView) -> UILabel = { _ in UILabel() }
     
     func testComponentEquatable() {
         XCTAssertEqual(comp, comp)
         XCTAssertEqual(comp.viewStyles(.alpha(0.2), .backgroundColor(.red)), comp)
         XCTAssertEqual(Component<UIView>().viewStyles(.backgroundColor(.red), .alpha(0.2)), comp)
         XCTAssertEqual(comp.child(comp, viewAccess), comp.child(comp, viewAccess))
-        XCTAssertNotEqual(comp.child(comp, { $0 }), comp.child(Component<UILabel>(), { _ in UILabel() }))
+        XCTAssertNotEqual(comp.child(comp, { $0 }), comp.child(Component<UILabel>(), labelAcess))
     }
     
     func testComponentSideEffect() {
@@ -74,6 +75,7 @@ class TestComponent: XCTestCase {
                     .buttonStyles(.title("test", for: .normal))
                     .viewStyles(.isHidden(true)), buttonAccess
             )
+            .child(Component<UILabel>().labelStyles(.isEnabled(true)), labelAcess)
         
         let secondComponent = Component<UIView>()
             .viewStyles(.backgroundColor(.red), .contentMode(.bottom))
@@ -87,6 +89,7 @@ class TestComponent: XCTestCase {
                     .buttonStyles(.title("test", for: .normal), .titleColor(.red, for: .normal))
                     .viewStyles(.isHidden(true), .isMultipleTouchEnabled(true)), buttonAccess
             )
+            .child(Component<UILabel>().labelStyles(.isEnabled(true)), labelAcess)
             .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), viewAccess)
         
         let diff = Component<UIView>()

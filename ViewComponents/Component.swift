@@ -55,9 +55,10 @@ public struct Component<T: UIView>: ConcreteComponentType {
 extension Component {
     public func diffChanges(from other: Component<T>) -> Component<T> {
         let newStyles = other.styles.subtracting(styles)
-        let newChildren = other.children.lazy.enumerated().map({ current -> ChildComponent in
+        let newChildren = other.children.lazy.enumerated().flatMap({ current -> ChildComponent? in
             if current.offset < children.count {
-                return children[current.offset].diffChanges(from: current.element)
+                let diff = children[current.offset].diffChanges(from: current.element)
+                return diff.isEmpty ? nil : diff
             } else {
                 return current.element
             }
