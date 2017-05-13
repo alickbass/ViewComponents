@@ -8,6 +8,19 @@
 
 import UIKit
 
+public protocol ComponentConvertible {
+    associatedtype ViewType: UIView
+    
+    var toComponent: Component<ViewType> { get }
+    func configure(view: ViewType)
+}
+
+public extension ComponentConvertible {
+    public func configure(view: ViewType) {
+        toComponent.configure(view: view)
+    }
+}
+
 public struct Component<T: UIView>: ConcreteComponentType {
     public let styles: Set<AnyStyle>
     let children: [ChildComponent]
@@ -67,18 +80,5 @@ extension Component {
     
     public static func == (lhs: Component<T>, rhs: Component<T>) -> Bool {
         return lhs.styles == rhs.styles && lhs.children == rhs.children
-    }
-}
-
-public protocol ComponentConvertible {
-    associatedtype ViewType: UIView
-    
-    var toComponent: Component<ViewType> { get }
-    func configure(view: ViewType)
-}
-
-public extension ComponentConvertible {
-    public func configure(view: ViewType) {
-        toComponent.configure(view: view)
     }
 }
