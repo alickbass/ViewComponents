@@ -47,3 +47,16 @@ extension UIEdgeInsets: Hashable {
         return hash
     }
 }
+
+extension NSRange: Hashable {
+    public static func == (lhs: NSRange, rhs: NSRange) -> Bool {
+        return lhs.length == rhs.length && lhs.location == rhs.location
+    }
+    
+    public var hashValue: Int {
+        var hash = 5381
+        hash = ((hash << 5) &+ hash) &+ length
+        hash = ((hash << 5) &+ hash) &+ location
+        return hash
+    }
+}
