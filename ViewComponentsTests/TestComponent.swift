@@ -58,6 +58,8 @@ class TestComponent: XCTestCase {
     }
     
     func testComponentDiffing() {
+        let access: (UIView) -> UIView = { $0 }
+        let button: (UIView) -> UIButton = { _ in UIButton() }
         XCTAssertEqual(Component<UIView>().viewStyles(.alpha(0.2)).diffChanges(from: comp), Component<UIView>().viewStyles(.backgroundColor(.red)))
         
         let firstComponent = Component<UIView>()
@@ -65,12 +67,12 @@ class TestComponent: XCTestCase {
             .child(
                 Component<UIView>()
                     .borderStyles(.color(.red), .width(12))
-                    .viewStyles(.isHidden(true)), { _ in UIView() }
+                    .viewStyles(.isHidden(true)), access
             )
             .child(
                 Component<UIButton>()
                     .buttonStyles(.title("test", for: .normal))
-                    .viewStyles(.isHidden(true)), { _ in UIButton() }
+                    .viewStyles(.isHidden(true)), button
             )
         
         let secondComponent = Component<UIView>()
@@ -78,30 +80,32 @@ class TestComponent: XCTestCase {
             .child(
                 Component<UIView>()
                     .borderStyles(.color(.green), .width(12))
-                    .viewStyles(.isHidden(true)), { _ in UIView() }
+                    .viewStyles(.isHidden(true)), access
             )
             .child(
                 Component<UIButton>()
                     .buttonStyles(.title("test", for: .normal), .titleColor(.red, for: .normal))
-                    .viewStyles(.isHidden(true), .isMultipleTouchEnabled(true)), { _ in UIButton() }
+                    .viewStyles(.isHidden(true), .isMultipleTouchEnabled(true)), button
             )
-            .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), { _ in UIView() })
+            .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), access)
         
         let diff = Component<UIView>()
             .viewStyles(.contentMode(.bottom))
             .child(
                 Component<UIView>()
                     .borderStyles(.color(.green))
-                    .viewStyles(), { _ in UIView() }
+                    .viewStyles(), access
             )
             .child(
                 Component<UIButton>()
                     .buttonStyles(.titleColor(.red, for: .normal))
-                    .viewStyles(.isMultipleTouchEnabled(true)), { _ in UIButton() }
+                    .viewStyles(.isMultipleTouchEnabled(true)), button
             )
-            .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), { _ in UIView() })
+            .child(Component<UIView>().viewStyles(.clearsContextBeforeDrawing(true)), access)
         
         XCTAssertEqual(firstComponent.diffChanges(from: secondComponent), diff)
+        XCTAssertEqual(Component<UIView>().child(Component<UIView>(), access).children.first?.isEmpty, true)
+        XCTAssertTrue(comp.diffChanges(from: Component<UIButton>()).isEqual(to: Component<UIButton>()))
     }
     
 }
