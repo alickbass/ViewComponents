@@ -39,9 +39,15 @@ public extension CALayer {
             }
         }
         
-        var startIndex: Int { return 29 }
+        @inline(__always) static func startIndex() -> Int {
+            return CALayer.ShadowStyle.lastStyleIndex()
+        }
         
-        var value: (index: Int, valueHash: Int) {
+        @inline(__always) static func stylesCount() -> Int {
+            return 3
+        }
+        
+        @inline(__always) func value() -> (index: Int, valueHash: Int) {
             switch self {
             case let .cornerRadius(cornerRadius):
                 return (1, cornerRadius.hashValue)

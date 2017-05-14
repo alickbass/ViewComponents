@@ -62,9 +62,15 @@ public enum UIImageViewStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 62 }
+    @inline(__always) static func startIndex() -> Int {
+        return UIButtonStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 7
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .image(image):
             return (1, image?.hashValue ?? 0)

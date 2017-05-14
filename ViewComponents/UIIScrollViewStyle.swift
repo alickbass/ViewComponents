@@ -100,9 +100,15 @@ public enum UIScrollViewStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 69 }
+    @inline(__always) static func startIndex() -> Int {
+        return UIImageViewStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 28
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .contentOffset(value):
             return (1, value.hashValue)

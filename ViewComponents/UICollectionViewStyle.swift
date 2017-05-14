@@ -44,9 +44,15 @@ public enum UICollectionViewStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 129 }
+    @inline(__always) static func startIndex() -> Int {
+        return TableViewCellStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 5
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .isPrefetchingEnabled(value):
             return (1, value.hashValue)

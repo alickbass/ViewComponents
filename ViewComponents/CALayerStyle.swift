@@ -193,11 +193,15 @@ public enum CALayerStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int {
+    @inline(__always) static func startIndex() -> Int {
         return 0
     }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 24
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .contentsGravity(gravity):
             return (1, gravity.hashValue)

@@ -45,9 +45,15 @@ public enum UIControlStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 44 }
+    @inline(__always) static func startIndex() -> Int {
+        return UILabelStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 5
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .isEnabled(isEnabled):
             return (1, isEnabled.hashValue)

@@ -108,9 +108,15 @@ public enum TableViewStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 97 }
+    @inline(__always) static func startIndex() -> Int {
+        return UIScrollViewStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 20
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .rowHeight(value):
             return (1, value.hashValue)
