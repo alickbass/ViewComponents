@@ -88,6 +88,10 @@ class TestUITextViewStyle: XCTestCase {
         view.isSelectable = false
         UITextViewStyle.isSelectable(true).sideEffect(on: view)
         XCTAssertEqual(view.isSelectable, true)
+        
+        view.isSelectable = false
+        Component<UITextView>().textViewStyles(.isSelectable(true)).configure(view: view)
+        XCTAssertEqual(view.isSelectable, true)
     }
     
     func testHashValue() {

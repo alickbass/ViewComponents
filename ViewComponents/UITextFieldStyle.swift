@@ -155,7 +155,7 @@ public enum UITextFieldStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITextField {
-    public func textFieldViewStyles(_ styles: UITextFieldStyle...) -> Component<T> {
+    public func textFieldStyles(_ styles: UITextFieldStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }
