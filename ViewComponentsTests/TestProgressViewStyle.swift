@@ -11,6 +11,16 @@ import ViewComponents
 
 class TestProgressViewStyle: XCTestCase {
     
+    static let allStyles: [ProgressViewStyle] = [
+        .progress(0.2, animated: true), .progressViewStyle(.bar), .progressTintColor(.red),
+        .progressTintColor(nil), .progressImage(UIImage()), .progressImage(nil),
+        .trackTintColor(.red), .trackTintColor(nil), .trackImage(UIImage()), .trackImage(nil)
+    ]
+    
+    static var accumulatedHashes: [Int] {
+        return TestUITextViewStyle.accumulatedHashes + TestProgressViewStyle.allStyles.map({ $0.hashValue })
+    }
+    
     let image = UIImage()
     
     func testStyleEquatable() {
@@ -55,4 +65,13 @@ class TestProgressViewStyle: XCTestCase {
         XCTAssertEqual(view.trackImage, image)
     }
     
+    func testHashValue() {
+        var hashes = Set(TestUITextViewStyle.accumulatedHashes)
+        
+        for item in TestProgressViewStyle.allStyles {
+            let hash = item.hashValue
+            XCTAssertFalse(hashes.contains(hash))
+            hashes.insert(hash)
+        }
+    }
 }
