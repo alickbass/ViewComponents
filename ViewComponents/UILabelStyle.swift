@@ -98,9 +98,15 @@ public enum UILabelStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 44 }
+    @inline(__always) static func startIndex() -> Int {
+        return UIViewStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 16
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .text(text):
             return (1, text?.hashValue ?? 0)

@@ -104,9 +104,15 @@ public enum UITextFieldStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 134 }
+    @inline(__always) static func startIndex() -> Int {
+        return UICollectionViewStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 18
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .text(value):
             return (1, value?.hashValue ?? 0)

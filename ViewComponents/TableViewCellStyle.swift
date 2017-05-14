@@ -77,9 +77,15 @@ public enum TableViewCellStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 117 }
+    @inline(__always) static func startIndex() -> Int {
+        return TableViewStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 12
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .accessoryType(value):
             return (1, value.hashValue)

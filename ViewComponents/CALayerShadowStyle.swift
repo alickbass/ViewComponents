@@ -49,9 +49,15 @@ public extension CALayer {
             }
         }
         
-        var startIndex: Int { return 24 }
+        @inline(__always) static func startIndex() -> Int {
+            return CALayerStyle.lastStyleIndex()
+        }
         
-        var value: (index: Int, valueHash: Int) {
+        @inline(__always) static func stylesCount() -> Int {
+            return 5
+        }
+        
+        @inline(__always) func value() -> (index: Int, valueHash: Int) {
             switch self {
             case let .opacity(shadowOpacity):
                 return (1, shadowOpacity.hashValue)

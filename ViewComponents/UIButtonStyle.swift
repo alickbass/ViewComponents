@@ -80,9 +80,15 @@ public enum UIButtonStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 49 }
+    @inline(__always) static func startIndex() -> Int {
+        return UIControlStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 13
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .title(title, for: state):
             var hash = 5381

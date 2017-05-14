@@ -80,9 +80,15 @@ extension UIViewStyle: HashableConcreteStyle {
         }
     }
     
-    var startIndex: Int { return 32 }
+    @inline(__always) static func startIndex() -> Int {
+        return CALayer.BorderStyle.lastStyleIndex()
+    }
     
-    var value: (index: Int, valueHash: Int) {
+    @inline(__always) static func stylesCount() -> Int {
+        return 12
+    }
+    
+    @inline(__always) func value() -> (index: Int, valueHash: Int) {
         switch self {
         case let .backgroundColor(color):
             return (1, color?.hashValue ?? 0)
