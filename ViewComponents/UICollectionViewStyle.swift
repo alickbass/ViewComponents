@@ -9,6 +9,7 @@
 import UIKit
 
 public enum UICollectionViewStyle: HashableConcreteStyle {
+    @available(iOS 10.0, *)
     case isPrefetchingEnabled(Bool)
     case allowsSelection(Bool)
     case allowsMultipleSelection(Bool)
@@ -18,7 +19,9 @@ public enum UICollectionViewStyle: HashableConcreteStyle {
     public func sideEffect(on view: UICollectionView) {
         switch self {
         case let .isPrefetchingEnabled(value):
-            view.isPrefetchingEnabled = value
+            if #available(iOSApplicationExtension 10.0, *) {
+                view.isPrefetchingEnabled = value
+            }
         case let .allowsSelection(value):
             view.allowsSelection = value
         case let .allowsMultipleSelection(value):

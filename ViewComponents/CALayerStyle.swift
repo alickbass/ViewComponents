@@ -50,6 +50,7 @@ public enum CAGravity: RawRepresentable {
     }
 }
 
+@available(iOS 10.0, *)
 public enum CAContentsFormat: RawRepresentable {
     case RGBA8Uint, RGBA16Float, gray8Uint
     
@@ -87,6 +88,7 @@ public enum CALayerStyle: HashableConcreteStyle {
     case drawsAsynchronously(Bool)
     case shouldRasterize(Bool)
     case rasterizationScale(CGFloat)
+    @available(iOS 10.0, *)
     case contentsFormat(CAContentsFormat)
     case frame(CGRect)
     case bounds(CGRect)
@@ -131,7 +133,9 @@ public enum CALayerStyle: HashableConcreteStyle {
         case let .rasterizationScale(rasterizationScale):
             layer.rasterizationScale = rasterizationScale
         case let .contentsFormat(contentsFormat):
-            layer.contentsFormat = contentsFormat.rawValue
+            if #available(iOSApplicationExtension 10.0, *) {
+                layer.contentsFormat = contentsFormat.rawValue
+            }
         case let .frame(frame):
             layer.frame = frame
         case let .bounds(bounds):
