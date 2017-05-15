@@ -5,9 +5,32 @@ Declarative view components
 [![Build Status](https://travis-ci.org/alickbass/ViewComponents.svg?branch=master)](https://travis-ci.org/alickbass/ViewComponents)
 [![codecov](https://codecov.io/gh/alickbass/ViewComponents/branch/master/graph/badge.svg)](https://codecov.io/gh/alickbass/ViewComponents)
 
-## How to use
+## What is ViewComponents
 
-Let's say we have a following custom view:
+ViewComponents is a library that helps you to create View Models that are:
+
+* Declarative
+* Composable
+* Perfect fit to MVVM architecture
+* Easy to test
+
+## Why declarative?
+
+You describe how the view should look like and the library will take care to applying the styling. Here's an example:
+
+```swift
+let buttonComponent = Component<UIButton>().buttonStyles(
+    .title("Test", for: .normal),
+    .titleColor(.red, for: .normal)
+)
+
+let myButton: UIButton /// The button we want to style
+buttonComponent.configure(view: myCustomeView)
+```
+
+No more manually setting the views properties! 
+
+## Why composable?
 
 ```swift
 class MyCustomView: UIView {
@@ -17,7 +40,7 @@ class MyCustomView: UIView {
 }
 ```
 
-With **ViewComponents** you can easily create immutable values that represent the styling of the view hierarchy like this:
+With **ViewComponents** you can easily create immutable values that represent the styling of the **whole view hierarchy** like this:
 
 ```swift
 let buttonComponent = Component<UIButton>().buttonStyles(
@@ -52,3 +75,74 @@ and then when we need to apply our style we do the following:
 ```swift
 viewComponent.configure(view: myCustomeView)
 ```
+
+## How to use with MVVM
+
+Library provides a protocol `ComponentConvertible` that your ViewModels should can conform to and then it's easy to apply ViewModel to the the view. Here is an example of MVVM architecture from [here](https://www.objc.io/issues/13-architecture/mvvm/).
+
+Imagine we have the following model:
+
+```swift
+struct Person {
+    let salutation: String
+    let firstName: String
+    let lastName: String
+    let birthday: Date
+}
+```
+
+And we have the following view:
+
+```swift
+class PersonView: UIView {
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var birthdateLabel: UILabel!
+}
+```
+
+Now the View Model will look like this:
+
+```swift
+struct PersonViewModel: ComponentConvertible {
+    let person: Person
+    
+    var name: String {
+        return "\(person.salutation) \(person.firstName) \(person.lastName)"
+    }
+    
+    var birthday: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE MMMM d, yyyy"
+        return formatter.string(from: person.birthday)
+    }
+    
+    var toComponent: Component<PersonView> {
+        let name = Component<UILabel>().labelStyles(
+            .text(self.name),
+            .font(.boldSystemFont(ofSize: 12)),
+            .textColor(.red)
+        )
+    
+        let birthday = Component<UILabel>().labelStyles(
+            .text(self.birthday),
+            .font(.boldSystemFont(ofSize: 12)),
+            .textColor(.red)
+        )
+        
+        return Component()
+            .borderStyles(.color(.red), .width(12))
+            .child(name, { $0.nameLabel })
+            .child(birthday, { $0.birthdateLabel })
+    }
+}
+```
+
+And let's apply it:
+
+```swift
+let person: Person /// our Person model here
+let view: PersonView /// our view
+PersonViewModel(person: person).configure(view: view)
+```
+
+That's it!)
