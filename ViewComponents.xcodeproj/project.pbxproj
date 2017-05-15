@@ -17,6 +17,8 @@
 		CE469E331EC9A006009C256F /* TestUISliderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE469E321EC9A006009C256F /* TestUISliderStyle.swift */; };
 		CE469E351EC9B2BC009C256F /* ActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE469E341EC9B2BC009C256F /* ActivityIndicatorViewStyle.swift */; };
 		CE469E371EC9B42E009C256F /* TestActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE469E361EC9B42E009C256F /* TestActivityIndicatorViewStyle.swift */; };
+		CE469E391EC9DF98009C256F /* UISwitchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE469E381EC9DF98009C256F /* UISwitchStyle.swift */; };
+		CE469E3B1EC9E268009C256F /* TestUISwitchStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE469E3A1EC9E268009C256F /* TestUISwitchStyle.swift */; };
 		CE5329AC1EC4A5AE0000E9AB /* HashableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329AB1EC4A5AE0000E9AB /* HashableExtensions.swift */; };
 		CE5329B01EC4A7D70000E9AB /* TestHashableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */; };
 		CE5329B21EC5AE320000E9AB /* UIIScrollViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5329B11EC5AE320000E9AB /* UIIScrollViewStyle.swift */; };
@@ -73,6 +75,8 @@
 		CE469E321EC9A006009C256F /* TestUISliderStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUISliderStyle.swift; sourceTree = "<group>"; };
 		CE469E341EC9B2BC009C256F /* ActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		CE469E361EC9B42E009C256F /* TestActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
+		CE469E381EC9DF98009C256F /* UISwitchStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISwitchStyle.swift; sourceTree = "<group>"; };
+		CE469E3A1EC9E268009C256F /* TestUISwitchStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUISwitchStyle.swift; sourceTree = "<group>"; };
 		CE5329AB1EC4A5AE0000E9AB /* HashableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashableExtensions.swift; sourceTree = "<group>"; };
 		CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHashableExtensions.swift; sourceTree = "<group>"; };
 		CE5329B11EC5AE320000E9AB /* UIIScrollViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIIScrollViewStyle.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 				CEF7DCDB1EC8A64500190D5C /* TestProgressViewStyle.swift */,
 				CE469E321EC9A006009C256F /* TestUISliderStyle.swift */,
 				CE469E361EC9B42E009C256F /* TestActivityIndicatorViewStyle.swift */,
+				CE469E3A1EC9E268009C256F /* TestUISwitchStyle.swift */,
 				CE5329AF1EC4A7D70000E9AB /* TestHashableExtensions.swift */,
 				CEF534DD1EB0C182001E3CA8 /* Info.plist */,
 			);
@@ -218,6 +223,7 @@
 				CEFE1A2E1EC8A2C900E077E0 /* ProgressViewStyle.swift */,
 				CE469E301EC8B620009C256F /* UISliderStyle.swift */,
 				CE469E341EC9B2BC009C256F /* ActivityIndicatorViewStyle.swift */,
+				CE469E381EC9DF98009C256F /* UISwitchStyle.swift */,
 			);
 			name = Styles;
 			sourceTree = "<group>";
@@ -350,6 +356,7 @@
 				CE0CF5551EB786C600B6BC36 /* UIControlStyle.swift in Sources */,
 				CEF534F11EB0C2DD001E3CA8 /* UIViewStyle.swift in Sources */,
 				CE469E351EC9B2BC009C256F /* ActivityIndicatorViewStyle.swift in Sources */,
+				CE469E391EC9DF98009C256F /* UISwitchStyle.swift in Sources */,
 				CE5329B61EC5C3B60000E9AB /* TableViewStyle.swift in Sources */,
 				CEF534EA1EB0C1AD001E3CA8 /* Style.swift in Sources */,
 				CE37165E1EBA235600590480 /* UIImageViewStyle.swift in Sources */,
@@ -366,6 +373,7 @@
 				CEF534F71EB0ECAD001E3CA8 /* TestUIViewStyle.swift in Sources */,
 				CE2D6A001EC33EE300CA62D0 /* TestCALayerBorderStyle.swift in Sources */,
 				CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */,
+				CE469E3B1EC9E268009C256F /* TestUISwitchStyle.swift in Sources */,
 				CE5329B81EC5CFCD0000E9AB /* TestTableViewStyle.swift in Sources */,
 				CE5329B41EC5B2EB0000E9AB /* TestUIScrollViewStyle.swift in Sources */,
 				CE0CF5571EB78A8900B6BC36 /* TestUIControlStyle.swift in Sources */,
