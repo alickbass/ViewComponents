@@ -9,10 +9,10 @@ Declarative view components
 
 ViewComponents is a library that helps you to create View Models that are:
 
-* Declarative
-* Composable
-* Perfect fit to MVVM architecture
-* Easy to test
+* [**Declarative**](#why-declarative)
+* [**Composable**](#why-composable)
+* [**Perfect fit to MVVM architecture**](#how-to-use-with-mvvm)
+* **Easy to test**
 
 ## Why declarative?
 
