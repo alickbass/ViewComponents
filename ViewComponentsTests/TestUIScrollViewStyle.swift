@@ -121,7 +121,7 @@ class TestUIScrollViewStyle: XCTestCase {
         XCTAssertEqual(view.bouncesZoom, true)
         
         view.bouncesZoom = false
-        Component<UIScrollView>().scrollView(.bouncesZoom(true)).configure(view: view)
+        Component<UIScrollView>().scrollView(.bouncesZoom(true)).configure(item: view)
         XCTAssertEqual(view.bouncesZoom, true)
     }
     

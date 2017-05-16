@@ -21,7 +21,7 @@ class TestStyle: XCTestCase {
         let view = UIView()
         
         view.backgroundColor = .red
-        UIViewStyle.backgroundColor(.green).sideEffect(view: view)
+        UIViewStyle.backgroundColor(.green).sideEffect(item: view)
         XCTAssertEqual(view.backgroundColor, .green)
     }
     

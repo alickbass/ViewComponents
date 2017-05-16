@@ -9,19 +9,19 @@
 import UIKit
 
 public protocol ComponentConvertible {
-    associatedtype ViewType: UIView
+    associatedtype ViewType
     
     var toComponent: Component<ViewType> { get }
-    func configure(view: ViewType)
+    func configure(item: ViewType)
 }
 
 public extension ComponentConvertible {
-    public func configure(view: ViewType) {
-        toComponent.configure(view: view)
+    public func configure(item: ViewType) {
+        toComponent.configure(item: item)
     }
 }
 
-public struct Component<T: UIView>: ConcreteComponentType {
+public struct Component<T>: ConcreteComponentType {
     public let styles: Set<AnyStyle>
     let children: [ChildComponent]
     
@@ -34,20 +34,20 @@ public struct Component<T: UIView>: ConcreteComponentType {
         self.children = children
     }
     
-    func configure(view: UIView) {
-        configure(view: view as! T)
+    func configure(item: Any) {
+        configure(item: item as! T)
     }
     
     public func add<S: StyleType>(styles: [S]) -> Component<T> {
         return Component<T>(styles: self.styles.union(styles.lazy.map(AnyStyle.init)), children: children)
     }
     
-    public func configure(view: T) {
-        styles.forEach { $0.sideEffect(view: view) }
-        children.forEach({ $0.configure(view: view) })
+    public func configure(item: T) {
+        styles.forEach { $0.sideEffect(item: item) }
+        children.forEach { $0.configure(item: item) }
     }
     
-    public func child<V: UIView>(_ component: Component<V>, access: @escaping (T) -> V) -> Component<T> {
+    public func child<V>(_ component: Component<V>, access: @escaping (T) -> V) -> Component<T> {
         return Component<T>(styles: styles, children: children + [ChildComponent(component: component, access)])
     }
 }

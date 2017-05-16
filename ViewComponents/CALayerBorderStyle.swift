@@ -60,7 +60,7 @@ public extension CALayer {
     }
 }
 
-public extension Component {
+public extension Component where T: UIView {
     public func border(_ styles: CALayer.BorderStyle...) -> Component<T> {
         return add(styles: styles)
     }

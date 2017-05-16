@@ -135,7 +135,7 @@ class TestTableViewStyle: XCTestCase {
         XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
         
         view.remembersLastFocusedIndexPath = false
-        Component<UITableView>().tableView(.remembersLastFocusedIndexPath(true)).configure(view: view)
+        Component<UITableView>().tableView(.remembersLastFocusedIndexPath(true)).configure(item: view)
         XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
     }
     

@@ -118,7 +118,7 @@ extension UIViewStyle: HashableConcreteStyle {
     }
 }
 
-public extension Component {
+public extension Component where T: UIView {
     public func view(_ styles: UIViewStyle...) -> Component<T> {
         return add(styles: styles)
     }

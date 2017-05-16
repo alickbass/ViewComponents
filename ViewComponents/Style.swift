@@ -15,8 +15,8 @@ public struct AnyStyle: StyleType, Hashable {
         self.style = style
     }
     
-    public func sideEffect(view: UIView) {
-        style.sideEffect(view: view)
+    public func sideEffect(item: Any) {
+        style.sideEffect(item: item)
     }
     
     public func isEqual(to other: StyleType) -> Bool {
@@ -34,19 +34,19 @@ public struct AnyStyle: StyleType, Hashable {
 }
 
 public protocol StyleType {
-    func sideEffect(view: UIView)
+    func sideEffect(item: Any)
     func isEqual(to other: StyleType) -> Bool
     var hashValue: Int { get }
 }
 
 public protocol ConcreteStyleType: StyleType, Hashable {
-    associatedtype View: UIView
-    func sideEffect(on view: View)
+    associatedtype View
+    func sideEffect(on item: View)
 }
 
 public extension ConcreteStyleType {
-    public func sideEffect(view: UIView) {
-        sideEffect(on: view as! View)
+    public func sideEffect(item: Any) {
+        sideEffect(on: item as! View)
     }
     
     public func isEqual(to other: StyleType) -> Bool {

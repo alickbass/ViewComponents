@@ -132,7 +132,7 @@ class TestUIButtonStyle: XCTestCase {
         XCTAssertEqual(view.imageEdgeInsets, .zero)
         
         view.showsTouchWhenHighlighted = false
-        Component<UIButton>().button(.showsTouchWhenHighlighted(true)).configure(view: view)
+        Component<UIButton>().button(.showsTouchWhenHighlighted(true)).configure(item: view)
         XCTAssertEqual(view.showsTouchWhenHighlighted, true)
     }
     
