@@ -13,6 +13,7 @@ ViewComponents is a library that helps you to create View Models that are:
 * [**Composable**](#why-composable)
 * [**Perfect fit to MVVM architecture**](#how-to-use-with-mvvm)
 * **Easy to test**
+* **Can applying only diffs between components**
 
 ## Why declarative?
 
@@ -130,14 +131,8 @@ struct PersonViewModel: ComponentConvertible {
             )
             .child(
                 Component<UILabel>()
-                .view(
-                    .backgroundColor(.yellow),
-                    .alpha(0.8)
-                )
-                .label(
-                    .text(birthday),
-                    .font(.systemFont(ofSize: 10))
-                ),
+                .view(.backgroundColor(.yellow), .alpha(0.8))
+                .label(.font(.systemFont(ofSize: 10)), .text(birthday)),
                 access: { $0.birthdateLabel }
             )
     }
