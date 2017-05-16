@@ -122,7 +122,7 @@ struct PersonViewModel: ComponentConvertible {
             .child(
                 Component<UILabel>()
                 .label(
-                    .text(self.name),
+                    .text(name),
                     .font(.boldSystemFont(ofSize: 12)),
                     .textColor(.red)
                 ),
@@ -135,7 +135,7 @@ struct PersonViewModel: ComponentConvertible {
                     .alpha(0.8)
                 )
                 .label(
-                    .text(self.birthday),
+                    .text(birthday),
                     .font(.systemFont(ofSize: 10))
                 ),
                 access: { $0.birthdateLabel }
