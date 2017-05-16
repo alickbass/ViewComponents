@@ -13,7 +13,7 @@ protocol ComponentType {
     var children: [ChildComponent] { get }
     var isEmpty: Bool { get }
     
-    func configure(view: UIView)
+    func configure(view: Any)
     func isEqual(to other: ComponentType) -> Bool
     func diffChanges(from other: ComponentType) -> ComponentType
 }
@@ -37,13 +37,13 @@ extension ConcreteComponentType {
 
 struct ChildComponent: ConcreteComponentType {
     let component: ComponentType
-    let access: (UIView) -> UIView
+    let access: (Any) -> Any
     
-    init<V: UIView, T: UIView>(component: Component<V>, _ access: @escaping (T) -> V) {
+    init<V, T>(component: Component<V>, _ access: @escaping (T) -> V) {
         self.init(component, { view in access(view as! T) })
     }
     
-    init(_ component: ComponentType, _ access: @escaping (UIView) -> UIView) {
+    init(_ component: ComponentType, _ access: @escaping (Any) -> Any) {
         self.component = component
         self.access = access
     }
@@ -56,7 +56,7 @@ struct ChildComponent: ConcreteComponentType {
         return component.children
     }
     
-    func configure(view: UIView) {
+    func configure(view: Any) {
         component.configure(view: access(view))
     }
     

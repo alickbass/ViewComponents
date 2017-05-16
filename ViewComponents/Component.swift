@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol ComponentConvertible {
-    associatedtype ViewType: UIView
+    associatedtype ViewType
     
     var toComponent: Component<ViewType> { get }
     func configure(view: ViewType)
@@ -21,7 +21,7 @@ public extension ComponentConvertible {
     }
 }
 
-public struct Component<T: UIView>: ConcreteComponentType {
+public struct Component<T>: ConcreteComponentType {
     public let styles: Set<AnyStyle>
     let children: [ChildComponent]
     
@@ -34,7 +34,7 @@ public struct Component<T: UIView>: ConcreteComponentType {
         self.children = children
     }
     
-    func configure(view: UIView) {
+    func configure(view: Any) {
         configure(view: view as! T)
     }
     
@@ -47,7 +47,7 @@ public struct Component<T: UIView>: ConcreteComponentType {
         children.forEach({ $0.configure(view: view) })
     }
     
-    public func child<V: UIView>(_ component: Component<V>, access: @escaping (T) -> V) -> Component<T> {
+    public func child<V>(_ component: Component<V>, access: @escaping (T) -> V) -> Component<T> {
         return Component<T>(styles: styles, children: children + [ChildComponent(component: component, access)])
     }
 }
