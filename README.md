@@ -11,8 +11,8 @@ ViewComponents is a library that helps you to create View Models that are:
 
 * [**Declarative**](#why-declarative)
 * [**Composable**](#why-composable)
+* [**Efficient**](#why-efficient)
 * [**Perfect fit to MVVM architecture**](#how-to-use-with-mvvm)
-* **Efficient**
 * [**Easy to test**](#why-easy-to-test)
 
 ## Why declarative?
@@ -76,6 +76,40 @@ and then when we need to apply our style we do the following:
 ```swift
 viewComponent.configure(view: myCustomeView)
 ```
+
+## Why Efficient?
+
+The library provides diffing mechanism. Consider following 2 components
+
+```swift
+let button1 = Component<UIButton>().button(
+    .title("Test", for: .normal),
+    .titleColor(.red, for: .normal)
+)
+
+let button2 = Component<UIButton>().button(
+    .title("Test", for: .normal),
+    .titleColor(.blue, for: .normal),
+    .adjustsImageWhenHighlighted(true)
+)
+```
+
+We can apply only the difference to the view:
+
+```swift
+let changes = button1.diffChanges(from: button2)
+```
+
+Which in this case will be the following component:
+
+```swift
+let realChanges = Component<UIButton>().button(
+    .titleColor(.blue, for: .normal),
+    .adjustsImageWhenHighlighted(true)
+)
+```
+
+The diffing will take the diffs for the all the subcomponents as well
 
 ## How to use with MVVM
 
@@ -179,7 +213,7 @@ let target = Component<PersonView>()
                 .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
             ),
         access: { $0.birthdateLabel }
-)
+    )
 
 XCTAssertEqual(PersonViewModel(person: person).toComponent, target)
 ```
