@@ -117,22 +117,29 @@ struct PersonViewModel: ComponentConvertible {
     }
     
     var toComponent: Component<PersonView> {
-        let name = Component<UILabel>().label(
-            .text(self.name),
-            .font(.boldSystemFont(ofSize: 12)),
-            .textColor(.red)
-        )
-    
-        let birthday = Component<UILabel>().label(
-            .text(self.birthday),
-            .font(.boldSystemFont(ofSize: 12)),
-            .textColor(.red)
-        )
-        
         return Component()
             .border(.color(.red), .width(12))
-            .child(name, { $0.nameLabel })
-            .child(birthday, { $0.birthdateLabel })
+            .child(
+                Component<UILabel>()
+                .label(
+                    .text(name),
+                    .font(.boldSystemFont(ofSize: 12)),
+                    .textColor(.red)
+                ),
+                access: { $0.nameLabel }
+            )
+            .child(
+                Component<UILabel>()
+                .view(
+                    .backgroundColor(.yellow),
+                    .alpha(0.8)
+                )
+                .label(
+                    .text(birthday),
+                    .font(.systemFont(ofSize: 10))
+                ),
+                access: { $0.birthdateLabel }
+            )
     }
 }
 ```

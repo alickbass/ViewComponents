@@ -19,8 +19,8 @@ class TestComponent: XCTestCase {
         XCTAssertEqual(comp, comp)
         XCTAssertEqual(comp.view(.alpha(0.2), .backgroundColor(.red)), comp)
         XCTAssertEqual(Component<UIView>().view(.backgroundColor(.red), .alpha(0.2)), comp)
-        XCTAssertEqual(comp.child(comp, viewAccess), comp.child(comp, viewAccess))
-        XCTAssertNotEqual(comp.child(comp, { $0 }), comp.child(Component<UILabel>(), labelAcess))
+        XCTAssertEqual(comp.child(comp, access: viewAccess), comp.child(comp, access: viewAccess))
+        XCTAssertNotEqual(comp.child(comp, access: { $0 }), comp.child(Component<UILabel>(), access: labelAcess))
     }
     
     func testComponentSideEffect() {
@@ -28,7 +28,7 @@ class TestComponent: XCTestCase {
         let label = UILabel()
         let labelComp = Component<UILabel>().label(.isEnabled(false))
 
-        comp.child(labelComp, { _ in label }).configure(view: view)
+        comp.child(labelComp, access: { _ in label }).configure(view: view)
         
         XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
@@ -65,46 +65,50 @@ class TestComponent: XCTestCase {
             .child(
                 Component<UIView>()
                     .border(.color(.red), .width(12))
-                    .view(.isHidden(true)), viewAccess
+                    .view(.isHidden(true)),
+                access: viewAccess
             )
             .child(
                 Component<UIButton>()
                     .button(.title("test", for: .normal))
-                    .view(.isHidden(true)), buttonAccess
+                    .view(.isHidden(true)),
+                access: buttonAccess
             )
-            .child(Component<UILabel>().label(.isEnabled(true)), labelAcess)
+            .child(Component<UILabel>().label(.isEnabled(true)), access: labelAcess)
         
         let secondComponent = Component<UIView>()
             .view(.backgroundColor(.red), .contentMode(.bottom))
             .child(
                 Component<UIView>()
                     .border(.color(.green), .width(12))
-                    .view(.isHidden(true)), viewAccess
+                    .view(.isHidden(true)), access: viewAccess
             )
             .child(
                 Component<UIButton>()
                     .button(.title("test", for: .normal), .titleColor(.red, for: .normal))
-                    .view(.isHidden(true), .isMultipleTouchEnabled(true)), buttonAccess
+                    .view(.isHidden(true), .isMultipleTouchEnabled(true)),
+                access: buttonAccess
             )
-            .child(Component<UILabel>().label(.isEnabled(true)), labelAcess)
-            .child(Component<UIView>().view(.clearsContextBeforeDrawing(true)), viewAccess)
+            .child(Component<UILabel>().label(.isEnabled(true)), access: labelAcess)
+            .child(Component<UIView>().view(.clearsContextBeforeDrawing(true)), access: viewAccess)
         
         let diff = Component<UIView>()
             .view(.contentMode(.bottom))
             .child(
                 Component<UIView>()
                     .border(.color(.green))
-                    .view(), viewAccess
+                    .view(), access: viewAccess
             )
             .child(
                 Component<UIButton>()
                     .button(.titleColor(.red, for: .normal))
-                    .view(.isMultipleTouchEnabled(true)), buttonAccess
+                    .view(.isMultipleTouchEnabled(true)),
+                access: buttonAccess
             )
-            .child(Component<UIView>().view(.clearsContextBeforeDrawing(true)), viewAccess)
+            .child(Component<UIView>().view(.clearsContextBeforeDrawing(true)), access: viewAccess)
         
         XCTAssertEqual(firstComponent.diffChanges(from: secondComponent), diff)
-        XCTAssertEqual(Component<UIView>().child(Component<UIView>(), viewAccess).children.first?.isEmpty, true)
+        XCTAssertEqual(Component<UIView>().child(Component<UIView>(), access: viewAccess).children.first?.isEmpty, true)
         XCTAssertTrue(comp.diffChanges(from: Component<UIButton>()).isEqual(to: Component<UIButton>()))
     }
     
