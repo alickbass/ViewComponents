@@ -75,7 +75,7 @@ public extension CALayer {
 }
 
 public extension Component {
-    public func layerShadowStyles(_ styles: CALayer.ShadowStyle...) -> Component<T> {
+    public func layerShadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

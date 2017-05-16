@@ -61,7 +61,7 @@ class TestProgressViewStyle: XCTestCase {
         XCTAssertEqual(view.trackImage, image)
         
         view.trackImage = nil
-        Component<UIProgressView>().progressViewStyles(.trackImage(image)).configure(view: view)
+        Component<UIProgressView>().progressView(.trackImage(image)).configure(view: view)
         XCTAssertEqual(view.trackImage, image)
     }
     

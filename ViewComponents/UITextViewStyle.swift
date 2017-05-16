@@ -118,7 +118,7 @@ public enum UITextViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITextView {
-    public func textViewStyles(_ styles: UITextViewStyle...) -> Component<T> {
+    public func textView(_ styles: UITextViewStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

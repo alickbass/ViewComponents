@@ -56,7 +56,7 @@ class TestUISwitchStyle: XCTestCase {
         XCTAssertEqual(view.offImage, image)
         
         view.offImage = nil
-        Component<UISwitch>().switchStyles(.offImage(image)).configure(view: view)
+        Component<UISwitch>().switch(.offImage(image)).configure(view: view)
         XCTAssertEqual(view.offImage, image)
     }
     

@@ -80,7 +80,7 @@ public enum ProgressViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIProgressView {
-    public func progressViewStyles(_ styles: ProgressViewStyle...) -> Component<T> {
+    public func progressView(_ styles: ProgressViewStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

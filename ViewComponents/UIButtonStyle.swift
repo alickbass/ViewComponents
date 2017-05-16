@@ -139,7 +139,7 @@ public enum UIButtonStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIButton {
-    public func buttonStyles(_ styles: UIButtonStyle...) -> Component<T> {
+    public func button(_ styles: UIButtonStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

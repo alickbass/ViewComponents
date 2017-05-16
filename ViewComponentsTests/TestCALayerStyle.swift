@@ -195,7 +195,7 @@ class TestCALayerStyle: XCTestCase {
         XCTAssertEqual(view.layer.name, "test")
         
         view.layer.name = nil
-        Component<UIView>().layerStyles(.name("test")).configure(view: view)
+        Component<UIView>().layer(.name("test")).configure(view: view)
         XCTAssertEqual(view.layer.name, "test")
     }
     

@@ -119,7 +119,7 @@ extension UIViewStyle: HashableConcreteStyle {
 }
 
 public extension Component {
-    public func viewStyles(_ styles: UIViewStyle...) -> Component<T> {
+    public func view(_ styles: UIViewStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

@@ -70,7 +70,7 @@ public enum UIControlStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIControl {
-    public func controlStyles(_ styles: UIControlStyle...) -> Component<T> {
+    public func control(_ styles: UIControlStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

@@ -163,7 +163,7 @@ public enum TableViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITableView {
-    public func tableViewStyles(_ styles: TableViewStyle...) -> Component<T> {
+    public func tableView(_ styles: TableViewStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }
