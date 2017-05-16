@@ -12,8 +12,8 @@ ViewComponents is a library that helps you to create View Models that are:
 * [**Declarative**](#why-declarative)
 * [**Composable**](#why-composable)
 * [**Perfect fit to MVVM architecture**](#how-to-use-with-mvvm)
-* **Easy to test**
 * **Efficient**
+* [**Easy to test**](#why-easy-to-test)
 
 ## Why declarative?
 
@@ -152,3 +152,35 @@ PersonViewModel(person: person).configure(view: view)
 ```
 
 That's it!)
+
+## Why easy to test?
+
+In you unit tests, you just need to check for the equality the `ViewModels` `toComponent` value and your desired `Component`. And that's it. Something like the following:
+
+```swift
+let person = Person(salutation: "Hallo", firstName: "John", lastName: "Doe", birthday: Date())
+let target = Component<PersonView>()
+    .border(.color(.red), .width(12))
+    .child(
+        Component<UILabel>()
+            .label(
+                .text("Hallo John Doe"),
+                .font(.boldSystemFont(ofSize: 12)),
+                .textColor(.red)
+            ),
+        access: { $0.nameLabel }
+    )
+    .child(
+        Component<UILabel>()
+            .view(
+                .backgroundColor(.yellow), .alpha(0.8)
+            )
+            .label(
+                .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
+            ),
+        access: { $0.birthdateLabel }
+)
+
+XCTAssertEqual(PersonViewModel(person: person).toComponent, target)
+```
+
