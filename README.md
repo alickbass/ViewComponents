@@ -66,9 +66,9 @@ let viewComponent = Component<MyCustomView>()
     .border(
         .color(.red), .width(3), .cornerRadius(12)
     )
-    .child(buttonComponent, { $0.myButton })
-    .child(labelComponent, { $0.myLabel })
-    .child(iconComponent, { $0.myIcon })
+    .child(buttonComponent, access: { $0.myButton })
+    .child(labelComponent, access: { $0.myLabel })
+    .child(iconComponent, access: { $0.myIcon })
 ```
 
 and then when we need to apply our style we do the following:
@@ -131,8 +131,12 @@ struct PersonViewModel: ComponentConvertible {
             )
             .child(
                 Component<UILabel>()
-                .view(.backgroundColor(.yellow), .alpha(0.8))
-                .label(.font(.systemFont(ofSize: 10)), .text(birthday)),
+                .view(
+                    .backgroundColor(.yellow), .alpha(0.8)
+                )
+                .label(
+                    .font(.systemFont(ofSize: 10)), .text(birthday)
+                ),
                 access: { $0.birthdateLabel }
             )
     }
