@@ -99,8 +99,7 @@ public enum CALayerStyle: HashableConcreteStyle {
     case contentsScale(CGFloat)
     case name(String?)
     
-    public func sideEffect(on view: UIView) {
-        let layer = view.layer
+    public func sideEffect(on layer: CALayer) {
         switch self {
         case let .contentsGravity(gravity):
             layer.contentsGravity = gravity.rawValue
@@ -260,6 +259,12 @@ public enum CALayerStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIView {
+    public func layer(_ styles: CALayerStyle...) -> Component<T> {
+        return child(Component<CALayer>().add(styles: styles), access: { $0.layer })
+    }
+}
+
+public extension Component where T: CALayer {
     public func layer(_ styles: CALayerStyle...) -> Component<T> {
         return add(styles: styles)
     }
