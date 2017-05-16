@@ -90,7 +90,7 @@ class TestUITextViewStyle: XCTestCase {
         XCTAssertEqual(view.isSelectable, true)
         
         view.isSelectable = false
-        Component<UITextView>().textViewStyles(.isSelectable(true)).configure(view: view)
+        Component<UITextView>().textView(.isSelectable(true)).configure(view: view)
         XCTAssertEqual(view.isSelectable, true)
     }
     

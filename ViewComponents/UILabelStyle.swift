@@ -145,7 +145,7 @@ public enum UILabelStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UILabel {
-    public func labelStyles(_ styles: UILabelStyle...) -> Component<T> {
+    public func label(_ styles: UILabelStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

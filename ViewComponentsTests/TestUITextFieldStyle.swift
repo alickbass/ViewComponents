@@ -124,7 +124,7 @@ class TestUITextFieldStyle: XCTestCase {
         XCTAssertEqual(view.rightViewMode, .always)
         
         view.rightViewMode = .never
-        Component<UITextField>().textFieldStyles(.rightViewMode(.always)).configure(view: view)
+        Component<UITextField>().textField(.rightViewMode(.always)).configure(view: view)
         XCTAssertEqual(view.rightViewMode, .always)
     }
     

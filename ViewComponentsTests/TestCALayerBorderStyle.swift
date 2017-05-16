@@ -42,7 +42,7 @@ class TestCALayerBorderStyle: XCTestCase {
         XCTAssertEqual(view.layer.borderColor, UIColor.red.cgColor)
         
         view.layer.borderColor = UIColor.green.cgColor
-        Component<UIView>().borderStyles(.color(.red)).configure(view: view)
+        Component<UIView>().border(.color(.red)).configure(view: view)
         XCTAssertEqual(view.layer.borderColor, UIColor.red.cgColor)
     }
     

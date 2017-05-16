@@ -50,7 +50,7 @@ class TestActivityIndicatorViewStyle: XCTestCase {
         XCTAssertEqual(view.color, .gray)
         
         view.color = nil
-        Component<UIActivityIndicatorView>().activityIndicatorStyles(.color(.gray)).configure(view: view)
+        Component<UIActivityIndicatorView>().activityIndicator(.color(.gray)).configure(view: view)
         XCTAssertEqual(view.color, .gray)
     }
     

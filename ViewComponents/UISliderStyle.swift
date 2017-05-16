@@ -127,7 +127,7 @@ public enum UISliderStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UISlider {
-    public func sliderStyles(_ styles: UISliderStyle...) -> Component<T> {
+    public func slider(_ styles: UISliderStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

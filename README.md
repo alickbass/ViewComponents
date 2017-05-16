@@ -19,7 +19,7 @@ ViewComponents is a library that helps you to create View Models that are:
 You describe how the view should look like and the library will take care to applying the styling. Here's an example:
 
 ```swift
-let buttonComponent = Component<UIButton>().buttonStyles(
+let buttonComponent = Component<UIButton>().button(
     .title("Test", for: .normal),
     .titleColor(.red, for: .normal)
 )
@@ -43,26 +43,26 @@ class MyCustomView: UIView {
 With **ViewComponents** you can easily create immutable values that represent the styling of the **whole view hierarchy** like this:
 
 ```swift
-let buttonComponent = Component<UIButton>().buttonStyles(
+let buttonComponent = Component<UIButton>().button(
     .title("Test", for: .normal),
     .titleColor(.red, for: .normal)
 )
 
 let labelComponent = Component<UILabel>()
-    .labelStyles(
+    .label(
         .text("MyLabel"),
         .font(.boldSystemFont(ofSize: 12))
     )
-    .viewStyles(
+    .view(
         .backgroundColor(.blue)
     )
 
-let iconComponent = Component<UIImageView>().imageViewStyles(
+let iconComponent = Component<UIImageView>().imageView(
     .image(myImage)
 )
 
 let viewComponent = Component<MyCustomView>()
-    .borderStyles(
+    .border(
         .color(.red), .width(3), .cornerRadius(12)
     )
     .child(buttonComponent, { $0.myButton })
@@ -117,20 +117,20 @@ struct PersonViewModel: ComponentConvertible {
     }
     
     var toComponent: Component<PersonView> {
-        let name = Component<UILabel>().labelStyles(
+        let name = Component<UILabel>().label(
             .text(self.name),
             .font(.boldSystemFont(ofSize: 12)),
             .textColor(.red)
         )
     
-        let birthday = Component<UILabel>().labelStyles(
+        let birthday = Component<UILabel>().label(
             .text(self.birthday),
             .font(.boldSystemFont(ofSize: 12)),
             .textColor(.red)
         )
         
         return Component()
-            .borderStyles(.color(.red), .width(12))
+            .border(.color(.red), .width(12))
             .child(name, { $0.nameLabel })
             .child(birthday, { $0.birthdateLabel })
     }

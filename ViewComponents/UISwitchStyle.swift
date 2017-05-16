@@ -73,7 +73,7 @@ public enum UISwitchStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UISwitch {
-    public func switchStyles(_ styles: UISwitchStyle...) -> Component<T> {
+    public func `switch`(_ styles: UISwitchStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }

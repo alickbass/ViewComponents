@@ -54,7 +54,7 @@ class TestUICollectionViewStyle: XCTestCase {
         XCTAssertEqual(view.collectionViewLayout, layout)
         
         view.remembersLastFocusedIndexPath = false
-        Component<UICollectionView>().collectionViewStyles(.remembersLastFocusedIndexPath(true)).configure(view: view)
+        Component<UICollectionView>().collectionView(.remembersLastFocusedIndexPath(true)).configure(view: view)
         XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
     }
     
