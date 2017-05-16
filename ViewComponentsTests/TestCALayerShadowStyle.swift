@@ -29,31 +29,31 @@ class TestCALayerShadowStyle: XCTestCase {
     }
     
     func testStyleSideEffects() {
-        let view = UIView()
+        let view = CALayer()
         
-        view.layer.shadowOpacity = 1
+        view.shadowOpacity = 1
         CALayer.ShadowStyle.opacity(0.2).sideEffect(on: view)
-        XCTAssertEqual(view.layer.shadowOpacity, 0.2)
+        XCTAssertEqual(view.shadowOpacity, 0.2)
         
-        view.layer.shadowRadius = 1
+        view.shadowRadius = 1
         CALayer.ShadowStyle.radius(2).sideEffect(on: view)
-        XCTAssertEqual(view.layer.shadowRadius, 2)
+        XCTAssertEqual(view.shadowRadius, 2)
         
-        view.layer.shadowOffset = .init(width: 20, height: 20)
+        view.shadowOffset = .init(width: 20, height: 20)
         CALayer.ShadowStyle.offset(.zero).sideEffect(on: view)
-        XCTAssertEqual(view.layer.shadowOffset, .zero)
+        XCTAssertEqual(view.shadowOffset, .zero)
         
-        view.layer.shadowColor = UIColor.green.cgColor
+        view.shadowColor = UIColor.green.cgColor
         CALayer.ShadowStyle.color(.red).sideEffect(on: view)
-        XCTAssertEqual(view.layer.shadowColor, UIColor.red.cgColor)
+        XCTAssertEqual(view.shadowColor, UIColor.red.cgColor)
         
-        view.layer.shadowPath = CGPath(rect: CGRect(x: 0, y: 0, width: 15, height: 15), transform: nil)
+        view.shadowPath = CGPath(rect: CGRect(x: 0, y: 0, width: 15, height: 15), transform: nil)
         CALayer.ShadowStyle.path(nil).sideEffect(on: view)
-        XCTAssertNil(view.layer.shadowPath)
+        XCTAssertNil(view.shadowPath)
         
-        view.layer.shadowColor = UIColor.green.cgColor
-        Component<UIView>().layerShadow(.color(.red)).configure(item: view)
-        XCTAssertEqual(view.layer.shadowColor, UIColor.red.cgColor)
+        view.shadowColor = UIColor.green.cgColor
+        Component<CALayer>().shadow(.color(.red)).configure(item: view)
+        XCTAssertEqual(view.shadowColor, UIColor.red.cgColor)
     }
     
     func testHashValue() {

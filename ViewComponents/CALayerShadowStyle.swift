@@ -16,8 +16,7 @@ public extension CALayer {
         case color(UIColor?)
         case path(CGPath?)
         
-        public func sideEffect(on view: UIView) {
-            let layer = view.layer
+        public func sideEffect(on layer: CALayer) {
             switch self {
             case let .opacity(shadowOpacity):
                 layer.shadowOpacity = shadowOpacity
@@ -74,8 +73,8 @@ public extension CALayer {
     }
 }
 
-public extension Component where T: UIView {
-    public func layerShadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
+public extension Component where T: CALayer {
+    public func shadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
         return add(styles: styles)
     }
 }
