@@ -52,7 +52,7 @@ class TestCALayerShadowStyle: XCTestCase {
         XCTAssertNil(view.layer.shadowPath)
         
         view.layer.shadowColor = UIColor.green.cgColor
-        Component<UIView>().layerShadow(.color(.red)).configure(view: view)
+        Component<UIView>().layerShadow(.color(.red)).configure(item: view)
         XCTAssertEqual(view.layer.shadowColor, UIColor.red.cgColor)
     }
     

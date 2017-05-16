@@ -28,7 +28,7 @@ class TestComponent: XCTestCase {
         let label = UILabel()
         let labelComp = Component<UILabel>().label(.isEnabled(false))
 
-        comp.child(labelComp, access: { _ in label }).configure(view: view)
+        comp.child(labelComp, access: { _ in label }).configure(item: view)
         
         XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
@@ -45,7 +45,7 @@ class TestComponent: XCTestCase {
         XCTAssertEqual(comp.toComponent, comp)
         
         let view = UIView()
-        MyViewModel().configure(view: view)
+        MyViewModel().configure(item: view)
         XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
     }

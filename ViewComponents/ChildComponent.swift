@@ -13,7 +13,7 @@ protocol ComponentType {
     var children: [ChildComponent] { get }
     var isEmpty: Bool { get }
     
-    func configure(view: Any)
+    func configure(item: Any)
     func isEqual(to other: ComponentType) -> Bool
     func diffChanges(from other: ComponentType) -> ComponentType
 }
@@ -56,8 +56,8 @@ struct ChildComponent: ConcreteComponentType {
         return component.children
     }
     
-    func configure(view: Any) {
-        component.configure(view: access(view))
+    func configure(item: Any) {
+        component.configure(item: access(item))
     }
     
     func isEqual(to other: ComponentType) -> Bool {

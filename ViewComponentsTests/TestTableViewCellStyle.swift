@@ -91,7 +91,7 @@ class TestTableViewCellStyle: XCTestCase {
         XCTAssertEqual(view.focusStyle, .default)
         
         view.showsReorderControl = false
-        Component<UITableViewCell>().tableViewCell(.showsReorderControl(true)).configure(view: view)
+        Component<UITableViewCell>().tableViewCell(.showsReorderControl(true)).configure(item: view)
         XCTAssertEqual(view.showsReorderControl, true)
     }
     

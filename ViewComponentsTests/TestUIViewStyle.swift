@@ -102,7 +102,7 @@ class TestUIViewStyle: XCTestCase {
         XCTAssertEqual(view.contentMode, .center)
         
         view.isExclusiveTouch = false
-        Component<UIView>().view(.isExclusiveTouch(true)).configure(view: view)
+        Component<UIView>().view(.isExclusiveTouch(true)).configure(item: view)
         XCTAssertEqual(view.isExclusiveTouch, true)
     }
     

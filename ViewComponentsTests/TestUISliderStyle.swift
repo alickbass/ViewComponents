@@ -94,7 +94,7 @@ class TestUISliderStyle: XCTestCase {
         XCTAssertEqual(view.thumbImage(for: .normal), image)
         
         view.minimumValue = 0.0
-        Component<UISlider>().slider(.minimumValue(0.2)).configure(view: view)
+        Component<UISlider>().slider(.minimumValue(0.2)).configure(item: view)
         XCTAssertEqual(view.minimumValue, 0.2)
     }
     

@@ -129,7 +129,7 @@ class TestUILabelStyle: XCTestCase {
         XCTAssertEqual(view.shadowOffset, .zero)
         
         view.isHighlighted = false
-        Component<UILabel>().label(.isHighlighted(true)).configure(view: view)
+        Component<UILabel>().label(.isHighlighted(true)).configure(item: view)
         XCTAssertEqual(view.isHighlighted, true)
     }
     
