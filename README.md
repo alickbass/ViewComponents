@@ -13,7 +13,7 @@ ViewComponents is a library that helps you to create View Models that are:
 * [**Composable**](#why-composable)
 * [**Perfect fit to MVVM architecture**](#how-to-use-with-mvvm)
 * **Easy to test**
-* **Can applying only diffs between components**
+* **Efficient**
 
 ## Why declarative?
 
