@@ -40,7 +40,7 @@ public protocol StyleType {
 }
 
 public protocol ConcreteStyleType: StyleType, Hashable {
-    associatedtype View: UIView
+    associatedtype View
     func sideEffect(on view: View)
 }
 
