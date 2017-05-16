@@ -259,7 +259,7 @@ public enum CALayerStyle: HashableConcreteStyle {
     }
 }
 
-public extension Component {
+public extension Component where T: UIView {
     public func layer(_ styles: CALayerStyle...) -> Component<T> {
         return add(styles: styles)
     }

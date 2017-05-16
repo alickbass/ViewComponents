@@ -74,7 +74,7 @@ public extension CALayer {
     }
 }
 
-public extension Component {
+public extension Component where T: UIView {
     public func layerShadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
         return add(styles: styles)
     }
