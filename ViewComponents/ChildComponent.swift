@@ -8,36 +8,9 @@
 
 import UIKit
 
-protocol ComponentType {
-    var styles: Set<AnyStyle> { get }
-    var children: [ChildComponent] { get }
-    var isEmpty: Bool { get }
-    
-    func configure(item: Any)
-    func isEqual(to other: ComponentType) -> Bool
-    func diffChanges(from other: ComponentType) -> ComponentType
-}
-
-protocol ConcreteComponentType: ComponentType, Equatable {
-    func diffChanges(from other: Self) -> Self
-}
-
-extension ComponentType {
-    var isEmpty: Bool {
-        return styles.isEmpty && children.isEmpty
-    }
-}
-
-extension ConcreteComponentType {
-    func diffChanges(from other: ComponentType) -> ComponentType {
-        guard let otherComp = other as? Self else { return other }
-        return diffChanges(from: otherComp)
-    }
-}
-
-struct ChildComponent: ConcreteComponentType {
+public struct ChildComponent: ConcreteComponentType {
     let component: ComponentType
-    let access: (Any) -> Any
+    public let access: (Any) -> Any
     
     init<V, T>(component: Component<V>, _ access: @escaping (T) -> V) {
         self.init(component, { view in access(view as! T) })
@@ -48,11 +21,11 @@ struct ChildComponent: ConcreteComponentType {
         self.access = access
     }
     
-    var styles: Set<AnyStyle> {
+    public var styles: Set<AnyStyle> {
         return component.styles
     }
     
-    var children: [ChildComponent] {
+    public var children: [ChildComponent] {
         return component.children
     }
     
@@ -65,11 +38,11 @@ struct ChildComponent: ConcreteComponentType {
         return component.isEqual(to: other.component)
     }
     
-    static func == (lhs: ChildComponent, rhs: ChildComponent) -> Bool {
+    public static func == (lhs: ChildComponent, rhs: ChildComponent) -> Bool {
         return lhs.component.isEqual(to: rhs.component)
     }
     
-    func diffChanges(from other: ChildComponent) -> ChildComponent {
+    public func diffChanges(from other: ChildComponent) -> ChildComponent {
         return ChildComponent(component.diffChanges(from: other.component), other.access)
     }
 }

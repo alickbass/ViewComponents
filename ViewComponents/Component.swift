@@ -8,22 +8,9 @@
 
 import UIKit
 
-public protocol ComponentConvertible {
-    associatedtype ViewType
-    
-    var toComponent: Component<ViewType> { get }
-    func configure(item: ViewType)
-}
-
-public extension ComponentConvertible {
-    public func configure(item: ViewType) {
-        toComponent.configure(item: item)
-    }
-}
-
 public struct Component<T>: ConcreteComponentType {
     public let styles: Set<AnyStyle>
-    let children: [ChildComponent]
+    public let children: [ChildComponent]
     
     public init() {
         self.init(styles: [], children: [])

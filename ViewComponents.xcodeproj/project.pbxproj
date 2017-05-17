@@ -11,6 +11,7 @@
 		CE0CF5531EB7758400B6BC36 /* TestComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5521EB7758400B6BC36 /* TestComponent.swift */; };
 		CE0CF5551EB786C600B6BC36 /* UIControlStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5541EB786C600B6BC36 /* UIControlStyle.swift */; };
 		CE0CF5571EB78A8900B6BC36 /* TestUIControlStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */; };
+		CE2B0CC51ECC73CC0003647D /* ComponentProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2B0CC41ECC73CC0003647D /* ComponentProtocols.swift */; };
 		CE2D6A001EC33EE300CA62D0 /* TestCALayerBorderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */; };
 		CE37165E1EBA235600590480 /* UIImageViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37165D1EBA235600590480 /* UIImageViewStyle.swift */; };
 		CE469E311EC8B620009C256F /* UISliderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE469E301EC8B620009C256F /* UISliderStyle.swift */; };
@@ -69,6 +70,7 @@
 		CE0CF5521EB7758400B6BC36 /* TestComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComponent.swift; sourceTree = "<group>"; };
 		CE0CF5541EB786C600B6BC36 /* UIControlStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIControlStyle.swift; sourceTree = "<group>"; };
 		CE0CF5561EB78A8900B6BC36 /* TestUIControlStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIControlStyle.swift; sourceTree = "<group>"; };
+		CE2B0CC41ECC73CC0003647D /* ComponentProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComponentProtocols.swift; sourceTree = "<group>"; };
 		CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCALayerBorderStyle.swift; sourceTree = "<group>"; };
 		CE37165D1EBA235600590480 /* UIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewStyle.swift; sourceTree = "<group>"; };
 		CE469E301EC8B620009C256F /* UISliderStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISliderStyle.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				CEF534D01EB0C182001E3CA8 /* ViewComponents.h */,
+				CE2B0CC41ECC73CC0003647D /* ComponentProtocols.swift */,
 				CEF534E71EB0C18B001E3CA8 /* Component.swift */,
 				CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */,
 				CEF534E91EB0C1AD001E3CA8 /* Style.swift */,
@@ -344,6 +347,7 @@
 				CE5779281EC5F05D00BE5F52 /* UICollectionViewStyle.swift in Sources */,
 				CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */,
 				CE5329B21EC5AE320000E9AB /* UIIScrollViewStyle.swift in Sources */,
+				CE2B0CC51ECC73CC0003647D /* ComponentProtocols.swift in Sources */,
 				CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */,
 				CEFE1A2F1EC8A2C900E077E0 /* ProgressViewStyle.swift in Sources */,
 				CEFE1A271EC7998A00E077E0 /* UITextFieldStyle.swift in Sources */,
