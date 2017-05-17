@@ -8,33 +8,6 @@
 
 import UIKit
 
-protocol ComponentType {
-    var styles: Set<AnyStyle> { get }
-    var children: [ChildComponent] { get }
-    var isEmpty: Bool { get }
-    
-    func configure(item: Any)
-    func isEqual(to other: ComponentType) -> Bool
-    func diffChanges(from other: ComponentType) -> ComponentType
-}
-
-protocol ConcreteComponentType: ComponentType, Equatable {
-    func diffChanges(from other: Self) -> Self
-}
-
-extension ComponentType {
-    var isEmpty: Bool {
-        return styles.isEmpty && children.isEmpty
-    }
-}
-
-extension ConcreteComponentType {
-    func diffChanges(from other: ComponentType) -> ComponentType {
-        guard let otherComp = other as? Self else { return other }
-        return diffChanges(from: otherComp)
-    }
-}
-
 public struct ChildComponent: ConcreteComponentType {
     let component: ComponentType
     public let access: (Any) -> Any
