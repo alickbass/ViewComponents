@@ -23,7 +23,7 @@ public extension ComponentConvertible {
 
 public struct Component<T>: ConcreteComponentType {
     public let styles: Set<AnyStyle>
-    let children: [ChildComponent]
+    public let children: [ChildComponent]
     
     public init() {
         self.init(styles: [], children: [])
