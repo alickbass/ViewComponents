@@ -152,6 +152,6 @@ public enum UIScrollViewStyle: HashableConcreteStyle {
 
 public extension Component where T: UIScrollView {
     public func scrollView(_ styles: UIScrollViewStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }

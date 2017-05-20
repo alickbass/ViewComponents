@@ -94,6 +94,6 @@ public enum UIImageViewStyle: HashableConcreteStyle {
 
 public extension Component where T: UIImageView {
     public func imageView(_ styles: UIImageViewStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }

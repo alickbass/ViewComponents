@@ -70,6 +70,6 @@ public enum ActivityIndicatorViewStyle: HashableConcreteStyle {
 
 public extension Component where T: UIActivityIndicatorView {
     public func activityIndicator(_ styles: ActivityIndicatorViewStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }

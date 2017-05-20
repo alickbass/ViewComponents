@@ -75,6 +75,6 @@ public extension CALayer {
 
 public extension Component where T: CALayer {
     public func shadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }

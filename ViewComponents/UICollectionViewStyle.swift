@@ -73,6 +73,6 @@ public enum UICollectionViewStyle: HashableConcreteStyle {
 
 public extension Component where T: UICollectionView {
     public func collectionView(_ styles: UICollectionViewStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }
