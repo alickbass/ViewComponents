@@ -71,6 +71,6 @@ public enum UIControlStyle: HashableConcreteStyle {
 
 public extension Component where T: UIControl {
     public func control(_ styles: UIControlStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }

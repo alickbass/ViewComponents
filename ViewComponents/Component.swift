@@ -25,7 +25,7 @@ public struct Component<T>: ConcreteComponentType {
         configure(item: item as! T)
     }
     
-    public func add<S: StyleType>(styles: [S]) -> Component<T> {
+    public func adding<S: StyleType>(styles: [S]) -> Component<T> {
         return Component<T>(styles: self.styles.union(styles.lazy.map(AnyStyle.init)), children: children)
     }
     

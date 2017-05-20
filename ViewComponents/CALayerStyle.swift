@@ -260,12 +260,12 @@ public enum CALayerStyle: HashableConcreteStyle {
 
 public extension Component where T: UIView {
     public func layer(_ styles: CALayerStyle...) -> Component<T> {
-        return child(Component<CALayer>().add(styles: styles), access: { $0.layer })
+        return child(Component<CALayer>().adding(styles: styles), access: { $0.layer })
     }
 }
 
 public extension Component where T: CALayer {
     public func layer(_ styles: CALayerStyle...) -> Component<T> {
-        return add(styles: styles)
+        return adding(styles: styles)
     }
 }
