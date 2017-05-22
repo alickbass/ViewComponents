@@ -29,6 +29,8 @@ public enum TableViewStyle: HashableConcreteStyle {
     case sectionIndexBackgroundColor(UIColor?)
     case sectionIndexTrackingBackgroundColor(UIColor?)
     case remembersLastFocusedIndexPath(Bool)
+    case dataSource(UITableViewDataSource?)
+    case delegate(UITableViewDelegate?)
     
     public func sideEffect(on view: UITableView) {
         switch self {
@@ -72,6 +74,10 @@ public enum TableViewStyle: HashableConcreteStyle {
             view.sectionIndexTrackingBackgroundColor = value
         case let .remembersLastFocusedIndexPath(value):
             view.remembersLastFocusedIndexPath = value
+        case let .dataSource(dataSource):
+            view.dataSource = dataSource
+        case let .delegate(delegate):
+            view.delegate = delegate
         }
     }
     
@@ -103,6 +109,10 @@ public enum TableViewStyle: HashableConcreteStyle {
              let (.isEditing(left), .isEditing(right)),
              let (.remembersLastFocusedIndexPath(left), .remembersLastFocusedIndexPath(right)):
             return left == right
+        case let (.dataSource(left), .dataSource(right)):
+            return left === right
+        case let (.delegate(left), .delegate(right)):
+            return left === right
         default:
             return false
         }
@@ -113,7 +123,7 @@ public enum TableViewStyle: HashableConcreteStyle {
     }
     
     @inline(__always) static func stylesCount() -> Int {
-        return 20
+        return 22
     }
     
     @inline(__always) func value() -> (index: Int, valueHash: Int) {
@@ -158,6 +168,10 @@ public enum TableViewStyle: HashableConcreteStyle {
             return (19, value?.hashValue ?? 0)
         case let .remembersLastFocusedIndexPath(value):
             return (20, value.hashValue)
+        case let .dataSource(value):
+            return (21, value?.hash ?? 0)
+        case let .delegate(value):
+            return (22, value?.hash ?? 0)
         }
     }
 }
