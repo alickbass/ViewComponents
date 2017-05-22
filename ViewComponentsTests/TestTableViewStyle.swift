@@ -9,8 +9,19 @@
 import XCTest
 import ViewComponents
 
+class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return .init()
+    }
+}
+
 class TestTableViewStyle: XCTestCase {
     let blur = UIBlurEffect()
+    let controller = TableViewController()
     
     static let allStyles: [TableViewStyle] = [
         .rowHeight(40), .separatorStyle(.singleLine), .separatorColor(.red), .separatorEffect(UIBlurEffect()),
@@ -20,7 +31,8 @@ class TestTableViewStyle: XCTestCase {
         .allowsSelectionDuringEditing(true), .allowsMultipleSelectionDuringEditing(true), .isEditing(true),
         .sectionIndexColor(.red), .sectionIndexBackgroundColor(.red), .sectionIndexTrackingBackgroundColor(.red),
         .remembersLastFocusedIndexPath(true), .separatorColor(nil), .separatorEffect(nil), .sectionIndexColor(nil),
-        .sectionIndexBackgroundColor(nil), .sectionIndexTrackingBackgroundColor(nil)
+        .sectionIndexBackgroundColor(nil), .sectionIndexTrackingBackgroundColor(nil),
+        .dataSource(nil), .dataSource(TableViewController()), .delegate(nil), .delegate(TableViewController())
     ]
     
     static var accumulatedHashes: [Int] {
@@ -48,6 +60,8 @@ class TestTableViewStyle: XCTestCase {
         XCTAssertEqual(TableViewStyle.sectionIndexBackgroundColor(.red), .sectionIndexBackgroundColor(.red))
         XCTAssertEqual(TableViewStyle.sectionIndexTrackingBackgroundColor(.red), .sectionIndexTrackingBackgroundColor(.red))
         XCTAssertEqual(TableViewStyle.remembersLastFocusedIndexPath(true), .remembersLastFocusedIndexPath(true))
+        XCTAssertEqual(TableViewStyle.dataSource(controller), .dataSource(controller))
+        XCTAssertEqual(TableViewStyle.delegate(controller), .delegate(controller))
         XCTAssertNotEqual(TableViewStyle.remembersLastFocusedIndexPath(true), .sectionIndexTrackingBackgroundColor(.red))
     }
     
@@ -133,6 +147,14 @@ class TestTableViewStyle: XCTestCase {
         view.remembersLastFocusedIndexPath = false
         TableViewStyle.remembersLastFocusedIndexPath(true).sideEffect(on: view)
         XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
+        
+        view.dataSource = nil
+        TableViewStyle.dataSource(controller).sideEffect(on: view)
+        XCTAssertTrue(view.dataSource === controller)
+        
+        view.delegate = nil
+        TableViewStyle.delegate(controller).sideEffect(on: view)
+        XCTAssertTrue(view.delegate === controller)
         
         view.remembersLastFocusedIndexPath = false
         Component<UITableView>().tableView(.remembersLastFocusedIndexPath(true)).configure(item: view)
