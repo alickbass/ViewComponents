@@ -73,6 +73,12 @@ public extension CALayer {
     }
 }
 
+public extension Component where T: UIView {
+    public func shadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
+        return child(Component<CALayer>().adding(styles: styles), access: { $0.layer })
+    }
+}
+
 public extension Component where T: CALayer {
     public func shadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
         return adding(styles: styles)

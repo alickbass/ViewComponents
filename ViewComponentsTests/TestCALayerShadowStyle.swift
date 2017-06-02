@@ -54,6 +54,11 @@ class TestCALayerShadowStyle: XCTestCase {
         view.shadowColor = UIColor.green.cgColor
         Component<CALayer>().shadow(.color(.red)).configure(item: view)
         XCTAssertEqual(view.shadowColor, UIColor.red.cgColor)
+        
+        let theView = UIView()
+        theView.layer.name = nil
+        Component<UIView>().shadow(.color(.red)).configure(item: theView)
+        XCTAssertEqual(view.shadowColor, UIColor.red.cgColor)
     }
     
     func testHashValue() {
