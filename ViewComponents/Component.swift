@@ -34,7 +34,7 @@ public struct Component<T>: ConcreteComponentType {
         children.forEach { $0.configure(item: item) }
     }
     
-    public func child<V>(_ component: Component<V>, access: @escaping (T) -> V) -> Component<T> {
+    public func child<V>(_ access: @escaping (T) -> V, _ component: Component<V>) -> Component<T> {
         return Component<T>(styles: styles, children: children + [ChildComponent(component: component, access)])
     }
 }

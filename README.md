@@ -66,9 +66,9 @@ let viewComponent = Component<MyCustomView>()
     .border(
         .color(.red), .width(3), .cornerRadius(12)
     )
-    .child(buttonComponent, access: { $0.myButton })
-    .child(labelComponent, access: { $0.myLabel })
-    .child(iconComponent, access: { $0.myIcon })
+    .child({ $0.myButton }, buttonComponent)
+    .child({ $0.myLabel }, labelComponent)
+    .child({ $0.myIcon }, iconComponent)
 ```
 
 and then when we need to apply our style we do the following:
@@ -154,24 +154,21 @@ struct PersonViewModel: ComponentConvertible {
     var toComponent: Component<PersonView> {
         return Component()
             .border(.color(.red), .width(12))
-            .child(
-                Component<UILabel>()
-                .label(
+            .child({ $0.nameLabel },
+                Component().label(
                     .text(name),
                     .font(.boldSystemFont(ofSize: 12)),
                     .textColor(.red)
-                ),
-                access: { $0.nameLabel }
+                )
             )
-            .child(
-                Component<UILabel>()
+            .child({ $0.birthdateLabel }, 
+                Component()
                 .view(
                     .backgroundColor(.yellow), .alpha(0.8)
                 )
                 .label(
                     .font(.systemFont(ofSize: 10)), .text(birthday)
-                ),
-                access: { $0.birthdateLabel }
+                )
             )
     }
 }
@@ -195,24 +192,22 @@ In you unit tests, you just need to check for the equality the `ViewModels` `toC
 let person = Person(salutation: "Hallo", firstName: "John", lastName: "Doe", birthday: Date())
 let target = Component<PersonView>()
     .border(.color(.red), .width(12))
-    .child(
+    .child({ $0.nameLabel },
         Component<UILabel>()
             .label(
                 .text("Hallo John Doe"),
                 .font(.boldSystemFont(ofSize: 12)),
                 .textColor(.red)
-            ),
-        access: { $0.nameLabel }
+            )
     )
-    .child(
+    .child({ $0.birthdateLabel },
         Component<UILabel>()
             .view(
                 .backgroundColor(.yellow), .alpha(0.8)
             )
             .label(
                 .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
-            ),
-        access: { $0.birthdateLabel }
+            )
     )
 
 XCTAssertEqual(PersonViewModel(person: person).toComponent, target)
