@@ -15,11 +15,16 @@ public protocol ComponentConvertible {
     
     var toComponent: Component<ViewType> { get }
     func configure(item: ViewType)
+    func diffChanges<T: ComponentConvertible>(from other: T) -> Component<ViewType> where T.ViewType == ViewType
 }
 
 public extension ComponentConvertible {
     public func configure(item: ViewType) {
         toComponent.configure(item: item)
+    }
+    
+    public func diffChanges<T: ComponentConvertible>(from other: T) -> Component<ViewType> where T.ViewType == ViewType {
+        return toComponent.diffChanges(from: other.toComponent)
     }
 }
 

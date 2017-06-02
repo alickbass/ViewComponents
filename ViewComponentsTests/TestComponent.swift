@@ -48,6 +48,8 @@ class TestComponent: XCTestCase {
         MyViewModel().configure(item: view)
         XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
+        
+        XCTAssertEqual(Component().diffChanges(from: MyViewModel()), MyViewModel().toComponent)
     }
     
     func testChildComponent() {
