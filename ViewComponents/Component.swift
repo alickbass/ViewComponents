@@ -25,12 +25,12 @@ public struct Component<T>: ConcreteComponentType {
         configure(item: item as! T)
     }
     
-    public func adding<S: StyleType>(styles: [S]) -> Component<T> {
+    func adding<S: StyleType>(styles: [S]) -> Component<T> {
         return Component<T>(styles: self.styles.union(styles.lazy.map(AnyStyle.init)), children: children)
     }
     
     public func configure(item: T) {
-        styles.forEach { $0.sideEffect(item: item) }
+        styles.forEach { $0.sideEffect(on: item) }
         children.forEach { $0.configure(item: item) }
     }
     
