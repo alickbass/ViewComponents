@@ -8,20 +8,38 @@
 
 import UIKit
 
-public struct AnyStyle: StyleType, Hashable {
-    public let style: StyleType
+protocol _AnyStyleBox {
+    func sideEffect(on item: Any)
+    func isEqual(to other: _AnyStyleBox) -> Bool
+    var hashValue: Int { get }
+}
+
+struct _ConcreteStyleBox<Base: StyleType>: _AnyStyleBox {
+    let baseStyle: Base
     
-    public init(_ style: StyleType) {
-        self.style = style
+    func sideEffect(on item: Any) {
+        baseStyle.sideEffect(on: item as! Base.View)
     }
     
-    public func sideEffect(item: Any) {
-        style.sideEffect(item: item)
+    func isEqual(to other: _AnyStyleBox) -> Bool {
+        guard let other = other as? _ConcreteStyleBox<Base> else { return false }
+        return baseStyle == other.baseStyle
     }
     
-    public func isEqual(to other: StyleType) -> Bool {
-        guard let other = other as? AnyStyle else { return false }
-        return self == other
+    var hashValue: Int {
+        return baseStyle.hashValue
+    }
+}
+
+public struct AnyStyle: StyleType {
+    let style: _AnyStyleBox
+    
+    public init<T: StyleType>(_ style: T) {
+        self.style = _ConcreteStyleBox(baseStyle: style)
+    }
+    
+    public func sideEffect(on item: Any) {
+        style.sideEffect(on: item)
     }
     
     public static func == (lhs: AnyStyle, rhs: AnyStyle) -> Bool {
@@ -33,29 +51,12 @@ public struct AnyStyle: StyleType, Hashable {
     }
 }
 
-public protocol StyleType {
-    func sideEffect(item: Any)
-    func isEqual(to other: StyleType) -> Bool
-    var hashValue: Int { get }
-}
-
-public protocol ConcreteStyleType: StyleType, Hashable {
+public protocol StyleType: Hashable {
     associatedtype View
     func sideEffect(on item: View)
 }
 
-public extension ConcreteStyleType {
-    public func sideEffect(item: Any) {
-        sideEffect(on: item as! View)
-    }
-    
-    public func isEqual(to other: StyleType) -> Bool {
-        guard let other = other as? Self else { return false }
-        return self == other
-    }
-}
-
-protocol HashableConcreteStyle: ConcreteStyleType {
+protocol HashableConcreteStyle: StyleType {
     static func startIndex() -> Int
     static func stylesCount() -> Int
     static func lastStyleIndex() -> Int
