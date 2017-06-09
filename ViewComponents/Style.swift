@@ -8,13 +8,18 @@
 
 import UIKit
 
-protocol _AnyStyleBox {
+public protocol StyleType: Hashable {
+    associatedtype View
+    func sideEffect(on item: View)
+}
+
+private protocol _AnyStyleBox {
     func sideEffect(on item: Any)
     func isEqual(to other: _AnyStyleBox) -> Bool
     var hashValue: Int { get }
 }
 
-struct _ConcreteStyleBox<Base: StyleType>: _AnyStyleBox {
+private struct _ConcreteStyleBox<Base: StyleType>: _AnyStyleBox {
     let baseStyle: Base
     
     func sideEffect(on item: Any) {
@@ -32,7 +37,7 @@ struct _ConcreteStyleBox<Base: StyleType>: _AnyStyleBox {
 }
 
 public struct AnyStyle: StyleType {
-    let style: _AnyStyleBox
+    private let style: _AnyStyleBox
     
     public init<T: StyleType>(_ style: T) {
         self.style = _ConcreteStyleBox(baseStyle: style)
@@ -49,11 +54,6 @@ public struct AnyStyle: StyleType {
     public var hashValue: Int {
         return style.hashValue
     }
-}
-
-public protocol StyleType: Hashable {
-    associatedtype View
-    func sideEffect(on item: View)
 }
 
 protocol HashableConcreteStyle: StyleType {
