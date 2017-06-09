@@ -8,6 +8,11 @@
 
 import UIKit
 
+public protocol StyleType: Hashable {
+    associatedtype View
+    func sideEffect(on item: View)
+}
+
 private protocol _AnyStyleBox {
     func sideEffect(on item: Any)
     func isEqual(to other: _AnyStyleBox) -> Bool
@@ -49,11 +54,6 @@ public struct AnyStyle: StyleType {
     public var hashValue: Int {
         return style.hashValue
     }
-}
-
-public protocol StyleType: Hashable {
-    associatedtype View
-    func sideEffect(on item: View)
 }
 
 protocol HashableConcreteStyle: StyleType {
