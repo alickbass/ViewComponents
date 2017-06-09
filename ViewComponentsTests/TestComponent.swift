@@ -54,9 +54,10 @@ class TestComponent: XCTestCase {
     
     func testChildComponent() {
         let child = ChildComponent(component: comp, viewAccess)
-        XCTAssertEqual(child.styles, comp.styles)
-        XCTAssertTrue(child.isEqual(to: child))
-        XCTAssertFalse(child.isEqual(to: comp))
+        let otherChild = ChildComponent(component: Component<UIButton>(), { (view: UIView) -> UIButton in UIButton() })
+        XCTAssertEqual(child.diffChanges(from: otherChild), otherChild)
+        XCTAssertEqual(child.children, comp.children)
+        XCTAssertEqual(ChildComponent(component: comp.child(viewAccess, comp), viewAccess).children, comp.child(viewAccess, comp).children)
     }
     
     func testComponentDiffing() {
@@ -107,7 +108,7 @@ class TestComponent: XCTestCase {
         
         XCTAssertEqual(firstComponent.diffChanges(from: secondComponent), diff)
         XCTAssertEqual(Component<UIView>().child(viewAccess, Component<UIView>()).children.first?.isEmpty, true)
-        XCTAssertTrue(comp.diffChanges(from: Component<UIButton>()).isEqual(to: Component<UIButton>()))
+//        XCTAssertTrue(comp.diffChanges(from: Component<UIButton>()).isEqual(to: Component<UIButton>()))
     }
     
 }

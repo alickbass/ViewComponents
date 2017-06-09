@@ -25,10 +25,6 @@ public struct Component<T>: ConcreteComponentType {
         return styles.isEmpty && children.isEmpty
     }
     
-    func configure(item: Any) {
-        configure(item: item as! T)
-    }
-    
     func adding<S: StyleType>(styles: [S]) -> Component<T> {
         return Component<T>(styles: self.styles.union(styles.lazy.map(AnyStyle.init)), children: children)
     }
@@ -65,11 +61,6 @@ extension Component: ComponentConvertible {
 }
 
 extension Component {
-    func isEqual(to other: ComponentType) -> Bool {
-        guard let other = other as? Component<T> else { return false }
-        return self == other
-    }
-    
     public static func == (lhs: Component<T>, rhs: Component<T>) -> Bool {
         return lhs.styles == rhs.styles && lhs.children == rhs.children
     }
