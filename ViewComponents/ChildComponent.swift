@@ -21,8 +21,8 @@ public struct ChildComponent: ConcreteComponentType {
         self.access = access
     }
     
-    public var styles: Set<AnyStyle> {
-        return component.styles
+    public var isEmpty: Bool {
+        return component.isEmpty
     }
     
     public var children: [ChildComponent] {

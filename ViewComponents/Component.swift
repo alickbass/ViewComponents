@@ -21,6 +21,10 @@ public struct Component<T>: ConcreteComponentType {
         self.children = children
     }
     
+    public var isEmpty: Bool {
+        return styles.isEmpty && children.isEmpty
+    }
+    
     func configure(item: Any) {
         configure(item: item as! T)
     }

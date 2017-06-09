@@ -31,7 +31,6 @@ public extension ComponentConvertible {
 // MARK: - Component Protocol
 
 protocol ComponentType {
-    var styles: Set<AnyStyle> { get }
     var children: [ChildComponent] { get }
     var isEmpty: Bool { get }
     
@@ -42,12 +41,6 @@ protocol ComponentType {
 
 protocol ConcreteComponentType: ComponentType, Equatable {
     func diffChanges(from other: Self) -> Self
-}
-
-extension ComponentType {
-    var isEmpty: Bool {
-        return styles.isEmpty && children.isEmpty
-    }
 }
 
 extension ConcreteComponentType {
