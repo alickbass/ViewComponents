@@ -32,6 +32,7 @@
 		CE57792A1EC5F20E00BE5F52 /* TestUICollectionViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5779291EC5F20E00BE5F52 /* TestUICollectionViewStyle.swift */; };
 		CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6735481EB677D400BBD2FE /* UILabelStyle.swift */; };
 		CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */; };
+		CE77FA9D1EEC89BC003A3FD6 /* AnyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */; };
 		CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */; };
 		CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */; };
 		CECED8621EBB490000FF8B36 /* CALayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED8611EBB490000FF8B36 /* CALayerStyle.swift */; };
@@ -91,6 +92,7 @@
 		CE5779291EC5F20E00BE5F52 /* TestUICollectionViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUICollectionViewStyle.swift; sourceTree = "<group>"; };
 		CE6735481EB677D400BBD2FE /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUILabelStyle.swift; sourceTree = "<group>"; };
+		CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyStyle.swift; sourceTree = "<group>"; };
 		CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIButtonStyle.swift; sourceTree = "<group>"; };
 		CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIImageViewStyle.swift; sourceTree = "<group>"; };
 		CECED8611EBB490000FF8B36 /* CALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerStyle.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				CEF534E71EB0C18B001E3CA8 /* Component.swift */,
 				CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */,
 				CEF534E91EB0C1AD001E3CA8 /* AnyViewStyle.swift */,
+				CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */,
 				CEF534EF1EB0C2D1001E3CA8 /* Styles */,
 				CE5329AA1EC4A5920000E9AB /* Extensions */,
 				CEF534D11EB0C182001E3CA8 /* Info.plist */,
@@ -354,6 +357,7 @@
 				CE5329AC1EC4A5AE0000E9AB /* HashableExtensions.swift in Sources */,
 				CEE5DA7A1EC212E50022D6F1 /* CALayerShadowStyle.swift in Sources */,
 				CE469E311EC8B620009C256F /* UISliderStyle.swift in Sources */,
+				CE77FA9D1EEC89BC003A3FD6 /* AnyStyle.swift in Sources */,
 				CEFE1A251EC70BF600E077E0 /* ChildComponent.swift in Sources */,
 				CE5329BA1EC5DA5F0000E9AB /* TableViewCellStyle.swift in Sources */,
 				CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */,
