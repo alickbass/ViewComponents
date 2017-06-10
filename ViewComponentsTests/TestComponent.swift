@@ -108,7 +108,26 @@ class TestComponent: XCTestCase {
         
         XCTAssertEqual(firstComponent.diffChanges(from: secondComponent), diff)
         XCTAssertEqual(Component<UIView>().child(viewAccess, Component<UIView>()).children.first?.isEmpty, true)
-//        XCTAssertTrue(comp.diffChanges(from: Component<UIButton>()).isEqual(to: Component<UIButton>()))
+    }
+    
+    func testComponentViewType() {
+        class CustomView: UIView, ComponentContainingView {
+            var item: Component<CustomView>?
+        }
+        
+        let component = Component<CustomView>().view(.alpha(0.2))
+        let view = CustomView()
+        
+        view.configure(with: component)
+        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.item, component)
+        
+        let new = component.view(.isHidden(true))
+        
+        view.configure(with: new)
+        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.isHidden, true)
+        XCTAssertEqual(view.item, new)
     }
     
 }

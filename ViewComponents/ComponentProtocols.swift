@@ -38,3 +38,17 @@ public protocol ConcreteComponentType: Equatable {
     func configure(item: View)
     func diffChanges(from other: Self) -> Self
 }
+
+// MARK: - Component View Protocol
+public protocol ComponentContainingView: class {
+    associatedtype ViewModel: ComponentConvertible
+    var item: ViewModel? { get set }
+    func configure(with newItem: ViewModel)
+}
+
+public extension ComponentContainingView where ViewModel.ViewType == Self {
+    public func configure(with newItem: ViewModel) {
+        (item?.diffChanges(from: newItem) ?? newItem.toComponent).configure(item: self)
+        item = newItem
+    }
+}
