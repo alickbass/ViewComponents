@@ -119,6 +119,6 @@ public enum UITextViewStyle: HashableConcreteStyle {
 
 public extension Component where T: UITextView {
     public func textView(_ styles: UITextViewStyle...) -> Component<T> {
-        return adding(styles: styles)
+        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
     }
 }

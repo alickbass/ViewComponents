@@ -140,6 +140,6 @@ public enum UIButtonStyle: HashableConcreteStyle {
 
 public extension Component where T: UIButton {
     public func button(_ styles: UIButtonStyle...) -> Component<T> {
-        return adding(styles: styles)
+        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
     }
 }
