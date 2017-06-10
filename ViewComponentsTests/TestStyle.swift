@@ -20,11 +20,11 @@ class TestStyle: XCTestCase {
     }
     
     func testAnyStyle() {
-        XCTAssertEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UIViewStyle.isHidden(true)))
-        XCTAssertNotEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UIViewStyle.isHidden(false)))
-        XCTAssertNotEqual(AnyStyle(UIViewStyle.isHidden(true)), AnyStyle(UILabelStyle.isEnabled(false)))
+        XCTAssertEqual(AnyViewStyle(UIViewStyle.isHidden(true)), AnyViewStyle(UIViewStyle.isHidden(true)))
+        XCTAssertNotEqual(AnyViewStyle(UIViewStyle.isHidden(true)), AnyViewStyle(UIViewStyle.isHidden(false)))
+        XCTAssertNotEqual(AnyViewStyle(UIViewStyle.isHidden(true)), AnyViewStyle(UILabelStyle.isEnabled(false)))
         
-        XCTAssertEqual(AnyStyle(UIViewStyle.isHidden(true)).hashValue, UIViewStyle.isHidden(true).hashValue)
+        XCTAssertEqual(AnyViewStyle(UIViewStyle.isHidden(true)).hashValue, UIViewStyle.isHidden(true).hashValue)
     }
     
 }

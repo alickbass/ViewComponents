@@ -36,7 +36,7 @@ private struct _ConcreteStyleBox<Base: StyleType>: _AnyStyleBox {
     }
 }
 
-public struct AnyStyle: StyleType {
+public struct AnyViewStyle: StyleType {
     private let style: _AnyStyleBox
     
     public init<T: StyleType>(_ style: T) {
@@ -47,7 +47,7 @@ public struct AnyStyle: StyleType {
         style.sideEffect(on: item)
     }
     
-    public static func == (lhs: AnyStyle, rhs: AnyStyle) -> Bool {
+    public static func == (lhs: AnyViewStyle, rhs: AnyViewStyle) -> Bool {
         return lhs.style.isEqual(to: rhs.style)
     }
     
