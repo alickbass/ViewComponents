@@ -9,12 +9,12 @@
 import UIKit
 
 public extension CALayer {
-    public enum BorderStyle: HashableConcreteStyle {
+    public enum BorderStyle<T: UIView>: HashableConcreteStyle {
         case cornerRadius(CGFloat)
         case width(CGFloat)
         case color(UIColor?)
         
-        public func sideEffect(on view: UIView) {
+        public func sideEffect(on view: T) {
             let layer = view.layer
             switch self {
             case let .cornerRadius(cornerRadius):
@@ -26,7 +26,7 @@ public extension CALayer {
             }
         }
         
-        public static func == (lhs: BorderStyle, rhs: BorderStyle) -> Bool {
+        public static func == (lhs: BorderStyle<T>, rhs: BorderStyle<T>) -> Bool {
             switch (lhs, rhs) {
             case let (.cornerRadius(leftRaduis), .cornerRadius(rightRaduis)):
                 return leftRaduis == rightRaduis
@@ -61,7 +61,7 @@ public extension CALayer {
 }
 
 public extension Component where T: UIView {
-    public func border(_ styles: CALayer.BorderStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func border(_ styles: CALayer.BorderStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }
