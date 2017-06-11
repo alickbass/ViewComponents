@@ -67,9 +67,9 @@ let viewComponent = Component<MyCustomView>()
         .color(.red), .width(3), .cornerRadius(12)
     )
     .withChildren(
-	    .child({ $0.myButton }, buttonComponent),
-	    .child({ $0.myLabel }, labelComponent),
-	    .child({ $0.myIcon }, iconComponent)
+	.child({ $0.myButton }, buttonComponent),
+	.child({ $0.myLabel }, labelComponent),
+	.child({ $0.myIcon }, iconComponent)
     )
 ```
 
@@ -157,22 +157,22 @@ struct PersonViewModel: ComponentConvertible {
         return Component()
             .border(.color(.red), .width(12))
             .withChildren(
-	            .child({ $0.nameLabel },
-	                Component().label(
-	                    .text(name),
-	                    .font(.boldSystemFont(ofSize: 12)),
-	                    .textColor(.red)
-	                )
-	            ),
-	            .child({ $0.birthdateLabel }, 
-	                Component()
-	                .view(
-	                    .backgroundColor(.yellow), .alpha(0.8)
-	                )
-	                .label(
-	                    .font(.systemFont(ofSize: 10)), .text(birthday)
-	                )
+	        .child({ $0.nameLabel },
+	            Component().label(
+	                .text(name),
+	                .font(.boldSystemFont(ofSize: 12)),
+	                .textColor(.red)
 	            )
+	        ),
+	        .child({ $0.birthdateLabel }, 
+	            Component()
+	            .view(
+	               .backgroundColor(.yellow), .alpha(0.8)
+	            )
+	            .label(
+	                .font(.systemFont(ofSize: 10)), .text(birthday)
+	            )
+	        )
             )
     }
 }
@@ -197,23 +197,23 @@ let person = Person(salutation: "Hallo", firstName: "John", lastName: "Doe", bir
 let target = Component<PersonView>()
     .border(.color(.red), .width(12))
     .withChildren(
-	    .child({ $0.nameLabel },
-	        Component<UILabel>()
-	            .label(
-	                .text("Hallo John Doe"),
-	                .font(.boldSystemFont(ofSize: 12)),
-	                .textColor(.red)
-	            )
-	    ),
-	    .child({ $0.birthdateLabel },
-	        Component<UILabel>()
-	            .view(
-	                .backgroundColor(.yellow), .alpha(0.8)
-	            )
-	            .label(
-	                .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
-	            )
-	    )
+	.child({ $0.nameLabel },
+	    Component<UILabel>()
+	        .label(
+	            .text("Hallo John Doe"),
+	            .font(.boldSystemFont(ofSize: 12)),
+	            .textColor(.red)
+	        )
+	),
+	.child({ $0.birthdateLabel },
+	    Component<UILabel>()
+	        .view(
+	            .backgroundColor(.yellow), .alpha(0.8)
+	        )
+	        .label(
+	            .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
+	        )
+	)
     )
 
 XCTAssertEqual(PersonViewModel(person: person).toComponent, target)
