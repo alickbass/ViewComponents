@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum TableViewStyle: HashableConcreteStyle {
+public enum TableViewStyle<T: UITableView>: HashableConcreteStyle {
     case rowHeight(CGFloat)
     case separatorStyle(UITableViewCellSeparatorStyle)
     case separatorColor(UIColor?)
@@ -32,7 +32,7 @@ public enum TableViewStyle: HashableConcreteStyle {
     case dataSource(UITableViewDataSource?)
     case delegate(UITableViewDelegate?)
     
-    public func sideEffect(on view: UITableView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .rowHeight(value):
             view.rowHeight = value
@@ -81,7 +81,7 @@ public enum TableViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: TableViewStyle, rhs: TableViewStyle) -> Bool {
+    public static func == (lhs: TableViewStyle<T>, rhs: TableViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.rowHeight(left), .rowHeight(right)),
              let (.sectionHeaderHeight(left), .sectionHeaderHeight(right)),
@@ -177,7 +177,7 @@ public enum TableViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITableView {
-    public func tableView(_ styles: TableViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func tableView(_ styles: TableViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

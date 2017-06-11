@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUITextViewStyle: XCTestCase {
     
-    static let allStyles: [UITextViewStyle] = [
+    static let allStyles: [UITextViewStyle<UITextView>] = [
         .text("test"), .attributedText(.init(string: "test")), .font(.systemFont(ofSize: 8)),
         .textColor(.red), .textAlignment(.center), .isEditable(true), .font(nil), .textColor(nil),
         .allowsEditingTextAttributes(true), .dataDetectorTypes(.address), .textContainerInset(.zero),

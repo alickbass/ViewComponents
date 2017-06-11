@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUISwitchStyle: XCTestCase {
     
-    static let allStyles: [UISwitchStyle] = [
+    static let allStyles: [UISwitchStyle<UISwitch>] = [
         .isOn(true, animated: true), .onTintColor(nil), .onTintColor(.red),
         .thumbTintColor(nil), .thumbTintColor(.red), .onImage(nil), .onImage(UIImage()),
         .offImage(nil), .offImage(UIImage())

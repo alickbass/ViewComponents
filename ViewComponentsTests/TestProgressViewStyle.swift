@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestProgressViewStyle: XCTestCase {
     
-    static let allStyles: [ProgressViewStyle] = [
+    static let allStyles: [ProgressViewStyle<UIProgressView>] = [
         .progress(0.2, animated: true), .progressViewStyle(.bar), .progressTintColor(.red),
         .progressTintColor(nil), .progressImage(UIImage()), .progressImage(nil),
         .trackTintColor(.red), .trackTintColor(nil), .trackImage(UIImage()), .trackImage(nil)

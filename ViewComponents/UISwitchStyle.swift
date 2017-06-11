@@ -8,14 +8,14 @@
 
 import UIKit
 
-public enum UISwitchStyle: HashableConcreteStyle {
+public enum UISwitchStyle<T: UISwitch>: HashableConcreteStyle {
     case isOn(Bool, animated: Bool)
     case onTintColor(UIColor?)
     case thumbTintColor(UIColor?)
     case onImage(UIImage?)
     case offImage(UIImage?)
 
-    public func sideEffect(on view: UISwitch) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .isOn(value, animated: animated):
             view.setOn(value, animated: animated)
@@ -30,7 +30,7 @@ public enum UISwitchStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UISwitchStyle, rhs: UISwitchStyle) -> Bool {
+    public static func == (lhs: UISwitchStyle<T>, rhs: UISwitchStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.isOn(left, animated: leftAnimated), .isOn(right, animated: rightAnimated)):
             return left == right && leftAnimated == rightAnimated
@@ -73,7 +73,7 @@ public enum UISwitchStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UISwitch {
-    public func `switch`(_ styles: UISwitchStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func `switch`(_ styles: UISwitchStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

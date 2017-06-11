@@ -8,13 +8,13 @@
 
 import UIKit
 
-public enum ActivityIndicatorViewStyle: HashableConcreteStyle {
+public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: HashableConcreteStyle {
     case isAnimating(Bool)
     case hidesWhenStopped(Bool)
     case activityIndicatorViewStyle(UIActivityIndicatorViewStyle)
     case color(UIColor?)
     
-    public func sideEffect(on view: UIActivityIndicatorView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .isAnimating(value):
             switch value {
@@ -32,7 +32,7 @@ public enum ActivityIndicatorViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: ActivityIndicatorViewStyle, rhs: ActivityIndicatorViewStyle) -> Bool {
+    public static func == (lhs: ActivityIndicatorViewStyle<T>, rhs: ActivityIndicatorViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.isAnimating(left), .isAnimating(right)),
              let (.hidesWhenStopped(left), .hidesWhenStopped(right)):
@@ -69,7 +69,7 @@ public enum ActivityIndicatorViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIActivityIndicatorView {
-    public func activityIndicator(_ styles: ActivityIndicatorViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func activityIndicator(_ styles: ActivityIndicatorViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

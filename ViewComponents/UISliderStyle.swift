@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UISliderStyle: HashableConcreteStyle {
+public enum UISliderStyle<T: UISlider>: HashableConcreteStyle {
     case currentValue(Float, animated: Bool)
     case minimumValue(Float)
     case maximumValue(Float)
@@ -22,7 +22,7 @@ public enum UISliderStyle: HashableConcreteStyle {
     case thumbTintColor(UIColor?)
     case thumbImage(UIImage?, for: UIControlState)
     
-    public func sideEffect(on view: UISlider) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .currentValue(value, animated: animated):
             view.setValue(value, animated: animated)
@@ -51,7 +51,7 @@ public enum UISliderStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UISliderStyle, rhs: UISliderStyle) -> Bool {
+    public static func == (lhs: UISliderStyle<T>, rhs: UISliderStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.currentValue(left, animated: leftAnimated), .currentValue(right, animated: rightAnimated)):
             return left == right && leftAnimated == rightAnimated
@@ -127,7 +127,7 @@ public enum UISliderStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UISlider {
-    public func slider(_ styles: UISliderStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func slider(_ styles: UISliderStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

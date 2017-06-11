@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UICollectionViewStyle: HashableConcreteStyle {
+public enum UICollectionViewStyle<T: UICollectionView>: HashableConcreteStyle {
     @available(iOS 10.0, *)
     case isPrefetchingEnabled(Bool)
     case allowsSelection(Bool)
@@ -16,7 +16,7 @@ public enum UICollectionViewStyle: HashableConcreteStyle {
     case remembersLastFocusedIndexPath(Bool)
     case collectionViewLayout(UICollectionViewLayout)
     
-    public func sideEffect(on view: UICollectionView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .isPrefetchingEnabled(value):
             if #available(iOSApplicationExtension 10.0, *) {
@@ -33,7 +33,7 @@ public enum UICollectionViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UICollectionViewStyle, rhs: UICollectionViewStyle) -> Bool {
+    public static func == (lhs: UICollectionViewStyle<T>, rhs: UICollectionViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.isPrefetchingEnabled(left), .isPrefetchingEnabled(right)),
              let (.allowsSelection(left), .allowsSelection(right)),
@@ -72,7 +72,7 @@ public enum UICollectionViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UICollectionView {
-    public func collectionView(_ styles: UICollectionViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func collectionView(_ styles: UICollectionViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }
