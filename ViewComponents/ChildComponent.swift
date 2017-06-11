@@ -8,8 +8,10 @@
 
 import UIKit
 
+private protocol _ChildComponent {}
+
 private protocol _AnyComponentBox {
-    var children: [ChildComponent] { get }
+    var children: [_ChildComponent] { get }
     var isEmpty: Bool { get }
     
     func configure(item: Any)
@@ -17,10 +19,10 @@ private protocol _AnyComponentBox {
     func diffChanges(from other: _AnyComponentBox) -> _AnyComponentBox
 }
 
-private struct _ConcreteComponentBox<Base: ConcreteComponentType>: _AnyComponentBox {
+private struct _ConcreteComponentBox<Base: ComponentType>: _AnyComponentBox {
     let base: Base
     
-    var children: [ChildComponent] {
+    var children: [_ChildComponent] {
         return base.children
     }
     
@@ -43,15 +45,15 @@ private struct _ConcreteComponentBox<Base: ConcreteComponentType>: _AnyComponent
     }
 }
 
-public struct ChildComponent: ConcreteComponentType {
+public struct ChildComponent<View>: ComponentType, _ChildComponent {
     private let box: _AnyComponentBox
-    let access: (Any) -> Any
+    let access: (View) -> Any
     
-    public init<V, T>(component: Component<V>, _ access: @escaping (T) -> V) {
-        self.init(_ConcreteComponentBox(base: component), { view in access(view as! T) })
+    public init<V: ComponentType>(component: V, _ access: @escaping (View) -> V.View) {
+        self.init(_ConcreteComponentBox(base: component), access)
     }
     
-    private init(_ box: _AnyComponentBox, _ access: @escaping (Any) -> Any) {
+    private init(_ box: _AnyComponentBox, _ access: @escaping (View) -> Any) {
         self.box = box
         self.access = access
     }
@@ -60,11 +62,11 @@ public struct ChildComponent: ConcreteComponentType {
         return box.isEmpty
     }
     
-    public var children: [ChildComponent] {
-        return box.children
+    public var children: [ChildComponent<View>] {
+        return box.children as! [ChildComponent<View>]
     }
     
-    public func configure(item: Any) {
+    public func configure(item: View) {
         box.configure(item: access(item))
     }
     
@@ -72,7 +74,7 @@ public struct ChildComponent: ConcreteComponentType {
         return lhs.box.isEqual(to: rhs.box)
     }
     
-    public func diffChanges(from other: ChildComponent) -> ChildComponent {
+    public func diffChanges(from other: ChildComponent<View>) -> ChildComponent<View> {
         return ChildComponent(box.diffChanges(from: other.box), other.access)
     }
 }
