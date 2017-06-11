@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUIControlStyle: XCTestCase {
     
-    static let allStyles: [UIControlStyle] = [
+    static let allStyles: [UIControlStyle<UIControl>] = [
         .isEnabled(true), .isSelected(true), .isHighlighted(true),
         .contentVerticalAlignment(.bottom), .contentHorizontalAlignment(.center)
     ]

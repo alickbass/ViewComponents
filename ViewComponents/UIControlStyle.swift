@@ -8,14 +8,14 @@
 
 import UIKit
 
-public enum UIControlStyle: HashableConcreteStyle {
+public enum UIControlStyle<T: UIControl>: HashableConcreteStyle {
     case isEnabled(Bool)
     case isSelected(Bool)
     case isHighlighted(Bool)
     case contentVerticalAlignment(UIControlContentVerticalAlignment)
     case contentHorizontalAlignment(UIControlContentHorizontalAlignment)
     
-    public func sideEffect(on view: UIControl) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .isEnabled(isEnabled):
             view.isEnabled = isEnabled
@@ -30,7 +30,7 @@ public enum UIControlStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UIControlStyle, rhs: UIControlStyle) -> Bool {
+    public static func == (lhs: UIControlStyle<T>, rhs: UIControlStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.isEnabled(leftBool), .isEnabled(rightBool)),
              let (.isSelected(leftBool), .isSelected(rightBool)),
@@ -70,7 +70,7 @@ public enum UIControlStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIControl {
-    public func control(_ styles: UIControlStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func control(_ styles: UIControlStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }
