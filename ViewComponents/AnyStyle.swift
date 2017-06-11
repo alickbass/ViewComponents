@@ -45,10 +45,6 @@ public struct AnyStyle<T>: StyleType {
         self.init(_AnyStyleConcreteBox(style))
     }
     
-    func unsafeCast<V>(to type: V.Type) -> AnyStyle<V> {
-        return AnyStyle<V>(box)
-    }
-    
     public func sideEffect(on item: T) {
         box.sideEffect(on: item)
     }
