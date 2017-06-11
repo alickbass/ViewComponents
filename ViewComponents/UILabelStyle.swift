@@ -146,6 +146,6 @@ public enum UILabelStyle: HashableConcreteStyle {
 
 public extension Component where T: UILabel {
     public func label(_ styles: UILabelStyle...) -> Component<T> {
-        return adding(styles: styles)
+        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
     }
 }

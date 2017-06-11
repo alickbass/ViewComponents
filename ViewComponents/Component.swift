@@ -9,14 +9,14 @@
 import UIKit
 
 public struct Component<T>: ConcreteComponentType {
-    public let styles: Set<AnyStyle>
+    public let styles: Set<AnyStyle<T>>
     public let children: [ChildComponent]
     
     public init() {
         self.init(styles: [], children: [])
     }
     
-    init(styles: Set<AnyStyle>, children: [ChildComponent]) {
+    init(styles: Set<AnyStyle<T>>, children: [ChildComponent]) {
         self.styles = styles
         self.children = children
     }
@@ -25,8 +25,8 @@ public struct Component<T>: ConcreteComponentType {
         return styles.isEmpty && children.isEmpty
     }
     
-    func adding<S: StyleType>(styles: [S]) -> Component<T> {
-        return Component<T>(styles: self.styles.union(styles.lazy.map(AnyStyle.init)), children: children)
+    public func adding<V: Sequence>(styles: V) -> Component<T> where V.Iterator.Element == AnyStyle<T> {
+        return Component<T>(styles: self.styles.union(styles), children: children)
     }
     
     public func configure(item: T) {

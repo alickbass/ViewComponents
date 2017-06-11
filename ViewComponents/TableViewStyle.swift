@@ -178,6 +178,6 @@ public enum TableViewStyle: HashableConcreteStyle {
 
 public extension Component where T: UITableView {
     public func tableView(_ styles: TableViewStyle...) -> Component<T> {
-        return adding(styles: styles)
+        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
     }
 }

@@ -62,6 +62,6 @@ public extension CALayer {
 
 public extension Component where T: UIView {
     public func border(_ styles: CALayer.BorderStyle...) -> Component<T> {
-        return adding(styles: styles)
+        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
     }
 }

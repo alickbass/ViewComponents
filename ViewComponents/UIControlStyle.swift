@@ -71,6 +71,6 @@ public enum UIControlStyle: HashableConcreteStyle {
 
 public extension Component where T: UIControl {
     public func control(_ styles: UIControlStyle...) -> Component<T> {
-        return adding(styles: styles)
+        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
     }
 }
