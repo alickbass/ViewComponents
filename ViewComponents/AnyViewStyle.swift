@@ -8,11 +8,6 @@
 
 import UIKit
 
-public protocol StyleType: Hashable {
-    associatedtype View
-    func sideEffect(on item: View)
-}
-
 private protocol _AnyStyleBox {
     func sideEffect(on item: Any)
     func isEqual(to other: _AnyStyleBox) -> Bool
@@ -53,26 +48,5 @@ public struct AnyViewStyle: StyleType {
     
     public var hashValue: Int {
         return style.hashValue
-    }
-}
-
-protocol HashableConcreteStyle: StyleType {
-    static func startIndex() -> Int
-    static func stylesCount() -> Int
-    static func lastStyleIndex() -> Int
-    func value() -> (index: Int, valueHash: Int)
-}
-
-extension HashableConcreteStyle {
-    public var hashValue: Int {
-        let value = self.value()
-        var hash = 5381
-        hash = ((hash << 5) &+ hash) &+ (Self.startIndex() + value.index)
-        hash = ((hash << 5) &+ hash) &+ value.valueHash
-        return hash
-    }
-    
-    @inline(__always) static func lastStyleIndex() -> Int {
-        return Self.startIndex() + Self.stylesCount()
     }
 }
