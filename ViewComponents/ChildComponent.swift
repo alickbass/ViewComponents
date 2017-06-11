@@ -47,7 +47,7 @@ public struct ChildComponent: ComponentType {
     private let box: _AnyComponentBox
     let access: (Any) -> Any
     
-    public init<V, T>(component: Component<V>, _ access: @escaping (T) -> V) {
+    public init<V: ComponentType, T>(component: V, _ access: @escaping (T) -> V.View) {
         self.init(_ConcreteComponentBox(base: component), { view in access(view as! T) })
     }
     
