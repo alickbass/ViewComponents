@@ -154,7 +154,7 @@ public enum CALayerStyle<T: CALayer>: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: CALayerStyle, rhs: CALayerStyle) -> Bool {
+    public static func == (lhs: CALayerStyle<T>, rhs: CALayerStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.contentsGravity(left), .contentsGravity(right)):
             return left == right
