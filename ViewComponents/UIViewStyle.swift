@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIViewStyle {
+public enum UIViewStyle<T: UIView> {
     case backgroundColor(UIColor?)
     case isHidden(Bool)
     case alpha(CGFloat)
@@ -24,9 +24,7 @@ public enum UIViewStyle {
 }
 
 extension UIViewStyle: HashableConcreteStyle {
-    public typealias View = UIView
-    
-    public func sideEffect(on view: UIView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .backgroundColor(color):
             view.backgroundColor = color
@@ -55,7 +53,7 @@ extension UIViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UIViewStyle, rhs: UIViewStyle) -> Bool {
+    public static func == (lhs: UIViewStyle<T>, rhs: UIViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.backgroundColor(leftColor), .backgroundColor(rightColor)):
             return leftColor == rightColor
@@ -119,7 +117,7 @@ extension UIViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIView {
-    public func view(_ styles: UIViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func view(_ styles: UIViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

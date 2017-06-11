@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUIViewStyle: XCTestCase {
     
-    static let allStyles: [UIViewStyle] = [
+    static let allStyles: [UIViewStyle<UIView>] = [
         .backgroundColor(.red), .backgroundColor(nil), .isHidden(true), .alpha(0.2),
         .isOpaque(true), .tintColor(.red), .tintAdjustmentMode(.automatic), .clipsToBounds(true),
         .clearsContextBeforeDrawing(true), .isUserInteractionEnabled(true), .isMultipleTouchEnabled(true),
