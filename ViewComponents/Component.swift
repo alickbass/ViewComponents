@@ -37,10 +37,6 @@ public struct Component<T>: ComponentType {
     public func withChildren(_ children: ChildComponent<T>...) -> Component<T> {
         return Component<T>(styles: styles, children: self.children + children)
     }
-    
-    public func child<V, E: ComponentConvertible>(_ access: @escaping (T) -> V, _ item: E) -> Component<T> where E.ViewType == V {
-        return Component<T>(styles: styles, children: children + [ChildComponent(component: item.toComponent, access)])
-    }
 }
 
 extension Component {

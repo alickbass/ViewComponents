@@ -260,7 +260,7 @@ public enum CALayerStyle<T: CALayer>: HashableConcreteStyle {
 
 public extension Component where T: UIView {
     public func layer(_ styles: CALayerStyle<CALayer>...) -> Component<T> {
-        return child({ $0.layer }, Component<CALayer>().adding(styles: styles.lazy.map(AnyStyle.init)))
+        return withChildren(.child({ $0.layer }, Component<CALayer>().adding(styles: styles.lazy.map(AnyStyle.init))))
     }
 }
 
