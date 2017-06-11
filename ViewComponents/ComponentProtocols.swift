@@ -32,7 +32,7 @@ public extension ComponentConvertible {
 public protocol ComponentType: Equatable {
     associatedtype View
     
-    var children: [ChildComponent] { get }
+    var children: [ChildComponent<View>] { get }
     var isEmpty: Bool { get }
     
     func configure(item: View)

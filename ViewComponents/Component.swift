@@ -10,13 +10,13 @@ import UIKit
 
 public struct Component<T>: ComponentType {
     public let styles: Set<AnyStyle<T>>
-    public let children: [ChildComponent]
+    public let children: [ChildComponent<T>]
     
     public init() {
         self.init(styles: [], children: [])
     }
     
-    init(styles: Set<AnyStyle<T>>, children: [ChildComponent]) {
+    public init(styles: Set<AnyStyle<T>>, children: [ChildComponent<T>]) {
         self.styles = styles
         self.children = children
     }
@@ -42,7 +42,7 @@ public struct Component<T>: ComponentType {
 extension Component {
     public func diffChanges(from other: Component<T>) -> Component<T> {
         let newStyles = other.styles.subtracting(styles)
-        let newChildren = other.children.lazy.enumerated().flatMap({ current -> ChildComponent? in
+        let newChildren = other.children.lazy.enumerated().flatMap({ current -> ChildComponent<T>? in
             if current.offset < children.count {
                 let diff = children[current.offset].diffChanges(from: current.element)
                 return diff.isEmpty ? nil : diff
