@@ -28,32 +28,61 @@ final class DetailsCell: UITableViewCell {
 
 struct DetailsItem: ComponentConvertible {
     var toComponent: Component<DetailsItemView> {
-        return Component<DetailsItemView>()
-            .child({ $0.title }, Component().label(.text("title"), .font(.systemFont(ofSize: 12)), .textColor(#colorLiteral(red: 0.3490196078, green: 0.3490196078, blue: 0.3490196078, alpha: 1))))
-            .child({ $0.value }, Component().label(.text("value"), .font(.systemFont(ofSize: 14)), .textColor(#colorLiteral(red: 0.3490196078, green: 0.3490196078, blue: 0.3490196078, alpha: 1))))
+        return Component<DetailsItemView>().withChildren(
+            .child({ $0.title },
+                Component()
+                    .view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2), .clipsToBounds(true), .isHidden(true))
+                    .label(.text("title"), .font(.systemFont(ofSize: 12)), .textColor(#colorLiteral(red: 0.3490196078, green: 0.3490196078, blue: 0.3490196078, alpha: 1)))
+            ),
+            .child({ $0.value },
+                Component()
+                    .view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2), .clipsToBounds(true), .isHidden(true))
+                    .label(.text("value"), .font(.systemFont(ofSize: 14)), .textColor(#colorLiteral(red: 0.3490196078, green: 0.3490196078, blue: 0.3490196078, alpha: 1)))
+            )
+        )
     }
 }
 
 struct DetailsCellViewModel: ComponentConvertible {
     var toComponent: Component<DetailsCell> {
         return Component()
-            .child({ $0.container }, Component<UIView>().view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1))))
-            .child({ $0.title },
-                   Component<UILabel>()
+            .view(
+                .backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2),
+                .clipsToBounds(true), .isHidden(true),
+                .isMultipleTouchEnabled(true), .isOpaque(true)
+            )
+            .view(
+                .backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2),
+                .clipsToBounds(true), .isHidden(true),
+                .isMultipleTouchEnabled(true), .isOpaque(true)
+            )
+            .view(
+                .backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2),
+                .clipsToBounds(true), .isHidden(true),
+                .isMultipleTouchEnabled(true), .isOpaque(true)
+            )
+            .withChildren(
+                .child({ $0.container }, Component<UIView>().view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)))),
+                .child({ $0.title },
+                    Component<UILabel>()
+                    .view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2), .clipsToBounds(true), .isHidden(true))
                     .label(.text("Title"), .textColor(.white), .font(.systemFont(ofSize: 16)))
-            )
-            .child({ $0.totalTitle },
-                   Component<UILabel>()
+                ),
+                .child({ $0.totalTitle },
+                    Component<UILabel>()
+                    .view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)), .alpha(0.2), .clipsToBounds(true), .isHidden(true))
                     .label(.text("Total"), .textColor(.gray), .font(.systemFont(ofSize: 16)))
-            )
-            .child({ $0.price },
-                   Component<UILabel>()
+                ),
+                .child({ $0.price },
+                    Component<UILabel>()
+                    .view(.backgroundColor(#colorLiteral(red: 1, green: 0.8470588235, blue: 0, alpha: 1)))
                     .label(.text("A lot of money"), .textColor(.green), .font(.boldSystemFont(ofSize: 16)))
+                ),
+                .child({ $0.enterDate }, DetailsItem()),
+                .child({ $0.enterTime }, DetailsItem()),
+                .child({ $0.exitDate }, DetailsItem()),
+                .child({ $0.exitTime }, DetailsItem())
             )
-            .child({ $0.enterDate }, DetailsItem())
-            .child({ $0.enterTime }, DetailsItem())
-            .child({ $0.exitDate }, DetailsItem())
-            .child({ $0.exitTime }, DetailsItem())
     }
 }
 
