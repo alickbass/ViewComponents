@@ -23,7 +23,7 @@ class TestTableViewStyle: XCTestCase {
     let blur = UIBlurEffect()
     let controller = TableViewController()
     
-    static let allStyles: [TableViewStyle] = [
+    static let allStyles: [TableViewStyle<UITableView>] = [
         .rowHeight(40), .separatorStyle(.singleLine), .separatorColor(.red), .separatorEffect(UIBlurEffect()),
         .separatorInset(.zero), .cellLayoutMarginsFollowReadableWidth(true), .sectionHeaderHeight(40),
         .sectionFooterHeight(40), .estimatedRowHeight(40), .estimatedSectionHeaderHeight(40),

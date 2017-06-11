@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum TableViewCellStyle: HashableConcreteStyle {
+public enum TableViewCellStyle<T: UITableViewCell>: HashableConcreteStyle {
     case accessoryType(UITableViewCellAccessoryType)
     case editingAccessoryType(UITableViewCellAccessoryType)
     case isSelected(Bool)
@@ -22,7 +22,7 @@ public enum TableViewCellStyle: HashableConcreteStyle {
     case separatorInset(UIEdgeInsets)
     case focusStyle(UITableViewCellFocusStyle)
 
-    public func sideEffect(on view: UITableViewCell) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .accessoryType(value):
             view.accessoryType = value
@@ -51,7 +51,7 @@ public enum TableViewCellStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: TableViewCellStyle, rhs: TableViewCellStyle) -> Bool {
+    public static func == (lhs: TableViewCellStyle<T>, rhs: TableViewCellStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.accessoryType(left), .accessoryType(right)),
              let (.editingAccessoryType(left), .editingAccessoryType(right)):
@@ -116,7 +116,7 @@ public enum TableViewCellStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITableViewCell {
-    public func tableViewCell(_ styles: TableViewCellStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func tableViewCell(_ styles: TableViewCellStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

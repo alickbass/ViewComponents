@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UITextViewStyle: HashableConcreteStyle {
+public enum UITextViewStyle<T: UITextView>: HashableConcreteStyle {
     case text(String)
     case attributedText(NSAttributedString)
     case font(UIFont?)
@@ -22,7 +22,7 @@ public enum UITextViewStyle: HashableConcreteStyle {
     case clearsOnInsertion(Bool)
     case isSelectable(Bool)
     
-    public func sideEffect(on view: UITextView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .text(value):
             view.text = value
@@ -51,7 +51,7 @@ public enum UITextViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UITextViewStyle, rhs: UITextViewStyle) -> Bool {
+    public static func == (lhs: UITextViewStyle<T>, rhs: UITextViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.text(left), .text(right)):
             return left == right
@@ -118,7 +118,7 @@ public enum UITextViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITextView {
-    public func textView(_ styles: UITextViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func textView(_ styles: UITextViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

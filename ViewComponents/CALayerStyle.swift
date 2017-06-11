@@ -72,7 +72,7 @@ public enum CAContentsFormat: RawRepresentable {
     }
 }
 
-public enum CALayerStyle: HashableConcreteStyle {
+public enum CALayerStyle<T: CALayer>: HashableConcreteStyle {
     case contentsGravity(CAGravity)
     case opacity(Float)
     case isHidden(Bool)
@@ -99,7 +99,7 @@ public enum CALayerStyle: HashableConcreteStyle {
     case contentsScale(CGFloat)
     case name(String?)
     
-    public func sideEffect(on layer: CALayer) {
+    public func sideEffect(on layer: T) {
         switch self {
         case let .contentsGravity(gravity):
             layer.contentsGravity = gravity.rawValue
@@ -154,7 +154,7 @@ public enum CALayerStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: CALayerStyle, rhs: CALayerStyle) -> Bool {
+    public static func == (lhs: CALayerStyle<T>, rhs: CALayerStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.contentsGravity(left), .contentsGravity(right)):
             return left == right
@@ -259,13 +259,13 @@ public enum CALayerStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIView {
-    public func layer(_ styles: CALayerStyle...) -> Component<T> {
+    public func layer(_ styles: CALayerStyle<CALayer>...) -> Component<T> {
         return child({ $0.layer }, Component<CALayer>().adding(styles: styles.lazy.map(AnyStyle.init)))
     }
 }
 
 public extension Component where T: CALayer {
-    public func layer(_ styles: CALayerStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func layer(_ styles: CALayerStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UILabelStyle: HashableConcreteStyle {
+public enum UILabelStyle<T: UILabel>: HashableConcreteStyle {
     case text(String?)
     case attributedText(NSAttributedString?)
     case font(UIFont)
@@ -26,7 +26,7 @@ public enum UILabelStyle: HashableConcreteStyle {
     case shadowColor(UIColor?)
     case shadowOffset(CGSize)
     
-    public func sideEffect(on view: UILabel) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .text(text):
             view.text = text
@@ -63,7 +63,7 @@ public enum UILabelStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UILabelStyle, rhs: UILabelStyle) -> Bool {
+    public static func == (lhs: UILabelStyle<T>, rhs: UILabelStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.text(leftText), .text(rightText)):
             return leftText == rightText
@@ -145,7 +145,7 @@ public enum UILabelStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UILabel {
-    public func label(_ styles: UILabelStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func label(_ styles: UILabelStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

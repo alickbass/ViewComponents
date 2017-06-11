@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestCALayerBorderStyle: XCTestCase {
     
-    static let allStyles: [CALayer.BorderStyle] = [
+    static let allStyles: [CALayer.BorderStyle<UIView>] = [
         .cornerRadius(12), .width(12), .color(.red), .color(nil)
     ]
     

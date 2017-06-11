@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestTableViewCellStyle: XCTestCase {
     
-    static let allStyles: [TableViewCellStyle] = [
+    static let allStyles: [TableViewCellStyle<UITableViewCell>] = [
         TableViewCellStyle.accessoryType(.detailButton), TableViewCellStyle.editingAccessoryType(.detailButton),
         TableViewCellStyle.isSelected(true), TableViewCellStyle.selectionStyle(.gray), TableViewCellStyle.isHighlighted(true),
         TableViewCellStyle.isEditing(true), TableViewCellStyle.showsReorderControl(true),

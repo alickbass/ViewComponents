@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIScrollViewStyle: HashableConcreteStyle {
+public enum UIScrollViewStyle<T: UIScrollView>: HashableConcreteStyle {
     case contentOffset(CGPoint)
     case contentSize(CGSize)
     case contentInset(UIEdgeInsets)
@@ -28,7 +28,7 @@ public enum UIScrollViewStyle: HashableConcreteStyle {
     case minimumZoomScale(CGFloat)
     case bouncesZoom(Bool)
 
-    public func sideEffect(on view: UIScrollView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .contentOffset(value):
             view.contentOffset = value
@@ -69,7 +69,7 @@ public enum UIScrollViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UIScrollViewStyle, rhs: UIScrollViewStyle) -> Bool {
+    public static func == (lhs: UIScrollViewStyle<T>, rhs: UIScrollViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.contentOffset(left), .contentOffset(right)):
             return left == right
@@ -151,7 +151,7 @@ public enum UIScrollViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIScrollView {
-    public func scrollView(_ styles: UIScrollViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func scrollView(_ styles: UIScrollViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

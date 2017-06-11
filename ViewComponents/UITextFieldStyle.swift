@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UITextFieldStyle: HashableConcreteStyle {
+public enum UITextFieldStyle<T: UITextField>: HashableConcreteStyle {
     case text(String?)
     case attributedText(NSAttributedString?)
     case placeholder(String?)
@@ -28,7 +28,7 @@ public enum UITextFieldStyle: HashableConcreteStyle {
     case leftViewMode(UITextFieldViewMode)
     case rightViewMode(UITextFieldViewMode)
     
-    public func sideEffect(on view: UITextField) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .text(value):
             view.text = value
@@ -69,7 +69,7 @@ public enum UITextFieldStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UITextFieldStyle, rhs: UITextFieldStyle) -> Bool {
+    public static func == (lhs: UITextFieldStyle<T>, rhs: UITextFieldStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.text(left), .text(right)),
              let (.placeholder(left), .placeholder(right)):
@@ -155,7 +155,7 @@ public enum UITextFieldStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UITextField {
-    public func textField(_ styles: UITextFieldStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func textField(_ styles: UITextFieldStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

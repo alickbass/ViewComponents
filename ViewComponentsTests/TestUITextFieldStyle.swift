@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUITextFieldStyle: XCTestCase {
     
-    static let allStyles: [UITextFieldStyle] = [
+    static let allStyles: [UITextFieldStyle<UITextField>] = [
         .text(nil), .text("test"), .attributedText(nil), .attributedText(.init(string: "test")),
         .placeholder(nil), .placeholder("test"), .attributedPlaceholder(nil), .attributedPlaceholder(.init(string: "test")),
         .font(.systemFont(ofSize: 8)), .textColor(.red), .textAlignment(.center), .adjustsFontSizeToFitWidth(true),

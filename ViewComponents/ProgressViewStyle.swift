@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum ProgressViewStyle: HashableConcreteStyle {
+public enum ProgressViewStyle<T: UIProgressView>: HashableConcreteStyle {
     case progress(Float, animated: Bool)
     case progressViewStyle(UIProgressViewStyle)
     case progressTintColor(UIColor?)
@@ -16,7 +16,7 @@ public enum ProgressViewStyle: HashableConcreteStyle {
     case trackTintColor(UIColor?)
     case trackImage(UIImage?)
     
-    public func sideEffect(on view: UIProgressView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .progress(value, animated: animated):
             view.setProgress(value, animated: animated)
@@ -33,7 +33,7 @@ public enum ProgressViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: ProgressViewStyle, rhs: ProgressViewStyle) -> Bool {
+    public static func == (lhs: ProgressViewStyle<T>, rhs: ProgressViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.progress(left, animated: leftAnimated), .progress(right, animated: rightAnimated)):
             return left == right && leftAnimated == rightAnimated
@@ -80,7 +80,7 @@ public enum ProgressViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIProgressView {
-    public func progressView(_ styles: ProgressViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func progressView(_ styles: ProgressViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

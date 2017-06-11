@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUILabelStyle: XCTestCase {
     
-    static let allStyles: [UILabelStyle] = [
+    static let allStyles: [UILabelStyle<UILabel>] = [
         UILabelStyle.text("test"), UILabelStyle.text(nil), UILabelStyle.attributedText(.init(string: "test")),
         UILabelStyle.attributedText(nil), UILabelStyle.font(.systemFont(ofSize: 12)), UILabelStyle.textColor(.red),
         UILabelStyle.textAlignment(.center), UILabelStyle.lineBreakMode(.byClipping), UILabelStyle.isEnabled(true),

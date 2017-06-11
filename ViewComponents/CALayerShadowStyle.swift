@@ -9,14 +9,14 @@
 import UIKit
 
 public extension CALayer {
-    public enum ShadowStyle: HashableConcreteStyle {
+    public enum ShadowStyle<T: CALayer>: HashableConcreteStyle {
         case opacity(Float)
         case radius(CGFloat)
         case offset(CGSize)
         case color(UIColor?)
         case path(CGPath?)
         
-        public func sideEffect(on layer: CALayer) {
+        public func sideEffect(on layer: T) {
             switch self {
             case let .opacity(shadowOpacity):
                 layer.shadowOpacity = shadowOpacity
@@ -31,7 +31,7 @@ public extension CALayer {
             }
         }
         
-        public static func == (lhs: ShadowStyle, rhs: ShadowStyle) -> Bool {
+        public static func == (lhs: ShadowStyle<T>, rhs: ShadowStyle<T>) -> Bool {
             switch (lhs, rhs) {
             case let (.opacity(leftOpacity), .opacity(rightOpacity)):
                 return leftOpacity == rightOpacity
@@ -80,7 +80,7 @@ public extension Component where T: UIView {
 }
 
 public extension Component where T: CALayer {
-    public func shadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func shadow(_ styles: CALayer.ShadowStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }

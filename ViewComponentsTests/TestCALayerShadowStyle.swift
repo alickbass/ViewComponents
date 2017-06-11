@@ -10,7 +10,7 @@ import XCTest
 import ViewComponents
 
 class TestCALayerShadowStyle: XCTestCase {
-    static let allStyles: [CALayer.ShadowStyle] = [
+    static let allStyles: [CALayer.ShadowStyle<CALayer>] = [
         .opacity(0.2), .radius(2), .offset(.zero),
         .color(.red), .path(CGPath(rect: CGRect(x: 0, y: 0, width: 15, height: 15), transform: nil)), .path(nil), .color(nil)
     ]
