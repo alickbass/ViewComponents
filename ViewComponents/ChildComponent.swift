@@ -58,6 +58,10 @@ public struct ChildComponent<View>: ComponentType, _ChildComponent {
         self.access = access
     }
     
+    public static func child<V, E: ComponentConvertible>(_ access: @escaping (View) -> V, _ item: E) -> ChildComponent<View> where E.ViewType == V {
+        return ChildComponent<View>(component: item.toComponent, access)
+    }
+    
     public var isEmpty: Bool {
         return box.isEmpty
     }

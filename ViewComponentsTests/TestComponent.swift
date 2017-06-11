@@ -19,8 +19,8 @@ class TestComponent: XCTestCase {
         XCTAssertEqual(comp, comp)
         XCTAssertEqual(comp.view(.alpha(0.2), .backgroundColor(.red)), comp)
         XCTAssertEqual(Component<UIView>().view(.backgroundColor(.red), .alpha(0.2)), comp)
-        XCTAssertEqual(comp.child(viewAccess, comp), comp.child(viewAccess, comp))
-        XCTAssertNotEqual(comp.child({ $0 }, comp), comp.child(labelAcess, Component<UILabel>()))
+        XCTAssertEqual(comp.withChildren(.child(viewAccess, comp)), comp.withChildren(.child(viewAccess, comp)))
+        XCTAssertNotEqual(comp.withChildren(.child({ $0 }, comp)), comp.withChildren(.child(labelAcess, Component<UILabel>())))
     }
     
     func testComponentSideEffect() {
@@ -28,7 +28,7 @@ class TestComponent: XCTestCase {
         let label = UILabel()
         let labelComp = Component<UILabel>().label(.isEnabled(false))
 
-        comp.child({ _ in label }, labelComp).configure(item: view)
+        comp.withChildren(.child({ _ in label }, labelComp)).configure(item: view)
         
         XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
@@ -57,7 +57,7 @@ class TestComponent: XCTestCase {
         let otherChild = ChildComponent(component: Component<UIButton>(), { (view: UIView) -> UIButton in UIButton() })
         XCTAssertEqual(child.diffChanges(from: otherChild), otherChild)
         XCTAssertEqual(child.children, comp.children)
-        XCTAssertEqual(ChildComponent(component: comp.child(viewAccess, comp), viewAccess).children, comp.child(viewAccess, comp).children)
+        XCTAssertEqual(ChildComponent(component: comp.withChildren(.child(viewAccess, comp)), viewAccess).children, comp.withChildren(.child(viewAccess, comp)).children)
     }
     
     func testComponentDiffing() {
@@ -65,49 +65,55 @@ class TestComponent: XCTestCase {
         
         let firstComponent = Component<UIView>()
             .view(.clipsToBounds(true), .backgroundColor(.red))
-            .child(viewAccess,
-                Component<UIView>()
+            .withChildren(
+                .child(viewAccess,
+                    Component<UIView>()
                     .border(.color(.red), .width(12))
                     .view(.isHidden(true))
-            )
-            .child(buttonAccess,
-                Component<UIButton>()
+                ),
+                .child(buttonAccess,
+                    Component<UIButton>()
                     .button(.title("test", for: .normal))
                     .view(.isHidden(true))
+                ),
+                .child(labelAcess, Component<UILabel>().label(.isEnabled(true)))
             )
-            .child(labelAcess, Component<UILabel>().label(.isEnabled(true)))
         
         let secondComponent = Component<UIView>()
             .view(.backgroundColor(.red), .contentMode(.bottom))
-            .child(viewAccess,
-                Component<UIView>()
+            .withChildren(
+                .child(viewAccess,
+                    Component<UIView>()
                     .border(.color(.green), .width(12))
                     .view(.isHidden(true))
-            )
-            .child(buttonAccess,
-                Component<UIButton>()
+                ),
+                .child(buttonAccess,
+                    Component<UIButton>()
                     .button(.title("test", for: .normal), .titleColor(.red, for: .normal))
                     .view(.isHidden(true), .isMultipleTouchEnabled(true))
+                ),
+                .child(labelAcess, Component<UILabel>().label(.isEnabled(true))),
+                .child(viewAccess, Component<UIView>().view(.clearsContextBeforeDrawing(true)))
             )
-            .child(labelAcess, Component<UILabel>().label(.isEnabled(true)))
-            .child(viewAccess, Component<UIView>().view(.clearsContextBeforeDrawing(true)))
         
         let diff = Component<UIView>()
             .view(.contentMode(.bottom))
-            .child(viewAccess,
-                Component<UIView>()
-                    .border(.color(.green))
-                    .view()
+            .withChildren(
+                .child(viewAccess,
+                       Component<UIView>()
+                        .border(.color(.green))
+                        .view()
+                ),
+                .child(buttonAccess,
+                       Component<UIButton>()
+                        .button(.titleColor(.red, for: .normal))
+                        .view(.isMultipleTouchEnabled(true))
+                ),
+                .child(viewAccess, Component<UIView>().view(.clearsContextBeforeDrawing(true)))
             )
-            .child(buttonAccess,
-                Component<UIButton>()
-                    .button(.titleColor(.red, for: .normal))
-                    .view(.isMultipleTouchEnabled(true))
-            )
-            .child(viewAccess, Component<UIView>().view(.clearsContextBeforeDrawing(true)))
         
         XCTAssertEqual(firstComponent.diffChanges(from: secondComponent), diff)
-        XCTAssertEqual(Component<UIView>().child(viewAccess, Component<UIView>()).children.first?.isEmpty, true)
+        XCTAssertEqual(Component<UIView>().withChildren(.child(viewAccess, Component<UIView>())).children.first?.isEmpty, true)
     }
     
     func testComponentViewType() {

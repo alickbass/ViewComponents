@@ -75,7 +75,7 @@ public extension CALayer {
 
 public extension Component where T: UIView {
     public func shadow(_ styles: CALayer.ShadowStyle...) -> Component<T> {
-        return child({ $0.layer }, Component<CALayer>().adding(styles: styles.lazy.map(AnyStyle<CALayer>.init)))
+        return withChildren(.child({ $0.layer }, Component<CALayer>().adding(styles: styles.lazy.map(AnyStyle<CALayer>.init))))
     }
 }
 

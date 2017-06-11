@@ -34,8 +34,8 @@ public struct Component<T>: ComponentType {
         children.forEach { $0.configure(item: item) }
     }
     
-    public func child<V, E: ComponentConvertible>(_ access: @escaping (T) -> V, _ item: E) -> Component<T> where E.ViewType == V {
-        return Component<T>(styles: styles, children: children + [ChildComponent(component: item.toComponent, access)])
+    public func withChildren(_ children: ChildComponent<T>...) -> Component<T> {
+        return Component<T>(styles: styles, children: self.children + children)
     }
 }
 
