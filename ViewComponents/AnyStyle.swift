@@ -34,7 +34,7 @@ extension HashableConcreteStyle {
     }
 }
 
-public final class AnyStyle<T>: StyleType {
+public struct AnyStyle<T>: StyleType {
     private let box: _AnyStyleBoxBase
     
     private init(_ box: _AnyStyleBoxBase) {
@@ -42,7 +42,7 @@ public final class AnyStyle<T>: StyleType {
     }
     
     public init<V: StyleType>(_ style: V) where V.View == T {
-        self.box = _AnyStyleConcreteBox(style)
+        self.init(_AnyStyleConcreteBox(style))
     }
     
     func unsafeCast<V>(to type: V.Type) -> AnyStyle<V> {
