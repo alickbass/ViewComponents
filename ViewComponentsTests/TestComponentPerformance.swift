@@ -59,7 +59,7 @@ struct DetailsCellViewModel: ComponentConvertible {
 
 class TestComponentPerformance: XCTestCase {
     
-    func testPerformanceExample() {
+    func testToComponent() {
         let viewModels = (0...10000).map({ _ in DetailsCellViewModel() })
         self.measure {
             _ = viewModels.map({ $0.toComponent })
