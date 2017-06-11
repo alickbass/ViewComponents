@@ -12,7 +12,7 @@ import ViewComponents
 class TestUIImageViewStyle: XCTestCase {
     let image = UIImage()
     
-    static let allStyles: [UIImageViewStyle] = [
+    static let allStyles: [UIImageViewStyle<UIImageView>] = [
         UIImageViewStyle.image(UIImage()), UIImageViewStyle.image(nil),
         UIImageViewStyle.highlightedImage(UIImage()), UIImageViewStyle.highlightedImage(nil),
         UIImageViewStyle.highlightedAnimationImages([UIImage()]), UIImageViewStyle.highlightedAnimationImages(nil),

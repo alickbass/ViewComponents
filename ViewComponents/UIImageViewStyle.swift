@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIImageViewStyle: HashableConcreteStyle {
+public enum UIImageViewStyle<T: UIImageView>: HashableConcreteStyle {
     case image(UIImage?)
     case highlightedImage(UIImage?)
     case animationImages([UIImage]?)
@@ -17,7 +17,7 @@ public enum UIImageViewStyle: HashableConcreteStyle {
     case animationRepeatCount(Int)
     case isHighlighted(Bool)
     
-    public func sideEffect(on view: UIImageView) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .image(image):
             view.image = image
@@ -36,7 +36,7 @@ public enum UIImageViewStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UIImageViewStyle, rhs: UIImageViewStyle) -> Bool {
+    public static func == (lhs: UIImageViewStyle<T>, rhs: UIImageViewStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.image(leftImage), .image(rightImage)),
              let (.highlightedImage(leftImage), .highlightedImage(rightImage)):
@@ -93,7 +93,7 @@ public enum UIImageViewStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIImageView {
-    public func imageView(_ styles: UIImageViewStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func imageView(_ styles: UIImageViewStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }
