@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct Component<T>: ConcreteComponentType {
+public struct Component<T>: ComponentType {
     public let styles: Set<AnyStyle<T>>
     public let children: [ChildComponent]
     

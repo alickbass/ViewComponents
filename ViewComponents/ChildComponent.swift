@@ -17,7 +17,7 @@ private protocol _AnyComponentBox {
     func diffChanges(from other: _AnyComponentBox) -> _AnyComponentBox
 }
 
-private struct _ConcreteComponentBox<Base: ConcreteComponentType>: _AnyComponentBox {
+private struct _ConcreteComponentBox<Base: ComponentType>: _AnyComponentBox {
     let base: Base
     
     var children: [ChildComponent] {
@@ -43,7 +43,7 @@ private struct _ConcreteComponentBox<Base: ConcreteComponentType>: _AnyComponent
     }
 }
 
-public struct ChildComponent: ConcreteComponentType {
+public struct ChildComponent: ComponentType {
     private let box: _AnyComponentBox
     let access: (Any) -> Any
     

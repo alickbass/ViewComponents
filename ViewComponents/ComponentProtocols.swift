@@ -29,7 +29,7 @@ public extension ComponentConvertible {
 }
 
 // MARK: - Component Protocol
-public protocol ConcreteComponentType: Equatable {
+public protocol ComponentType: Equatable {
     associatedtype View
     
     var children: [ChildComponent] { get }
