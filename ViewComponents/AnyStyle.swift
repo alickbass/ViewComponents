@@ -35,14 +35,10 @@ extension HashableConcreteStyle {
 }
 
 public struct AnyStyle<T>: StyleType {
-    private let box: _AnyStyleBoxBase
-    
-    private init(_ box: _AnyStyleBoxBase) {
-        self.box = box
-    }
+    private let box: _AnyStyleBoxBase<T>
     
     public init<V: StyleType>(_ style: V) where V.View == T {
-        self.init(_AnyStyleConcreteBox(style))
+        box = _AnyStyleConcreteBox(style)
     }
     
     public func sideEffect(on item: T) {
@@ -58,16 +54,16 @@ public struct AnyStyle<T>: StyleType {
     }
 }
 
-private class _AnyStyleBoxBase: StyleType {
-    func sideEffect(on item: Any) {
+private class _AnyStyleBoxBase<V>: StyleType {
+    func sideEffect(on item: V) {
         fatalError()
     }
     
-    func isEqual(to other: _AnyStyleBoxBase) -> Bool {
+    func isEqual(to other: _AnyStyleBoxBase<V>) -> Bool {
         fatalError()
     }
     
-    static func == (lhs: _AnyStyleBoxBase, rhs: _AnyStyleBoxBase) -> Bool {
+    static func == (lhs: _AnyStyleBoxBase<V>, rhs: _AnyStyleBoxBase<V>) -> Bool {
         return lhs.isEqual(to: rhs)
     }
     
@@ -76,18 +72,18 @@ private class _AnyStyleBoxBase: StyleType {
     }
 }
 
-private final class _AnyStyleConcreteBox<T: StyleType>: _AnyStyleBoxBase {
+private final class _AnyStyleConcreteBox<T: StyleType>: _AnyStyleBoxBase<T.View> {
     let base: T
     
     init(_ base: T) {
         self.base = base
     }
     
-    override func sideEffect(on item: Any) {
-        base.sideEffect(on: item as! T.View)
+    override func sideEffect(on item: T.View) {
+        base.sideEffect(on: item)
     }
     
-    override func isEqual(to other: _AnyStyleBoxBase) -> Bool {
+    override func isEqual(to other: _AnyStyleBoxBase<T.View>) -> Bool {
         guard let other = other as? _AnyStyleConcreteBox<T> else { return false }
         return self.base == other.base
     }
