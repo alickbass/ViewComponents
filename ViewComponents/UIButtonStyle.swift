@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UIButtonStyle: HashableConcreteStyle {
+public enum UIButtonStyle<T: UIButton>: HashableConcreteStyle {
     case title(String?, for: UIControlState)
     case attributedTitle(NSAttributedString?, for: UIControlState)
     case titleColor(UIColor?, for: UIControlState)
@@ -23,7 +23,7 @@ public enum UIButtonStyle: HashableConcreteStyle {
     case titleEdgeInsets(UIEdgeInsets)
     case imageEdgeInsets(UIEdgeInsets)
     
-    public func sideEffect(on view: UIButton) {
+    public func sideEffect(on view: T) {
         switch self {
         case let .title(title, for: state):
             view.setTitle(title, for: state)
@@ -54,7 +54,7 @@ public enum UIButtonStyle: HashableConcreteStyle {
         }
     }
     
-    public static func == (lhs: UIButtonStyle, rhs: UIButtonStyle) -> Bool {
+    public static func == (lhs: UIButtonStyle<T>, rhs: UIButtonStyle<T>) -> Bool {
         switch (lhs, rhs) {
         case let (.title(leftTitle, for: leftState), .title(rightTitle, for: rightState)):
             return leftTitle == rightTitle && leftState == rightState
@@ -139,7 +139,7 @@ public enum UIButtonStyle: HashableConcreteStyle {
 }
 
 public extension Component where T: UIButton {
-    public func button(_ styles: UIButtonStyle...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init).map({ $0.unsafeCast(to: T.self) }))
+    public func button(_ styles: UIButtonStyle<T>...) -> Component<T> {
+        return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }
