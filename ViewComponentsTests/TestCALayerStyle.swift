@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestCALayerStyle: XCTestCase {
     
-    static let allStyles: [CALayerStyle] = [
+    static let allStyles: [CALayerStyle<CALayer>] = [
         .contentsGravity(.bottom), CALayerStyle.opacity(0.2), .isHidden(true), .masksToBounds(true),
         .mask(CALayer()), .isDoubleSided(true), .backgroundColor(.red), .allowsEdgeAntialiasing(true),
         .allowsGroupOpacity(true), .isOpaque(true), .edgeAntialiasingMask(.layerLeftEdge), .isGeometryFlipped(true),
