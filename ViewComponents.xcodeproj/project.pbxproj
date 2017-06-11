@@ -32,6 +32,7 @@
 		CE6735491EB677D400BBD2FE /* UILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6735481EB677D400BBD2FE /* UILabelStyle.swift */; };
 		CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */; };
 		CE77FA9D1EEC89BC003A3FD6 /* AnyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */; };
+		CE77FA9F1EED4758003A3FD6 /* TestComponentPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE77FA9E1EED4758003A3FD6 /* TestComponentPerformance.swift */; };
 		CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */; };
 		CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */; };
 		CECED8621EBB490000FF8B36 /* CALayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED8611EBB490000FF8B36 /* CALayerStyle.swift */; };
@@ -90,6 +91,7 @@
 		CE6735481EB677D400BBD2FE /* UILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelStyle.swift; sourceTree = "<group>"; };
 		CE67354C1EB7295000BBD2FE /* TestUILabelStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUILabelStyle.swift; sourceTree = "<group>"; };
 		CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyStyle.swift; sourceTree = "<group>"; };
+		CE77FA9E1EED4758003A3FD6 /* TestComponentPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComponentPerformance.swift; sourceTree = "<group>"; };
 		CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIButtonStyle.swift; sourceTree = "<group>"; };
 		CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIImageViewStyle.swift; sourceTree = "<group>"; };
 		CECED8611EBB490000FF8B36 /* CALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerStyle.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				CE0CF5521EB7758400B6BC36 /* TestComponent.swift */,
+				CE77FA9E1EED4758003A3FD6 /* TestComponentPerformance.swift */,
 				CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */,
 				CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */,
 				CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */,
@@ -384,6 +387,7 @@
 				CE469E371EC9B42E009C256F /* TestActivityIndicatorViewStyle.swift in Sources */,
 				CECED8641EBB4C2600FF8B36 /* TestCALayerStyle.swift in Sources */,
 				CE57792A1EC5F20E00BE5F52 /* TestUICollectionViewStyle.swift in Sources */,
+				CE77FA9F1EED4758003A3FD6 /* TestComponentPerformance.swift in Sources */,
 				CEFE1A2D1EC7BC2400E077E0 /* TestUITextViewStyle.swift in Sources */,
 				CEA374E71EB88DC800DA55C5 /* TestUIButtonStyle.swift in Sources */,
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
