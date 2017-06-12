@@ -19,7 +19,7 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
     }
 }
 
-class TestTableViewStyle: XCTestCase {
+class TestTableViewStyle: XCTestCase, ViewTestType {
     let blur = UIBlurEffect()
     let controller = TableViewController()
     
@@ -35,9 +35,7 @@ class TestTableViewStyle: XCTestCase {
         .dataSource(nil), .dataSource(TableViewController()), .delegate(nil), .delegate(TableViewController())
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUIScrollViewStyle.accumulatedHashes + TestTableViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUIScrollViewStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(TableViewStyle.rowHeight(40), .rowHeight(40))
@@ -162,12 +160,6 @@ class TestTableViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUIScrollViewStyle.accumulatedHashes)
-        
-        for item in TestTableViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

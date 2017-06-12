@@ -9,16 +9,14 @@
 import XCTest
 import ViewComponents
 
-class TestUICollectionViewStyle: XCTestCase {
+class TestUICollectionViewStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UICollectionViewStyle<UICollectionView>] = [
         .isPrefetchingEnabled(true), .allowsSelection(true), .allowsMultipleSelection(true),
         .remembersLastFocusedIndexPath(true), .collectionViewLayout(UICollectionViewLayout())
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestTableViewCellStyle.accumulatedHashes + TestUICollectionViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestTableViewCellStyle.accumulatedHashes }
     
     let layout = UICollectionViewLayout()
     
@@ -59,12 +57,6 @@ class TestUICollectionViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestTableViewCellStyle.accumulatedHashes)
-        
-        for item in TestUICollectionViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

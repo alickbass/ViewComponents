@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUISwitchStyle: XCTestCase {
+class TestUISwitchStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UISwitchStyle<UISwitch>] = [
         .isOn(true, animated: true), .onTintColor(nil), .onTintColor(.red),
@@ -17,9 +17,7 @@ class TestUISwitchStyle: XCTestCase {
         .offImage(nil), .offImage(UIImage())
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestActivityIndicatorViewStyle.accumulatedHashes + TestUISwitchStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestActivityIndicatorViewStyle.accumulatedHashes }
     
     let image = UIImage()
     
@@ -61,12 +59,6 @@ class TestUISwitchStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestActivityIndicatorViewStyle.accumulatedHashes)
-        
-        for item in TestUISwitchStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

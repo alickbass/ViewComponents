@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestProgressViewStyle: XCTestCase {
+class TestProgressViewStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [ProgressViewStyle<UIProgressView>] = [
         .progress(0.2, animated: true), .progressViewStyle(.bar), .progressTintColor(.red),
@@ -17,9 +17,7 @@ class TestProgressViewStyle: XCTestCase {
         .trackTintColor(.red), .trackTintColor(nil), .trackImage(UIImage()), .trackImage(nil)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUITextViewStyle.accumulatedHashes + TestProgressViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUITextViewStyle.accumulatedHashes }
     
     let image = UIImage()
     
@@ -66,12 +64,6 @@ class TestProgressViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUITextViewStyle.accumulatedHashes)
-        
-        for item in TestProgressViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

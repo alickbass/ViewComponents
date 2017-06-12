@@ -9,16 +9,14 @@
 import XCTest
 import ViewComponents
 
-class TestActivityIndicatorViewStyle: XCTestCase {
+class TestActivityIndicatorViewStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [ActivityIndicatorViewStyle<UIActivityIndicatorView>] = [
         .isAnimating(true), .hidesWhenStopped(true), .activityIndicatorViewStyle(.gray),
         .color(.gray), .color(.none)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUISliderStyle.accumulatedHashes + TestActivityIndicatorViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUISliderStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(ActivityIndicatorViewStyle.isAnimating(true), .isAnimating(true))
@@ -55,12 +53,6 @@ class TestActivityIndicatorViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUISliderStyle.accumulatedHashes)
-        
-        for item in TestActivityIndicatorViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

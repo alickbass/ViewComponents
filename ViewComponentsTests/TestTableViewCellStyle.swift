@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestTableViewCellStyle: XCTestCase {
+class TestTableViewCellStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [TableViewCellStyle<UITableViewCell>] = [
         TableViewCellStyle.accessoryType(.detailButton), TableViewCellStyle.editingAccessoryType(.detailButton),
@@ -19,9 +19,7 @@ class TestTableViewCellStyle: XCTestCase {
         TableViewCellStyle.separatorInset(.zero), TableViewCellStyle.focusStyle(.default)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestTableViewStyle.accumulatedHashes + TestTableViewCellStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestTableViewStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(TableViewCellStyle.accessoryType(.detailButton), .accessoryType(.detailButton))
@@ -96,12 +94,6 @@ class TestTableViewCellStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestTableViewStyle.accumulatedHashes)
-        
-        for item in TestTableViewCellStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }
