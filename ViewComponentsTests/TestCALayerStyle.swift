@@ -9,7 +9,35 @@
 import XCTest
 import ViewComponents
 
-class TestCALayerStyle: XCTestCase {
+protocol ViewTestType {
+    associatedtype S: StyleType
+    
+    static var allStyles: [S] { get }
+    static var accumulatedHashes: [Int: Any] { get }
+    static var previousHashes: [Int: Any] { get }
+    
+    func testAccumulatingHashes()
+}
+
+extension ViewTestType {
+    static var accumulatedHashes: [Int: Any] {
+        var hashes = previousHashes
+        allStyles.forEach({ hashes[$0.hashValue] = $0 })
+        return hashes
+    }
+    
+    func testAccumulatingHashes() {
+        var hashes = Self.previousHashes
+        
+        for item in Self.allStyles {
+            let hash = item.hashValue
+            XCTAssertNil(hashes[hash], "\(item) has the same hash as \(hashes[hash]!)")
+            hashes[hash] = item
+        }
+    }
+}
+
+class TestCALayerStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [CALayerStyle<CALayer>] = [
         .contentsGravity(.bottom), CALayerStyle.opacity(0.2), .isHidden(true), .masksToBounds(true),
@@ -21,11 +49,7 @@ class TestCALayerStyle: XCTestCase {
         .mask(nil), .backgroundColor(nil), .name(nil)
     ]
     
-    static var accumulatedHashes: [Int: Any] {
-        var hashes = [Int: Any]()
-        TestCALayerStyle.allStyles.forEach({ hashes[$0.hashValue] = $0 })
-        return hashes
-    }
+    static let previousHashes: [Int: Any] = [:]
     
     func testCAGravity() {
         XCTAssertEqual(CAGravity.center.rawValue, kCAGravityCenter)
@@ -207,12 +231,6 @@ class TestCALayerStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set<Int>()
-        
-        for item in TestCALayerStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }
