@@ -8,7 +8,16 @@
 
 import UIKit
 
-public enum UILabelStyle<T: UILabel>: HashableConcreteStyle {
+public enum UILabelStyle<T: UILabel>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case text = 44, attributedText, font
+        case textColor, textAlignment, lineBreakMode
+        case isEnabled, adjustsFontSizeToFitWidth, allowsDefaultTighteningForTruncation
+        case baselineAdjustment, minimumScaleFactor, numberOfLines
+        case highlightedTextColor, isHighlighted, shadowColor
+        case shadowOffset
+    }
+    
     case text(String?)
     case attributedText(NSAttributedString?)
     case font(UIFont)
@@ -98,48 +107,40 @@ public enum UILabelStyle<T: UILabel>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 44
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 16
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .text(text):
-            return (1, text?.hashValue ?? 0)
+            return (.text, text?.hashValue ?? 0)
         case let .attributedText(text):
-            return (2, text?.hashValue ?? 0)
+            return (.attributedText, text?.hashValue ?? 0)
         case let .font(font):
-            return (3, font.hashValue)
+            return (.font, font.hashValue)
         case let .textColor(textColor):
-            return (4, textColor.hashValue)
+            return (.textColor, textColor.hashValue)
         case let .textAlignment(textAlignment):
-            return (5, textAlignment.hashValue)
+            return (.textAlignment, textAlignment.hashValue)
         case let .lineBreakMode(lineBreakMode):
-            return (6, lineBreakMode.hashValue)
+            return (.lineBreakMode, lineBreakMode.hashValue)
         case let .isEnabled(isEnabled):
-            return (7, isEnabled.hashValue)
+            return (.isEnabled, isEnabled.hashValue)
         case let .adjustsFontSizeToFitWidth(adjusts):
-            return (8, adjusts.hashValue)
+            return (.adjustsFontSizeToFitWidth, adjusts.hashValue)
         case let .allowsDefaultTighteningForTruncation(allows):
-            return (9, allows.hashValue)
+            return (.allowsDefaultTighteningForTruncation, allows.hashValue)
         case let .baselineAdjustment(adjustment):
-            return (10, adjustment.hashValue)
+            return (.baselineAdjustment, adjustment.hashValue)
         case let .minimumScaleFactor(minimumScaleFactor):
-            return (11, minimumScaleFactor.hashValue)
+            return (.minimumScaleFactor, minimumScaleFactor.hashValue)
         case let .numberOfLines(numberOfLines):
-            return (12, numberOfLines.hashValue)
+            return (.numberOfLines, numberOfLines.hashValue)
         case let .highlightedTextColor(highlightedTextColor):
-            return (13, highlightedTextColor?.hashValue ?? 0)
+            return (.highlightedTextColor, highlightedTextColor?.hashValue ?? 0)
         case let .isHighlighted(isHighlighted):
-            return (14, isHighlighted.hashValue)
+            return (.isHighlighted, isHighlighted.hashValue)
         case let .shadowColor(shadowColor):
-            return (15, shadowColor?.hashValue ?? 0)
+            return (.shadowColor, shadowColor?.hashValue ?? 0)
         case let .shadowOffset(shadowOffset):
-            return (16, shadowOffset.hashValue)
+            return (.shadowOffset, shadowOffset.hashValue)
         }
     }
 }
