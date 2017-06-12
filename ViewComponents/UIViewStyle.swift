@@ -79,7 +79,7 @@ extension UIViewStyle: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return CALayer.BorderStyle.lastStyleIndex()
+        return 32
     }
     
     @inline(__always) static func stylesCount() -> Int {

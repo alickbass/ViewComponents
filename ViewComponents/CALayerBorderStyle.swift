@@ -40,7 +40,7 @@ public extension CALayer {
         }
         
         @inline(__always) static func startIndex() -> Int {
-            return CALayer.ShadowStyle.lastStyleIndex()
+            return 29
         }
         
         @inline(__always) static func stylesCount() -> Int {

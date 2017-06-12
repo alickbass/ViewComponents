@@ -99,7 +99,7 @@ public enum UILabelStyle<T: UILabel>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UIViewStyle.lastStyleIndex()
+        return 44
     }
     
     @inline(__always) static func stylesCount() -> Int {
