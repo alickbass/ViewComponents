@@ -8,7 +8,16 @@
 
 import UIKit
 
-public enum UIScrollViewStyle<T: UIScrollView>: HashableConcreteStyle {
+public enum UIScrollViewStyle<T: UIScrollView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case contentOffset = 85, contentSize, contentInset
+        case isScrollEnabled, isDirectionalLockEnabled, isPagingEnabled
+        case bounces, alwaysBounceVertical, alwaysBounceHorizontal
+        case canCancelContentTouches, delaysContentTouches, indicatorStyle
+        case scrollIndicatorInsets, showsHorizontalScrollIndicator, showsVerticalScrollIndicator
+        case maximumZoomScale, minimumZoomScale, bouncesZoom
+    }
+    
     case contentOffset(CGPoint)
     case contentSize(CGSize)
     case contentInset(UIEdgeInsets)
@@ -100,52 +109,44 @@ public enum UIScrollViewStyle<T: UIScrollView>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 85
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 28
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .contentOffset(value):
-            return (1, value.hashValue)
+            return (.contentOffset, value.hashValue)
         case let .contentSize(value):
-            return (2, value.hashValue)
+            return (.contentSize, value.hashValue)
         case let .contentInset(value):
-            return (3, value.hashValue)
+            return (.contentInset, value.hashValue)
         case let .isScrollEnabled(value):
-            return (4, value.hashValue)
+            return (.isScrollEnabled, value.hashValue)
         case let .isDirectionalLockEnabled(value):
-            return (5, value.hashValue)
+            return (.isDirectionalLockEnabled, value.hashValue)
         case let .isPagingEnabled(value):
-            return (6, value.hashValue)
+            return (.isPagingEnabled, value.hashValue)
         case let .bounces(value):
-            return (7, value.hashValue)
+            return (.bounces, value.hashValue)
         case let .alwaysBounceVertical(value):
-            return (8, value.hashValue)
+            return (.alwaysBounceVertical, value.hashValue)
         case let .alwaysBounceHorizontal(value):
-            return (9, value.hashValue)
+            return (.alwaysBounceHorizontal, value.hashValue)
         case let .canCancelContentTouches(value):
-            return (10, value.hashValue)
+            return (.canCancelContentTouches, value.hashValue)
         case let .delaysContentTouches(value):
-            return (11, value.hashValue)
+            return (.delaysContentTouches, value.hashValue)
         case let .indicatorStyle(value):
-            return (12, value.hashValue)
+            return (.indicatorStyle, value.hashValue)
         case let .scrollIndicatorInsets(value):
-            return (13, value.hashValue)
+            return (.scrollIndicatorInsets, value.hashValue)
         case let .showsHorizontalScrollIndicator(value):
-            return (14, value.hashValue)
+            return (.showsHorizontalScrollIndicator, value.hashValue)
         case let .showsVerticalScrollIndicator(value):
-            return (15, value.hashValue)
+            return (.showsVerticalScrollIndicator, value.hashValue)
         case let .maximumZoomScale(value):
-            return (16, value.hashValue)
+            return (.maximumZoomScale, value.hashValue)
         case let .minimumZoomScale(value):
-            return (17, value.hashValue)
+            return (.minimumZoomScale, value.hashValue)
         case let .bouncesZoom(value):
-            return (28, value.hashValue)
+            return (.bouncesZoom, value.hashValue)
         }
     }
 }
