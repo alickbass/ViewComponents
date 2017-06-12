@@ -62,6 +62,8 @@ class TestCALayerShadowStyle: XCTestCase {
     }
     
     func testHashValue() {
+        XCTAssertEqual(CALayer.ShadowStyle.Key.opacity.rawValue, CALayerStyle.Key.name.rawValue + 1)
+        
         var hashes = Set(TestCALayerStyle.accumulatedHashes)
         
         for item in TestCALayerShadowStyle.allStyles {
