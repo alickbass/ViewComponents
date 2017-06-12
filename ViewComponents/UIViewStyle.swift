@@ -9,6 +9,13 @@
 import UIKit
 
 public enum UIViewStyle<T: UIView> {
+    public enum Key: Int, Hashable {
+        case backgroundColor = 32, isHidden, alpha
+        case isOpaque, tintColor, tintAdjustmentMode
+        case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled
+        case isMultipleTouchEnabled, isExclusiveTouch, contentMode
+    }
+    
     case backgroundColor(UIColor?)
     case isHidden(Bool)
     case alpha(CGFloat)
@@ -23,7 +30,7 @@ public enum UIViewStyle<T: UIView> {
     case contentMode(UIViewContentMode)
 }
 
-extension UIViewStyle: HashableConcreteStyle {
+extension UIViewStyle: KeyedStyle {
     public func sideEffect(on view: T) {
         switch self {
         case let .backgroundColor(color):
@@ -78,40 +85,32 @@ extension UIViewStyle: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 32
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 12
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .backgroundColor(color):
-            return (1, color?.hashValue ?? 0)
+            return (.backgroundColor, color?.hashValue ?? 0)
         case let .isHidden(isHidden):
-            return (2, isHidden.hashValue)
+            return (.isHidden, isHidden.hashValue)
         case let .alpha(alpha):
-            return (3, alpha.hashValue)
+            return (.alpha, alpha.hashValue)
         case let .isOpaque(isOpaque):
-            return (4, isOpaque.hashValue)
+            return (.isOpaque, isOpaque.hashValue)
         case let .tintColor(tintColor):
-            return (5, tintColor.hashValue)
+            return (.tintColor, tintColor.hashValue)
         case let .tintAdjustmentMode(mode):
-            return (6, mode.hashValue)
+            return (.tintAdjustmentMode, mode.hashValue)
         case let .clipsToBounds(clips):
-            return (7, clips.hashValue)
+            return (.clipsToBounds, clips.hashValue)
         case let .clearsContextBeforeDrawing(clears):
-            return (8, clears.hashValue)
+            return (.clearsContextBeforeDrawing, clears.hashValue)
         case let .isUserInteractionEnabled(isEnabled):
-            return (9, isEnabled.hashValue)
+            return (.isUserInteractionEnabled, isEnabled.hashValue)
         case let .isMultipleTouchEnabled(isEnabled):
-            return (10, isEnabled.hashValue)
+            return (.isMultipleTouchEnabled, isEnabled.hashValue)
         case let .isExclusiveTouch(isExclusive):
-            return (11, isExclusive.hashValue)
+            return (.isExclusiveTouch, isExclusive.hashValue)
         case let .contentMode(mode):
-            return (12, mode.hashValue)
+            return (.contentMode, mode.hashValue)
         }
     }
 }
