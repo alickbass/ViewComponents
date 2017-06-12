@@ -101,7 +101,7 @@ public enum UIScrollViewStyle<T: UIScrollView>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UIImageViewStyle.lastStyleIndex()
+        return 85
     }
     
     @inline(__always) static func stylesCount() -> Int {

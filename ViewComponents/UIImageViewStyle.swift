@@ -63,7 +63,7 @@ public enum UIImageViewStyle<T: UIImageView>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UIButtonStyle.lastStyleIndex()
+        return 78
     }
     
     @inline(__always) static func stylesCount() -> Int {

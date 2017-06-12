@@ -80,7 +80,7 @@ public enum UITextViewStyle<T: UITextView>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UITextFieldStyle.lastStyleIndex()
+        return 170
     }
     
     @inline(__always) static func stylesCount() -> Int {

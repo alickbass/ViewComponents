@@ -46,7 +46,7 @@ public enum UISwitchStyle<T: UISwitch>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return ActivityIndicatorViewStyle.lastStyleIndex()
+        return 205
     }
     
     @inline(__always) static func stylesCount() -> Int {

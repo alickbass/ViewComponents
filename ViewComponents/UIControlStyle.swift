@@ -46,7 +46,7 @@ public enum UIControlStyle<T: UIControl>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UILabelStyle.lastStyleIndex()
+        return 60
     }
     
     @inline(__always) static func stylesCount() -> Int {

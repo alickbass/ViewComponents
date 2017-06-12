@@ -48,7 +48,7 @@ public enum UICollectionViewStyle<T: UICollectionView>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return TableViewCellStyle.lastStyleIndex()
+        return 147
     }
     
     @inline(__always) static func stylesCount() -> Int {

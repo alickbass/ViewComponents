@@ -119,7 +119,7 @@ public enum TableViewStyle<T: UITableView>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UIScrollViewStyle.lastStyleIndex()
+        return 113
     }
     
     @inline(__always) static func stylesCount() -> Int {

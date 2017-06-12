@@ -105,7 +105,7 @@ public enum UITextFieldStyle<T: UITextField>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UICollectionViewStyle.lastStyleIndex()
+        return 152
     }
     
     @inline(__always) static func stylesCount() -> Int {

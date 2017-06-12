@@ -77,7 +77,7 @@ public enum UISliderStyle<T: UISlider>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return ProgressViewStyle.lastStyleIndex()
+        return 189
     }
     
     @inline(__always) static func stylesCount() -> Int {

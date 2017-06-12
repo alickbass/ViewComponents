@@ -78,7 +78,7 @@ public enum TableViewCellStyle<T: UITableViewCell>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return TableViewStyle.lastStyleIndex()
+        return 135
     }
     
     @inline(__always) static func stylesCount() -> Int {

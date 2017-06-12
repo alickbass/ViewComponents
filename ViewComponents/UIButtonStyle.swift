@@ -81,7 +81,7 @@ public enum UIButtonStyle<T: UIButton>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UIControlStyle.lastStyleIndex()
+        return 65
     }
     
     @inline(__always) static func stylesCount() -> Int {

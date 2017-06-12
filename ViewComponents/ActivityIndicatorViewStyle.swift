@@ -47,7 +47,7 @@ public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: HashableConc
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UISliderStyle.lastStyleIndex()
+        return 201
     }
     
     @inline(__always) static func stylesCount() -> Int {

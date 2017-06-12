@@ -51,7 +51,7 @@ public enum ProgressViewStyle<T: UIProgressView>: HashableConcreteStyle {
     }
     
     @inline(__always) static func startIndex() -> Int {
-        return UITextViewStyle.lastStyleIndex()
+        return 183
     }
     
     @inline(__always) static func stylesCount() -> Int {
