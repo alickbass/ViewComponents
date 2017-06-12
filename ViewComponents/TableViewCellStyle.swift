@@ -8,7 +8,14 @@
 
 import UIKit
 
-public enum TableViewCellStyle<T: UITableViewCell>: HashableConcreteStyle {
+public enum TableViewCellStyle<T: UITableViewCell>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case accessoryType = 135, editingAccessoryType, isSelected
+        case selectionStyle, isHighlighted, isEditing
+        case showsReorderControl, indentationLevel, indentationWidth
+        case shouldIndentWhileEditing, separatorInset, focusStyle
+    }
+    
     case accessoryType(UITableViewCellAccessoryType)
     case editingAccessoryType(UITableViewCellAccessoryType)
     case isSelected(Bool)
@@ -77,40 +84,32 @@ public enum TableViewCellStyle<T: UITableViewCell>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 135
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 12
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .accessoryType(value):
-            return (1, value.hashValue)
+            return (.accessoryType, value.hashValue)
         case let .editingAccessoryType(value):
-            return (2, value.hashValue)
+            return (.editingAccessoryType, value.hashValue)
         case let .isSelected(value):
-            return (3, value.hashValue)
+            return (.isSelected, value.hashValue)
         case let .selectionStyle(value):
-            return (4, value.hashValue)
+            return (.selectionStyle, value.hashValue)
         case let .isHighlighted(value):
-            return (5, value.hashValue)
+            return (.isHighlighted, value.hashValue)
         case let .isEditing(value):
-            return (6, value.hashValue)
+            return (.isEditing, value.hashValue)
         case let .showsReorderControl(value):
-            return (7, value.hashValue)
+            return (.showsReorderControl, value.hashValue)
         case let .indentationLevel(value):
-            return (8, value.hashValue)
+            return (.indentationLevel, value.hashValue)
         case let .indentationWidth(value):
-            return (9, value.hashValue)
+            return (.indentationWidth, value.hashValue)
         case let .shouldIndentWhileEditing(value):
-            return (10, value.hashValue)
+            return (.shouldIndentWhileEditing, value.hashValue)
         case let .separatorInset(value):
-            return (11, value.hashValue)
+            return (.separatorInset, value.hashValue)
         case let .focusStyle(value):
-            return (12, value.hashValue)
+            return (.focusStyle, value.hashValue)
         }
     }
 }
