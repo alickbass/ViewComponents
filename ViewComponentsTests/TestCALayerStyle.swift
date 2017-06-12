@@ -21,8 +21,10 @@ class TestCALayerStyle: XCTestCase {
         .mask(nil), .backgroundColor(nil), .name(nil)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestCALayerStyle.allStyles.map({ $0.hashValue })
+    static var accumulatedHashes: [Int: Any] {
+        var hashes = [Int: Any]()
+        TestCALayerStyle.allStyles.forEach({ hashes[$0.hashValue] = $0 })
+        return hashes
     }
     
     func testCAGravity() {
