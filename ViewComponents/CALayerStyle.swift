@@ -72,7 +72,18 @@ public enum CAContentsFormat: RawRepresentable {
     }
 }
 
-public enum CALayerStyle<T: CALayer>: HashableConcreteStyle {
+public enum CALayerStyle<T: CALayer>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case contentsGravity = 1, opacity, isHidden
+        case masksToBounds, mask, isDoubleSided
+        case backgroundColor, allowsEdgeAntialiasing, allowsGroupOpacity
+        case isOpaque, edgeAntialiasingMask, isGeometryFlipped
+        case drawsAsynchronously, shouldRasterize, rasterizationScale
+        case contentsFormat, frame, bounds
+        case position, zPosition, anchorPointZ
+        case anchorPoint, contentsScale, name
+    }
+    
     case contentsGravity(CAGravity)
     case opacity(Float)
     case isHidden(Bool)
@@ -98,6 +109,10 @@ public enum CALayerStyle<T: CALayer>: HashableConcreteStyle {
     case anchorPoint(CGPoint)
     case contentsScale(CGFloat)
     case name(String?)
+    
+    public var lastKey: Key {
+        return .name
+    }
     
     public func sideEffect(on layer: T) {
         switch self {
@@ -196,64 +211,56 @@ public enum CALayerStyle<T: CALayer>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 0
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 24
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .contentsGravity(gravity):
-            return (1, gravity.hashValue)
+            return (.contentsGravity, gravity.hashValue)
         case let .opacity(opacity):
-            return (2, opacity.hashValue)
+            return (.opacity, opacity.hashValue)
         case let .isHidden(isHidden):
-            return (3, isHidden.hashValue)
+            return (.isHidden, isHidden.hashValue)
         case let .masksToBounds(masksToBounds):
-            return (4, masksToBounds.hashValue)
+            return (.masksToBounds, masksToBounds.hashValue)
         case let .mask(mask):
-            return (5, mask?.hashValue ?? 1)
+            return (.mask, mask?.hashValue ?? 1)
         case let .isDoubleSided(isDoubleSided):
-            return (6, isDoubleSided.hashValue)
+            return (.isDoubleSided, isDoubleSided.hashValue)
         case let .backgroundColor(backgroundColor):
-            return (7, backgroundColor?.hashValue ?? 1)
+            return (.backgroundColor, backgroundColor?.hashValue ?? 1)
         case let .allowsEdgeAntialiasing(allowsEdgeAntialiasing):
-            return (8, allowsEdgeAntialiasing.hashValue)
+            return (.allowsEdgeAntialiasing, allowsEdgeAntialiasing.hashValue)
         case let .allowsGroupOpacity(allowsGroupOpacity):
-            return (9, allowsGroupOpacity.hashValue)
+            return (.allowsGroupOpacity, allowsGroupOpacity.hashValue)
         case let .isOpaque(isOpaque):
-            return (10, isOpaque.hashValue)
+            return (.isOpaque, isOpaque.hashValue)
         case let .edgeAntialiasingMask(edgeAntialiasingMask):
-            return (11, edgeAntialiasingMask.rawValue.hashValue)
+            return (.edgeAntialiasingMask, edgeAntialiasingMask.rawValue.hashValue)
         case let .isGeometryFlipped(isGeometryFlipped):
-            return (12, isGeometryFlipped.hashValue)
+            return (.isGeometryFlipped, isGeometryFlipped.hashValue)
         case let .drawsAsynchronously(drawsAsynchronously):
-            return (13, drawsAsynchronously.hashValue)
+            return (.drawsAsynchronously, drawsAsynchronously.hashValue)
         case let .shouldRasterize(shouldRasterize):
-            return (14, shouldRasterize.hashValue)
+            return (.shouldRasterize, shouldRasterize.hashValue)
         case let .rasterizationScale(rasterizationScale):
-            return (15, rasterizationScale.hashValue)
+            return (.rasterizationScale, rasterizationScale.hashValue)
         case let .contentsFormat(contentsFormat):
-            return (16, contentsFormat.hashValue)
+            return (.contentsFormat, contentsFormat.hashValue)
         case let .frame(frame):
-            return (17, frame.hashValue)
+            return (.frame, frame.hashValue)
         case let .bounds(bounds):
-            return (18, bounds.hashValue)
+            return (.bounds, bounds.hashValue)
         case let .position(position):
-            return (19, position.hashValue)
+            return (.position, position.hashValue)
         case let .zPosition(zPosition):
-            return (20, zPosition.hashValue)
+            return (.zPosition, zPosition.hashValue)
         case let .anchorPointZ(anchorPointZ):
-            return (21, anchorPointZ.hashValue)
+            return (.anchorPointZ, anchorPointZ.hashValue)
         case let .anchorPoint(anchorPoint):
-            return (22, anchorPoint.hashValue)
+            return (.anchorPoint, anchorPoint.hashValue)
         case let .contentsScale(contentsScale):
-            return (23, contentsScale.hashValue)
+            return (.contentsScale, contentsScale.hashValue)
         case let .name(name):
-            return (24, name?.hashValue ?? 1)
+            return (.name, name?.hashValue ?? 1)
         }
     }
 }
