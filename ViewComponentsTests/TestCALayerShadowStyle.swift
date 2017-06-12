@@ -9,16 +9,14 @@
 import XCTest
 import ViewComponents
 
-class TestCALayerShadowStyle: XCTestCase {
+class TestCALayerShadowStyle: XCTestCase, ViewTestType {
     static let allStyles: [CALayer.ShadowStyle<CALayer>] = [
         .opacity(0.2), .radius(2), .offset(.zero),
         .color(.red), .path(CGPath(rect: CGRect(x: 0, y: 0, width: 15, height: 15), transform: nil)), .path(nil), .color(nil)
     ]
     
-    static var accumulatedHashes: [Int: Any] {
-        var hashes = TestCALayerStyle.accumulatedHashes
-        TestCALayerShadowStyle.allStyles.forEach({ hashes[$0.hashValue] = $0 })
-        return hashes
+    static var previousHashes: [Int : Any] {
+        return TestCALayerStyle.accumulatedHashes
     }
     
     func testStyleEquatable() {
@@ -65,13 +63,6 @@ class TestCALayerShadowStyle: XCTestCase {
     
     func testHashValue() {
         XCTAssertEqual(CALayer.ShadowStyle.Key.opacity.rawValue, CALayerStyle.Key.name.rawValue + 1)
-        
-        var hashes = TestCALayerStyle.accumulatedHashes
-        
-        for item in TestCALayerShadowStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertNil(hashes[hash], "Has the same hash as \(hashes[hash]!)")
-            hashes[hash] = item
-        }
+        testAccumulatingHashes()
     }
 }
