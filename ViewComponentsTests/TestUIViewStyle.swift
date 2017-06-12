@@ -104,11 +104,6 @@ class TestUIViewStyle: XCTestCase, ViewTestType {
         XCTAssertEqual(view.isExclusiveTouch, true)
     }
     
-    func testAnyStyleEquatable() {
-        XCTAssertEqual(AnyStyle<UIView>.backgroundColor(.red), .backgroundColor(.red))
-        XCTAssertNotEqual(AnyStyle<UIView>.backgroundColor(.red), .backgroundColor(.green))
-    }
-    
     func testAnyStyleSideEffects() {
         let view = UIView()
         

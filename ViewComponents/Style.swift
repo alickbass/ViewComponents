@@ -43,14 +43,14 @@ public struct Style<View, Input, Key: RawRepresentable>: StyleType where Key.Raw
     }
 }
 
-extension Style where Input: Equatable {
-    public init(_ input: Input, key: Key, sideEffect: @escaping (View, Input) -> Void, hash: @escaping (Input) -> Int) {
-        self.init(input, key: key, sideEffect: sideEffect, equality: { $0.0 == $0.1 }, hash: hash)
+extension Style where Input: Hashable {
+    public init(_ input: Input, key: Key, sideEffect: @escaping (View, Input) -> Void) {
+        self.init(input, key: key, sideEffect: sideEffect, equality: { $0.0 == $0.1 }, hash: { $0.hashValue })
     }
 }
 
-extension Style where Input: Hashable {
+extension Style where Input: Optionable, Input.WrappedType: Hashable {
     public init(_ input: Input, key: Key, sideEffect: @escaping (View, Input) -> Void) {
-        self.init(input, key: key, sideEffect: sideEffect, hash: { $0.hashValue })
+        self.init(input, key: key, sideEffect: sideEffect, equality: { $0.value == $1.value }, hash: { $0.value?.hashValue ?? 0 })
     }
 }

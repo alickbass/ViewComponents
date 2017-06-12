@@ -127,12 +127,7 @@ public extension AnyStyle where T: UIView {
     private typealias ViewStyle<Item> = Style<T, Item, UIViewStyleKey>
     
     public static func backgroundColor(_ color: UIColor? = nil) -> AnyStyle<T> {
-        return ViewStyle(
-            color, key: .backgroundColor,
-            sideEffect: { $0.0.backgroundColor = $0.1 },
-            equality: { $0 == $1 },
-            hash: { $0?.hashValue ?? 0 }
-        ).toAnyStyle
+        return ViewStyle(color, key: .backgroundColor, sideEffect: { $0.0.backgroundColor = $0.1 }).toAnyStyle
     }
     
     public static func isHidden(_ value: Bool) -> AnyStyle<T> {
