@@ -15,8 +15,6 @@ public protocol StyleType: Hashable {
 
 public protocol KeyedStyle: StyleType {
     associatedtype Key: RawRepresentable
-    
-    var lastKey: Key { get }
     func value() -> (key: Key, valueHash: Int)
 }
 

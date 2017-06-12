@@ -74,7 +74,7 @@ public enum CAContentsFormat: RawRepresentable {
 
 public enum CALayerStyle<T: CALayer>: KeyedStyle {
     public enum Key: Int, Hashable {
-        case contentsGravity = 1, opacity, isHidden
+        case contentsGravity = 0, opacity, isHidden
         case masksToBounds, mask, isDoubleSided
         case backgroundColor, allowsEdgeAntialiasing, allowsGroupOpacity
         case isOpaque, edgeAntialiasingMask, isGeometryFlipped
@@ -109,10 +109,6 @@ public enum CALayerStyle<T: CALayer>: KeyedStyle {
     case anchorPoint(CGPoint)
     case contentsScale(CGFloat)
     case name(String?)
-    
-    public var lastKey: Key {
-        return .name
-    }
     
     public func sideEffect(on layer: T) {
         switch self {
