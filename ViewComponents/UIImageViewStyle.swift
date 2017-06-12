@@ -8,7 +8,13 @@
 
 import UIKit
 
-public enum UIImageViewStyle<T: UIImageView>: HashableConcreteStyle {
+public enum UIImageViewStyle<T: UIImageView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case image = 78, highlightedImage, animationImages
+        case highlightedAnimationImages, animationDuration, animationRepeatCount
+        case isHighlighted
+    }
+    
     case image(UIImage?)
     case highlightedImage(UIImage?)
     case animationImages([UIImage]?)
@@ -62,32 +68,24 @@ public enum UIImageViewStyle<T: UIImageView>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 78
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 7
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .image(image):
-            return (1, image?.hashValue ?? 0)
+            return (.image, image?.hashValue ?? 0)
         case let .highlightedImage(image):
-            return (2, image?.hashValue ?? 0)
+            return (.highlightedImage, image?.hashValue ?? 0)
         case let .animationImages(images):
             let hash = images.map({ $0.reduce(5381, { (($0.0 << 5) &+ $0.0) &+ $0.1.hashValue }) })
-            return (3, hash ?? 0)
+            return (.animationImages, hash ?? 0)
         case let .highlightedAnimationImages(images):
             let hash = images.map({ $0.reduce(5381, { (($0.0 << 5) &+ $0.0) &+ $0.1.hashValue }) })
-            return (4, hash ?? 0)
+            return (.highlightedAnimationImages, hash ?? 0)
         case let .animationDuration(duration):
-            return (5, duration.hashValue)
+            return (.animationDuration, duration.hashValue)
         case let .animationRepeatCount(animationRepeatCount):
-            return (6, animationRepeatCount.hashValue)
+            return (.animationRepeatCount, animationRepeatCount.hashValue)
         case let .isHighlighted(isHighlighted):
-            return (7, isHighlighted.hashValue)
+            return (.isHighlighted, isHighlighted.hashValue)
         }
     }
 }
