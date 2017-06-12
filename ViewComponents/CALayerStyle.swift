@@ -72,17 +72,19 @@ public enum CAContentsFormat: RawRepresentable {
     }
 }
 
+public enum CALayerStyleKey: Int, Hashable {
+    case contentsGravity = 0, opacity, isHidden
+    case masksToBounds, mask, isDoubleSided
+    case backgroundColor, allowsEdgeAntialiasing, allowsGroupOpacity
+    case isOpaque, edgeAntialiasingMask, isGeometryFlipped
+    case drawsAsynchronously, shouldRasterize, rasterizationScale
+    case contentsFormat, frame, bounds
+    case position, zPosition, anchorPointZ
+    case anchorPoint, contentsScale, name
+}
+
 public enum CALayerStyle<T: CALayer>: KeyedStyle {
-    public enum Key: Int, Hashable {
-        case contentsGravity = 0, opacity, isHidden
-        case masksToBounds, mask, isDoubleSided
-        case backgroundColor, allowsEdgeAntialiasing, allowsGroupOpacity
-        case isOpaque, edgeAntialiasingMask, isGeometryFlipped
-        case drawsAsynchronously, shouldRasterize, rasterizationScale
-        case contentsFormat, frame, bounds
-        case position, zPosition, anchorPointZ
-        case anchorPoint, contentsScale, name
-    }
+    public typealias Key = CALayerStyleKey
     
     case contentsGravity(CAGravity)
     case opacity(Float)
