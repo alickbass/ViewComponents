@@ -104,6 +104,63 @@ class TestUIViewStyle: XCTestCase, ViewTestType {
         XCTAssertEqual(view.isExclusiveTouch, true)
     }
     
+    func testAnyStyleEquatable() {
+        XCTAssertEqual(AnyStyle<UIView>.backgroundColor(.red), .backgroundColor(.red))
+        XCTAssertNotEqual(AnyStyle<UIView>.backgroundColor(.red), .backgroundColor(.green))
+    }
+    
+    func testAnyStyleSideEffects() {
+        let view = UIView()
+        
+        view.backgroundColor = .red
+        AnyStyle<UIView>.backgroundColor(.green).sideEffect(on: view)
+        XCTAssertEqual(view.backgroundColor, .green)
+        
+        view.isHidden = false
+        AnyStyle<UIView>.isHidden(true).sideEffect(on: view)
+        XCTAssertEqual(view.isHidden, true)
+        
+        view.alpha = 0.4
+        AnyStyle<UIView>.alpha(0.3).sideEffect(on: view)
+        XCTAssertEqualWithAccuracy(view.alpha, 0.3, accuracy: 0.001)
+        
+        view.isOpaque = false
+        AnyStyle<UIView>.isOpaque(true).sideEffect(on: view)
+        XCTAssertEqual(view.isOpaque, true)
+        
+        view.tintColor = .gray
+        AnyStyle<UIView>.tintColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.tintColor, .red)
+        
+        view.tintAdjustmentMode = .dimmed
+        AnyStyle<UIView>.tintAdjustmentMode(.normal).sideEffect(on: view)
+        XCTAssertEqual(view.tintAdjustmentMode, .normal)
+        
+        view.clipsToBounds = false
+        AnyStyle<UIView>.clipsToBounds(true).sideEffect(on: view)
+        XCTAssertEqual(view.clipsToBounds, true)
+        
+        view.clearsContextBeforeDrawing = false
+        AnyStyle<UIView>.clearsContextBeforeDrawing(true).sideEffect(on: view)
+        XCTAssertEqual(view.clearsContextBeforeDrawing, true)
+        
+        view.isUserInteractionEnabled = false
+        AnyStyle<UIView>.isUserInteractionEnabled(true).sideEffect(on: view)
+        XCTAssertEqual(view.isUserInteractionEnabled, true)
+        
+        view.isMultipleTouchEnabled = false
+        AnyStyle<UIView>.isMultipleTouchEnabled(true).sideEffect(on: view)
+        XCTAssertEqual(view.isMultipleTouchEnabled, true)
+        
+        view.isExclusiveTouch = false
+        AnyStyle<UIView>.isExclusiveTouch(true).sideEffect(on: view)
+        XCTAssertEqual(view.isExclusiveTouch, true)
+        
+        view.contentMode = .scaleToFill
+        AnyStyle<UIView>.contentMode(.center).sideEffect(on: view)
+        XCTAssertEqual(view.contentMode, .center)
+    }
+    
     func testHashValue() {
         XCTAssertEqual(UIViewStyle.Key.backgroundColor.rawValue, CALayer.BorderStyle.Key.color.rawValue + 1)
         testAccumulatingHashes()
