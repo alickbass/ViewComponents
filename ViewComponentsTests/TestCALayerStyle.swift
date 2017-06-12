@@ -230,6 +230,111 @@ class TestCALayerStyle: XCTestCase, ViewTestType {
         XCTAssertEqual(theView.layer.name, "test")
     }
     
+    func testAnyStyleEquatable() {
+        XCTAssertEqual(AnyStyle<CALayer>.edgeAntialiasingMask(.layerLeftEdge), .edgeAntialiasingMask(.layerLeftEdge))
+    }
+    
+    func testAnyStyleSideEffects() {
+        let view = CALayer()
+        
+        view.contentsGravity = kCAGravityCenter
+        AnyStyle<CALayer>.contentsGravity(.bottom).sideEffect(on: view)
+        XCTAssertEqual(view.contentsGravity, kCAGravityBottom)
+        
+        view.opacity = 1
+        AnyStyle<CALayer>.opacity(0.2).sideEffect(on: view)
+        XCTAssertEqual(view.opacity, 0.2)
+        
+        view.isHidden = false
+        AnyStyle<CALayer>.isHidden(true).sideEffect(on: view)
+        XCTAssertEqual(view.isHidden, true)
+        
+        view.masksToBounds = false
+        AnyStyle<CALayer>.masksToBounds(true).sideEffect(on: view)
+        XCTAssertEqual(view.masksToBounds, true)
+        
+        let mask = CALayer()
+        view.mask = mask
+        AnyStyle<CALayer>.mask(mask).sideEffect(on: view)
+        XCTAssertEqual(view.mask, mask)
+        
+        view.isDoubleSided = false
+        AnyStyle<CALayer>.isDoubleSided(true).sideEffect(on: view)
+        XCTAssertEqual(view.isDoubleSided, true)
+        
+        view.backgroundColor = UIColor.red.cgColor
+        AnyStyle<CALayer>.backgroundColor(.green).sideEffect(on: view)
+        XCTAssertEqual(view.backgroundColor, UIColor.green.cgColor)
+        
+        view.allowsEdgeAntialiasing = false
+        AnyStyle<CALayer>.allowsEdgeAntialiasing(true).sideEffect(on: view)
+        XCTAssertEqual(view.allowsEdgeAntialiasing, true)
+        
+        view.allowsGroupOpacity = false
+        AnyStyle<CALayer>.allowsGroupOpacity(true).sideEffect(on: view)
+        XCTAssertEqual(view.allowsGroupOpacity, true)
+        
+        view.isOpaque = false
+        AnyStyle<CALayer>.isOpaque(true).sideEffect(on: view)
+        XCTAssertEqual(view.isOpaque, true)
+        
+        view.edgeAntialiasingMask = .layerTopEdge
+        AnyStyle<CALayer>.edgeAntialiasingMask(.layerLeftEdge).sideEffect(on: view)
+        XCTAssertEqual(view.edgeAntialiasingMask, .layerLeftEdge)
+        
+        view.isGeometryFlipped = false
+        AnyStyle<CALayer>.isGeometryFlipped(true).sideEffect(on: view)
+        XCTAssertEqual(view.isGeometryFlipped, true)
+        
+        view.drawsAsynchronously = false
+        AnyStyle<CALayer>.drawsAsynchronously(true).sideEffect(on: view)
+        XCTAssertEqual(view.drawsAsynchronously, true)
+        
+        view.shouldRasterize = false
+        AnyStyle<CALayer>.shouldRasterize(true).sideEffect(on: view)
+        XCTAssertEqual(view.shouldRasterize, true)
+        
+        view.rasterizationScale = 1
+        AnyStyle<CALayer>.rasterizationScale(0.2).sideEffect(on: view)
+        XCTAssertEqual(view.rasterizationScale, 0.2)
+        
+        view.contentsFormat = kCAContentsFormatRGBA16Float
+        AnyStyle<CALayer>.contentsFormat(.RGBA8Uint).sideEffect(on: view)
+        XCTAssertEqual(view.contentsFormat, kCAContentsFormatRGBA8Uint)
+        
+        view.frame = CGRect(x: 20, y: 20, width: 20, height: 20)
+        AnyStyle<CALayer>.frame(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.frame, .zero)
+        
+        view.bounds = CGRect(x: 20, y: 20, width: 20, height: 20)
+        AnyStyle<CALayer>.bounds(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.bounds, .zero)
+        
+        view.position = CGPoint(x: 20, y: 20)
+        AnyStyle<CALayer>.position(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.position, .zero)
+        
+        view.zPosition = 1
+        AnyStyle<CALayer>.zPosition(0.2).sideEffect(on: view)
+        XCTAssertEqual(view.zPosition, 0.2)
+        
+        view.anchorPointZ = 1
+        AnyStyle<CALayer>.anchorPointZ(0.2).sideEffect(on: view)
+        XCTAssertEqual(view.anchorPointZ, 0.2)
+        
+        view.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        AnyStyle<CALayer>.anchorPoint(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.anchorPoint, .zero)
+        
+        view.contentsScale = 1
+        AnyStyle<CALayer>.contentsScale(0.2).sideEffect(on: view)
+        XCTAssertEqual(view.contentsScale, 0.2)
+        
+        view.name = nil
+        AnyStyle<CALayer>.name("test").sideEffect(on: view)
+        XCTAssertEqual(view.name, "test")
+    }
+    
     func testHashValue() {
         testAccumulatingHashes()
     }

@@ -274,3 +274,108 @@ public extension Component where T: CALayer {
         return adding(styles: styles.lazy.map(AnyStyle.init))
     }
 }
+
+public extension AnyStyle where T: CALayer {
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerStyleKey>
+    
+    public static func contentsGravity(_ gravity: CAGravity) -> AnyStyle<T> {
+        return ViewStyle(gravity, key: .contentsGravity, sideEffect: { $0.contentsGravity = $1.rawValue }).toAnyStyle
+    }
+    
+    public static func opacity(_ opacity: Float) -> AnyStyle<T> {
+        return ViewStyle(opacity, key: .opacity, sideEffect: { $0.opacity = $1 }).toAnyStyle
+    }
+    
+    public static func isHidden(_ isHidden: Bool) -> AnyStyle<T> {
+        return ViewStyle(isHidden, key: .isHidden, sideEffect: { $0.isHidden = $1 }).toAnyStyle
+    }
+    
+    public static func masksToBounds(_ masksToBounds: Bool) -> AnyStyle<T> {
+        return ViewStyle(masksToBounds, key: .masksToBounds, sideEffect: { $0.masksToBounds = $1 }).toAnyStyle
+    }
+    
+    public static func mask(_ mask: CALayer?) -> AnyStyle<T> {
+        return ViewStyle(mask, key: .mask, sideEffect: { $0.mask = $1 }).toAnyStyle
+    }
+    
+    public static func isDoubleSided(_ isDoubleSided: Bool) -> AnyStyle<T> {
+        return ViewStyle(isDoubleSided, key: .isDoubleSided, sideEffect: { $0.isDoubleSided = $1 }).toAnyStyle
+    }
+    
+    public static func backgroundColor(_ color: UIColor?) -> AnyStyle<T> {
+        return ViewStyle(color, key: .backgroundColor, sideEffect: { $0.backgroundColor = $1?.cgColor }).toAnyStyle
+    }
+    
+    public static func allowsEdgeAntialiasing(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .allowsEdgeAntialiasing, sideEffect: { $0.allowsEdgeAntialiasing = $1 }).toAnyStyle
+    }
+    
+    public static func allowsGroupOpacity(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .allowsGroupOpacity, sideEffect: { $0.allowsGroupOpacity = $1 }).toAnyStyle
+    }
+    
+    public static func isOpaque(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isOpaque, sideEffect: { $0.isOpaque = $1 }).toAnyStyle
+    }
+    
+    public static func edgeAntialiasingMask(_ mask: CAEdgeAntialiasingMask) -> AnyStyle<T> {
+        return ViewStyle<CAEdgeAntialiasingMask>(mask, key: .edgeAntialiasingMask,
+            sideEffect: { $0.edgeAntialiasingMask = $1 },
+            equality: { $0 == $1 },
+            hash: { $0.rawValue.hashValue }
+        ).toAnyStyle
+    }
+    
+    public static func isGeometryFlipped(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isGeometryFlipped, sideEffect: { $0.isGeometryFlipped = $1 }).toAnyStyle
+    }
+    
+    public static func drawsAsynchronously(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .drawsAsynchronously, sideEffect: { $0.drawsAsynchronously = $1 }).toAnyStyle
+    }
+    
+    public static func shouldRasterize(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .shouldRasterize, sideEffect: { $0.shouldRasterize = $1 }).toAnyStyle
+    }
+    
+    public static func rasterizationScale(_ value: CGFloat) -> AnyStyle<T> {
+        return ViewStyle(value, key: .rasterizationScale, sideEffect: { $0.rasterizationScale = $1 }).toAnyStyle
+    }
+    
+    @available(iOS 10.0, *)
+    public static func contentsFormat(_ value: CAContentsFormat) -> AnyStyle<T> {
+        return ViewStyle(value, key: .contentsFormat, sideEffect: { $0.contentsFormat = $1.rawValue }).toAnyStyle
+    }
+    
+    public static func frame(_ value: CGRect) -> AnyStyle<T> {
+        return ViewStyle(value, key: .frame, sideEffect: { $0.frame = $1 }).toAnyStyle
+    }
+    
+    public static func bounds(_ value: CGRect) -> AnyStyle<T> {
+        return ViewStyle(value, key: .bounds, sideEffect: { $0.bounds = $1 }).toAnyStyle
+    }
+    
+    public static func position(_ value: CGPoint) -> AnyStyle<T> {
+        return ViewStyle(value, key: .position, sideEffect: { $0.position = $1 }).toAnyStyle
+    }
+    
+    public static func zPosition(_ value: CGFloat) -> AnyStyle<T> {
+        return ViewStyle(value, key: .zPosition, sideEffect: { $0.zPosition = $1 }).toAnyStyle
+    }
+    
+    public static func anchorPointZ(_ value: CGFloat) -> AnyStyle<T> {
+        return ViewStyle(value, key: .anchorPointZ, sideEffect: { $0.anchorPointZ = $1 }).toAnyStyle
+    }
+    
+    public static func anchorPoint(_ value: CGPoint) -> AnyStyle<T> {
+        return ViewStyle(value, key: .anchorPoint, sideEffect: { $0.anchorPoint = $1 }).toAnyStyle
+    }
+    
+    public static func contentsScale(_ value: CGFloat) -> AnyStyle<T> {
+        return ViewStyle(value, key: .contentsScale, sideEffect: { $0.contentsScale = $1 }).toAnyStyle
+    }
+    
+    public static func name(_ value: String?) -> AnyStyle<T> {
+        return ViewStyle(value, key: .name, sideEffect: { $0.name = $1 }).toAnyStyle
+    }
+}
