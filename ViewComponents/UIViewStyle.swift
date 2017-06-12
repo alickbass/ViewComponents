@@ -8,14 +8,14 @@
 
 import UIKit
 
+public enum UIViewStyleKey: Int, Hashable {
+    case backgroundColor = 32, isHidden, alpha
+    case isOpaque, tintColor, tintAdjustmentMode
+    case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled
+    case isMultipleTouchEnabled, isExclusiveTouch, contentMode
+}
+
 public enum UIViewStyle<T: UIView> {
-    public enum Key: Int, Hashable {
-        case backgroundColor = 32, isHidden, alpha
-        case isOpaque, tintColor, tintAdjustmentMode
-        case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled
-        case isMultipleTouchEnabled, isExclusiveTouch, contentMode
-    }
-    
     case backgroundColor(UIColor?)
     case isHidden(Bool)
     case alpha(CGFloat)
@@ -31,6 +31,8 @@ public enum UIViewStyle<T: UIView> {
 }
 
 extension UIViewStyle: KeyedStyle {
+    public typealias Key = UIViewStyleKey
+    
     public func sideEffect(on view: T) {
         switch self {
         case let .backgroundColor(color):
