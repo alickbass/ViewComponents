@@ -10,20 +10,20 @@ import XCTest
 import ViewComponents
 
 final class DetailsItemView: UIView {
-    var title: UILabel!
-    var value: UILabel!
+    var title = UILabel()
+    var value = UILabel()
 }
 
 final class DetailsCell: UITableViewCell {
-    var title: UILabel!
-    var container: UIView!
-    var totalTitle: UILabel!
-    var price: UILabel!
+    var title = UILabel()
+    var container = UIView()
+    var totalTitle = UILabel()
+    var price = UILabel()
     
-    var enterDate: DetailsItemView!
-    var enterTime: DetailsItemView!
-    var exitDate: DetailsItemView!
-    var exitTime: DetailsItemView!
+    var enterDate = DetailsItemView()
+    var enterTime = DetailsItemView()
+    var exitDate = DetailsItemView()
+    var exitTime = DetailsItemView()
 }
 
 struct DetailsItem: ComponentConvertible {
@@ -88,10 +88,29 @@ struct DetailsCellViewModel: ComponentConvertible {
 
 class TestComponentPerformance: XCTestCase {
     
+    let viewModels = (0...10000).map({ _ in DetailsCellViewModel() })
+    
     func testToComponent() {
-        let viewModels = (0...10000).map({ _ in DetailsCellViewModel() })
         self.measure {
-            _ = viewModels.map({ $0.toComponent })
+            _ = self.viewModels.map({ $0.toComponent })
+        }
+    }
+    
+    func testDiffing() {
+        let viewModels = self.viewModels.lazy.map({ $0.toComponent })
+        let zipped = Array(zip(viewModels, viewModels))
+        
+        self.measure {
+            _ = zipped.map({ $0.0.diffChanges(from: $0.1) })
+        }
+    }
+    
+    func testConfiguring() {
+        let viewModels = self.viewModels.map({ $0.toComponent })
+        let view = DetailsCell()
+        
+        self.measure {
+            viewModels.forEach({ $0.configure(item: view) })
         }
     }
     
