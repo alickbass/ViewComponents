@@ -47,6 +47,8 @@ class TestCALayerBorderStyle: XCTestCase {
     }
     
     func testHashValue() {
+        XCTAssertEqual(CALayer.BorderStyle.Key.cornerRadius.rawValue, CALayer.ShadowStyle.Key.path.rawValue + 1)
+        
         var hashes = Set(TestCALayerShadowStyle.accumulatedHashes)
         
         for item in TestCALayerBorderStyle.allStyles {
