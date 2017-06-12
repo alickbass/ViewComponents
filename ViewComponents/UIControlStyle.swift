@@ -8,7 +8,12 @@
 
 import UIKit
 
-public enum UIControlStyle<T: UIControl>: HashableConcreteStyle {
+public enum UIControlStyle<T: UIControl>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case isEnabled = 60, isSelected, isHighlighted
+        case contentVerticalAlignment, contentHorizontalAlignment
+    }
+    
     case isEnabled(Bool)
     case isSelected(Bool)
     case isHighlighted(Bool)
@@ -45,26 +50,18 @@ public enum UIControlStyle<T: UIControl>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 60
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 5
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .isEnabled(isEnabled):
-            return (1, isEnabled.hashValue)
+            return (.isEnabled, isEnabled.hashValue)
         case let .isSelected(isSelected):
-            return (2, isSelected.hashValue)
+            return (.isSelected, isSelected.hashValue)
         case let .isHighlighted(isHighlighted):
-            return (3, isHighlighted.hashValue)
+            return (.isHighlighted, isHighlighted.hashValue)
         case let .contentVerticalAlignment(alignment):
-            return (4, alignment.hashValue)
+            return (.contentVerticalAlignment, alignment.hashValue)
         case let .contentHorizontalAlignment(alignment):
-            return (5, alignment.hashValue)
+            return (.contentHorizontalAlignment, alignment.hashValue)
         }
     }
 }
