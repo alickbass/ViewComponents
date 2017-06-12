@@ -8,7 +8,11 @@
 
 import UIKit
 
-public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: HashableConcreteStyle {
+public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case isAnimating = 201, hidesWhenStopped, activityIndicatorViewStyle, color
+    }
+    
     case isAnimating(Bool)
     case hidesWhenStopped(Bool)
     case activityIndicatorViewStyle(UIActivityIndicatorViewStyle)
@@ -46,24 +50,16 @@ public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: HashableConc
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return 201
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 4
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .isAnimating(value):
-            return (1, value.hashValue)
+            return (.isAnimating, value.hashValue)
         case let .hidesWhenStopped(value):
-            return (2, value.hashValue)
+            return (.hidesWhenStopped, value.hashValue)
         case let .activityIndicatorViewStyle(value):
-            return (3, value.hashValue)
+            return (.activityIndicatorViewStyle, value.hashValue)
         case let .color(value):
-            return (4, value?.hashValue ?? 0)
+            return (.color, value?.hashValue ?? 0)
         }
     }
 }
