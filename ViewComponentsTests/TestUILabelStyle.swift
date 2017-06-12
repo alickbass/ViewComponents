@@ -21,8 +21,10 @@ class TestUILabelStyle: XCTestCase {
         .shadowColor(nil), .shadowOffset(.zero)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUIViewStyle.accumulatedHashes + TestUILabelStyle.allStyles.map({ $0.hashValue })
+    static var accumulatedHashes: [Int: Any] {
+        var hashes = TestUIViewStyle.accumulatedHashes
+        TestUILabelStyle.allStyles.forEach({ hashes[$0.hashValue] = $0 })
+        return hashes
     }
     
     func testStyleEquatable() {
@@ -134,12 +136,12 @@ class TestUILabelStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUIViewStyle.accumulatedHashes)
+        var hashes = TestUIViewStyle.accumulatedHashes
         
         for item in TestUILabelStyle.allStyles {
             let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
+            XCTAssertNil(hashes[hash], "Has the same hash as \(hashes[hash]!)")
+            hashes[hash] = item
         }
     }
 }

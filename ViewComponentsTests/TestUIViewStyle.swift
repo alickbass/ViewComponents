@@ -18,8 +18,10 @@ class TestUIViewStyle: XCTestCase {
         .isExclusiveTouch(true), .contentMode(.scaleToFill)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestCALayerBorderStyle.accumulatedHashes + TestUIViewStyle.allStyles.map({ $0.hashValue })
+    static var accumulatedHashes: [Int: Any] {
+        var hashes = TestCALayerBorderStyle.accumulatedHashes
+        TestUIViewStyle.allStyles.forEach({ hashes[$0.hashValue] = $0 })
+        return hashes
     }
     
     func testStyleEquatable() {
@@ -107,12 +109,14 @@ class TestUIViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestCALayerBorderStyle.accumulatedHashes)
+        XCTAssertEqual(UIViewStyle.Key.backgroundColor.rawValue, CALayer.BorderStyle.Key.color.rawValue + 1)
+        
+        var hashes = TestCALayerBorderStyle.accumulatedHashes
         
         for item in TestUIViewStyle.allStyles {
             let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
+            XCTAssertNil(hashes[hash], "Has the same hash as \(hashes[hash]!)")
+            hashes[hash] = item
         }
     }
 }
