@@ -28,27 +28,6 @@ public extension KeyedStyle where Key: Hashable, Key.RawValue == Int {
     }
 }
 
-protocol HashableConcreteStyle: StyleType {
-    static func startIndex() -> Int
-    static func stylesCount() -> Int
-    static func lastStyleIndex() -> Int
-    func value() -> (index: Int, valueHash: Int)
-}
-
-extension HashableConcreteStyle {
-    public var hashValue: Int {
-        let value = self.value()
-        var hash = 5381
-        hash = ((hash << 5) &+ hash) &+ (Self.startIndex() + value.index)
-        hash = ((hash << 5) &+ hash) &+ value.valueHash
-        return hash
-    }
-    
-    @inline(__always) static func lastStyleIndex() -> Int {
-        return Self.startIndex() + Self.stylesCount()
-    }
-}
-
 public struct AnyStyle<T>: StyleType {
     private let box: _AnyStyleBoxBase<T>
     
