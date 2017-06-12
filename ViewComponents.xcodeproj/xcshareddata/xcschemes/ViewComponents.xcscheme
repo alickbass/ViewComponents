@@ -38,11 +38,6 @@
                BlueprintName = "ViewComponentsTests"
                ReferencedContainer = "container:ViewComponents.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "TestComponentPerformance">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
