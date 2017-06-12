@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUIScrollViewStyle: XCTestCase {
+class TestUIScrollViewStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UIScrollViewStyle<UIScrollView>] = [
         .contentOffset(.zero), .contentSize(.zero), .contentInset(.zero), .isScrollEnabled(true),
@@ -19,9 +19,7 @@ class TestUIScrollViewStyle: XCTestCase {
         .showsVerticalScrollIndicator(true), .maximumZoomScale(0.4), .minimumZoomScale(0.4), .bouncesZoom(true)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUIImageViewStyle.accumulatedHashes + TestUIScrollViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUIImageViewStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(UIScrollViewStyle.contentOffset(.zero), .contentOffset(.zero))
@@ -126,12 +124,6 @@ class TestUIScrollViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUIImageViewStyle.accumulatedHashes)
-        
-        for item in TestUIScrollViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

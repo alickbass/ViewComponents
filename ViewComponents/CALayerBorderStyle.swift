@@ -9,7 +9,11 @@
 import UIKit
 
 public extension CALayer {
-    public enum BorderStyle<T: UIView>: HashableConcreteStyle {
+    public enum BorderStyle<T: UIView>: KeyedStyle {
+        public enum Key: Int, Hashable {
+            case cornerRadius = 29, width, color
+        }
+        
         case cornerRadius(CGFloat)
         case width(CGFloat)
         case color(UIColor?)
@@ -39,22 +43,14 @@ public extension CALayer {
             }
         }
         
-        @inline(__always) static func startIndex() -> Int {
-            return CALayer.ShadowStyle.lastStyleIndex()
-        }
-        
-        @inline(__always) static func stylesCount() -> Int {
-            return 3
-        }
-        
-        @inline(__always) func value() -> (index: Int, valueHash: Int) {
+        @inline(__always) public func value() -> (key: Key, valueHash: Int) {
             switch self {
             case let .cornerRadius(cornerRadius):
-                return (1, cornerRadius.hashValue)
+                return (.cornerRadius, cornerRadius.hashValue)
             case let .width(borderWidth):
-                return (2, borderWidth.hashValue)
+                return (.width, borderWidth.hashValue)
             case let .color(borderColor):
-                return (3, borderColor?.hashValue ?? 0)
+                return (.color, borderColor?.hashValue ?? 0)
             }
         }
     }

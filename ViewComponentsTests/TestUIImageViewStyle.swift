@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUIImageViewStyle: XCTestCase {
+class TestUIImageViewStyle: XCTestCase, ViewTestType {
     let image = UIImage()
     
     static let allStyles: [UIImageViewStyle<UIImageView>] = [
@@ -20,9 +20,7 @@ class TestUIImageViewStyle: XCTestCase {
         UIImageViewStyle.animationDuration(12), .animationRepeatCount(12), .isHighlighted(true)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUIButtonStyle.accumulatedHashes + TestUIImageViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUIButtonStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(UIImageViewStyle.image(image), .image(image))
@@ -87,12 +85,6 @@ class TestUIImageViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUIButtonStyle.accumulatedHashes)
-        
-        for item in TestUIImageViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

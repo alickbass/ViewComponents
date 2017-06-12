@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUILabelStyle: XCTestCase {
+class TestUILabelStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UILabelStyle<UILabel>] = [
         UILabelStyle.text("test"), UILabelStyle.text(nil), UILabelStyle.attributedText(.init(string: "test")),
@@ -21,9 +21,7 @@ class TestUILabelStyle: XCTestCase {
         .shadowColor(nil), .shadowOffset(.zero)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUIViewStyle.accumulatedHashes + TestUILabelStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUIViewStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(UILabelStyle.text("test"), .text("test"))
@@ -134,12 +132,6 @@ class TestUILabelStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUIViewStyle.accumulatedHashes)
-        
-        for item in TestUILabelStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

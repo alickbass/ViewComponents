@@ -9,16 +9,14 @@
 import XCTest
 import ViewComponents
 
-class TestUIControlStyle: XCTestCase {
+class TestUIControlStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UIControlStyle<UIControl>] = [
         .isEnabled(true), .isSelected(true), .isHighlighted(true),
         .contentVerticalAlignment(.bottom), .contentHorizontalAlignment(.center)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUILabelStyle.accumulatedHashes + TestUIControlStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUILabelStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(UIControlStyle.isEnabled(true), .isEnabled(true))
@@ -63,12 +61,6 @@ class TestUIControlStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUILabelStyle.accumulatedHashes)
-        
-        for item in TestUIControlStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

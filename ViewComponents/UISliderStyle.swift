@@ -8,7 +8,14 @@
 
 import UIKit
 
-public enum UISliderStyle<T: UISlider>: HashableConcreteStyle {
+public enum UISliderStyle<T: UISlider>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case currentValue = 189, minimumValue, maximumValue
+        case isContinuous, minimumValueImage, maximumValueImage
+        case minimumTrackTintColor, minimumTrackImage, maximumTrackTintColor
+        case maximumTrackImage, thumbTintColor, thumbImage
+    }
+    
     case currentValue(Float, animated: Bool)
     case minimumValue(Float)
     case maximumValue(Float)
@@ -76,52 +83,44 @@ public enum UISliderStyle<T: UISlider>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return ProgressViewStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 12
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .currentValue(value, animated: animated):
             var hash = 5381
             hash = ((hash << 5) &+ hash) &+ value.hashValue
             hash = ((hash << 5) &+ hash) &+ animated.hashValue
-            return (1, hash)
+            return (.currentValue, hash)
         case let .minimumValue(value):
-            return (2, value.hashValue)
+            return (.minimumValue, value.hashValue)
         case let .maximumValue(value):
-            return (3, value.hashValue)
+            return (.maximumValue, value.hashValue)
         case let .isContinuous(value):
-            return (4, value.hashValue)
+            return (.isContinuous, value.hashValue)
         case let .minimumValueImage(value):
-            return (5, value?.hashValue ?? 0)
+            return (.minimumValueImage, value?.hashValue ?? 0)
         case let .maximumValueImage(value):
-            return (6, value?.hashValue ?? 0)
+            return (.maximumValueImage, value?.hashValue ?? 0)
         case let .minimumTrackTintColor(value):
-            return (7, value?.hashValue ?? 0)
+            return (.minimumTrackTintColor, value?.hashValue ?? 0)
         case let .minimumTrackImage(value, for: state):
             var hash = 5381
             hash = ((hash << 5) &+ hash) &+ (value?.hashValue ?? 0)
             hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
-            return (8, hash)
+            return (.minimumTrackImage, hash)
         case let .maximumTrackTintColor(value):
-            return (9, value?.hashValue ?? 0)
+            return (.maximumTrackTintColor, value?.hashValue ?? 0)
         case let .maximumTrackImage(value, for: state):
             var hash = 5381
             hash = ((hash << 5) &+ hash) &+ (value?.hashValue ?? 0)
             hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
-            return (10, hash)
+            return (.maximumTrackImage, hash)
         case let .thumbTintColor(value):
-            return (11, value?.hashValue ?? 0)
+            return (.thumbTintColor, value?.hashValue ?? 0)
         case let .thumbImage(value, for: state):
             var hash = 5381
             hash = ((hash << 5) &+ hash) &+ (value?.hashValue ?? 0)
             hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
-            return (12, hash)
+            return (.thumbImage, hash)
         }
     }
 }

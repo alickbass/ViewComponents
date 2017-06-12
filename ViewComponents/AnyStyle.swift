@@ -13,24 +13,18 @@ public protocol StyleType: Hashable {
     func sideEffect(on item: View)
 }
 
-protocol HashableConcreteStyle: StyleType {
-    static func startIndex() -> Int
-    static func stylesCount() -> Int
-    static func lastStyleIndex() -> Int
-    func value() -> (index: Int, valueHash: Int)
+public protocol KeyedStyle: StyleType {
+    associatedtype Key: RawRepresentable
+    func value() -> (key: Key, valueHash: Int)
 }
 
-extension HashableConcreteStyle {
+public extension KeyedStyle where Key: Hashable, Key.RawValue == Int {
     public var hashValue: Int {
         let value = self.value()
         var hash = 5381
-        hash = ((hash << 5) &+ hash) &+ (Self.startIndex() + value.index)
+        hash = ((hash << 5) &+ hash) &+ value.key.rawValue.hashValue
         hash = ((hash << 5) &+ hash) &+ value.valueHash
         return hash
-    }
-    
-    @inline(__always) static func lastStyleIndex() -> Int {
-        return Self.startIndex() + Self.stylesCount()
     }
 }
 

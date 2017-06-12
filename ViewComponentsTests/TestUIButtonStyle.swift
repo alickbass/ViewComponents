@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUIButtonStyle: XCTestCase {
+class TestUIButtonStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UIButtonStyle<UIButton>] = [
         .title("some", for: .normal), .title(nil, for: .normal),
@@ -23,9 +23,7 @@ class TestUIButtonStyle: XCTestCase {
         .contentEdgeInsets(.zero), .titleEdgeInsets(.zero), .imageEdgeInsets(.zero)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUIControlStyle.accumulatedHashes + TestUIButtonStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUIControlStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(UIButtonStyle.title("some", for: .normal), .title("some", for: .normal))
@@ -137,12 +135,6 @@ class TestUIButtonStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUIControlStyle.accumulatedHashes)
-        
-        for item in TestUIButtonStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

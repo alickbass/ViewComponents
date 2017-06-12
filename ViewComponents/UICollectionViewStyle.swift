@@ -8,7 +8,12 @@
 
 import UIKit
 
-public enum UICollectionViewStyle<T: UICollectionView>: HashableConcreteStyle {
+public enum UICollectionViewStyle<T: UICollectionView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case isPrefetchingEnabled = 147, allowsSelection, allowsMultipleSelection
+        case remembersLastFocusedIndexPath, collectionViewLayout
+    }
+    
     @available(iOS 10.0, *)
     case isPrefetchingEnabled(Bool)
     case allowsSelection(Bool)
@@ -47,26 +52,18 @@ public enum UICollectionViewStyle<T: UICollectionView>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return TableViewCellStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 5
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .isPrefetchingEnabled(value):
-            return (1, value.hashValue)
+            return (.isPrefetchingEnabled, value.hashValue)
         case let .allowsSelection(value):
-            return (2, value.hashValue)
+            return (.allowsSelection, value.hashValue)
         case let .allowsMultipleSelection(value):
-            return (3, value.hashValue)
+            return (.allowsMultipleSelection, value.hashValue)
         case let .remembersLastFocusedIndexPath(value):
-            return (4, value.hashValue)
+            return (.remembersLastFocusedIndexPath, value.hashValue)
         case let .collectionViewLayout(value):
-            return (5, value.hashValue)
+            return (.collectionViewLayout, value.hashValue)
         }
     }
 }

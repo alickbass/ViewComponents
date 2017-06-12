@@ -9,15 +9,13 @@
 import XCTest
 import ViewComponents
 
-class TestCALayerBorderStyle: XCTestCase {
+class TestCALayerBorderStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [CALayer.BorderStyle<UIView>] = [
         .cornerRadius(12), .width(12), .color(.red), .color(nil)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestCALayerShadowStyle.accumulatedHashes + TestCALayerBorderStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestCALayerShadowStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(CALayer.BorderStyle.cornerRadius(12), .cornerRadius(12))
@@ -47,12 +45,7 @@ class TestCALayerBorderStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestCALayerShadowStyle.accumulatedHashes)
-        
-        for item in TestCALayerBorderStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        XCTAssertEqual(CALayer.BorderStyle.Key.cornerRadius.rawValue, CALayer.ShadowStyle.Key.path.rawValue + 1)
+        testAccumulatingHashes()
     }
 }

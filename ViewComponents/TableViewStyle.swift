@@ -8,7 +8,18 @@
 
 import UIKit
 
-public enum TableViewStyle<T: UITableView>: HashableConcreteStyle {
+public enum TableViewStyle<T: UITableView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case rowHeight = 113, separatorStyle, separatorColor
+        case separatorEffect, separatorInset, cellLayoutMarginsFollowReadableWidth
+        case sectionHeaderHeight, sectionFooterHeight, estimatedRowHeight
+        case estimatedSectionHeaderHeight, estimatedSectionFooterHeight, allowsSelection
+        case allowsMultipleSelection, allowsSelectionDuringEditing, allowsMultipleSelectionDuringEditing
+        case isEditing, sectionIndexColor, sectionIndexBackgroundColor
+        case sectionIndexTrackingBackgroundColor, remembersLastFocusedIndexPath, dataSource
+        case delegate
+    }
+    
     case rowHeight(CGFloat)
     case separatorStyle(UITableViewCellSeparatorStyle)
     case separatorColor(UIColor?)
@@ -118,60 +129,52 @@ public enum TableViewStyle<T: UITableView>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return UIScrollViewStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 22
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .rowHeight(value):
-            return (1, value.hashValue)
+            return (.rowHeight, value.hashValue)
         case let .separatorStyle(value):
-            return (2, value.hashValue)
+            return (.separatorStyle, value.hashValue)
         case let .separatorColor(value):
-            return (3, value?.hashValue ?? 0)
+            return (.separatorColor, value?.hashValue ?? 0)
         case let .separatorEffect(value):
-            return (4, value?.hashValue ?? 0)
+            return (.separatorEffect, value?.hashValue ?? 0)
         case let .separatorInset(value):
-            return (5, value.hashValue)
+            return (.separatorInset, value.hashValue)
         case let .cellLayoutMarginsFollowReadableWidth(value):
-            return (6, value.hashValue)
+            return (.cellLayoutMarginsFollowReadableWidth, value.hashValue)
         case let .sectionHeaderHeight(value):
-            return (7, value.hashValue)
+            return (.sectionHeaderHeight, value.hashValue)
         case let .sectionFooterHeight(value):
-            return (8, value.hashValue)
+            return (.sectionFooterHeight, value.hashValue)
         case let .estimatedRowHeight(value):
-            return (9, value.hashValue)
+            return (.estimatedRowHeight, value.hashValue)
         case let .estimatedSectionHeaderHeight(value):
-            return (10, value.hashValue)
+            return (.estimatedSectionHeaderHeight, value.hashValue)
         case let .estimatedSectionFooterHeight(value):
-            return (11, value.hashValue)
+            return (.estimatedSectionFooterHeight, value.hashValue)
         case let .allowsSelection(value):
-            return (12, value.hashValue)
+            return (.allowsSelection, value.hashValue)
         case let .allowsMultipleSelection(value):
-            return (13, value.hashValue)
+            return (.allowsMultipleSelection, value.hashValue)
         case let .allowsSelectionDuringEditing(value):
-            return (14, value.hashValue)
+            return (.allowsSelectionDuringEditing, value.hashValue)
         case let .allowsMultipleSelectionDuringEditing(value):
-            return (15, value.hashValue)
+            return (.allowsMultipleSelectionDuringEditing, value.hashValue)
         case let .isEditing(value):
-            return (16, value.hashValue)
+            return (.isEditing, value.hashValue)
         case let .sectionIndexColor(value):
-            return (17, value?.hashValue ?? 0)
+            return (.sectionIndexColor, value?.hashValue ?? 0)
         case let .sectionIndexBackgroundColor(value):
-            return (18, value?.hashValue ?? 0)
+            return (.sectionIndexBackgroundColor, value?.hashValue ?? 0)
         case let .sectionIndexTrackingBackgroundColor(value):
-            return (19, value?.hashValue ?? 0)
+            return (.sectionIndexTrackingBackgroundColor, value?.hashValue ?? 0)
         case let .remembersLastFocusedIndexPath(value):
-            return (20, value.hashValue)
+            return (.remembersLastFocusedIndexPath, value.hashValue)
         case let .dataSource(value):
-            return (21, value?.hash ?? 0)
+            return (.dataSource, value?.hash ?? 0)
         case let .delegate(value):
-            return (22, value?.hash ?? 0)
+            return (.delegate, value?.hash ?? 0)
         }
     }
 }

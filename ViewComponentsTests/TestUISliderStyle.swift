@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUISliderStyle: XCTestCase {
+class TestUISliderStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UISliderStyle<UISlider>] = [
         .currentValue(0.2, animated: true), .minimumValue(0.2), .maximumValue(0.2), .isContinuous(true),
@@ -20,9 +20,7 @@ class TestUISliderStyle: XCTestCase {
         .thumbImage(nil, for: .normal), .thumbImage(UIImage(), for: .normal)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestProgressViewStyle.accumulatedHashes + TestUISliderStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestProgressViewStyle.accumulatedHashes }
     
     let image = UIImage()
     
@@ -99,12 +97,6 @@ class TestUISliderStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestProgressViewStyle.accumulatedHashes)
-        
-        for item in TestUISliderStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

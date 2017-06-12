@@ -8,7 +8,11 @@
 
 import UIKit
 
-public enum UISwitchStyle<T: UISwitch>: HashableConcreteStyle {
+public enum UISwitchStyle<T: UISwitch>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case isOn = 205, onTintColor, thumbTintColor, onImage, offImage
+    }
+    
     case isOn(Bool, animated: Bool)
     case onTintColor(UIColor?)
     case thumbTintColor(UIColor?)
@@ -45,29 +49,21 @@ public enum UISwitchStyle<T: UISwitch>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return ActivityIndicatorViewStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 5
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .isOn(value, animated: animated):
             var hash = 5381
             hash = ((hash << 5) &+ hash) &+ value.hashValue
             hash = ((hash << 5) &+ hash) &+ animated.hashValue
-            return (1, hash)
+            return (.isOn, hash)
         case let .onTintColor(value):
-            return (2, value?.hashValue ?? 0)
+            return (.onTintColor, value?.hashValue ?? 0)
         case let .thumbTintColor(value):
-            return (3, value?.hashValue ?? 0)
+            return (.thumbTintColor, value?.hashValue ?? 0)
         case let .onImage(value):
-            return (4, value?.hashValue ?? 0)
+            return (.onImage, value?.hashValue ?? 0)
         case let .offImage(value):
-            return (5, value?.hashValue ?? 0)
+            return (.offImage, value?.hashValue ?? 0)
         }
     }
 }

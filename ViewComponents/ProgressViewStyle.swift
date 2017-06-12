@@ -8,7 +8,12 @@
 
 import UIKit
 
-public enum ProgressViewStyle<T: UIProgressView>: HashableConcreteStyle {
+public enum ProgressViewStyle<T: UIProgressView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case progress = 183, progressViewStyle, progressTintColor
+        case progressImage, trackTintColor, trackImage
+    }
+    
     case progress(Float, animated: Bool)
     case progressViewStyle(UIProgressViewStyle)
     case progressTintColor(UIColor?)
@@ -50,31 +55,23 @@ public enum ProgressViewStyle<T: UIProgressView>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return UITextViewStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 6
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .progress(value, animated: animated):
             var hash = 5381
             hash = ((hash << 5) &+ hash) &+ value.hashValue
             hash = ((hash << 5) &+ hash) &+ animated.hashValue
-            return (1, hash)
+            return (.progress, hash)
         case let .progressViewStyle(value):
-            return (2, value.hashValue)
+            return (.progressViewStyle, value.hashValue)
         case let .progressTintColor(value):
-            return (3, value?.hashValue ?? 0)
+            return (.progressTintColor, value?.hashValue ?? 0)
         case let .progressImage(value):
-            return (4, value?.hashValue ?? 0)
+            return (.progressImage, value?.hashValue ?? 0)
         case let .trackTintColor(value):
-            return (5, value?.hashValue ?? 0)
+            return (.trackTintColor, value?.hashValue ?? 0)
         case let .trackImage(value):
-            return (6, value?.hashValue ?? 0)
+            return (.trackImage, value?.hashValue ?? 0)
         }
     }
 }

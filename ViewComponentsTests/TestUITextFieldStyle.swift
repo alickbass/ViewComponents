@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUITextFieldStyle: XCTestCase {
+class TestUITextFieldStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UITextFieldStyle<UITextField>] = [
         .text(nil), .text("test"), .attributedText(nil), .attributedText(.init(string: "test")),
@@ -20,9 +20,7 @@ class TestUITextFieldStyle: XCTestCase {
         .disabledBackground(UIImage()), .clearButtonMode(.always), .leftViewMode(.always), .rightViewMode(.always)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUICollectionViewStyle.accumulatedHashes + TestUITextFieldStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUICollectionViewStyle.accumulatedHashes }
     
     let image = UIImage()
     
@@ -129,12 +127,6 @@ class TestUITextFieldStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUICollectionViewStyle.accumulatedHashes)
-        
-        for item in TestUITextFieldStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }

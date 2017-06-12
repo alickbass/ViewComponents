@@ -8,7 +8,14 @@
 
 import UIKit
 
-public enum UITextViewStyle<T: UITextView>: HashableConcreteStyle {
+public enum UITextViewStyle<T: UITextView>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case text = 170, attributedText, font
+        case textColor, isEditable, allowsEditingTextAttributes
+        case dataDetectorTypes, textAlignment, textContainerInset
+        case selectedRange, clearsOnInsertion, isSelectable
+    }
+    
     case text(String)
     case attributedText(NSAttributedString)
     case font(UIFont?)
@@ -79,40 +86,32 @@ public enum UITextViewStyle<T: UITextView>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return UITextFieldStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 13
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .text(value):
-            return (1, value.hashValue)
+            return (.text, value.hashValue)
         case let .attributedText(value):
-            return (2, value.hashValue)
+            return (.attributedText, value.hashValue)
         case let .font(value):
-            return (3, value?.hashValue ?? 0)
+            return (.font, value?.hashValue ?? 0)
         case let .textColor(value):
-            return (4, value?.hashValue ?? 0)
+            return (.textColor, value?.hashValue ?? 0)
         case let .isEditable(value):
-            return (5, value.hashValue)
+            return (.isEditable, value.hashValue)
         case let .allowsEditingTextAttributes(value):
-            return (6, value.hashValue)
+            return (.allowsEditingTextAttributes, value.hashValue)
         case let .dataDetectorTypes(value):
-            return (7, value.rawValue.hashValue)
+            return (.dataDetectorTypes, value.rawValue.hashValue)
         case let .textAlignment(value):
-            return (8, value.hashValue)
+            return (.textAlignment, value.hashValue)
         case let .textContainerInset(value):
-            return (9, value.hashValue)
+            return (.textContainerInset, value.hashValue)
         case let .selectedRange(value):
-            return (10, value.hashValue)
+            return (.selectedRange, value.hashValue)
         case let .clearsOnInsertion(value):
-            return (12, value.hashValue)
+            return (.clearsOnInsertion, value.hashValue)
         case let .isSelectable(value):
-            return (13, value.hashValue)
+            return (.isSelectable, value.hashValue)
         }
     }
 }

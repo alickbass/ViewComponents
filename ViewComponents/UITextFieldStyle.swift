@@ -8,7 +8,16 @@
 
 import UIKit
 
-public enum UITextFieldStyle<T: UITextField>: HashableConcreteStyle {
+public enum UITextFieldStyle<T: UITextField>: KeyedStyle {
+    public enum Key: Int, Hashable {
+        case text = 152, attributedText, placeholder
+        case attributedPlaceholder, font, textColor
+        case textAlignment, adjustsFontSizeToFitWidth, minimumFontSize
+        case clearsOnBeginEditing, clearsOnInsertion, allowsEditingTextAttributes
+        case borderStyle, background, disabledBackground
+        case clearButtonMode, leftViewMode, rightViewMode
+    }
+    
     case text(String?)
     case attributedText(NSAttributedString?)
     case placeholder(String?)
@@ -104,52 +113,44 @@ public enum UITextFieldStyle<T: UITextField>: HashableConcreteStyle {
         }
     }
     
-    @inline(__always) static func startIndex() -> Int {
-        return UICollectionViewStyle.lastStyleIndex()
-    }
-    
-    @inline(__always) static func stylesCount() -> Int {
-        return 18
-    }
-    
-    @inline(__always) func value() -> (index: Int, valueHash: Int) {
+    @inline(__always) public func value() -> (key: Key, valueHash: Int) {
         switch self {
         case let .text(value):
-            return (1, value?.hashValue ?? 0)
+            return (.text, value?.hashValue ?? 0)
         case let .attributedText(value):
-            return (2, value?.hashValue ?? 0)
+            return (.attributedText, value?.hashValue ?? 0)
         case let .placeholder(value):
-            return (3, value?.hashValue ?? 0)
+            return (.placeholder, value?.hashValue ?? 0)
         case let .attributedPlaceholder(value):
-            return (4, value?.hashValue ?? 0)
+            return (.attributedPlaceholder, value?.hashValue ?? 0)
         case let .font(value):
-            return (5, value.hashValue)
+            return (.font, value.hashValue)
         case let .textColor(value):
-            return (6, value.hashValue)
+            return (.textColor, value.hashValue)
         case let .textAlignment(value):
-            return (7, value.hashValue)
+            return (.textAlignment, value.hashValue)
         case let .adjustsFontSizeToFitWidth(value):
-            return (8, value.hashValue)
+            return (.adjustsFontSizeToFitWidth, value.hashValue)
         case let .minimumFontSize(value):
-            return (9, value.hashValue)
+            return (.minimumFontSize, value.hashValue)
         case let .clearsOnBeginEditing(value):
-            return (10, value.hashValue)
+            return (.clearsOnBeginEditing, value.hashValue)
         case let .clearsOnInsertion(value):
-            return (11, value.hashValue)
+            return (.clearsOnInsertion, value.hashValue)
         case let .allowsEditingTextAttributes(value):
-            return (12, value.hashValue)
+            return (.allowsEditingTextAttributes, value.hashValue)
         case let .borderStyle(value):
-            return (13, value.hashValue)
+            return (.borderStyle, value.hashValue)
         case let .background(value):
-            return (14, value?.hashValue ?? 0)
+            return (.background, value?.hashValue ?? 0)
         case let .disabledBackground(value):
-            return (15, value?.hashValue ?? 0)
+            return (.disabledBackground, value?.hashValue ?? 0)
         case let .clearButtonMode(value):
-            return (16, value.hashValue)
+            return (.clearButtonMode, value.hashValue)
         case let .leftViewMode(value):
-            return (17, value.hashValue)
+            return (.leftViewMode, value.hashValue)
         case let .rightViewMode(value):
-            return (18, value.hashValue)
+            return (.rightViewMode, value.hashValue)
         }
     }
 }

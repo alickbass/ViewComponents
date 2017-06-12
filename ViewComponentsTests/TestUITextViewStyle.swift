@@ -9,7 +9,7 @@
 import XCTest
 import ViewComponents
 
-class TestUITextViewStyle: XCTestCase {
+class TestUITextViewStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [UITextViewStyle<UITextView>] = [
         .text("test"), .attributedText(.init(string: "test")), .font(.systemFont(ofSize: 8)),
@@ -18,9 +18,7 @@ class TestUITextViewStyle: XCTestCase {
         .selectedRange(.init(location: 0, length: 0)), .clearsOnInsertion(true), .isSelectable(true)
     ]
     
-    static var accumulatedHashes: [Int] {
-        return TestUITextFieldStyle.accumulatedHashes + TestUITextViewStyle.allStyles.map({ $0.hashValue })
-    }
+    static var previousHashes: [Int : Any] { return TestUITextFieldStyle.accumulatedHashes }
     
     func testStyleEquatable() {
         XCTAssertEqual(UITextViewStyle.text("test"), .text("test"))
@@ -95,12 +93,6 @@ class TestUITextViewStyle: XCTestCase {
     }
     
     func testHashValue() {
-        var hashes = Set(TestUITextFieldStyle.accumulatedHashes)
-        
-        for item in TestUITextViewStyle.allStyles {
-            let hash = item.hashValue
-            XCTAssertFalse(hashes.contains(hash))
-            hashes.insert(hash)
-        }
+        testAccumulatingHashes()
     }
 }
