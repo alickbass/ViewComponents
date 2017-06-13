@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUIScrollViewStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UIScrollViewStyle<UIScrollView>] = [
+    static let allStyles: [AnyStyle<UIScrollView>] = [
         .contentOffset(.zero), .contentSize(.zero), .contentInset(.zero), .isScrollEnabled(true),
         .isDirectionalLockEnabled(true), .isPagingEnabled(true), .bounces(true), .alwaysBounceVertical(true),
         .alwaysBounceHorizontal(true), .canCancelContentTouches(true), .delaysContentTouches(true),

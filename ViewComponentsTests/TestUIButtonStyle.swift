@@ -11,7 +11,7 @@ import XCTest
 
 class TestUIButtonStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UIButtonStyle<UIButton>] = [
+    static let allStyles: [AnyStyle<UIButton>] = [
         .title("some", for: .normal), .title(nil, for: .normal),
         .attributedTitle(.init(string: "some"), for: .normal), .attributedTitle(nil, for: .normal),
         .titleColor(.red, for: .normal), .titleColor(nil, for: .normal),

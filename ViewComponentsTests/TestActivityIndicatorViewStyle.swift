@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestActivityIndicatorViewStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [ActivityIndicatorViewStyle<UIActivityIndicatorView>] = [
+    static let allStyles: [AnyStyle<UIActivityIndicatorView>] = [
         .isAnimating(true), .hidesWhenStopped(true), .activityIndicatorViewStyle(.gray),
         .color(.gray), .color(.none)
     ]

@@ -10,9 +10,9 @@ import XCTest
 @testable import ViewComponents
 
 class TestCALayerShadowStyle: XCTestCase, ViewTestType {
-    static let allStyles: [CALayer.ShadowStyle<CALayer>] = [
-        .opacity(0.2), .radius(2), .offset(.zero),
-        .color(.red), .path(CGPath(rect: CGRect(x: 0, y: 0, width: 15, height: 15), transform: nil)), .path(nil), .color(nil)
+    static let allStyles: [AnyStyle<CALayer>] = [
+        .shadow(opacity: 0.2, radius: 0.2, offset: .zero, color: nil, path: nil),
+        .shadow(opacity: 0.2, radius: 0.2, offset: .zero, color: .red, path: CGPath(rect: .zero, transform: nil)),
     ]
     
     static var previousHashes: [Int : Any] {

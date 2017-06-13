@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUISliderStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UISliderStyle<UISlider>] = [
+    static let allStyles: [AnyStyle<UISlider>] = [
         .currentValue(0.2, animated: true), .minimumValue(0.2), .maximumValue(0.2), .isContinuous(true),
         .minimumValueImage(nil), .minimumValueImage(UIImage()), .maximumValueImage(nil), .maximumValueImage(UIImage()),
         .minimumTrackTintColor(nil), .minimumTrackTintColor(.blue), .maximumTrackTintColor(nil), .maximumTrackTintColor(.blue),

@@ -11,9 +11,9 @@ import ViewComponents
 
 class TestUITextViewStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UITextViewStyle<UITextView>] = [
+    static let allStyles: [AnyStyle<UITextView>] = [
         .text("test"), .attributedText(.init(string: "test")), .font(.systemFont(ofSize: 8)),
-        .textColor(.red), .textAlignment(.center), .isEditable(true), .font(nil), .textColor(nil),
+        .textColor(.red), .textAlignment(.center), .isEditable(true),
         .allowsEditingTextAttributes(true), .dataDetectorTypes(.address), .textContainerInset(.zero),
         .selectedRange(.init(location: 0, length: 0)), .clearsOnInsertion(true), .isSelectable(true)
     ]

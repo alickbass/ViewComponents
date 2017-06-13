@@ -11,12 +11,12 @@ import ViewComponents
 
 class TestUILabelStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UILabelStyle<UILabel>] = [
-        UILabelStyle.text("test"), UILabelStyle.text(nil), UILabelStyle.attributedText(.init(string: "test")),
-        UILabelStyle.attributedText(nil), UILabelStyle.font(.systemFont(ofSize: 12)), UILabelStyle.textColor(.red),
-        UILabelStyle.textAlignment(.center), UILabelStyle.lineBreakMode(.byClipping), UILabelStyle.isEnabled(true),
-        UILabelStyle.adjustsFontSizeToFitWidth(true), UILabelStyle.allowsDefaultTighteningForTruncation(true),
-        UILabelStyle.baselineAdjustment(.alignBaselines), .minimumScaleFactor(12), UILabelStyle.numberOfLines(0),
+    static let allStyles: [AnyStyle<UILabel>] = [
+        AnyStyle<UILabel>.text("test"), AnyStyle<UILabel>.text(nil), AnyStyle<UILabel>.attributedText(.init(string: "test")),
+        AnyStyle<UILabel>.attributedText(nil), AnyStyle<UILabel>.font(.systemFont(ofSize: 12)), AnyStyle<UILabel>.textColor(.red),
+        AnyStyle<UILabel>.textAlignment(.center), AnyStyle<UILabel>.lineBreakMode(.byClipping), AnyStyle<UILabel>.isEnabled(true),
+        AnyStyle<UILabel>.adjustsFontSizeToFitWidth(true), AnyStyle<UILabel>.allowsDefaultTighteningForTruncation(true),
+        AnyStyle<UILabel>.baselineAdjustment(.alignBaselines), .minimumScaleFactor(12), AnyStyle<UILabel>.numberOfLines(0),
         .highlightedTextColor(.red), .highlightedTextColor(nil), .isHighlighted(true), .shadowColor(.red),
         .shadowColor(nil), .shadowOffset(.zero)
     ]

@@ -11,12 +11,12 @@ import ViewComponents
 
 class TestTableViewCellStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [TableViewCellStyle<UITableViewCell>] = [
-        TableViewCellStyle.accessoryType(.detailButton), TableViewCellStyle.editingAccessoryType(.detailButton),
-        TableViewCellStyle.isSelected(true), TableViewCellStyle.selectionStyle(.gray), TableViewCellStyle.isHighlighted(true),
-        TableViewCellStyle.isEditing(true), TableViewCellStyle.showsReorderControl(true),
-        TableViewCellStyle.indentationLevel(3), TableViewCellStyle.indentationWidth(3), TableViewCellStyle.shouldIndentWhileEditing(true),
-        TableViewCellStyle.separatorInset(.zero), TableViewCellStyle.focusStyle(.default)
+    static let allStyles: [AnyStyle<UITableViewCell>] = [
+        AnyStyle<UITableViewCell>.accessoryType(.detailButton), AnyStyle<UITableViewCell>.editingAccessoryType(.detailButton),
+        AnyStyle<UITableViewCell>.isSelected(true), AnyStyle<UITableViewCell>.selectionStyle(.gray), AnyStyle<UITableViewCell>.isHighlighted(true),
+        AnyStyle<UITableViewCell>.isEditing(true), AnyStyle<UITableViewCell>.showsReorderControl(true),
+        AnyStyle<UITableViewCell>.indentationLevel(3), AnyStyle<UITableViewCell>.indentationWidth(3), AnyStyle<UITableViewCell>.shouldIndentWhileEditing(true),
+        AnyStyle<UITableViewCell>.separatorInset(.zero), AnyStyle<UITableViewCell>.focusStyle(.default)
     ]
     
     static var previousHashes: [Int : Any] { return TestTableViewStyle.accumulatedHashes }

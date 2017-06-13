@@ -12,12 +12,12 @@ import ViewComponents
 class TestUIImageViewStyle: XCTestCase, ViewTestType {
     let image = UIImage()
     
-    static let allStyles: [UIImageViewStyle<UIImageView>] = [
-        UIImageViewStyle.image(UIImage()), UIImageViewStyle.image(nil),
-        UIImageViewStyle.highlightedImage(UIImage()), UIImageViewStyle.highlightedImage(nil),
-        UIImageViewStyle.highlightedAnimationImages([UIImage()]), UIImageViewStyle.highlightedAnimationImages(nil),
-        UIImageViewStyle.animationImages([UIImage()]), UIImageViewStyle.animationImages(nil),
-        UIImageViewStyle.animationDuration(12), .animationRepeatCount(12), .isHighlighted(true)
+    static let allStyles: [AnyStyle<UIImageView>] = [
+        AnyStyle<UIImageView>.image(UIImage()), AnyStyle<UIImageView>.image(nil),
+        AnyStyle<UIImageView>.highlightedImage(UIImage()), AnyStyle<UIImageView>.highlightedImage(nil),
+        AnyStyle<UIImageView>.highlightedAnimationImages([UIImage()]), AnyStyle<UIImageView>.highlightedAnimationImages(nil),
+        AnyStyle<UIImageView>.animationImages([UIImage()]), AnyStyle<UIImageView>.animationImages(nil),
+        AnyStyle<UIImageView>.animationDuration(12), .animationRepeatCount(12), .isHighlighted(true)
     ]
     
     static var previousHashes: [Int : Any] { return TestUIButtonStyle.accumulatedHashes }

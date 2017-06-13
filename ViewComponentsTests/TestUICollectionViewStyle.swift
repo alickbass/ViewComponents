@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUICollectionViewStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UICollectionViewStyle<UICollectionView>] = [
+    static let allStyles: [AnyStyle<UICollectionView>] = [
         .isPrefetchingEnabled(true), .allowsSelection(true), .allowsMultipleSelection(true),
         .remembersLastFocusedIndexPath(true), .collectionViewLayout(UICollectionViewLayout())
     ]

@@ -10,9 +10,9 @@ import XCTest
 import ViewComponents
 
 protocol ViewTestType {
-    associatedtype S: StyleType
+    associatedtype View
     
-    static var allStyles: [S] { get }
+    static var allStyles: [AnyStyle<View>] { get }
     static var accumulatedHashes: [Int: Any] { get }
     static var previousHashes: [Int: Any] { get }
     
@@ -39,8 +39,8 @@ extension ViewTestType {
 
 class TestCALayerStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [CALayerStyle<CALayer>] = [
-        .contentsGravity(.bottom), CALayerStyle.opacity(0.2), .isHidden(true), .masksToBounds(true),
+    static let allStyles: [AnyStyle<CALayer>] = [
+        .contentsGravity(.bottom), AnyStyle<CALayer>.opacity(0.2), .isHidden(true), .masksToBounds(true),
         .mask(CALayer()), .isDoubleSided(true), .backgroundColor(.red), .allowsEdgeAntialiasing(true),
         .allowsGroupOpacity(true), .isOpaque(true), .edgeAntialiasingMask(.layerLeftEdge), .isGeometryFlipped(true),
         .drawsAsynchronously(true), .shouldRasterize(true), .rasterizationScale(0.2), .contentsFormat(.RGBA16Float),

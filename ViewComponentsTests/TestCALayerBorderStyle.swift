@@ -11,8 +11,9 @@ import XCTest
 
 class TestCALayerBorderStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [CALayer.BorderStyle<UIView>] = [
-        .cornerRadius(12), .width(12), .color(.red), .color(nil)
+    static let allStyles: [AnyStyle<UIView>] = [
+        .border(cornerRadius: 12, width: 12, color: nil),
+        .border(cornerRadius: 12, width: 12, color: .red)
     ]
     
     static var previousHashes: [Int : Any] { return TestCALayerShadowStyle.accumulatedHashes }
