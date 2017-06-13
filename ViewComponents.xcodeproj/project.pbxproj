@@ -39,6 +39,7 @@
 		CECED8641EBB4C2600FF8B36 /* TestCALayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */; };
 		CED662FD1EEEADBA006A13C4 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED662FC1EEEADBA006A13C4 /* Style.swift */; };
 		CED663051EEF3353006A13C4 /* Optionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED663041EEF3353006A13C4 /* Optionable.swift */; };
+		CED6631F1EF00742006A13C4 /* TestStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6631E1EF00742006A13C4 /* TestStyle.swift */; };
 		CEE5DA7A1EC212E50022D6F1 /* CALayerShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5DA791EC212E50022D6F1 /* CALayerShadowStyle.swift */; };
 		CEE5DA7C1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */; };
 		CEE5DA7E1EC219620022D6F1 /* CALayerBorderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5DA7D1EC219620022D6F1 /* CALayerBorderStyle.swift */; };
@@ -100,6 +101,7 @@
 		CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCALayerStyle.swift; sourceTree = "<group>"; };
 		CED662FC1EEEADBA006A13C4 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		CED663041EEF3353006A13C4 /* Optionable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optionable.swift; sourceTree = "<group>"; };
+		CED6631E1EF00742006A13C4 /* TestStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStyle.swift; sourceTree = "<group>"; };
 		CEE5DA791EC212E50022D6F1 /* CALayerShadowStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerShadowStyle.swift; sourceTree = "<group>"; };
 		CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCALayerShadowStyle.swift; sourceTree = "<group>"; };
 		CEE5DA7D1EC219620022D6F1 /* CALayerBorderStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerBorderStyle.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			children = (
 				CE0CF5521EB7758400B6BC36 /* TestComponent.swift */,
 				CE77FA9E1EED4758003A3FD6 /* TestComponentPerformance.swift */,
+				CED6631E1EF00742006A13C4 /* TestStyle.swift */,
 				CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */,
 				CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */,
 				CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */,
@@ -401,6 +404,7 @@
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
 				CEFE1A291EC79E0400E077E0 /* TestUITextFieldStyle.swift in Sources */,
 				CE469E331EC9A006009C256F /* TestUISliderStyle.swift in Sources */,
+				CED6631F1EF00742006A13C4 /* TestStyle.swift in Sources */,
 				CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */,
 				CEF7DCDC1EC8A64500190D5C /* TestProgressViewStyle.swift in Sources */,
 			);

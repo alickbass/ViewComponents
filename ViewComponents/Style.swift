@@ -28,7 +28,7 @@ public struct Style<View, Input, Key: RawRepresentable>: StyleType where Key.Raw
     }
     
     public static func == (lhs: Style<View, Input, Key>, rhs: Style<View, Input, Key>) -> Bool {
-        return lhs.equality(lhs.input, rhs.input)
+        return lhs.key == rhs.key && lhs.equality(lhs.input, rhs.input)
     }
     
     public var hashValue: Int {
