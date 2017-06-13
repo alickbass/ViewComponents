@@ -66,3 +66,9 @@ extension CAEdgeAntialiasingMask: Hashable {
         return rawValue.hashValue
     }
 }
+
+extension UIDataDetectorTypes: Hashable {
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+}
