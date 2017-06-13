@@ -8,11 +8,13 @@
 
 import UIKit
 
+public enum CALayerShadowStyleKey: Int, Hashable {
+    case opacity = 24, radius, offset, color, path, shadow
+}
+
 public extension CALayer {
     public enum ShadowStyle<T: CALayer>: KeyedStyle {
-        public enum Key: Int, Hashable {
-            case opacity = 24, radius, offset, color, path
-        }
+        public typealias Key = CALayerShadowStyleKey
         
         case opacity(Float)
         case radius(CGFloat)
@@ -78,5 +80,57 @@ public extension Component where T: UIView {
 public extension Component where T: CALayer {
     public func shadow(_ styles: CALayer.ShadowStyle<T>...) -> Component<T> {
         return adding(styles: styles.lazy.map(AnyStyle.init))
+    }
+}
+
+struct LayerShadow: Hashable, StyleType {
+    let opacity: Float
+    let radius: CGFloat
+    let offset: CGSize
+    let color: UIColor?
+    let path: CGPath?
+    
+    func sideEffect(on layer: CALayer) {
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = radius
+        layer.shadowOffset = offset
+        layer.shadowColor = color?.cgColor
+        layer.shadowPath = path
+    }
+    
+    static func == (lhs: LayerShadow, rhs: LayerShadow) -> Bool {
+        return lhs.opacity == rhs.opacity
+            && lhs.radius == rhs.radius
+            && lhs.offset == rhs.offset
+            && lhs.color == rhs.color
+            && lhs.path == rhs.path
+    }
+    
+    var hashValue: Int {
+        var hash = 5381
+        hash = ((hash << 5) &+ hash) &+ opacity.hashValue
+        hash = ((hash << 5) &+ hash) &+ radius.hashValue
+        hash = ((hash << 5) &+ hash) &+ offset.hashValue
+        hash = ((hash << 5) &+ hash) &+ (color?.hashValue ?? 0)
+        hash = ((hash << 5) &+ hash) &+ (path.map({ UIBezierPath(cgPath: $0) })?.hashValue ?? 0)
+        return hash
+    }
+}
+
+public extension AnyStyle where T: CALayer {
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
+    
+    public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = UIColor.black, path: CGPath? = nil) -> AnyStyle<T> {
+        let value = LayerShadow(opacity: opacity, radius: radius, offset: offset, color: color, path: path)
+        return ViewStyle(value, key: .shadow, sideEffect: { $1.sideEffect(on: $0) }).toAnyStyle
+    }
+}
+
+public extension AnyStyle where T: UIView {
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
+    
+    public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = UIColor.black, path: CGPath? = nil) -> AnyStyle<T> {
+        let value = LayerShadow(opacity: opacity, radius: radius, offset: offset, color: color, path: path)
+        return ViewStyle(value, key: .shadow, sideEffect: { $1.sideEffect(on: $0.layer) }).toAnyStyle
     }
 }
