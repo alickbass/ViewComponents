@@ -120,7 +120,7 @@ struct LayerShadow: Hashable, StyleType {
 public extension AnyStyle where T: CALayer {
     private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
     
-    public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = UIColor.black, path: CGPath? = nil) -> AnyStyle<T> {
+    public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = .black, path: CGPath? = nil) -> AnyStyle<T> {
         let value = LayerShadow(opacity: opacity, radius: radius, offset: offset, color: color, path: path)
         return ViewStyle(value, key: .shadow, sideEffect: { $1.sideEffect(on: $0) }).toAnyStyle
     }
@@ -129,7 +129,7 @@ public extension AnyStyle where T: CALayer {
 public extension AnyStyle where T: UIView {
     private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
     
-    public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = UIColor.black, path: CGPath? = nil) -> AnyStyle<T> {
+    public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = .black, path: CGPath? = nil) -> AnyStyle<T> {
         let value = LayerShadow(opacity: opacity, radius: radius, offset: offset, color: color, path: path)
         return ViewStyle(value, key: .shadow, sideEffect: { $1.sideEffect(on: $0.layer) }).toAnyStyle
     }
