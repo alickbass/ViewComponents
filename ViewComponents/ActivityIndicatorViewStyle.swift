@@ -8,10 +8,12 @@
 
 import UIKit
 
+public enum ActivityIndicatorViewStyleKey: Int, Hashable {
+    case isAnimating = 201, hidesWhenStopped, activityIndicatorViewStyle, color
+}
+
 public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: KeyedStyle {
-    public enum Key: Int, Hashable {
-        case isAnimating = 201, hidesWhenStopped, activityIndicatorViewStyle, color
-    }
+    public typealias Key = ActivityIndicatorViewStyleKey
     
     case isAnimating(Bool)
     case hidesWhenStopped(Bool)
@@ -67,5 +69,25 @@ public enum ActivityIndicatorViewStyle<T: UIActivityIndicatorView>: KeyedStyle {
 public extension Component where T: UIActivityIndicatorView {
     public func activityIndicator(_ styles: ActivityIndicatorViewStyle<T>...) -> Component<T> {
         return adding(styles: styles.lazy.map(AnyStyle.init))
+    }
+}
+
+public extension AnyStyle where T: UIActivityIndicatorView {
+    private typealias ViewStyle<Item> = Style<T, Item, ActivityIndicatorViewStyleKey>
+    
+    public static func isAnimating(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isAnimating, sideEffect: { $1 ? $0.startAnimating() : $0.stopAnimating() }).toAnyStyle
+    }
+    
+    public static func hidesWhenStopped(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .hidesWhenStopped, sideEffect: { $0.hidesWhenStopped = $1 }).toAnyStyle
+    }
+    
+    public static func activityIndicatorViewStyle(_ value: UIActivityIndicatorViewStyle) -> AnyStyle<T> {
+        return ViewStyle(value, key: .activityIndicatorViewStyle, sideEffect: { $0.activityIndicatorViewStyle = $1 }).toAnyStyle
+    }
+    
+    public static func color(_ value: UIColor?) -> AnyStyle<T> {
+        return ViewStyle(value, key: .color, sideEffect: { $0.color = $1 }).toAnyStyle
     }
 }
