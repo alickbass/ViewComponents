@@ -14,6 +14,10 @@ class MyView {
         case one, two
     }
     
+    enum OtherKey: Int {
+        case alpha
+    }
+    
     var one: Int = 0
     var two: Int? = .none
 }
@@ -27,7 +31,7 @@ class TestStyle: XCTestCase {
         XCTAssertEqual(style, .init(4, key: .one, sideEffect: { $0.one = $1 }))
         XCTAssertNotEqual(style, .init(5, key: .one, sideEffect: { $0.one = $1 }))
         XCTAssertNotEqual(style, .init(4, key: .two, sideEffect: { $0.one = $1 }))
-        XCTAssertNotEqual(style.toAnyStyle, Style<MyView, Int, UIViewStyleKey>(4, key: .alpha, sideEffect: { $0.one = $1 }).toAnyStyle)
+        XCTAssertNotEqual(style.toAnyStyle, Style<MyView, Int, MyView.OtherKey>(4, key: .alpha, sideEffect: { $0.one = $1 }).toAnyStyle)
         XCTAssertEqual(style.hashValue, Style<MyView, Int, MyView.Key>(4, key: .one, sideEffect: { $0.one = $1 }).hashValue)
         XCTAssertNotEqual(style.hashValue, Style<MyView, Int, MyView.Key>(4, key: .two, sideEffect: { $0.one = $1 }).hashValue)
         
