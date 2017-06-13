@@ -8,11 +8,13 @@
 
 import UIKit
 
+public enum UICollectionViewStyleKey: Int, Hashable {
+    case isPrefetchingEnabled = 147, allowsSelection, allowsMultipleSelection
+    case remembersLastFocusedIndexPath, collectionViewLayout
+}
+
 public enum UICollectionViewStyle<T: UICollectionView>: KeyedStyle {
-    public enum Key: Int, Hashable {
-        case isPrefetchingEnabled = 147, allowsSelection, allowsMultipleSelection
-        case remembersLastFocusedIndexPath, collectionViewLayout
-    }
+    public typealias Key = UICollectionViewStyleKey
     
     @available(iOS 10.0, *)
     case isPrefetchingEnabled(Bool)
@@ -71,5 +73,30 @@ public enum UICollectionViewStyle<T: UICollectionView>: KeyedStyle {
 public extension Component where T: UICollectionView {
     public func collectionView(_ styles: UICollectionViewStyle<T>...) -> Component<T> {
         return adding(styles: styles.lazy.map(AnyStyle.init))
+    }
+}
+
+public extension AnyStyle where T: UICollectionView {
+    private typealias ViewStyle<Item> = Style<T, Item, UICollectionViewStyleKey>
+    
+    @available(iOS 10.0, *)
+    public static func isPrefetchingEnabled(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isPrefetchingEnabled, sideEffect: { $0.isPrefetchingEnabled = $1 }).toAnyStyle
+    }
+    
+    public static func allowsSelection(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .allowsSelection, sideEffect: { $0.allowsSelection = $1 }).toAnyStyle
+    }
+    
+    public static func allowsMultipleSelection(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .allowsMultipleSelection, sideEffect: { $0.allowsMultipleSelection = $1 }).toAnyStyle
+    }
+    
+    public static func remembersLastFocusedIndexPath(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .remembersLastFocusedIndexPath, sideEffect: { $0.remembersLastFocusedIndexPath = $1 }).toAnyStyle
+    }
+    
+    public static func collectionViewLayout(_ value: UICollectionViewLayout) -> AnyStyle<T> {
+        return ViewStyle(value, key: .collectionViewLayout, sideEffect: { $0.collectionViewLayout = $1 }).toAnyStyle
     }
 }

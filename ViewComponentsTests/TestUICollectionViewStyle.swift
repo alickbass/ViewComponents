@@ -56,6 +56,33 @@ class TestUICollectionViewStyle: XCTestCase, ViewTestType {
         XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
     }
     
+    func testAnyStyleSideEffects() {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        
+        view.isPrefetchingEnabled = false
+        AnyStyle<UICollectionView>.isPrefetchingEnabled(true).sideEffect(on: view)
+        XCTAssertEqual(view.isPrefetchingEnabled, true)
+        
+        view.allowsSelection = false
+        AnyStyle<UICollectionView>.allowsSelection(true).sideEffect(on: view)
+        XCTAssertEqual(view.allowsSelection, true)
+        
+        view.allowsMultipleSelection = false
+        AnyStyle<UICollectionView>.allowsMultipleSelection(true).sideEffect(on: view)
+        XCTAssertEqual(view.allowsMultipleSelection, true)
+        
+        view.remembersLastFocusedIndexPath = false
+        AnyStyle<UICollectionView>.remembersLastFocusedIndexPath(true).sideEffect(on: view)
+        XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
+        
+        AnyStyle<UICollectionView>.collectionViewLayout(layout).sideEffect(on: view)
+        XCTAssertEqual(view.collectionViewLayout, layout)
+        
+        view.remembersLastFocusedIndexPath = false
+        Component<UICollectionView>().collectionView(.remembersLastFocusedIndexPath(true)).configure(item: view)
+        XCTAssertEqual(view.remembersLastFocusedIndexPath, true)
+    }
+    
     func testHashValue() {
         testAccumulatingHashes()
     }
