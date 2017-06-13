@@ -139,6 +139,10 @@ class TestTableViewCellStyle: XCTestCase, ViewTestType {
         view.separatorInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         AnyStyle<UITableViewCell>.separatorInset(.zero).sideEffect(on: view)
         XCTAssertEqual(view.separatorInset, .zero)
+        
+        view.focusStyle = .custom
+        AnyStyle<UITableViewCell>.focusStyle(.default).sideEffect(on: view)
+        XCTAssertEqual(view.focusStyle, .default)
     }
     
     func testHashValue() {
