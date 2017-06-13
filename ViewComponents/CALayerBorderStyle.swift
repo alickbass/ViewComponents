@@ -8,58 +8,8 @@
 
 import UIKit
 
-public extension CALayer {
-    public enum BorderStyle<T: UIView>: KeyedStyle {
-        public enum Key: Int, Hashable {
-            case cornerRadius = 29, width, color, border
-        }
-        
-        case cornerRadius(CGFloat)
-        case width(CGFloat)
-        case color(UIColor?)
-        
-        public func sideEffect(on view: T) {
-            let layer = view.layer
-            switch self {
-            case let .cornerRadius(cornerRadius):
-                layer.cornerRadius = cornerRadius
-            case let .width(borderWidth):
-                layer.borderWidth = borderWidth
-            case let .color(borderColor):
-                layer.borderColor = borderColor?.cgColor
-            }
-        }
-        
-        public static func == (lhs: BorderStyle<T>, rhs: BorderStyle<T>) -> Bool {
-            switch (lhs, rhs) {
-            case let (.cornerRadius(leftRaduis), .cornerRadius(rightRaduis)):
-                return leftRaduis == rightRaduis
-            case let (.width(leftWidth), .width(rightWidth)):
-                return leftWidth == rightWidth
-            case let (.color(leftColor), .color(rightColor)):
-                return leftColor == rightColor
-            default:
-                return false
-            }
-        }
-        
-        @inline(__always) public func value() -> (key: Key, valueHash: Int) {
-            switch self {
-            case let .cornerRadius(cornerRadius):
-                return (.cornerRadius, cornerRadius.hashValue)
-            case let .width(borderWidth):
-                return (.width, borderWidth.hashValue)
-            case let .color(borderColor):
-                return (.color, borderColor?.hashValue ?? 0)
-            }
-        }
-    }
-}
-
-public extension Component where T: UIView {
-    public func border(_ styles: CALayer.BorderStyle<T>...) -> Component<T> {
-        return adding(styles: styles.lazy.map(AnyStyle.init))
-    }
+public enum CALayerBorderStyleKey: Int, Hashable {
+    case cornerRadius = 29, width, color, border
 }
 
 struct LayerBorder: StyleType {
@@ -87,19 +37,19 @@ struct LayerBorder: StyleType {
 }
 
 public extension AnyStyle where T: CALayer {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerBorderStyleKey>
     
     public static func border(cornerRadius: CGFloat = 0, width: CGFloat = 0, color: UIColor? = .black) -> AnyStyle<T> {
         let value = LayerBorder(cornerRadius: cornerRadius, width: width, color: color)
-        return ViewStyle(value, key: .shadow, sideEffect: { $1.sideEffect(on: $0) }).toAnyStyle
+        return ViewStyle(value, key: .border, sideEffect: { $1.sideEffect(on: $0) }).toAnyStyle
     }
 }
 
 public extension AnyStyle where T: UIView {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerBorderStyleKey>
     
     public static func border(cornerRadius: CGFloat = 0, width: CGFloat = 0, color: UIColor? = .black) -> AnyStyle<T> {
         let value = LayerBorder(cornerRadius: cornerRadius, width: width, color: color)
-        return ViewStyle(value, key: .shadow, sideEffect: { $1.sideEffect(on: $0.layer) }).toAnyStyle
+        return ViewStyle(value, key: .border, sideEffect: { $1.sideEffect(on: $0.layer) }).toAnyStyle
     }
 }

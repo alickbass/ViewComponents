@@ -157,7 +157,6 @@ class TestUIViewStyle: XCTestCase, ViewTestType {
     }
     
     func testHashValue() {
-        XCTAssertEqual(UIViewStyle.Key.backgroundColor.rawValue, CALayer.BorderStyle.Key.color.rawValue + 1)
         testAccumulatingHashes()
     }
 }
