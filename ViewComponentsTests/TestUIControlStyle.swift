@@ -60,6 +60,34 @@ class TestUIControlStyle: XCTestCase, ViewTestType {
         XCTAssertEqual(view.isSelected, false)
     }
     
+    func testAnyStyleSideEffects() {
+        let view = UIControl()
+        
+        view.isEnabled = true
+        AnyStyle<UIControl>.isEnabled(false).sideEffect(on: view)
+        XCTAssertEqual(view.isEnabled, false)
+        
+        view.isSelected = true
+        AnyStyle<UIControl>.isSelected(false).sideEffect(on: view)
+        XCTAssertEqual(view.isSelected, false)
+        
+        view.isHighlighted = true
+        AnyStyle<UIControl>.isHighlighted(false).sideEffect(on: view)
+        XCTAssertEqual(view.isHighlighted, false)
+        
+        view.contentVerticalAlignment = .bottom
+        AnyStyle<UIControl>.contentVerticalAlignment(.top).sideEffect(on: view)
+        XCTAssertEqual(view.contentVerticalAlignment, .top)
+        
+        view.contentHorizontalAlignment = .left
+        AnyStyle<UIControl>.contentHorizontalAlignment(.center).sideEffect(on: view)
+        XCTAssertEqual(view.contentHorizontalAlignment, .center)
+        
+        view.isSelected = true
+        Component<UIControl>().control(.isSelected(false)).configure(item: view)
+        XCTAssertEqual(view.isSelected, false)
+    }
+    
     func testHashValue() {
         testAccumulatingHashes()
     }

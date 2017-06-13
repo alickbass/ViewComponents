@@ -8,11 +8,13 @@
 
 import UIKit
 
+public enum UIControlStyleKey: Int, Hashable {
+    case isEnabled = 60, isSelected, isHighlighted
+    case contentVerticalAlignment, contentHorizontalAlignment
+}
+
 public enum UIControlStyle<T: UIControl>: KeyedStyle {
-    public enum Key: Int, Hashable {
-        case isEnabled = 60, isSelected, isHighlighted
-        case contentVerticalAlignment, contentHorizontalAlignment
-    }
+    public typealias Key = UIControlStyleKey
     
     case isEnabled(Bool)
     case isSelected(Bool)
@@ -69,5 +71,29 @@ public enum UIControlStyle<T: UIControl>: KeyedStyle {
 public extension Component where T: UIControl {
     public func control(_ styles: UIControlStyle<T>...) -> Component<T> {
         return adding(styles: styles.lazy.map(AnyStyle.init))
+    }
+}
+
+public extension AnyStyle where T: UIControl {
+    private typealias ViewStyle<Item> = Style<T, Item, UIControlStyleKey>
+    
+    public static func isEnabled(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isEnabled, sideEffect: { $0.isEnabled = $1 }).toAnyStyle
+    }
+    
+    public static func isSelected(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isSelected, sideEffect: { $0.isSelected = $1 }).toAnyStyle
+    }
+    
+    public static func isHighlighted(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isHighlighted, sideEffect: { $0.isHighlighted = $1 }).toAnyStyle
+    }
+    
+    public static func contentVerticalAlignment(_ value: UIControlContentVerticalAlignment) -> AnyStyle<T> {
+        return ViewStyle(value, key: .contentVerticalAlignment, sideEffect: { $0.contentVerticalAlignment = $1 }).toAnyStyle
+    }
+    
+    public static func contentHorizontalAlignment(_ value: UIControlContentHorizontalAlignment) -> AnyStyle<T> {
+        return ViewStyle(value, key: .contentHorizontalAlignment, sideEffect: { $0.contentHorizontalAlignment = $1 }).toAnyStyle
     }
 }
