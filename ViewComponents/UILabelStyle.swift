@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum UILabelStyleKey: Int, Hashable {
+private enum UILabelStyleKey: Int, Hashable {
     case text = 44, attributedText, font
     case textColor, textAlignment, lineBreakMode
     case isEnabled, adjustsFontSizeToFitWidth, allowsDefaultTighteningForTruncation
