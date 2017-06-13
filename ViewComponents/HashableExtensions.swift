@@ -60,3 +60,9 @@ extension NSRange: Hashable {
         return hash
     }
 }
+
+extension CAEdgeAntialiasingMask: Hashable {
+    public var hashValue: Int {
+        return rawValue.hashValue
+    }
+}

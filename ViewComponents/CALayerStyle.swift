@@ -319,11 +319,7 @@ public extension AnyStyle where T: CALayer {
     }
     
     public static func edgeAntialiasingMask(_ mask: CAEdgeAntialiasingMask) -> AnyStyle<T> {
-        return ViewStyle<CAEdgeAntialiasingMask>(mask, key: .edgeAntialiasingMask,
-            sideEffect: { $0.edgeAntialiasingMask = $1 },
-            equality: { $0 == $1 },
-            hash: { $0.rawValue.hashValue }
-        ).toAnyStyle
+        return ViewStyle(mask, key: .edgeAntialiasingMask, sideEffect: { $0.edgeAntialiasingMask = $1 }).toAnyStyle
     }
     
     public static func isGeometryFlipped(_ value: Bool) -> AnyStyle<T> {
