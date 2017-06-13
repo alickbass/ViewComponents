@@ -30,6 +30,10 @@ class TestUISwitchStyle: XCTestCase, ViewTestType {
         XCTAssertNotEqual(UISwitchStyle.offImage(image), .onImage(image))
     }
     
+    func testAnyStyleEquatable() {
+        XCTAssertEqual(AnyStyle<UISwitch>.isOn(true, animated: true), .isOn(true, animated: true))
+    }
+    
     func testStyleSideEffects() {
         let view = UISwitch()
         
@@ -55,6 +59,30 @@ class TestUISwitchStyle: XCTestCase, ViewTestType {
         
         view.offImage = nil
         Component<UISwitch>().switch(.offImage(image)).configure(item: view)
+        XCTAssertEqual(view.offImage, image)
+    }
+    
+    func testAnyStyleSideEffects() {
+        let view = UISwitch()
+        
+        view.setOn(false, animated: false)
+        AnyStyle<UISwitch>.isOn(true, animated: false).sideEffect(on: view)
+        XCTAssertEqual(view.isOn, true)
+        
+        view.onTintColor = nil
+        AnyStyle<UISwitch>.onTintColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.onTintColor, .red)
+        
+        view.thumbTintColor = nil
+        AnyStyle<UISwitch>.thumbTintColor(.red).sideEffect(on: view)
+        XCTAssertEqual(view.thumbTintColor, .red)
+        
+        view.onImage = nil
+        AnyStyle<UISwitch>.onImage(image).sideEffect(on: view)
+        XCTAssertEqual(view.onImage, image)
+        
+        view.offImage = nil
+        AnyStyle<UISwitch>.offImage(image).sideEffect(on: view)
         XCTAssertEqual(view.offImage, image)
     }
     
