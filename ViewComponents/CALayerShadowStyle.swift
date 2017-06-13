@@ -83,7 +83,7 @@ public extension Component where T: CALayer {
     }
 }
 
-struct LayerShadow: Hashable, StyleType {
+struct LayerShadow: StyleType {
     let opacity: Float
     let radius: CGFloat
     let offset: CGSize
