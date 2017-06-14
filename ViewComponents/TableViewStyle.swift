@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum TableViewStyleKey: Int, Hashable {
+private enum TableViewStyleKey: Int, Hashable {
     case rowHeight = 113, separatorStyle, separatorColor
     case separatorEffect, separatorInset, cellLayoutMarginsFollowReadableWidth
     case sectionHeaderHeight, sectionFooterHeight, estimatedRowHeight
