@@ -39,4 +39,8 @@ class TestStyle: XCTestCase {
         XCTAssertEqual(optional.hashValue, Style<MyView, Int?, MyView.Key>(4, key: .two, sideEffect: { $0.two = $1 }).hashValue)
         XCTAssertNotEqual(optional.hashValue, Style<MyView, Int?, MyView.Key>(.none, key: .two, sideEffect: { $0.two = $1 }).hashValue)
     }
+    
+    func testStyleDescription() {
+        XCTAssertEqual(AnyStyle<UILabel>.adjustsFontSizeToFitWidth(true).description, "adjustsFontSizeToFitWidth: true")
+    }
 }

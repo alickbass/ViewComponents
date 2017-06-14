@@ -13,7 +13,7 @@ public protocol StyleType: Hashable {
     func sideEffect(on item: View)
 }
 
-public struct AnyStyle<T>: StyleType {
+public struct AnyStyle<T>: StyleType, CustomStringConvertible {
     private let box: _AnyStyleBoxBase<T>
     
     public init<V: StyleType>(_ style: V) where V.View == T {
@@ -30,6 +30,10 @@ public struct AnyStyle<T>: StyleType {
     
     public var hashValue: Int {
         return box.hashValue
+    }
+    
+    public var description: String {
+        return "\(box)"
     }
 }
 
@@ -51,7 +55,7 @@ private class _AnyStyleBoxBase<V>: StyleType {
     }
 }
 
-private final class _AnyStyleConcreteBox<T: StyleType>: _AnyStyleBoxBase<T.View> {
+private final class _AnyStyleConcreteBox<T: StyleType>: _AnyStyleBoxBase<T.View>, CustomStringConvertible {
     let base: T
     
     init(_ base: T) {
@@ -69,5 +73,9 @@ private final class _AnyStyleConcreteBox<T: StyleType>: _AnyStyleBoxBase<T.View>
     
     override var hashValue: Int {
         return base.hashValue
+    }
+    
+    var description: String {
+        return "\(base)"
     }
 }
