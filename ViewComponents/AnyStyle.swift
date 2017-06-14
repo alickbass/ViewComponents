@@ -13,21 +13,6 @@ public protocol StyleType: Hashable {
     func sideEffect(on item: View)
 }
 
-public protocol KeyedStyle: StyleType {
-    associatedtype Key: RawRepresentable
-    func value() -> (key: Key, valueHash: Int)
-}
-
-public extension KeyedStyle where Key: Hashable, Key.RawValue == Int {
-    public var hashValue: Int {
-        let value = self.value()
-        var hash = 5381
-        hash = ((hash << 5) &+ hash) &+ value.key.rawValue.hashValue
-        hash = ((hash << 5) &+ hash) &+ value.valueHash
-        return hash
-    }
-}
-
 public struct AnyStyle<T>: StyleType {
     private let box: _AnyStyleBoxBase<T>
     
