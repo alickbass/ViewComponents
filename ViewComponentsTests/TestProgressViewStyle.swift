@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestProgressViewStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [ProgressViewStyle<UIProgressView>] = [
+    static let allStyles: [AnyStyle<UIProgressView>] = [
         .progress(0.2, animated: true), .progressViewStyle(.bar), .progressTintColor(.red),
         .progressTintColor(nil), .progressImage(UIImage()), .progressImage(nil),
         .trackTintColor(.red), .trackTintColor(nil), .trackImage(UIImage()), .trackImage(nil)
@@ -21,45 +21,35 @@ class TestProgressViewStyle: XCTestCase, ViewTestType {
     
     let image = UIImage()
     
-    func testStyleEquatable() {
-        XCTAssertEqual(ProgressViewStyle.progress(0.2, animated: true), .progress(0.2, animated: true))
-        XCTAssertEqual(ProgressViewStyle.progressViewStyle(.bar), .progressViewStyle(.bar))
-        XCTAssertEqual(ProgressViewStyle.progressTintColor(.red), .progressTintColor(.red))
-        XCTAssertEqual(ProgressViewStyle.progressImage(image), .progressImage(image))
-        XCTAssertEqual(ProgressViewStyle.trackTintColor(.red), .trackTintColor(.red))
-        XCTAssertEqual(ProgressViewStyle.trackImage(image), .trackImage(image))
-        XCTAssertNotEqual(ProgressViewStyle.trackImage(image), .trackTintColor(.red))
+    func testAnyStyleEquatable() {
+        XCTAssertEqual(AnyStyle<UIProgressView>.progress(0.2, animated: true), .progress(0.2, animated: true))
     }
     
-    func testStyleSideEffects() {
+    func testAnyStyleSideEffects() {
         let view = UIProgressView()
         
         view.setProgress(0.5, animated: false)
-        ProgressViewStyle.progress(0.2, animated: false).sideEffect(on: view)
+        AnyStyle<UIProgressView>.progress(0.2, animated: false).sideEffect(on: view)
         XCTAssertEqual(view.progress, 0.2)
         
         view.progressViewStyle = .default
-        ProgressViewStyle.progressViewStyle(.bar).sideEffect(on: view)
+        AnyStyle<UIProgressView>.progressViewStyle(.bar).sideEffect(on: view)
         XCTAssertEqual(view.progressViewStyle, .bar)
         
         view.progressTintColor = .blue
-        ProgressViewStyle.progressTintColor(.red).sideEffect(on: view)
+        AnyStyle<UIProgressView>.progressTintColor(.red).sideEffect(on: view)
         XCTAssertEqual(view.progressTintColor, .red)
         
         view.progressImage = nil
-        ProgressViewStyle.progressImage(image).sideEffect(on: view)
+        AnyStyle<UIProgressView>.progressImage(image).sideEffect(on: view)
         XCTAssertEqual(view.progressImage, image)
         
         view.trackTintColor = .blue
-        ProgressViewStyle.trackTintColor(.red).sideEffect(on: view)
+        AnyStyle<UIProgressView>.trackTintColor(.red).sideEffect(on: view)
         XCTAssertEqual(view.trackTintColor, .red)
         
         view.trackImage = nil
-        ProgressViewStyle.trackImage(image).sideEffect(on: view)
-        XCTAssertEqual(view.trackImage, image)
-        
-        view.trackImage = nil
-        Component<UIProgressView>().progressView(.trackImage(image)).configure(item: view)
+        AnyStyle<UIProgressView>.trackImage(image).sideEffect(on: view)
         XCTAssertEqual(view.trackImage, image)
     }
     

@@ -20,7 +20,7 @@ ViewComponents is a library that helps you to create View Models that are:
 You describe how the view should look like and the library will take care to applying the styling. Here's an example:
 
 ```swift
-let buttonComponent = Component<UIButton>().button(
+let buttonComponent = Component<UIButton>(
     .title("Test", for: .normal),
     .titleColor(.red, for: .normal)
 )
@@ -44,33 +44,25 @@ class MyCustomView: UIView {
 With **ViewComponents** you can easily create immutable values that represent the styling of the **whole view hierarchy** like this:
 
 ```swift
-let buttonComponent = Component<UIButton>().button(
-    .title("Test", for: .normal),
-    .titleColor(.red, for: .normal)
+let labelComponent = Component<UILabel>(
+    .text("MyLabel"),
+    .font(.boldSystemFont(ofSize: 12)),
+    .backgroundColor(.blue)
 )
 
-let labelComponent = Component<UILabel>()
-    .label(
-        .text("MyLabel"),
-        .font(.boldSystemFont(ofSize: 12))
-    )
-    .view(
-        .backgroundColor(.blue)
-    )
-
-let iconComponent = Component<UIImageView>().imageView(
-    .image(myImage)
+let viewComponent = Component<MyCustomView>(
+    .border(cornerRadius: 12, width: 3, color: .red)
 )
-
-let viewComponent = Component<MyCustomView>()
-    .border(
-        .color(.red), .width(3), .cornerRadius(12)
+.withChildren(
+    .child({ $0.myButton }, styles:
+        .title("Test", for: .normal),
+        .titleColor(.red, for: .normal)
+    ),
+    .child({ $0.myLabel }, labelComponent),
+    .child({ $0.myIcon }, styles:
+        .image(myImage)
     )
-    .withChildren(
-	.child({ $0.myButton }, buttonComponent),
-	.child({ $0.myLabel }, labelComponent),
-	.child({ $0.myIcon }, iconComponent)
-    )
+)
 ```
 
 and then when we need to apply our style we do the following:
@@ -84,12 +76,12 @@ viewComponent.configure(view: myCustomeView)
 The library provides diffing mechanism. Consider following 2 components
 
 ```swift
-let button1 = Component<UIButton>().button(
+let button1 = Component<UIButton>(
     .title("Test", for: .normal),
     .titleColor(.red, for: .normal)
 )
 
-let button2 = Component<UIButton>().button(
+let button2 = Component<UIButton>(
     .title("Test", for: .normal),
     .titleColor(.blue, for: .normal),
     .adjustsImageWhenHighlighted(true)
@@ -105,7 +97,7 @@ let changes = button1.diffChanges(from: button2)
 Which in this case will be the following component:
 
 ```swift
-let realChanges = Component<UIButton>().button(
+let realChanges = Component<UIButton>(
     .titleColor(.blue, for: .normal),
     .adjustsImageWhenHighlighted(true)
 )
@@ -154,26 +146,20 @@ struct PersonViewModel: ComponentConvertible {
     }
     
     var toComponent: Component<PersonView> {
-        return Component()
-            .border(.color(.red), .width(12))
-            .withChildren(
-	        .child({ $0.nameLabel },
-	            Component().label(
-	                .text(name),
-	                .font(.boldSystemFont(ofSize: 12)),
-	                .textColor(.red)
-	            )
-	        ),
-	        .child({ $0.birthdateLabel }, 
-	            Component()
-	            .view(
-	               .backgroundColor(.yellow), .alpha(0.8)
-	            )
-	            .label(
-	                .font(.systemFont(ofSize: 10)), .text(birthday)
-	            )
-	        )
+        return Component(
+            .border(width: 12, color: .red)
+        )
+        .withChildren(
+            .child({ $0.nameLabel }, styles:
+                .text(name),
+                .font(.boldSystemFont(ofSize: 12)),
+                .textColor(.red)
+            ),
+            .child({ $0.birthdateLabel }, styles:
+                .backgroundColor(.yellow), .alpha(0.8),
+                .font(.systemFont(ofSize: 10)), .text(birthday)
             )
+        )
     }
 }
 ```
@@ -194,27 +180,21 @@ In you unit tests, you just need to check for the equality the `ViewModels` `toC
 
 ```swift
 let person = Person(salutation: "Hallo", firstName: "John", lastName: "Doe", birthday: Date())
-let target = Component<PersonView>()
-    .border(.color(.red), .width(12))
-    .withChildren(
-	.child({ $0.nameLabel },
-	    Component<UILabel>()
-	        .label(
-	            .text("Hallo John Doe"),
-	            .font(.boldSystemFont(ofSize: 12)),
-	            .textColor(.red)
-	        )
-	),
-	.child({ $0.birthdateLabel },
-	    Component<UILabel>()
-	        .view(
-	            .backgroundColor(.yellow), .alpha(0.8)
-	        )
-	        .label(
-	            .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
-	        )
-	)
+
+let target = Component<PersonView>(
+    .border(width: 12, color: .red)
+)
+.withChildren(
+    .child({ $0.nameLabel }, styles:
+        .text("Hallo John Doe"),
+        .font(.boldSystemFont(ofSize: 12)),
+        .textColor(.red)
+    ),
+    .child({ $0.birthdateLabel }, styles:
+        .backgroundColor(.yellow), .alpha(0.8),
+        .font(.systemFont(ofSize: 10)), .text("Tuesday May 16, 2017")
     )
+)
 
 XCTAssertEqual(PersonViewModel(person: person).toComponent, target)
 ```

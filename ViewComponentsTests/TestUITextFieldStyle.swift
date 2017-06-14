@@ -11,7 +11,7 @@ import ViewComponents
 
 class TestUITextFieldStyle: XCTestCase, ViewTestType {
     
-    static let allStyles: [UITextFieldStyle<UITextField>] = [
+    static let allStyles: [AnyStyle<UITextField>] = [
         .text(nil), .text("test"), .attributedText(nil), .attributedText(.init(string: "test")),
         .placeholder(nil), .placeholder("test"), .attributedPlaceholder(nil), .attributedPlaceholder(.init(string: "test")),
         .font(.systemFont(ofSize: 8)), .textColor(.red), .textAlignment(.center), .adjustsFontSizeToFitWidth(true),
@@ -24,105 +24,79 @@ class TestUITextFieldStyle: XCTestCase, ViewTestType {
     
     let image = UIImage()
     
-    func testStyleEquatable() {
-        XCTAssertEqual(UITextFieldStyle.text("test"), .text("test"))
-        XCTAssertEqual(UITextFieldStyle.attributedText(.init(string: "test")), .attributedText(.init(string: "test")))
-        XCTAssertEqual(UITextFieldStyle.placeholder("test"), .placeholder("test"))
-        XCTAssertEqual(UITextFieldStyle.attributedPlaceholder(.init(string: "test")), .attributedPlaceholder(.init(string: "test")))
-        XCTAssertEqual(UITextFieldStyle.font(.systemFont(ofSize: 8)), .font(.systemFont(ofSize: 8)))
-        XCTAssertEqual(UITextFieldStyle.textColor(.red), .textColor(.red))
-        XCTAssertEqual(UITextFieldStyle.textAlignment(.center), .textAlignment(.center))
-        XCTAssertEqual(UITextFieldStyle.adjustsFontSizeToFitWidth(true), .adjustsFontSizeToFitWidth(true))
-        XCTAssertEqual(UITextFieldStyle.minimumFontSize(12), .minimumFontSize(12))
-        XCTAssertEqual(UITextFieldStyle.clearsOnBeginEditing(true), .clearsOnBeginEditing(true))
-        XCTAssertEqual(UITextFieldStyle.clearsOnInsertion(true), .clearsOnInsertion(true))
-        XCTAssertEqual(UITextFieldStyle.allowsEditingTextAttributes(true), .allowsEditingTextAttributes(true))
-        XCTAssertEqual(UITextFieldStyle.borderStyle(.bezel), .borderStyle(.bezel))
-        XCTAssertEqual(UITextFieldStyle.background(image), .background(image))
-        XCTAssertEqual(UITextFieldStyle.disabledBackground(image), .disabledBackground(image))
-        XCTAssertEqual(UITextFieldStyle.clearButtonMode(.always), .clearButtonMode(.always))
-        XCTAssertEqual(UITextFieldStyle.leftViewMode(.always), .leftViewMode(.always))
-        XCTAssertEqual(UITextFieldStyle.rightViewMode(.always), .rightViewMode(.always))
-        XCTAssertNotEqual(UITextFieldStyle.rightViewMode(.always), .leftViewMode(.always))
-    }
-    
-    func testStyleSideEffects() {
+    func testAnyStyleSideEffects() {
         let view = UITextField()
         
         view.text = nil
-        UITextFieldStyle.text("test").sideEffect(on: view)
+        AnyStyle<UITextField>.text("test").sideEffect(on: view)
         XCTAssertEqual(view.text, "test")
         
         view.attributedText = nil
-        UITextFieldStyle.attributedText(.init(string: "test")).sideEffect(on: view)
+        AnyStyle<UITextField>.attributedText(.init(string: "test")).sideEffect(on: view)
         XCTAssertNotNil(view.attributedText)
         
         view.placeholder = nil
-        UITextFieldStyle.placeholder("test").sideEffect(on: view)
+        AnyStyle<UITextField>.placeholder("test").sideEffect(on: view)
         XCTAssertEqual(view.placeholder, "test")
         
         view.attributedPlaceholder = nil
-        UITextFieldStyle.attributedPlaceholder(.init(string: "test")).sideEffect(on: view)
+        AnyStyle<UITextField>.attributedPlaceholder(.init(string: "test")).sideEffect(on: view)
         XCTAssertEqual(view.attributedPlaceholder, .init(string: "test"))
         
         view.font = .boldSystemFont(ofSize: 12)
-        UITextFieldStyle.font(.systemFont(ofSize: 8)).sideEffect(on: view)
+        AnyStyle<UITextField>.font(.systemFont(ofSize: 8)).sideEffect(on: view)
         XCTAssertEqual(view.font, .systemFont(ofSize: 8))
         
         view.textColor = .blue
-        UITextFieldStyle.textColor(.red).sideEffect(on: view)
+        AnyStyle<UITextField>.textColor(.red).sideEffect(on: view)
         XCTAssertEqual(view.textColor, .red)
         
         view.textAlignment = .left
-        UITextFieldStyle.textAlignment(.center).sideEffect(on: view)
+        AnyStyle<UITextField>.textAlignment(.center).sideEffect(on: view)
         XCTAssertEqual(view.textAlignment, .center)
         
         view.adjustsFontSizeToFitWidth = false
-        UITextFieldStyle.adjustsFontSizeToFitWidth(true).sideEffect(on: view)
+        AnyStyle<UITextField>.adjustsFontSizeToFitWidth(true).sideEffect(on: view)
         XCTAssertEqual(view.adjustsFontSizeToFitWidth, true)
         
         view.minimumFontSize = 10
-        UITextFieldStyle.minimumFontSize(12).sideEffect(on: view)
+        AnyStyle<UITextField>.minimumFontSize(12).sideEffect(on: view)
         XCTAssertEqual(view.minimumFontSize, 12)
         
         view.clearsOnBeginEditing = false
-        UITextFieldStyle.clearsOnBeginEditing(true).sideEffect(on: view)
+        AnyStyle<UITextField>.clearsOnBeginEditing(true).sideEffect(on: view)
         XCTAssertEqual(view.clearsOnBeginEditing, true)
         
         view.clearsOnInsertion = false
-        UITextFieldStyle.clearsOnInsertion(true).sideEffect(on: view)
+        AnyStyle<UITextField>.clearsOnInsertion(true).sideEffect(on: view)
         XCTAssertEqual(view.clearsOnInsertion, true)
         
         view.allowsEditingTextAttributes = false
-        UITextFieldStyle.allowsEditingTextAttributes(true).sideEffect(on: view)
+        AnyStyle<UITextField>.allowsEditingTextAttributes(true).sideEffect(on: view)
         XCTAssertEqual(view.allowsEditingTextAttributes, true)
         
         view.borderStyle = .line
-        UITextFieldStyle.borderStyle(.bezel).sideEffect(on: view)
+        AnyStyle<UITextField>.borderStyle(.bezel).sideEffect(on: view)
         XCTAssertEqual(view.borderStyle, .bezel)
         
         view.background = nil
-        UITextFieldStyle.background(image).sideEffect(on: view)
+        AnyStyle<UITextField>.background(image).sideEffect(on: view)
         XCTAssertEqual(view.background, image)
         
         view.disabledBackground = nil
-        UITextFieldStyle.disabledBackground(image).sideEffect(on: view)
+        AnyStyle<UITextField>.disabledBackground(image).sideEffect(on: view)
         XCTAssertEqual(view.disabledBackground, image)
         
         view.clearButtonMode = .never
-        UITextFieldStyle.clearButtonMode(.always).sideEffect(on: view)
+        AnyStyle<UITextField>.clearButtonMode(.always).sideEffect(on: view)
         XCTAssertEqual(view.clearButtonMode, .always)
         
         view.leftViewMode = .never
-        UITextFieldStyle.leftViewMode(.always).sideEffect(on: view)
+        AnyStyle<UITextField>.leftViewMode(.always).sideEffect(on: view)
         XCTAssertEqual(view.leftViewMode, .always)
         
         view.rightViewMode = .never
-        UITextFieldStyle.rightViewMode(.always).sideEffect(on: view)
-        XCTAssertEqual(view.rightViewMode, .always)
-        
-        view.rightViewMode = .never
-        Component<UITextField>().textField(.rightViewMode(.always)).configure(item: view)
+        AnyStyle<UITextField>.rightViewMode(.always).sideEffect(on: view)
         XCTAssertEqual(view.rightViewMode, .always)
     }
     

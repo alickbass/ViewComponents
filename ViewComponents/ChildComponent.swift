@@ -62,6 +62,10 @@ public struct ChildComponent<View>: ComponentType, _ChildComponent {
         return ChildComponent<View>(component: item.toComponent, access)
     }
     
+    public static func child<V>(_ access: @escaping (View) -> V, styles: AnyStyle<V>...) -> ChildComponent<View> {
+        return ChildComponent<View>(component: Component<V>(styles: styles, children: []), access)
+    }
+    
     public var isEmpty: Bool {
         return box.isEmpty
     }

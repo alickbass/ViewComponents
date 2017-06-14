@@ -37,6 +37,9 @@
 		CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */; };
 		CECED8621EBB490000FF8B36 /* CALayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED8611EBB490000FF8B36 /* CALayerStyle.swift */; };
 		CECED8641EBB4C2600FF8B36 /* TestCALayerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */; };
+		CED662FD1EEEADBA006A13C4 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED662FC1EEEADBA006A13C4 /* Style.swift */; };
+		CED663051EEF3353006A13C4 /* Optionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED663041EEF3353006A13C4 /* Optionable.swift */; };
+		CED6631F1EF00742006A13C4 /* TestStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED6631E1EF00742006A13C4 /* TestStyle.swift */; };
 		CEE5DA7A1EC212E50022D6F1 /* CALayerShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5DA791EC212E50022D6F1 /* CALayerShadowStyle.swift */; };
 		CEE5DA7C1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */; };
 		CEE5DA7E1EC219620022D6F1 /* CALayerBorderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5DA7D1EC219620022D6F1 /* CALayerBorderStyle.swift */; };
@@ -96,6 +99,9 @@
 		CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIImageViewStyle.swift; sourceTree = "<group>"; };
 		CECED8611EBB490000FF8B36 /* CALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerStyle.swift; sourceTree = "<group>"; };
 		CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCALayerStyle.swift; sourceTree = "<group>"; };
+		CED662FC1EEEADBA006A13C4 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		CED663041EEF3353006A13C4 /* Optionable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Optionable.swift; sourceTree = "<group>"; };
+		CED6631E1EF00742006A13C4 /* TestStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestStyle.swift; sourceTree = "<group>"; };
 		CEE5DA791EC212E50022D6F1 /* CALayerShadowStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerShadowStyle.swift; sourceTree = "<group>"; };
 		CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCALayerShadowStyle.swift; sourceTree = "<group>"; };
 		CEE5DA7D1EC219620022D6F1 /* CALayerBorderStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerBorderStyle.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				CE5329AB1EC4A5AE0000E9AB /* HashableExtensions.swift */,
+				CED663041EEF3353006A13C4 /* Optionable.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -170,6 +177,7 @@
 				CEF534E71EB0C18B001E3CA8 /* Component.swift */,
 				CEFE1A241EC70BF600E077E0 /* ChildComponent.swift */,
 				CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */,
+				CED662FC1EEEADBA006A13C4 /* Style.swift */,
 				CEF534EF1EB0C2D1001E3CA8 /* Styles */,
 				CE5329AA1EC4A5920000E9AB /* Extensions */,
 				CEF534D11EB0C182001E3CA8 /* Info.plist */,
@@ -182,6 +190,7 @@
 			children = (
 				CE0CF5521EB7758400B6BC36 /* TestComponent.swift */,
 				CE77FA9E1EED4758003A3FD6 /* TestComponentPerformance.swift */,
+				CED6631E1EF00742006A13C4 /* TestStyle.swift */,
 				CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */,
 				CEE5DA7B1EC2153C0022D6F1 /* TestCALayerShadowStyle.swift */,
 				CE2D69FF1EC33EE300CA62D0 /* TestCALayerBorderStyle.swift */,
@@ -346,6 +355,7 @@
 			files = (
 				CE5779281EC5F05D00BE5F52 /* UICollectionViewStyle.swift in Sources */,
 				CEF534F31EB0C382001E3CA8 /* UIButtonStyle.swift in Sources */,
+				CED662FD1EEEADBA006A13C4 /* Style.swift in Sources */,
 				CE5329B21EC5AE320000E9AB /* UIIScrollViewStyle.swift in Sources */,
 				CE2B0CC51ECC73CC0003647D /* ComponentProtocols.swift in Sources */,
 				CEF534E81EB0C18B001E3CA8 /* Component.swift in Sources */,
@@ -361,6 +371,7 @@
 				CE0CF5551EB786C600B6BC36 /* UIControlStyle.swift in Sources */,
 				CEF534F11EB0C2DD001E3CA8 /* UIViewStyle.swift in Sources */,
 				CE469E351EC9B2BC009C256F /* ActivityIndicatorViewStyle.swift in Sources */,
+				CED663051EEF3353006A13C4 /* Optionable.swift in Sources */,
 				CE469E391EC9DF98009C256F /* UISwitchStyle.swift in Sources */,
 				CE5329B61EC5C3B60000E9AB /* TableViewStyle.swift in Sources */,
 				CE37165E1EBA235600590480 /* UIImageViewStyle.swift in Sources */,
@@ -393,6 +404,7 @@
 				CE67354D1EB7295000BBD2FE /* TestUILabelStyle.swift in Sources */,
 				CEFE1A291EC79E0400E077E0 /* TestUITextFieldStyle.swift in Sources */,
 				CE469E331EC9A006009C256F /* TestUISliderStyle.swift in Sources */,
+				CED6631F1EF00742006A13C4 /* TestStyle.swift in Sources */,
 				CECED85F1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift in Sources */,
 				CEF7DCDC1EC8A64500190D5C /* TestProgressViewStyle.swift in Sources */,
 			);
