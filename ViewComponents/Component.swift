@@ -16,6 +16,10 @@ public struct Component<T>: ComponentType {
         self.init(styles: [], children: [])
     }
     
+    public init(styles: AnyStyle<T>...) {
+        self.init(styles: Set(styles), children: [])
+    }
+    
     public init(styles: Set<AnyStyle<T>>, children: [ChildComponent<T>]) {
         self.styles = styles
         self.children = children
@@ -23,6 +27,10 @@ public struct Component<T>: ComponentType {
     
     public var isEmpty: Bool {
         return styles.isEmpty && children.isEmpty
+    }
+    
+    public func adding(_ styles: AnyStyle<T>...) -> Component<T> {
+        return adding(styles: styles)
     }
     
     public func adding<V: Sequence>(styles: V) -> Component<T> where V.Iterator.Element == AnyStyle<T> {
