@@ -16,8 +16,13 @@ public struct Component<T>: ComponentType {
         self.init(styles: [], children: [])
     }
     
-    public init(styles: AnyStyle<T>...) {
-        self.init(styles: Set(styles), children: [])
+    public init(styles: [AnyStyle<T>], children: [ChildComponent<T>]) {
+        self.styles = Set(styles)
+        self.children = children
+    }
+    
+    public init(_ styles: AnyStyle<T>...) {
+        self.init(styles: styles, children: [])
     }
     
     public init(styles: Set<AnyStyle<T>>, children: [ChildComponent<T>]) {
