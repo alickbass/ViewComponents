@@ -16,7 +16,7 @@ private enum TableViewStyleKey: Int, Hashable {
     case allowsMultipleSelection, allowsSelectionDuringEditing, allowsMultipleSelectionDuringEditing
     case isEditing, sectionIndexColor, sectionIndexBackgroundColor
     case sectionIndexTrackingBackgroundColor, remembersLastFocusedIndexPath, dataSource
-    case delegate
+    case delegate, tableHeaderView, tableFooterView
 }
 
 public extension AnyStyle where T: UITableView {
@@ -108,5 +108,13 @@ public extension AnyStyle where T: UITableView {
     
     public static func delegate(_ value: UITableViewDelegate?) -> AnyStyle<T> {
         return ViewStyle(value, key: .delegate, sideEffect: { $0.delegate = $1 }, equality: { $0 === $1 }, hash: { $0?.hash ?? 0 }).toAnyStyle
+    }
+    
+    public static func tableHeaderView(_ value: UIView?) -> AnyStyle<T> {
+        return ViewStyle(value, key: .tableHeaderView, sideEffect: { $0.tableHeaderView = $1 }).toAnyStyle
+    }
+    
+    public static func tableFooterView(_ value: UIView?) -> AnyStyle<T> {
+        return ViewStyle(value, key: .tableFooterView, sideEffect: { $0.tableFooterView = $1 }).toAnyStyle
     }
 }
