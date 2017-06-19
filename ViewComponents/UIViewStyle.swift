@@ -12,7 +12,8 @@ private enum UIViewStyleKey: Int, Hashable {
     case backgroundColor = 32, isHidden, alpha
     case isOpaque, tintColor, tintAdjustmentMode
     case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled
-    case isMultipleTouchEnabled, isExclusiveTouch, contentMode
+    case isMultipleTouchEnabled, isExclusiveTouch, contentMode, layoutMargins
+    case preservesSuperviewLayoutMargins
 }
 
 public extension AnyStyle where T: UIView {
@@ -64,5 +65,13 @@ public extension AnyStyle where T: UIView {
     
     public static func contentMode(_ mode: UIViewContentMode) -> AnyStyle<T> {
         return ViewStyle(mode, key: .contentMode, sideEffect: { $0.contentMode = $1 }).toAnyStyle
+    }
+    
+    public static func layoutMargins(_ value: UIEdgeInsets) -> AnyStyle<T> {
+        return ViewStyle(value, key: .layoutMargins, sideEffect: { $0.layoutMargins = $1 }).toAnyStyle
+    }
+    
+    public static func preservesSuperviewLayoutMargins(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .preservesSuperviewLayoutMargins, sideEffect: { $0.preservesSuperviewLayoutMargins = $1 }).toAnyStyle
     }
 }

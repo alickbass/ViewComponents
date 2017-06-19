@@ -15,7 +15,8 @@ class TestUIViewStyle: XCTestCase, ViewTestType {
         .backgroundColor(.red), .backgroundColor(nil), .isHidden(true), .alpha(0.2),
         .isOpaque(true), .tintColor(.red), .tintAdjustmentMode(.automatic), .clipsToBounds(true),
         .clearsContextBeforeDrawing(true), .isUserInteractionEnabled(true), .isMultipleTouchEnabled(true),
-        .isExclusiveTouch(true), .contentMode(.scaleToFill)
+        .isExclusiveTouch(true), .contentMode(.scaleToFill), .layoutMargins(.zero),
+        .preservesSuperviewLayoutMargins(true)
     ]
     
     static var previousHashes: [Int : Any] { return TestCALayerBorderStyle.accumulatedHashes }
@@ -70,6 +71,14 @@ class TestUIViewStyle: XCTestCase, ViewTestType {
         view.contentMode = .scaleToFill
         AnyStyle<UIView>.contentMode(.center).sideEffect(on: view)
         XCTAssertEqual(view.contentMode, .center)
+        
+        view.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        AnyStyle<UIView>.layoutMargins(.zero).sideEffect(on: view)
+        XCTAssertEqual(view.layoutMargins, .zero)
+        
+        view.preservesSuperviewLayoutMargins = false
+        AnyStyle<UIView>.preservesSuperviewLayoutMargins(true).sideEffect(on: view)
+        XCTAssertEqual(view.preservesSuperviewLayoutMargins, true)
     }
     
     func testHashValue() {
