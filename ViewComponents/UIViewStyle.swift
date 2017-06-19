@@ -13,7 +13,7 @@ private enum UIViewStyleKey: Int, Hashable {
     case isOpaque, tintColor, tintAdjustmentMode
     case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled
     case isMultipleTouchEnabled, isExclusiveTouch, contentMode, layoutMargins
-    case preservesSuperviewLayoutMargins
+    case preservesSuperviewLayoutMargins, semanticContentAttribute
 }
 
 public extension AnyStyle where T: UIView {
@@ -73,5 +73,9 @@ public extension AnyStyle where T: UIView {
     
     public static func preservesSuperviewLayoutMargins(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .preservesSuperviewLayoutMargins, sideEffect: { $0.preservesSuperviewLayoutMargins = $1 }).toAnyStyle
+    }
+    
+    public static func semanticContentAttribute(_ value: UISemanticContentAttribute) -> AnyStyle<T> {
+        return ViewStyle(value, key: .semanticContentAttribute, sideEffect: { $0.semanticContentAttribute = $1 }).toAnyStyle
     }
 }
