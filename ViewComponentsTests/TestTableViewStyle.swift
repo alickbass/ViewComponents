@@ -32,7 +32,8 @@ class TestTableViewStyle: XCTestCase, ViewTestType {
         .sectionIndexColor(.red), .sectionIndexBackgroundColor(.red), .sectionIndexTrackingBackgroundColor(.red),
         .remembersLastFocusedIndexPath(true), .separatorColor(nil), .separatorEffect(nil), .sectionIndexColor(nil),
         .sectionIndexBackgroundColor(nil), .sectionIndexTrackingBackgroundColor(nil),
-        .dataSource(nil), .dataSource(TableViewController()), .delegate(nil), .delegate(TableViewController())
+        .dataSource(nil), .dataSource(TableViewController()), .delegate(nil), .delegate(TableViewController()),
+        .tableHeaderView(UIView()), .tableFooterView(UIView())
     ]
     
     static var previousHashes: [Int : Any] { return TestUIScrollViewStyle.accumulatedHashes }
@@ -132,6 +133,17 @@ class TestTableViewStyle: XCTestCase, ViewTestType {
         view.delegate = nil
         AnyStyle<UITableView>.delegate(controller).sideEffect(on: view)
         XCTAssertTrue(view.delegate === controller)
+        
+        
+        let customView = UIView()
+        
+        view.tableHeaderView = nil
+        AnyStyle<UITableView>.tableHeaderView(customView).sideEffect(on: view)
+        XCTAssertEqual(view.tableHeaderView, customView)
+        
+        view.tableFooterView = nil
+        AnyStyle<UITableView>.tableFooterView(customView).sideEffect(on: view)
+        XCTAssertEqual(view.tableFooterView, customView)
     }
     
     func testHashValue() {
