@@ -11,19 +11,19 @@ import UIKit
 // MARK: - Component Convertible
 
 public protocol ComponentConvertible {
-    associatedtype ViewType
+    associatedtype ComponentViewType
     
-    var toComponent: Component<ViewType> { get }
-    func configure(item: ViewType)
-    func diffChanges<T: ComponentConvertible>(from other: T) -> Component<ViewType> where T.ViewType == ViewType
+    var toComponent: Component<ComponentViewType> { get }
+    func configure(item: ComponentViewType)
+    func diffChanges<T: ComponentConvertible>(from other: T) -> Component<ComponentViewType> where T.ComponentViewType == ComponentViewType
 }
 
 public extension ComponentConvertible {
-    public func configure(item: ViewType) {
+    public func configure(item: ComponentViewType) {
         toComponent.configure(item: item)
     }
     
-    public func diffChanges<T: ComponentConvertible>(from other: T) -> Component<ViewType> where T.ViewType == ViewType {
+    public func diffChanges<T: ComponentConvertible>(from other: T) -> Component<ComponentViewType> where T.ComponentViewType == ComponentViewType {
         return toComponent.diffChanges(from: other.toComponent)
     }
 }
@@ -46,7 +46,7 @@ public protocol ComponentContainingView: class {
     func configure(with newItem: ViewModel)
 }
 
-public extension ComponentContainingView where ViewModel.ViewType == Self {
+public extension ComponentContainingView where ViewModel.ComponentViewType == Self {
     public func configure(with newItem: ViewModel) {
         (item?.diffChanges(from: newItem) ?? newItem.toComponent).configure(item: self)
         item = newItem
