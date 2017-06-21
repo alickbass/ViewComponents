@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct LayerBorder: StyleType {
+struct LayerBorder: StyleType, CustomStringConvertible {
     let cornerRadius: CGFloat
     let width: CGFloat
     let color: UIColor?
@@ -29,6 +29,10 @@ struct LayerBorder: StyleType {
         hash = ((hash << 5) &+ hash) &+ width.hashValue
         hash = ((hash << 5) &+ hash) &+ (color?.hashValue ?? 0)
         return hash
+    }
+    
+    var description: String {
+        return "{\n\tcornerRadius: \(cornerRadius),\n\twidth: \(width),\n\tcolor: \(color?.description ?? "nil")\n}"
     }
 }
 
