@@ -42,5 +42,6 @@ class TestStyle: XCTestCase {
     
     func testStyleDescription() {
         XCTAssertEqual(AnyStyle<UILabel>.adjustsFontSizeToFitWidth(true).description, "adjustsFontSizeToFitWidth: true")
+        XCTAssertEqual(AnyStyle<UIView>.backgroundColor(nil).description, "backgroundColor: nil")
     }
 }

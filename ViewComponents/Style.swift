@@ -60,3 +60,9 @@ extension Style: CustomStringConvertible {
         return "\(key): \(input)"
     }
 }
+
+extension Style where Input: Optionable {
+    public var description: String {
+        return "\(key): \(input._description)"
+    }
+}
