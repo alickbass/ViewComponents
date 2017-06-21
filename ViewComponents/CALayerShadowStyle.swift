@@ -8,10 +8,6 @@
 
 import UIKit
 
-private enum CALayerShadowStyleKey: Int, Hashable {
-    case opacity = 24, radius, offset, color, path, shadow
-}
-
 struct LayerShadow: StyleType {
     let opacity: Float
     let radius: CGFloat
@@ -47,7 +43,7 @@ struct LayerShadow: StyleType {
 }
 
 public extension AnyStyle where T: CALayer {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerStyleKey>
     
     public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = .black, path: CGPath? = nil) -> AnyStyle<T> {
         let value = LayerShadow(opacity: opacity, radius: radius, offset: offset, color: color, path: path)
@@ -56,7 +52,7 @@ public extension AnyStyle where T: CALayer {
 }
 
 public extension AnyStyle where T: UIView {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerShadowStyleKey>
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerStyleKey>
     
     public static func shadow(opacity: Float = 0.0, radius: CGFloat = 3, offset: CGSize = CGSize(width: 0.0, height: -3.0), color: UIColor? = .black, path: CGPath? = nil) -> AnyStyle<T> {
         let value = LayerShadow(opacity: opacity, radius: radius, offset: offset, color: color, path: path)

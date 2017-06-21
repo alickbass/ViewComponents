@@ -81,6 +81,7 @@ private enum CALayerStyleKey: Int, Hashable {
     case contentsFormat, frame, bounds
     case position, zPosition, anchorPointZ
     case anchorPoint, contentsScale, name
+    case shadow, border
 }
 
 public extension AnyStyle where T: CALayer {

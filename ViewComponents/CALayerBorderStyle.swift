@@ -8,10 +8,6 @@
 
 import UIKit
 
-public enum CALayerBorderStyleKey: Int, Hashable {
-    case cornerRadius = 29, width, color, border
-}
-
 struct LayerBorder: StyleType {
     let cornerRadius: CGFloat
     let width: CGFloat
@@ -37,7 +33,7 @@ struct LayerBorder: StyleType {
 }
 
 public extension AnyStyle where T: CALayer {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerBorderStyleKey>
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerStyleKey>
     
     public static func border(cornerRadius: CGFloat = 0, width: CGFloat = 0, color: UIColor? = .black) -> AnyStyle<T> {
         let value = LayerBorder(cornerRadius: cornerRadius, width: width, color: color)
@@ -46,7 +42,7 @@ public extension AnyStyle where T: CALayer {
 }
 
 public extension AnyStyle where T: UIView {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerBorderStyleKey>
+    private typealias ViewStyle<Item> = Style<T, Item, CALayerStyleKey>
     
     public static func border(cornerRadius: CGFloat = 0, width: CGFloat = 0, color: UIColor? = .black) -> AnyStyle<T> {
         let value = LayerBorder(cornerRadius: cornerRadius, width: width, color: color)
