@@ -9,8 +9,9 @@
 import UIKit
 
 private enum UICollectionViewStyleKey: Int, Hashable {
-    case isPrefetchingEnabled = 147, allowsSelection, allowsMultipleSelection
+    case isPrefetchingEnabled = 450, allowsSelection, allowsMultipleSelection
     case remembersLastFocusedIndexPath, collectionViewLayout
+    case delegate, dataSource
 }
 
 public extension AnyStyle where T: UICollectionView {
@@ -35,5 +36,13 @@ public extension AnyStyle where T: UICollectionView {
     
     public static func collectionViewLayout(_ value: UICollectionViewLayout) -> AnyStyle<T> {
         return ViewStyle(value, key: .collectionViewLayout, sideEffect: { $0.collectionViewLayout = $1 }).toAnyStyle
+    }
+    
+    public static func dataSource(_ value: UICollectionViewDataSource?) -> AnyStyle<T> {
+        return ViewStyle(value, key: .dataSource, sideEffect: { $0.dataSource = $1 }, equality: { $0 === $1 }, hash: { $0?.hash ?? 0 }).toAnyStyle
+    }
+    
+    public static func delegate(_ value: UICollectionViewDelegate?) -> AnyStyle<T> {
+        return ViewStyle(value, key: .delegate, sideEffect: { $0.delegate = $1 }, equality: { $0 === $1 }, hash: { $0?.hash ?? 0 }).toAnyStyle
     }
 }

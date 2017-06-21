@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UISwitchStyleKey: Int, Hashable {
-    case isOn = 205, onTintColor, thumbTintColor, onImage, offImage
+    case isOn = 750, onTintColor, thumbTintColor, onImage, offImage
 }
 
 public extension AnyStyle where T: UISwitch {

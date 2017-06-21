@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UITextFieldStyleKey: Int, Hashable {
-    case text = 152, attributedText, placeholder
+    case text = 500, attributedText, placeholder
     case attributedPlaceholder, font, textColor
     case textAlignment, adjustsFontSizeToFitWidth, minimumFontSize
     case clearsOnBeginEditing, clearsOnInsertion, allowsEditingTextAttributes

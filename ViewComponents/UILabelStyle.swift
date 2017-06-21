@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UILabelStyleKey: Int, Hashable {
-    case text = 44, attributedText, font
+    case text = 100, attributedText, font
     case textColor, textAlignment, lineBreakMode
     case isEnabled, adjustsFontSizeToFitWidth, allowsDefaultTighteningForTruncation
     case baselineAdjustment, minimumScaleFactor, numberOfLines

@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UIControlStyleKey: Int, Hashable {
-    case isEnabled = 60, isSelected, isHighlighted
+    case isEnabled = 150, isSelected, isHighlighted
     case contentVerticalAlignment, contentHorizontalAlignment
 }
 

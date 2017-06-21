@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UISliderStyleKey: Int, Hashable {
-    case currentValue = 189, minimumValue, maximumValue
+    case currentValue = 650, minimumValue, maximumValue
     case isContinuous, minimumValueImage, maximumValueImage
     case minimumTrackTintColor, minimumTrackImage, maximumTrackTintColor
     case maximumTrackImage, thumbTintColor, thumbImage

@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UIImageViewStyleKey: Int, Hashable {
-    case image = 78, highlightedImage, animationImages
+    case image = 250, highlightedImage, animationImages
     case highlightedAnimationImages, animationDuration, animationRepeatCount
     case isHighlighted
 }

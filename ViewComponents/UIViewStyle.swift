@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UIViewStyleKey: Int, Hashable {
-    case backgroundColor = 32, isHidden, alpha
+    case backgroundColor = 50, isHidden, alpha
     case isOpaque, tintColor, tintAdjustmentMode
     case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled
     case isMultipleTouchEnabled, isExclusiveTouch, contentMode, layoutMargins

@@ -9,7 +9,7 @@
 import UIKit
 
 private enum TableViewStyleKey: Int, Hashable {
-    case rowHeight = 113, separatorStyle, separatorColor
+    case rowHeight = 350, separatorStyle, separatorColor
     case separatorEffect, separatorInset, cellLayoutMarginsFollowReadableWidth
     case sectionHeaderHeight, sectionFooterHeight, estimatedRowHeight
     case estimatedSectionHeaderHeight, estimatedSectionFooterHeight, allowsSelection

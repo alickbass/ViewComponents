@@ -72,7 +72,7 @@ public enum CAContentsFormat: RawRepresentable {
     }
 }
 
-private enum CALayerStyleKey: Int, Hashable {
+enum CALayerStyleKey: Int, Hashable {
     case contentsGravity = 0, opacity, isHidden
     case masksToBounds, mask, isDoubleSided
     case backgroundColor, allowsEdgeAntialiasing, allowsGroupOpacity
@@ -81,6 +81,7 @@ private enum CALayerStyleKey: Int, Hashable {
     case contentsFormat, frame, bounds
     case position, zPosition, anchorPointZ
     case anchorPoint, contentsScale, name
+    case shadow, border
 }
 
 public extension AnyStyle where T: CALayer {
