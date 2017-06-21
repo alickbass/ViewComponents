@@ -16,7 +16,7 @@ private enum UIButtonStyleKey: Int, Hashable {
     case imageEdgeInsets
 }
 
-struct StateInput<Input: Hashable>: Hashable {
+struct StateInput<Input: Hashable>: Hashable, CustomStringConvertible {
     let value: Input?
     let state: UIControlState
     
@@ -29,6 +29,10 @@ struct StateInput<Input: Hashable>: Hashable {
         hash = ((hash << 5) &+ hash) &+ (value?.hashValue ?? 0)
         hash = ((hash << 5) &+ hash) &+ state.rawValue.hashValue
         return hash
+    }
+    
+    var description: String {
+        return "\(value._description) for: \(state.description)"
     }
 }
 
