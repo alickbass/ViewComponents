@@ -32,7 +32,7 @@ struct LayerBorder: StyleType, CustomStringConvertible {
     }
     
     var description: String {
-        return "{\n\tcornerRadius: \(cornerRadius),\n\twidth: \(width),\n\tcolor: \(color?.description ?? "nil")\n}"
+        return "{\n\tcornerRadius: \(cornerRadius),\n\twidth: \(width),\n\tcolor: \(color._description)\n}"
     }
 }
 

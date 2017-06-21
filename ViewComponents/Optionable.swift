@@ -19,4 +19,8 @@ extension Optional : Optionable {
     public var value: WrappedType? {
         return self
     }
+    
+    var _description: String {
+        return value.map({ "\($0)" }) ?? "nil"
+    }
 }
