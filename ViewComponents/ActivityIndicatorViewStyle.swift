@@ -9,7 +9,7 @@
 import UIKit
 
 private enum ActivityIndicatorViewStyleKey: Int, Hashable {
-    case isAnimating = 201, hidesWhenStopped, activityIndicatorViewStyle, color
+    case isAnimating = 700, hidesWhenStopped, activityIndicatorViewStyle, color
 }
 
 public extension AnyStyle where T: UIActivityIndicatorView {

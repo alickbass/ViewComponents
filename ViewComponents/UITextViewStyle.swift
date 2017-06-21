@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UITextViewStyleKey: Int, Hashable {
-    case text = 170, attributedText, font
+    case text = 550, attributedText, font
     case textColor, isEditable, allowsEditingTextAttributes
     case dataDetectorTypes, textAlignment, textContainerInset
     case selectedRange, clearsOnInsertion, isSelectable

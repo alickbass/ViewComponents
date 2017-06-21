@@ -9,7 +9,7 @@
 import UIKit
 
 private enum ProgressViewStyleKey: Int, Hashable {
-    case progress = 183, progressViewStyle, progressTintColor
+    case progress = 600, progressViewStyle, progressTintColor
     case progressImage, trackTintColor, trackImage
 }
 

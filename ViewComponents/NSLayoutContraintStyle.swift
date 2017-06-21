@@ -9,7 +9,7 @@
 import UIKit
 
 private enum NSLayoutConstraintKey: Int {
-    case isActive = 210, constant, priority, identifier, shouldBeArchived
+    case isActive = 800, constant, priority, identifier, shouldBeArchived
 }
 
 public extension AnyStyle where T: NSLayoutConstraint {

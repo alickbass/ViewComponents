@@ -9,7 +9,7 @@
 import UIKit
 
 private enum TableViewCellStyleKey: Int, Hashable {
-    case accessoryType = 135, editingAccessoryType, isSelected
+    case accessoryType = 400, editingAccessoryType, isSelected
     case selectionStyle, isHighlighted, isEditing
     case showsReorderControl, indentationLevel, indentationWidth
     case shouldIndentWhileEditing, separatorInset, focusStyle

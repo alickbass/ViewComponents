@@ -9,7 +9,7 @@
 import UIKit
 
 private enum UIButtonStyleKey: Int, Hashable {
-    case title = 65, attributedTitle, titleColor
+    case title = 200, attributedTitle, titleColor
     case titleShadowColor, reversesTitleShadowWhenHighlighted, adjustsImageWhenHighlighted
     case adjustsImageWhenDisabled, showsTouchWhenHighlighted, backgroundImage
     case image, contentEdgeInsets, titleEdgeInsets
