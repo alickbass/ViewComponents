@@ -13,14 +13,16 @@ public protocol Optionable {
     var value: WrappedType? { get }
 }
 
+extension Optionable {
+    var _description: String {
+        return value.map({ "\($0)" }) ?? "nil"
+    }
+}
+
 extension Optional : Optionable {
     public typealias WrappedType = Wrapped
     
     public var value: WrappedType? {
         return self
-    }
-    
-    var _description: String {
-        return value.map({ "\($0)" }) ?? "nil"
     }
 }
