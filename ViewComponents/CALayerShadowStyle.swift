@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct LayerShadow: StyleType {
+struct LayerShadow: StyleType, CustomStringConvertible {
     let opacity: Float
     let radius: CGFloat
     let offset: CGSize
@@ -39,6 +39,10 @@ struct LayerShadow: StyleType {
         hash = ((hash << 5) &+ hash) &+ (color?.hashValue ?? 0)
         hash = ((hash << 5) &+ hash) &+ (path.map({ UIBezierPath(cgPath: $0) })?.hashValue ?? 0)
         return hash
+    }
+    
+    var description: String {
+        return "{\n\topacity: \(opacity),\n\tradius: \(radius),\n\toffset: \(offset),\n\tcolor: \(color._description),\n\tpath: \(path._description)\n}"
     }
 }
 

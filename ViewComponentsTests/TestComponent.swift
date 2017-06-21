@@ -135,4 +135,27 @@ class TestComponent: XCTestCase {
         XCTAssertEqual(view.item, new)
     }
     
+    func testComponentCustomString() {
+        let component = Component<UIView>(
+            .clipsToBounds(true), .backgroundColor(.red)
+        ).withChildren(
+            .child(viewAccess, styles:
+                .border(width: 12, color: .red),
+                .isHidden(true),
+                .isExclusiveTouch(true)
+            ),
+            .child(buttonAccess, styles:
+                .title("test", for: .normal),
+                .isHidden(true),
+                .shadow(opacity: 0.2, radius: 4, offset: .zero, color: nil, path: nil)
+            ),
+            .child(labelAcess, styles:
+                .isEnabled(true)
+            )
+        )
+        
+        let targetString = "UIView: {\n\tbackgroundColor: Optional(UIExtendedSRGBColorSpace 1 0 0 1),\n\tclipsToBounds: true,\n\tchildren: [\n\t\tUIView: {\n\t\t\tborder: {\n\t\t\t\tcornerRadius: 0.0,\n\t\t\t\twidth: 12.0,\n\t\t\t\tcolor: UIExtendedSRGBColorSpace 1 0 0 1\n\t\t\t},\n\t\t\tisHidden: true,\n\t\t\tisExclusiveTouch: true,\n\t\t},\n\t\tUIButton: {\n\t\t\tisHidden: true,\n\t\t\ttitle: test for: normal,\n\t\t\tshadow: {\n\t\t\t\topacity: 0.2,\n\t\t\t\tradius: 4.0,\n\t\t\t\toffset: (0.0, 0.0),\n\t\t\t\tcolor: nil,\n\t\t\t\tpath: nil\n\t\t\t},\n\t\t},\n\t\tUILabel: {\n\t\t\tisEnabled: true,\n\t\t},\n\t]\n}"
+        
+        XCTAssertEqual(component.description, targetString)
+    }
 }

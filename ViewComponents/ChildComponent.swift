@@ -19,7 +19,7 @@ private protocol _AnyComponentBox {
     func diffChanges(from other: _AnyComponentBox) -> _AnyComponentBox
 }
 
-private struct _ConcreteComponentBox<Base: ComponentType>: _AnyComponentBox {
+private struct _ConcreteComponentBox<Base: ComponentType>: _AnyComponentBox, CustomStringConvertible {
     let base: Base
     
     var children: [_ChildComponent] {
@@ -43,9 +43,13 @@ private struct _ConcreteComponentBox<Base: ComponentType>: _AnyComponentBox {
         guard let otherComp = other as? _ConcreteComponentBox<Base> else { return other }
         return _ConcreteComponentBox<Base>(base: base.diffChanges(from: otherComp.base))
     }
+    
+    var description: String {
+        return "\(base)"
+    }
 }
 
-public struct ChildComponent<View>: ComponentType, _ChildComponent {
+public struct ChildComponent<View>: ComponentType, _ChildComponent, CustomStringConvertible {
     private let box: _AnyComponentBox
     let access: (View) -> Any
     
@@ -84,5 +88,9 @@ public struct ChildComponent<View>: ComponentType, _ChildComponent {
     
     public func diffChanges(from other: ChildComponent<View>) -> ChildComponent<View> {
         return ChildComponent(box.diffChanges(from: other.box), other.access)
+    }
+    
+    public var description: String {
+        return "\(box)"
     }
 }

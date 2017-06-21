@@ -78,3 +78,26 @@ extension Component {
         return lhs.styles == rhs.styles && lhs.children == rhs.children
     }
 }
+
+extension Component: CustomStringConvertible {
+    public var description: String {
+        var target = "\(String(describing: T.self)): {\n"
+        target += styles
+            .lazy.map({ $0.description })
+            .map({ $0.replacingOccurrences(of: "\n", with: "\n\t") })
+            .map({ "\t\($0),\n" }).joined()
+        
+        if children.isEmpty == false {
+            let children = self.children
+                .lazy.map({ $0.description })
+                .map({ $0.replacingOccurrences(of: "\n", with: "\n\t\t") })
+                .map({ "\t\t\($0),\n" })
+                .joined()
+            target += "\tchildren: [\n\(children)\t]\n"
+        }
+        
+        target += "}"
+        
+        return target
+    }
+}

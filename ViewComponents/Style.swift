@@ -54,3 +54,9 @@ extension Style where Input: Optionable, Input.WrappedType: Hashable {
         self.init(input, key: key, sideEffect: sideEffect, equality: { $0.value == $1.value }, hash: { $0.value?.hashValue ?? 0 })
     }
 }
+
+extension Style: CustomStringConvertible {
+    public var description: String {
+        return "\(key): \(input)"
+    }
+}
