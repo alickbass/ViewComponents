@@ -72,3 +72,26 @@ extension UIDataDetectorTypes: Hashable {
         return rawValue.hashValue
     }
 }
+
+extension UIControlState: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case UIControlState.normal:
+            return "normal"
+        case UIControlState.highlighted:
+            return "highlighted"
+        case UIControlState.disabled:
+            return "disabled"
+        case UIControlState.selected:
+            return "selected"
+        case UIControlState.focused:
+            return "focused"
+        case UIControlState.application:
+            return "application"
+        case UIControlState.reserved:
+            return "reserved"
+        default:
+            return "\(String(rawValue))"
+        }
+    }
+}
