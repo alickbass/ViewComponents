@@ -44,4 +44,16 @@ class TestStyle: XCTestCase {
         XCTAssertEqual(AnyStyle<UILabel>.adjustsFontSizeToFitWidth(true).description, "adjustsFontSizeToFitWidth: true")
         XCTAssertEqual(AnyStyle<UIView>.backgroundColor(nil).description, "backgroundColor: nil")
     }
+    
+    func testCustomSideEffect() {
+        let view = UIView()
+        let style = AnyStyle<UIView>.sideEffect(for: "test", { $0.backgroundColor = .green })
+        
+        view.backgroundColor = .red
+        style.sideEffect(on: view)
+        XCTAssertEqual(view.backgroundColor, .green)
+        
+        XCTAssertEqual(style, .sideEffect(for: "test", { $0.backgroundColor = .red }))
+        XCTAssertEqual(style.hashValue, "test".hashValue)
+    }
 }
