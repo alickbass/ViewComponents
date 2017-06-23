@@ -70,3 +70,9 @@ extension Style: CustomStringConvertible {
         return "\(key): \(input)"
     }
 }
+
+public extension AnyStyle {
+    public static func style<K: Hashable, I: Hashable>(with input: I, for key: K, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> {
+        return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
+    }
+}

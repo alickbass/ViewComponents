@@ -47,13 +47,13 @@ class TestStyle: XCTestCase {
     
     func testCustomSideEffect() {
         let view = UIView()
-        let style = AnyStyle<UIView>.sideEffect(for: "test", { $0.backgroundColor = .green })
+        let style = AnyStyle<UIView>.style(with: true, for: "hidden", sideEffect: { $0.view.isHidden = $0.input })
         
-        view.backgroundColor = .red
+        view.isHidden = false
         style.sideEffect(on: view)
-        XCTAssertEqual(view.backgroundColor, .green)
+        XCTAssertEqual(view.isHidden, true)
         
-        XCTAssertEqual(style, .sideEffect(for: "test", { $0.backgroundColor = .red }))
-        XCTAssertEqual(style.hashValue, "test".hashValue)
+        XCTAssertEqual(style, .style(with: true, for: "hidden", sideEffect: { $0.view.isHidden = $0.input }))
+        XCTAssertEqual(style.hashValue, AnyStyle<UIView>.style(with: true, for: "hidden", sideEffect: { $0.view.isHidden = $0.input }).hashValue)
     }
 }
