@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum ActivityIndicatorViewStyleKey: Int, Hashable {
+private enum ActivityIndicatorViewStyleKey: Int, StyleKey {
     case isAnimating = 700, hidesWhenStopped, activityIndicatorViewStyle, color
 }
 

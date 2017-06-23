@@ -8,7 +8,17 @@
 
 import UIKit
 
-public struct Style<View, Input, Key: RawRepresentable>: StyleType where Key.RawValue == Int {
+protocol StyleKey {
+    var hashValue: Int { get }
+}
+
+extension StyleKey where Self: RawRepresentable, Self.RawValue == Int {
+    var hashValue: Int {
+        return rawValue.hashValue
+    }
+}
+
+public struct Style<View, Input, Key: Hashable>: StyleType {
     public let input: Input
     public let key: Key
     public let sideEffect: (View, Input) -> Void
@@ -33,7 +43,7 @@ public struct Style<View, Input, Key: RawRepresentable>: StyleType where Key.Raw
     
     public var hashValue: Int {
         var hash = 5381
-        hash = ((hash << 5) &+ hash) &+ key.rawValue.hashValue
+        hash = ((hash << 5) &+ hash) &+ key.hashValue
         hash = ((hash << 5) &+ hash) &+ self.hash(input)
         return hash
     }
@@ -58,5 +68,15 @@ extension Style where Input: Optionable, Input.WrappedType: Hashable {
 extension Style: CustomStringConvertible {
     public var description: String {
         return "\(key): \(input)"
+    }
+}
+
+public extension AnyStyle {
+    public static func style<K: Hashable, I: Hashable>(for key: K, with input: I, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> {
+        return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
+    }
+    
+    public static func style<K: Hashable, I: Optionable>(for key: K, with input: I, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> where I.WrappedType: Hashable {
+        return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
     }
 }

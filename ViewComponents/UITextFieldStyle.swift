@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UITextFieldStyleKey: Int, Hashable {
+private enum UITextFieldStyleKey: Int, StyleKey {
     case text = 500, attributedText, placeholder
     case attributedPlaceholder, font, textColor
     case textAlignment, adjustsFontSizeToFitWidth, minimumFontSize

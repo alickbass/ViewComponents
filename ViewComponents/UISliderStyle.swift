@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UISliderStyleKey: Int, Hashable {
+private enum UISliderStyleKey: Int, StyleKey {
     case currentValue = 650, minimumValue, maximumValue
     case isContinuous, minimumValueImage, maximumValueImage
     case minimumTrackTintColor, minimumTrackImage, maximumTrackTintColor

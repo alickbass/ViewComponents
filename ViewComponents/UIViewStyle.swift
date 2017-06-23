@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UIViewStyleKey: Int, Hashable {
+private enum UIViewStyleKey: Int, StyleKey {
     case backgroundColor = 50, isHidden, alpha
     case isOpaque, tintColor, tintAdjustmentMode
     case clipsToBounds, clearsContextBeforeDrawing, isUserInteractionEnabled

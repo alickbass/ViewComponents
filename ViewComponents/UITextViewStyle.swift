@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UITextViewStyleKey: Int, Hashable {
+private enum UITextViewStyleKey: Int, StyleKey {
     case text = 550, attributedText, font
     case textColor, isEditable, allowsEditingTextAttributes
     case dataDetectorTypes, textAlignment, textContainerInset

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UIScrollViewStyleKey: Int, Hashable {
+private enum UIScrollViewStyleKey: Int, StyleKey {
     case contentOffset = 300, contentSize, contentInset
     case isScrollEnabled, isDirectionalLockEnabled, isPagingEnabled
     case bounces, alwaysBounceVertical, alwaysBounceHorizontal
