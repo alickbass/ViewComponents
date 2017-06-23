@@ -75,4 +75,8 @@ public extension AnyStyle {
     public static func style<K: Hashable, I: Hashable>(for key: K, with input: I, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> {
         return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
     }
+    
+    public static func style<K: Hashable, I: Optionable>(for key: K, with input: I, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> where I.WrappedType: Hashable {
+        return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
+    }
 }
