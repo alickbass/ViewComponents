@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UICollectionViewStyleKey: Int, Hashable {
+private enum UICollectionViewStyleKey: Int, StyleKey {
     case isPrefetchingEnabled = 450, allowsSelection, allowsMultipleSelection
     case remembersLastFocusedIndexPath, collectionViewLayout
     case delegate, dataSource

@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum UISwitchStyleKey: Int, Hashable {
+private enum UISwitchStyleKey: Int, StyleKey {
     case isOn = 750, onTintColor, thumbTintColor, onImage, offImage
 }
 

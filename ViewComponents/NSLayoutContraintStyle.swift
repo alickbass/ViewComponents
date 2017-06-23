@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum NSLayoutConstraintKey: Int {
+private enum NSLayoutConstraintKey: Int, StyleKey {
     case isActive = 800, constant, priority, identifier, shouldBeArchived
 }
 
