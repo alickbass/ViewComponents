@@ -14,6 +14,7 @@ ViewComponents is a library that helps you to create View Models that are:
 * [**Efficient**](#why-efficient)
 * [**Perfect fit to MVVM architecture**](#how-to-use-with-mvvm)
 * [**Easy to test**](#why-easy-to-test)
+* [**Easy to support custom views and types**](#why-easy-to-support-custom-views)
 
 ## Why declarative?
 
@@ -199,3 +200,49 @@ let target = Component<PersonView>(
 XCTAssertEqual(PersonViewModel(person: person).toComponent, target)
 ```
 
+## Why easy to support custom views?
+
+Let's imagine that you have the following custom class with a property `isShiny`:
+
+```swift
+class MyCustomView: UIView {
+    var isShiny: Bool = true {
+        didSet {
+            // Do some magic stuff here
+        }
+    }
+}
+```
+
+In order for ViewComponents to support `MyCustomView` we need to add the following code:
+
+```swift
+private enum MyCustomViewStyleKey: Int {
+    case isShiny
+}
+
+extension AnyStyle where T: MyCustomView {
+    private typealias ViewStyle<Item> = Style<T, Item, MyCustomViewStyleKey>
+    
+    static func isShiny(_ value: Bool) -> AnyStyle<T> {
+        return ViewStyle(value, key: .isShiny, sideEffect: { $0.isShiny = $1 }).toAnyStyle
+    }
+}
+```
+
+Let's take a closer look at what we did:
+
+1. We need to declare a `Int enum` that will contain the keys for every propery we want to support. In our case it's `MyCustomViewStyleKey`
+2. We need to make an extension to `AnyStyle` where generic type is `MyCustomView` or it's subclass
+3. For convenienve we define `typealias ViewStyle<Item>`
+4. We need to implement static function that will contain our side effect. We provide the value (in our case it's a `Bool`), key (in our case `MyCustomViewStyleKey.isShiny`) and a side effect function, that take 2 parameters: the view of type `T` and the value which is boolean in our case.
+
+And that's it.
+
+Now we can use our `MyCustomView` just as any other type:
+
+```swift
+let customView = Component<MyCustomView>(
+    .isShiny(true)
+)
+```
