@@ -53,8 +53,7 @@ let labelComponent = Component<UILabel>(
 
 let viewComponent = Component<MyCustomView>(
     .border(cornerRadius: 12, width: 3, color: .red)
-)
-.withChildren(
+).withChildren(
     .child({ $0.myButton }, styles:
         .title("Test", for: .normal),
         .titleColor(.red, for: .normal)
@@ -149,8 +148,7 @@ struct PersonViewModel: ComponentConvertible {
     var toComponent: Component<PersonView> {
         return Component(
             .border(width: 12, color: .red)
-        )
-        .withChildren(
+        ).withChildren(
             .child({ $0.nameLabel }, styles:
                 .text(name),
                 .font(.boldSystemFont(ofSize: 12)),
@@ -184,8 +182,7 @@ let person = Person(salutation: "Hallo", firstName: "John", lastName: "Doe", bir
 
 let target = Component<PersonView>(
     .border(width: 12, color: .red)
-)
-.withChildren(
+).withChildren(
     .child({ $0.nameLabel }, styles:
         .text("Hallo John Doe"),
         .font(.boldSystemFont(ofSize: 12)),
