@@ -66,7 +66,7 @@ class TestTableViewCellStyle: XCTestCase, ViewTestType {
         
         view.separatorInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         AnyStyle<UITableViewCell>.separatorInset(.zero).sideEffect(on: view)
-        XCTAssertEqual(view.separatorInset, .zero)
+        XCTAssertEqual(view.separatorInset, .init(top: 0, left: 8, bottom: 0, right: 0))
         
         view.focusStyle = .custom
         AnyStyle<UITableViewCell>.focusStyle(.default).sideEffect(on: view)
