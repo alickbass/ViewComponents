@@ -68,7 +68,7 @@ class TestUILabelStyle: XCTestCase, ViewTestType {
         
         view.minimumScaleFactor = 0.5
         AnyStyle<UILabel>.minimumScaleFactor(0.7).sideEffect(on: view)
-        XCTAssertEqualWithAccuracy(view.minimumScaleFactor, 0.7, accuracy: 0.001)
+        XCTAssertEqual(view.minimumScaleFactor, 0.7, accuracy: 0.001)
         
         view.numberOfLines = 12
         AnyStyle<UILabel>.numberOfLines(0).sideEffect(on: view)

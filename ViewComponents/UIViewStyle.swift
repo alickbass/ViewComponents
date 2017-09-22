@@ -20,7 +20,7 @@ public extension AnyStyle where T: UIView {
     private typealias ViewStyle<Item> = Style<T, Item, UIViewStyleKey>
     
     public static func backgroundColor(_ color: UIColor? = nil) -> AnyStyle<T> {
-        return ViewStyle(color, key: .backgroundColor, sideEffect: { $0.0.backgroundColor = $0.1 }).toAnyStyle
+        return ViewStyle(color, key: .backgroundColor, sideEffect: {  $0.backgroundColor = $1 }).toAnyStyle
     }
     
     public static func isHidden(_ value: Bool) -> AnyStyle<T> {
@@ -28,7 +28,7 @@ public extension AnyStyle where T: UIView {
     }
     
     public static func alpha(_ alpha: CGFloat) -> AnyStyle<T> {
-        return ViewStyle(alpha, key: .alpha, sideEffect: { $0.0.alpha = $0.1 }).toAnyStyle
+        return ViewStyle(alpha, key: .alpha, sideEffect: { $0.alpha = $1 }).toAnyStyle
     }
     
     public static func isOpaque(_ value: Bool) -> AnyStyle<T> {

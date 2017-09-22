@@ -92,7 +92,7 @@ extension Component: CustomStringConvertible {
                 .lazy.map({ $0.description })
                 .map({ $0.replacingOccurrences(of: "\n", with: "\n\t\t") })
                 .map({ "\t\t\($0),\n" })
-                .joined()
+                .joined(separator: "")
             target += "\tchildren: [\n\(children)\t]\n"
         }
         

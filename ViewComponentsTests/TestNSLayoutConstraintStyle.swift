@@ -13,7 +13,7 @@ class TestNSLayoutConstraintStyle: XCTestCase, ViewTestType {
     
     static let allStyles: [AnyStyle<NSLayoutConstraint>] = [
         .isActive(true), AnyStyle<NSLayoutConstraint>.constant(20),
-        .priority(200), .identifier("some"), .shouldBeArchived(true)
+        .priority(.init(200)), .identifier("some"), .shouldBeArchived(true)
     ]
     
     static var previousHashes: [Int : Any] { return TestUISwitchStyle.accumulatedHashes }
@@ -30,9 +30,9 @@ class TestNSLayoutConstraintStyle: XCTestCase, ViewTestType {
         AnyStyle<NSLayoutConstraint>.constant(20).sideEffect(on: constraint)
         XCTAssertEqual(constraint.constant, 20)
         
-        constraint.priority = 750
-        AnyStyle<NSLayoutConstraint>.priority(200).sideEffect(on: constraint)
-        XCTAssertEqual(constraint.priority, 200)
+        constraint.priority = UILayoutPriority(rawValue: 750)
+        AnyStyle<NSLayoutConstraint>.priority(.init(200)).sideEffect(on: constraint)
+        XCTAssertEqual(constraint.priority, .init(200))
         
         constraint.identifier = nil
         AnyStyle<NSLayoutConstraint>.identifier("test").sideEffect(on: constraint)

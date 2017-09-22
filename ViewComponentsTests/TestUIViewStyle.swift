@@ -34,7 +34,7 @@ class TestUIViewStyle: XCTestCase, ViewTestType {
         
         view.alpha = 0.4
         AnyStyle<UIView>.alpha(0.3).sideEffect(on: view)
-        XCTAssertEqualWithAccuracy(view.alpha, 0.3, accuracy: 0.001)
+        XCTAssertEqual(view.alpha, 0.3, accuracy: 0.001)
         
         view.isOpaque = false
         AnyStyle<UIView>.isOpaque(true).sideEffect(on: view)

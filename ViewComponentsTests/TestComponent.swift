@@ -30,7 +30,7 @@ class TestComponent: XCTestCase {
 
         comp.withChildren(.child({ _ in label }, labelComp)).configure(item: view)
 
-        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
         XCTAssertEqual(label.isEnabled, false)
     }
@@ -46,7 +46,7 @@ class TestComponent: XCTestCase {
 
         let view = UIView()
         MyViewModel().configure(item: view)
-        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.backgroundColor, .red)
 
         XCTAssertEqual(Component().diffChanges(from: MyViewModel()), MyViewModel().toComponent)
@@ -124,13 +124,13 @@ class TestComponent: XCTestCase {
         let view = CustomView()
 
         view.configure(with: component)
-        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.item, component)
 
         let new = component.adding(.isHidden(true))
 
         view.configure(with: new)
-        XCTAssertEqualWithAccuracy(view.alpha, 0.2, accuracy: 0.001)
+        XCTAssertEqual(view.alpha, 0.2, accuracy: 0.001)
         XCTAssertEqual(view.isHidden, true)
         XCTAssertEqual(view.item, new)
     }

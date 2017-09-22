@@ -67,6 +67,6 @@ private extension Optional where Wrapped == [UIImage]  {
     }
     
     var hashValue: Int {
-        return map({ $0.reduce(5381, { (($0.0 << 5) &+ $0.0) &+ $0.1.hashValue }) }) ?? 0
+        return map({ $0.reduce(5381, { (($0 << 5) &+ $0) &+ $1.hashValue }) }) ?? 0
     }
 }
