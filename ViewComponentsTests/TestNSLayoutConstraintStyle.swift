@@ -30,9 +30,9 @@ class TestNSLayoutConstraintStyle: XCTestCase, ViewTestType {
         AnyStyle<NSLayoutConstraint>.constant(20).sideEffect(on: constraint)
         XCTAssertEqual(constraint.constant, 20)
         
-        constraint.priority = 750
+        constraint.priority = UILayoutPriority(rawValue: 750)
         AnyStyle<NSLayoutConstraint>.priority(200).sideEffect(on: constraint)
-        XCTAssertEqual(constraint.priority, 200)
+        XCTAssertEqual(constraint.priority, UILayoutPriority.RawValue(200))
         
         constraint.identifier = nil
         AnyStyle<NSLayoutConstraint>.identifier("test").sideEffect(on: constraint)

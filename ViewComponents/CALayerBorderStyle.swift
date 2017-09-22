@@ -46,10 +46,10 @@ public extension AnyStyle where T: CALayer {
 }
 
 public extension AnyStyle where T: UIView {
-    private typealias ViewStyle<Item> = Style<T, Item, CALayerStyleKey>
+    private typealias BorderStyle<Item> = Style<T, Item, CALayerStyleKey>
     
     public static func border(cornerRadius: CGFloat = 0, width: CGFloat = 0, color: UIColor? = .black) -> AnyStyle<T> {
         let value = LayerBorder(cornerRadius: cornerRadius, width: width, color: color)
-        return ViewStyle(value, key: .border, sideEffect: { $1.sideEffect(on: $0.layer) }).toAnyStyle
+        return BorderStyle(value, key: .border, sideEffect: { $1.sideEffect(on: $0.layer) }).toAnyStyle
     }
 }

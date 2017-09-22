@@ -55,7 +55,7 @@ public struct Style<View, Input, Key: Hashable>: StyleType {
 
 extension Style where Input: Hashable {
     public init(_ input: Input, key: Key, sideEffect: @escaping (View, Input) -> Void) {
-        self.init(input, key: key, sideEffect: sideEffect, equality: { $0.0 == $0.1 }, hash: { $0.hashValue })
+        self.init(input, key: key, sideEffect: sideEffect, equality: { $0 == $1 }, hash: { $0.hashValue })
     }
 }
 
@@ -72,11 +72,11 @@ extension Style: CustomStringConvertible {
 }
 
 public extension AnyStyle {
-    public static func style<K: Hashable, I: Hashable>(for key: K, with input: I, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> {
+    public static func style<K: Hashable, I: Hashable>(for key: K, with input: I, sideEffect: @escaping (T, I) -> Void) -> AnyStyle<T> {
         return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
     }
     
-    public static func style<K: Hashable, I: Optionable>(for key: K, with input: I, sideEffect: @escaping ((view: T, input: I)) -> Void) -> AnyStyle<T> where I.WrappedType: Hashable {
+    public static func style<K: Hashable, I: Optionable>(for key: K, with input: I, sideEffect: @escaping (T, I) -> Void) -> AnyStyle<T> where I.WrappedType: Hashable {
         return Style<T, I, K>(input, key: key, sideEffect: sideEffect).toAnyStyle
     }
 }
