@@ -4,6 +4,7 @@ Declarative view components
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
 [![Build Status](https://travis-ci.org/alickbass/ViewComponents.svg?branch=master)](https://travis-ci.org/alickbass/ViewComponents)
 [![codecov](https://codecov.io/gh/alickbass/ViewComponents/branch/master/graph/badge.svg)](https://codecov.io/gh/alickbass/ViewComponents)
+[![Swift Version](https://img.shields.io/badge/swift-v4.0.0-orange.svg)](https://github.com/alickbass/ViewComponents)
 
 ## What is ViewComponents
 

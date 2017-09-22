@@ -100,6 +100,7 @@
 		CE77FA9C1EEC89BC003A3FD6 /* AnyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyStyle.swift; sourceTree = "<group>"; };
 		CE77FA9E1EED4758003A3FD6 /* TestComponentPerformance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestComponentPerformance.swift; sourceTree = "<group>"; };
 		CEA374E61EB88DC800DA55C5 /* TestUIButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIButtonStyle.swift; sourceTree = "<group>"; };
+		CEC0F6771F753139002B7EF0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CECED85E1EBB1BBE00FF8B36 /* TestUIImageViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUIImageViewStyle.swift; sourceTree = "<group>"; };
 		CECED8611EBB490000FF8B36 /* CALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayerStyle.swift; sourceTree = "<group>"; };
 		CECED8631EBB4C2600FF8B36 /* TestCALayerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCALayerStyle.swift; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		CEF534C31EB0C182001E3CA8 = {
 			isa = PBXGroup;
 			children = (
+				CEC0F6771F753139002B7EF0 /* README.md */,
 				CEF534CF1EB0C182001E3CA8 /* ViewComponents */,
 				CEF534DA1EB0C182001E3CA8 /* ViewComponentsTests */,
 				CEF534CE1EB0C182001E3CA8 /* Products */,
