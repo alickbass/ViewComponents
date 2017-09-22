@@ -89,7 +89,9 @@ extension Component: CustomStringConvertible {
         
         if children.isEmpty == false {
             let children = self.children
-                .map({ "\t\t\($0.description.replacingOccurrences(of: "\n", with: "\n\t\t")),\n" })
+                .lazy.map({ $0.description })
+                .map({ $0.replacingOccurrences(of: "\n", with: "\n\t\t") })
+                .map({ "\t\t\($0),\n" })
                 .joined()
             target += "\tchildren: [\n\(children)\t]\n"
         }
