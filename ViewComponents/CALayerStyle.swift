@@ -127,6 +127,14 @@ public extension AnyStyle where T: CALayer {
         return ViewStyle(gravity, key: .contentsGravity, sideEffect: { $0.contentsGravity = $1.rawValue }).toAnyStyle
     }
     
+    /**
+     The opacity of the receiver. Animatable.
+     
+     The value of this property must be in the range 0.0 (transparent) to 1.0 (opaque).
+     Values outside that range are clamped to the minimum or maximum.
+     
+     - parameter opacity: The opacity of the receiver.
+     */
     public static func opacity(_ opacity: Float) -> AnyStyle<T> {
         return ViewStyle(opacity, key: .opacity, sideEffect: { $0.opacity = $1 }).toAnyStyle
     }
