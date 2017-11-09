@@ -139,58 +139,183 @@ public extension AnyStyle where T: CALayer {
         return ViewStyle(opacity, key: .opacity, sideEffect: { $0.opacity = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean indicating whether the layer is displayed. Animatable.
+     The default value of this property is false.
+     */
     public static func isHidden(_ isHidden: Bool) -> AnyStyle<T> {
         return ViewStyle(isHidden, key: .isHidden, sideEffect: { $0.isHidden = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+     
+     When the value of this property is true, Core Animation creates an implicit clipping
+     mask that matches the bounds of the layer and includes any corner radius effects. If
+     a value for the mask property is also specified, the two masks are multiplied to get the final mask value.
+     
+     The default value of this property is false.
+     */
     public static func masksToBounds(_ masksToBounds: Bool) -> AnyStyle<T> {
         return ViewStyle(masksToBounds, key: .masksToBounds, sideEffect: { $0.masksToBounds = $1 }).toAnyStyle
     }
     
+    /**
+     An optional layer whose alpha channel is used to mask the layer’s content.
+     
+     The layer’s alpha channel determines how much of the layer’s content and background shows
+     through. Fully or partially opaque pixels allow the underlying content to show through but
+     fully transparent pixels block that content.
+     
+     The default value of this property is nil nil. When configuring a mask, remember to set the
+     size and position of the mask layer to ensure it is aligned properly with the layer it masks.
+     */
     public static func mask(_ mask: CALayer?) -> AnyStyle<T> {
         return ViewStyle(mask, key: .mask, sideEffect: { $0.mask = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+     
+     When the value in this property is false, the layer hides its content when it faces away from the viewer.
+     The default value of this property is true.
+     */
     public static func isDoubleSided(_ isDoubleSided: Bool) -> AnyStyle<T> {
         return ViewStyle(isDoubleSided, key: .isDoubleSided, sideEffect: { $0.isDoubleSided = $1 }).toAnyStyle
     }
     
+    /**
+     The background color of the receiver. Animatable.
+     
+     The default value of this property is nil.
+     */
     public static func backgroundColor(_ color: UIColor?) -> AnyStyle<T> {
         return ViewStyle(color, key: .backgroundColor, sideEffect: { $0.backgroundColor = $1?.cgColor }).toAnyStyle
     }
     
+    /**
+     A Boolean indicating whether the layer is allowed to perform edge antialiasing.
+     
+     When the value is true, the layer is allowed to antialias its edges, as requested by the value in the
+     layer’s edgeAntialiasingMask property. The default value is read from the boolean UIViewEdgeAntialiasing
+     property in the main bundle’s Info.plist file. If no value is found, the default value is false.
+     */
     public static func allowsEdgeAntialiasing(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .allowsEdgeAntialiasing, sideEffect: { $0.allowsEdgeAntialiasing = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+     
+     When the value is true and the layer’s opacity property value is less than 1.0, the layer is allowed to
+     composite itself as a group separate from its parent. This gives correct results when the layer contains
+     multiple opaque components, but may reduce performance.
+     
+     The default value is read from the boolean UIViewGroupOpacity property in the main bundle’s Info.plist
+     file. If no value is found, the default value is true for apps linked against the iOS 7 SDK or later and
+     false for apps linked against an earlier SDK.
+     */
     public static func allowsGroupOpacity(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .allowsGroupOpacity, sideEffect: { $0.allowsGroupOpacity = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean value indicating whether the layer contains completely opaque content.
+     
+     The default value of this property is false. If your app draws completely opaque content that fills the
+     layer’s bounds, setting this property to true lets the system optimize the rendering behavior for the
+     layer. Specifically, when the layer creates the backing store for your drawing commands, Core Animation
+     omits the alpha channel of that backing store. Doing so can improve the performance of compositing
+     operations. If you set the value of this property to true, you must fill the layer’s bounds with opaque content.
+     
+     Setting this property affects only the backing store managed by Core Animation. If you assign an image
+     with an alpha channel to the layer’s contents property, that image retains its alpha channel regardless
+     of the value of this property.
+     */
     public static func isOpaque(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .isOpaque, sideEffect: { $0.isOpaque = $1 }).toAnyStyle
     }
     
+    /**
+     A bitmask defining how the edges of the receiver are rasterized.
+     
+     This property specifies which edges of the layer are antialiased and is a combination of the constants
+     defined in CAEdgeAntialiasingMask. You can enable or disable antialiasing for each edge (top, left, bottom,
+     right) separately. By default antialiasing is enabled for all edges.
+     
+     Typically, you would use this property to disable antialiasing for edges that abut edges of other layers,
+     to eliminate the seams that would otherwise occur.
+     */
     public static func edgeAntialiasingMask(_ mask: CAEdgeAntialiasingMask) -> AnyStyle<T> {
         return ViewStyle(mask, key: .edgeAntialiasingMask, sideEffect: { $0.edgeAntialiasingMask = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+     
+     If the layer is providing the backing for a layer-backed view, the view is responsible for managing the value
+     in this property. For standalone layers, this property controls whether geometry values for the layer are
+     interpreted using the standard or flipped coordinate system. The value of this property does not affect the
+     rendering of the layer’s content.
+     
+     The default value of this property is false.
+     */
     public static func isGeometryFlipped(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .isGeometryFlipped, sideEffect: { $0.isGeometryFlipped = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+     
+     When this property is set to true, the graphics context used to draw the layer’s contents queues drawing
+     commands and executes them on a background thread rather than executing them synchronously. Performing
+     these commands asynchronously can improve performance in some apps. However, you should always measure
+     the actual performance benefits before enabling this capability.
+     
+     The default value for this property is false.
+     */
     public static func drawsAsynchronously(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .drawsAsynchronously, sideEffect: { $0.drawsAsynchronously = $1 }).toAnyStyle
     }
     
+    /**
+     A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+     
+     When the value of this property is true, the layer is rendered as a bitmap in its local coordinate
+     space and then composited to the destination with any other content. Shadow effects and any filters
+     in the filters property are rasterized and included in the bitmap. However, the current opacity of
+     the layer is not rasterized. If the rasterized bitmap requires scaling during compositing, the filters
+     in the minificationFilter and magnificationFilter properties are applied as needed.
+     
+     When the value of this property is false, the layer is composited directly into the destination whenever
+     possible. The layer may still be rasterized prior to compositing if certain features of the compositing
+     model (such as the inclusion of filters) require it.
+     
+     The default value of this property is false.
+     */
     public static func shouldRasterize(_ value: Bool) -> AnyStyle<T> {
         return ViewStyle(value, key: .shouldRasterize, sideEffect: { $0.shouldRasterize = $1 }).toAnyStyle
     }
     
+    /**
+     The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+     
+     When the value in the shouldRasterize property is true, the layer uses this property to determine
+     whether to scale the rasterized content (and by how much). The default value of this property is 1.0,
+     which indicates that the layer should be rasterized at its current size. Larger values magnify the
+     content and smaller values shrink it.
+     */
     public static func rasterizationScale(_ value: CGFloat) -> AnyStyle<T> {
         return ViewStyle(value, key: .rasterizationScale, sideEffect: { $0.rasterizationScale = $1 }).toAnyStyle
     }
     
+    /**
+     A hint for the desired storage format of the layer contents.
+     
+     The default value of this property is CAContentsFormat.RGBA8Uint.
+     
+     UIView and layer-backed NSView objects may change the value to a format appropriate for the current device.
+     */
     @available(iOS 10.0, *)
     public static func contentsFormat(_ value: CAContentsFormat) -> AnyStyle<T> {
         return ViewStyle(value, key: .contentsFormat, sideEffect: { $0.contentsFormat = $1.rawValue }).toAnyStyle
