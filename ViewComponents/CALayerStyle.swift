@@ -321,34 +321,123 @@ public extension AnyStyle where T: CALayer {
         return ViewStyle(value, key: .contentsFormat, sideEffect: { $0.contentsFormat = $1.rawValue }).toAnyStyle
     }
     
+    /**
+     The layer’s frame rectangle.
+     
+     The frame rectangle is position and size of the layer specified in the superlayer’s coordinate space.
+     For layers, the frame rectangle is a computed property that is derived from the values in thebounds,
+     anchorPoint and position properties. When you assign a new value to this property, the layer changes its
+     position and bounds properties to match the rectangle you specified. The values of each coordinate in the
+     rectangle are measured in points.
+     
+     Do not set the frame if the transform property applies a rotation transform that is not a multiple of 90 degrees.
+     
+     For more information about the relationship between the frame, bounds, anchorPoint and position properties,
+     see Core Animation Programming Guide.
+     
+     **Note**
+     
+     The frame property is not directly animatable. Instead you should animate the appropriate combination of the
+     bounds, anchorPoint and position properties to achieve the desired result.
+     */
     public static func frame(_ value: CGRect) -> AnyStyle<T> {
         return ViewStyle(value, key: .frame, sideEffect: { $0.frame = $1 }).toAnyStyle
     }
     
+    /**
+     The layer’s bounds rectangle. Animatable.
+     
+     The bounds rectangle is the origin and size of the layer in its own coordinate space. When you create a new
+     standalone layer, the default value for this property is an empty rectangle, which you must change before
+     using the layer. The values of each coordinate in the rectangle are measured in points.
+     
+     For more information about the relationship between the frame, bounds, anchorPoint and position properties,
+     see Core Animation Programming Guide.
+     */
     public static func bounds(_ value: CGRect) -> AnyStyle<T> {
         return ViewStyle(value, key: .bounds, sideEffect: { $0.bounds = $1 }).toAnyStyle
     }
     
+    /**
+     The layer’s position in its superlayer’s coordinate space. Animatable.
+     
+     The value of this property is specified in points and is always specified relative to the value in the
+     anchorPoint property. For new standalone layers, the default position is set to (0.0, 0.0). Changing the
+     frame property also updates the value in this property.
+     
+     For more information about the relationship between the frame, bounds, anchorPoint and position properties,
+     see Core Animation Programming Guide.
+     */
     public static func position(_ value: CGPoint) -> AnyStyle<T> {
         return ViewStyle(value, key: .position, sideEffect: { $0.position = $1 }).toAnyStyle
     }
     
+    /**
+     The layer’s position on the z axis. Animatable.
+     
+     The default value of this property is 0. Changing the value of this property changes the the front-to-back
+     ordering of layers onscreen. Higher values place this layer visually closer to the viewer than layers with
+     lower values. This can affect the visibility of layers whose frame rectangles overlap.
+     
+     The value of this property is measured in points. The range of this property is single-precision,
+     floating-point -greatestFiniteMagnitude to greatestFiniteMagnitude.
+     */
     public static func zPosition(_ value: CGFloat) -> AnyStyle<T> {
         return ViewStyle(value, key: .zPosition, sideEffect: { $0.zPosition = $1 }).toAnyStyle
     }
     
+    /**
+     The anchor point for the layer’s position along the z axis. Animatable.
+     
+     This property specifies the anchor point on the z axis around which geometric manipulations occur.
+     The point is expressed as a distance (measured in points) along the z axis. The default value of this
+     property is 0.
+     */
     public static func anchorPointZ(_ value: CGFloat) -> AnyStyle<T> {
         return ViewStyle(value, key: .anchorPointZ, sideEffect: { $0.anchorPointZ = $1 }).toAnyStyle
     }
     
+    /**
+     Defines the anchor point of the layer's bounds rectangle. Animatable.
+     
+     You specify the value for this property using the unit coordinate space. The default value of this
+     property is (0.5, 0.5), which represents the center of the layer’s bounds rectangle. All geometric
+     manipulations to the view occur about the specified point. For example, applying a rotation transform
+     to a layer with the default anchor point causes the layer to rotate around its center. Changing the
+     anchor point to a different location would cause the layer to rotate around that new point.
+     
+     For more information about the relationship between the frame, bounds, anchorPoint and position
+     properties, see Core Animation Programming Guide.
+     */
     public static func anchorPoint(_ value: CGPoint) -> AnyStyle<T> {
         return ViewStyle(value, key: .anchorPoint, sideEffect: { $0.anchorPoint = $1 }).toAnyStyle
     }
     
+    /**
+     The scale factor applied to the layer.
+     
+     This value defines the mapping between the logical coordinate space of the layer (measured in points)
+     and the physical coordinate space (measured in pixels). Higher scale factors indicate that each point
+     in the layer is represented by more than one pixel at render time. For example, if the scale factor
+     is 2.0 and the layer’s bounds are 50 x 50 points, the size of the bitmap used to present the layer’s
+     content is 100 x 100 pixels.
+     
+     The default value of this property is 1.0. For layers attached to a view, the view changes the scale
+     factor automatically to a value that is appropriate for the current screen. For layers you create and
+     manage yourself, you must set the value of this property yourself based on the resolution of the screen
+     and the content you are providing. Core Animation uses the value you specify as a cue to determine how
+     to render your content.
+     */
     public static func contentsScale(_ value: CGFloat) -> AnyStyle<T> {
         return ViewStyle(value, key: .contentsScale, sideEffect: { $0.contentsScale = $1 }).toAnyStyle
     }
     
+    /**
+     The name of the receiver.
+     
+     The layer name is used by some layout managers to identify a layer. The default value of this
+     property is nil.
+     */
     public static func name(_ value: String?) -> AnyStyle<T> {
         return ViewStyle(value, key: .name, sideEffect: { $0.name = $1 }).toAnyStyle
     }
