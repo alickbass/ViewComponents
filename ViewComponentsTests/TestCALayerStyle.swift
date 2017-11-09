@@ -21,9 +21,7 @@ protocol ViewTestType {
 
 extension ViewTestType {
     static var accumulatedHashes: [Int: Any] {
-        var hashes = previousHashes
-        allStyles.forEach({ hashes[$0.hashValue] = $0 })
-        return hashes
+        return allStyles.reduce(into: [:], { $0[$1.hashValue] = $1 })
     }
     
     func testAccumulatingHashes() {

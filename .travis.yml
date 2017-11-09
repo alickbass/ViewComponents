@@ -1,9 +1,8 @@
 language: objective-c
-osx_image: xcode9
+osx_image: xcode9.1
 
 script:
-  - open -a "simulator" --args -CurrentDeviceUDID F60B87EC-8969-41A7-90ED-D0826ECC32DB
-  - xcodebuild clean build test -project ViewComponents.xcodeproj -scheme ViewComponents -destination 'platform=iOS Simulator,OS=10.3.1,id=F60B87EC-8969-41A7-90ED-D0826ECC32DB'
+  - xcodebuild clean build test -project ViewComponents.xcodeproj -scheme ViewComponents -destination 'platform=iOS Simulator,name=iPhone 8'
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
